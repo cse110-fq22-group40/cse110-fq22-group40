@@ -11,7 +11,7 @@
 
 
 ## Our Philosophy
-
+Innovation is inside each of us. Everyone has unique and original ideas, but sometimes these ideas only live as tinder deep inside us. As a team, we strive to spark the innovations inside every member and ignite them into bright ideas. In today's fast-paced culture, we are committed to creating efficient tools for innovative minds to organize their bright ideas and turn them into shining stars.
 
 ## Team Members
 - <img src= "Pics/Sailor.jpg"  alt= "error" width="120"/> \
