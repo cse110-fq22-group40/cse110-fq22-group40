@@ -1,4 +1,4 @@
-# Meeting Notes 10/12 - Bennet
+# Meeting Notes 10/12 - Bennett
 
 Created By: Bennett Zhang
 Date: October 12, 2022
