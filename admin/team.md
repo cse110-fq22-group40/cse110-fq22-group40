@@ -3,9 +3,9 @@
 
 ## Table of Contents
 
-> 1. Project Overview
-> 2. Our Philosophy
-> 3. Team members
+> 1. [Project Overview](#project-overview)
+> 2. [Our Philosophy](#our-philosophy)
+> 3. [Team members(#team-members)
 
 ## Project Overview
 
