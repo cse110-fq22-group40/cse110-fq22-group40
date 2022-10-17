@@ -1,5 +1,5 @@
 # CSE 110 - Team Lithub
-
+![Banner](./branding/TeamLitHub_Banner.png)
 
 ### Table of Contents
 
