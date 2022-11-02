@@ -65,28 +65,28 @@ We split into groups to start working on different aspects of the pitch for next
 
 NOTE: The time on the board in the picture from the fat marker drawing were for this specific and to make sure everyone was who was working together had the same free available time to actually collaborate.
 
-##Wire-framing
+## Wire-framing
 
 - Ryan
 - Benjamin
 
-##Event modeling/C4 diagrams
+## Event modeling/C4 diagrams
 
 - Billy
 - Alex
 
-##Research
+## Research
 
 - Kevin
 - Emmanuel
 
-##Proof of Concept
+## Proof of Concept
 
 - Sailor
 - Kat
 - Bennett
 
-##Editors and User Stories/Personas
+## Editors and User Stories/Personas
 
 - Grace
 - Ernest
