@@ -5,6 +5,7 @@ Location: CSE Basement
 Participants: Billy Sudirdja, Anonymous, Grace Jin, Bennett Zhang, Ben Snowbarger, Alex Wu, Ernest Lin, Emmanuel Serrano, Ryan Truong, Kevin Truong, Sailor Eichhorn
 
 ##To find demo: https://github.com/bennett-zhang/CSE-110-text-editor.git
+
 ##To find miro: https://miro.com/app/board/uXjVPJ88Awg=/?share_link_id=881331704226
 
 # Specs(What we doing exactly)
