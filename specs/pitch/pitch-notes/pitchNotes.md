@@ -53,7 +53,7 @@ Participants: Billy Sudirdja, Anonymous, Grace Jin, Bennett Zhang, Ben Snowbarge
 
 We wanted to drawn down our specs on the board so we were all on the same page about how we wanted our application to look, and how it was going to be organized as well. 
 
-![Whiteboard diagram of data structure and design structure^](pitch_notes_imgs/whiteboard_plan.jpeg)
+![Whiteboard diagram of data structure and design structure^](pitch-notes-imgs/whiteboard_plan.jpeg)
 
 Whiteboard diagram of data structure and design structure^
 
