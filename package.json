@@ -2,7 +2,7 @@
   "name": "cse110-fq21-group40",
   "version": "1.0.0",
   "description": "[Team Page](admin/team.md)",
-  "main": "source/app.js",
+  "main": "source/local/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
