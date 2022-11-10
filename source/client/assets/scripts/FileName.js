@@ -8,21 +8,35 @@ class FileName extends HTMLElement {
 
     let filetitle = document.createElement('h2');
     filetitle.innerText = "Create Audio Object";
-    filetitle.className = "fileTitle"
+    filetitle.className = "fileTitle";
 
     let fileform = document.createElement('form');
 
     let textinput = document.createElement('input');
-    textinput.type = "text"
+    textinput.type = "text";
     textinput.className = "fileName";
 
     let fileinput = document.createElement('input');
-    fileinput.type = "file"
+    fileinput.type = "file";
     fileinput.className = "fileUpload";
+    fileinput.accept = "audio/*";
 
     let filesubmit = document.createElement('input');
     filesubmit.type = "submit";
-    filesubmit.className = "fileCreate"
+    filesubmit.className = "fileCreate";
+
+    filesubmit.addEventListener("click", evt => {
+      evt.preventDefault();
+
+      const submitEvent = new CustomEvent("fileSubmitted", {
+        detail: {
+          name: textinput.value,
+          path: fileinput.files[0].path
+        }
+      });
+
+      this.dispatchEvent(submitEvent);
+    });
 
     filename.appendChild(filetitle);
     fileform.appendChild(textinput);
@@ -84,20 +98,3 @@ class FileName extends HTMLElement {
 }
 
 customElements.define("create-aud-object", FileName);
-
-const addButton = document.querySelector(".addButton");
-
-addButton.addEventListener("click", () => {
-  const createAudObject = document.createElement("create-aud-object");
-  document.body.appendChild(createAudObject);
-
-  const fileName = createAudObject.shadowRoot.querySelector(".fileName");
-  const fileUpload = createAudObject.shadowRoot.querySelector(".fileUpload");
-  const fileCreate = createAudObject.shadowRoot.querySelector(".fileCreate");
-
-  fileCreate.addEventListener("click", evt => {
-    evt.preventDefault();
-
-    console.log(fileName.value, fileUpload.value);
-  });
-});
