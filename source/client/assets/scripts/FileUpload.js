@@ -12,8 +12,8 @@ addButton.addEventListener("click", () => {
 
     const audioFiles = localStorage.audioFiles ? JSON.parse(localStorage.audioFiles) : [];
     audioFiles.push({
-        name: evt.detail.name,
-        path: evt.detail.path
+      name: evt.detail.name,
+      path: evt.detail.path
     });
     localStorage.audioFiles = JSON.stringify(audioFiles);
 
@@ -21,23 +21,23 @@ addButton.addEventListener("click", () => {
     document.body.appendChild(successScreen);
 
     setTimeout(() => {
-        document.body.removeChild(successScreen);
+      document.body.removeChild(successScreen);
     }, 1400);
   });
 });
 
 function createAudioCard(name, path) {
-    const audioCard = document.createElement("audio-card");
-    audioContainer.appendChild(audioCard);
+  const audioCard = document.createElement("audio-card");
+  audioContainer.appendChild(audioCard);
 
-    audioCard.name = name;
-    audioCard.path = path.split("\\").pop().split("/").pop();
+  audioCard.name = name;
+  audioCard.path = path.split("\\").pop().split("/").pop();
 }
 
 if (localStorage.audioFiles) {
-    const audioFiles = JSON.parse(localStorage.audioFiles);
+  const audioFiles = JSON.parse(localStorage.audioFiles);
 
-    for (const file of audioFiles) {
-        createAudioCard(file.name, file.path);
-    }
+  for (const file of audioFiles) {
+    createAudioCard(file.name, file.path);
+  }
 }
