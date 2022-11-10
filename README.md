@@ -2,7 +2,9 @@
 
 [Team Page](admin/team.md)
 
-[Team Miro](https://miro.com/app/board/uXjVPJ88Awg=/?share_link_id=881331704226)
+[Team Miro](https://miro.com/app/board/uXjVPJ88Awg=/?share_link_id=881331704226)  
+
+[Test](cse110-fq22-group40/source/client/index.html)
 
 ## Project description
 We are aiming to create a CRUD app with html, css and javascript. <br> <br>
