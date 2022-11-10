@@ -11,10 +11,12 @@ class AudioCard extends HTMLElement {
     audioimage.className = "musicIcon";
     audioimage.alt = "music icon";
 
-    let audiotext = document.createElement('h2');
+    let audioname = document.createElement('h2');
+    let audiopath = document.createElement('p');
 
     audiocard.appendChild(audioimage);
-    audiocard.appendChild(audiotext);
+    audiocard.appendChild(audioname);
+    audiocard.appendChild(audiopath);
 
     let style = document.createElement('style');
     style.textContent = `
@@ -25,7 +27,7 @@ class AudioCard extends HTMLElement {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        width: 150px;
+        min-width: 150px;
         height: 200px;
         background: linear-gradient(180deg, #FFECD2 0%, #FCB69F 100%);;
         border-style: solid;
@@ -42,6 +44,16 @@ class AudioCard extends HTMLElement {
     `
     shadow.append(audiocard);
     shadow.append(style);
+  }
+
+  set name(name) {
+    const audioname = this.shadowRoot.querySelector("h2");
+    audioname.textContent = name;
+  }
+
+  set path(path) {
+    const audiopath = this.shadowRoot.querySelector("p");
+    audiopath.textContent = path;
   }
 }
 

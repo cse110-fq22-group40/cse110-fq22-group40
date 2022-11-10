@@ -62,7 +62,6 @@ class FileSuccess extends HTMLElement {
             margin-top: -20px;
         }
     `
-      // A5. TODO - Append the <style> and <article> elements to the Shadow DOM
       shadow.append(successcontainer);
       shadow.append(style);
     }
