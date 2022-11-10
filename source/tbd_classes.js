@@ -105,7 +105,7 @@ class TypeA {
     }
 
     get_audio_obj(str_audioObjName) {
-        return this.dict_audio[str_audioFileName];
+        return this.dict_audio[str_audioObjName];
     }
     
     // NOTE: we may want this to take a JSON from a form instead
