@@ -13,6 +13,14 @@
 import * as utils from './utils.js';
 
 export class AudioObject {
+    /**
+    *AudioObject is a container for the path to the audio file
+    *and the dictionary of notes
+    *TBD: Connection to localstorage and updating contents
+    *
+    *@param {str_name} Name of Audio (TBD)
+    *@param {str_path} path to audio file
+    */
     constructor(str_name, str_path, ) {
 
         this.str_path = str_path;
@@ -21,32 +29,73 @@ export class AudioObject {
         this.notes = {};
     }
 
-    get_audio_file
+    /** TBD
+    *Getter for audio file
+    *
+    *@return Audio file
+    */
+    get_audio_file() {
+        //TBD
+    }
 
+    /** 
+    *Updates path to audio file
+    *@param {str_newPath} New path to audio file
+    *
+    *@return none
+    */
     update_path(str_newPath) {
         this.str_path = str_newPath;
     }
 
+    /** 
+    *Getter for specific note given a timestamp
+    *@param {str_timestamp} Timestamp of the note
+    *
+    *@return Note
+    */
     get_note(str_timestamp) {
         return this.notes[str_timestamp];
     }
 
+    /** 
+    *Add specific note with a timestamp
+    *@param {str_timestamp} Timestamp of the note
+    *@param {str_note} The note
+    *
+    *@return None
+    */
     add_note(str_timestamp, str_note) {
         this.notes[str_timestamp] = str_note;
     }
     
+    /** 
+    *Deletes note given timestamp
+    *@param {str_timestamp} Timestamp of the note
+    *
+    *@return None
+    */
     delete_note(str_timestamp) {
         delete this.notes[str_timestamp];
     }
 
+    /**
+     * Clears note dictionary
+     */
     clear_notes() {
         this.notes = {};
     }
 }
 
 class TypeA {
+    /**
+    *TypeA is a container for a group of audio objects
+    *TODO: Connection to localstorage and updating contents
+    *
+    *@param {str_name} Name of Folder
+    */
     constructor(str_name) {
-        //Array of AudioObject
+        //Dict of AudioObject {"name" : AudioObject}
         this.dict_audio = {};
         this.str_name = str_name;
     }
@@ -75,7 +124,7 @@ class TypeA {
     }
 
     clear_folder() {
-        this.dict_audio = [];
+        this.dict_audio = {};
     }
 
     //TODO
@@ -85,8 +134,15 @@ class TypeA {
 }
 
 class TypeF {
+    /**
+    *TypeF is a container for a group of TypeA objects
+    *TODO: Connection to localstorage and updating contents
+    *
+    *@param {str_name} Name of Folder
+    */
     constructor(str_name) {
         this.str_name = str_name;
+        //{"name" L typeA}
         this.dict_typeA = {};
     }
 
@@ -111,7 +167,14 @@ class TypeF {
         this.array_typeA = {};
     }
 
-    //TODO
+    /**
+    *Saves the typeF folders for the whole application, will
+    *need to call get typeF folder function to save. No
+    *input but might change to method in future.
+    *
+    *@param none
+    *@return returns true if successfully, false othewise
+    */
     save() {
 
     }
