@@ -2,10 +2,10 @@
   "name": "cse110-fq21-group40",
   "version": "1.0.0",
   "description": "[Team Page](admin/team.md)",
-  "main": "demo/app.js",
+  "main": "source/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "electron ."
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,5 @@
   "homepage": "https://github.com/cse110-fq21-group40/cse110-fq21-group40#readme",
   "devDependencies": {
     "electron": "^21.2.2"
-  },
-  "type": "module"
+  }
 }
