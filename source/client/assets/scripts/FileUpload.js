@@ -1,13 +1,5 @@
 import * as utils from "../../../local/utils.js"
 
-// Backend only !!!!! TESTING______
-// utils.addTypeF("Monke");
-// utils.addTypeA("Monke", "yes");
-// utils.addAudio("Monke", "yes", "no", "aiodjfiaodjfoa");
-// utils.add_note("Monke", "yes", "no", "12:00", "ooga booga");
-// utils.delete_note("Monke", "yes", "no", "12:00");
-// utils.update_name("Kat", "Monke", "yes");
-
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
 

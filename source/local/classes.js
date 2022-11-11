@@ -1,11 +1,3 @@
-// if (localStorage.notes) {
-//   const notes = JSON.parse(localStorage.notes);
-
-//   // Loop through notes and display them on screen
-//   for (const timestamp in notes)
-//     displayNote(timestamp, notes[timestamp]);
-// }
-
 // function: the_brown_cow
 // classes: StartWithUpper (camel)
 // objects: camelCase
@@ -13,12 +5,11 @@
 
 export class AudioObject {
   /**
-  *AudioObject is a container for the path to the audio file
-  *and the dictionary of notes
-  *TODO: functions for accessing and changing audio path
+  * AudioObject is a container for the path to the audio file
+  * and the dictionary of notes
   *
-  *@param {str_name} Name of Audio (TBD)
-  *@param {str_path} path to audio file
+  * @param {str_name} Name of Audio (TBD)
+  * @param {str_path} path to audio file
   */
   constructor(str_path, ) {
     this.str_path = str_path;
@@ -28,59 +19,59 @@ export class AudioObject {
   }
 
   /** TBD
-  *Getter for audio file
+  * Getter for audio file
   *
-  *@return Audio file
+  * @return Audio file
   */
   get_audio_file() {
-    //TBD
+    // TBD
   }
 
   /** 
-  *Updates path to audio file
-  *@param {str_newPath} New path to audio file
+  * Updates path to audio file
+  * @param {str_newPath} New path to audio file
   *
-  *@return none
+  * @return none
   */
   update_path(str_newPath) {
     this.str_path = str_newPath;
   }
 
   /** 
-  *Getter for all the notes
+  * Getter for all the notes
   *
-  *@return Note
+  * @return Note
   */
   get_notes() {
     return this.notes;
   }
 
   /** 
-  *Getter for specific note given a timestamp
-  *@param {str_timestamp} Timestamp of the note
+  * Getter for specific note given a timestamp
+  * @param {str_timestamp} Timestamp of the note
   *
-  *@return Note
+  * @return Note
   */
   get_note(str_timestamp) {
     return this.notes[str_timestamp];
   }
 
   /** 
-  *Add specific note with a timestamp
-  *@param {str_timestamp} Timestamp of the note
-  *@param {str_note} The note
+  * Add specific note with a timestamp
+  * @param {str_timestamp} Timestamp of the note
+  * @param {str_note} The note
   *
-  *@return None
+  * @return None
   */
   add_note(str_timestamp, str_note) {
     this.notes[str_timestamp] = str_note;
   }
   
   /** 
-  *Deletes note given timestamp
-  *@param {str_timestamp} Timestamp of the note
+  * Deletes note given timestamp
+  * @param {str_timestamp} Timestamp of the note
   *
-  *@return None
+  * @return None
   */
   delete_note(str_timestamp) {
     delete this.notes[str_timestamp];
@@ -96,12 +87,10 @@ export class AudioObject {
 
 export class TypeA {
   /**
-  *TypeA is a container for a group of audio objects
-  *TODO: Connection to localstorage and updating contents
-  *
+  * TypeA is a container for a group of audio objects
   */
   constructor() {
-    //Dict of AudioObject {"name" : AudioObject}
+    // Dict of AudioObject {"name" : AudioObject}
     this.dict_audio = {};
   }
 
@@ -112,10 +101,8 @@ export class TypeA {
    * @param {str_newName} : new name of the AudioObj you want to change
    */
   update_audio_name(str_oldName, str_newName) {
-    let obj_audio = this.dict_audio[str_oldName]
+    this.dict_audio[str_newName] = this.dict_audio[str_oldName];
     delete this.dict_audio[str_oldName];
-
-    this.dict_audio[str_newName] = obj_audio;
   }
 
   get_audio(str_audioObjName) {
@@ -143,14 +130,13 @@ export class TypeA {
 
 export class TypeF {
   /**
-  *TypeF is a container for a group of TypeA objects
-  *TODO: Connection to localstorage and updating contents
+  * TypeF is a container for a group of TypeA objects
   *
-  *@param {str_name} Name of Folder
+  * @param {str_name} Name of Folder
   */
   constructor(str_name) {
     this.str_name = str_name;
-    //{"name" L typeA}
+    // Dict of Type A folders {"name" : typeA}
     this.dict_typeA = {};
   }
 
@@ -161,9 +147,8 @@ export class TypeF {
    * @param {str_newName} : new name of the typeA folder you want to change
    */
   update_typeA_name(str_oldName, str_newName) {
-    let obj_typeA = this.dict_typeA[str_oldName];
+    this.dict_typeA[str_newName] = this.dict_typeA[str_oldName];
     delete this.dict_typeA[str_oldName];
-    this.dict_typeA[str_newName] = obj_typeA;
   }
 
   get_typeA(str_typeAName) {
@@ -178,17 +163,17 @@ export class TypeF {
     delete this.dict_typeA[str_typeAName];
   }
 
-  clear() {
+  clear_folder() {
     this.array_typeA = {};
   }
 
   // /**
-  // *Saves the typeF folders for the whole application, will
-  // *need to call get typeF folder function to save. No
-  // *input but might change to method in future.
+  // * Saves the typeF folders for the whole application, will
+  // * need to call get typeF folder function to save. No
+  // * input but might change to method in future.
   // *
-  // *@param none
-  // *@return returns true if successfully, false othewise
+  // * @param none
+  // * @return returns true if successfully, false othewise
   // */
   // save() {
 
