@@ -10,18 +10,17 @@
 // classes: StartWithUpper (camel)
 // objects: camelCase
 // data: str_hungarianCamel
-import * as utils from './utils.js';
 
 export class AudioObject {
   /**
   *AudioObject is a container for the path to the audio file
   *and the dictionary of notes
-  *TBD: Connection to localstorage and updating contents
+  *TODO: functions for accessing and changing audio path
   *
   *@param {str_name} Name of Audio (TBD)
   *@param {str_path} path to audio file
   */
-  constructor(str_name, str_path, ) {
+  constructor(str_path, ) {
     this.str_path = str_path;
       
     // {"timestamp" : "text"}
@@ -45,6 +44,15 @@ export class AudioObject {
   */
   update_path(str_newPath) {
     this.str_path = str_newPath;
+  }
+
+  /** 
+  *Getter for all the notes
+  *
+  *@return Note
+  */
+  get_notes() {
+    return this.notes;
   }
 
   /** 
@@ -86,53 +94,54 @@ export class AudioObject {
   }
 }
 
-class TypeA {
+export class TypeA {
   /**
   *TypeA is a container for a group of audio objects
   *TODO: Connection to localstorage and updating contents
   *
-  *@param {str_name} Name of Folder
   */
-  constructor(str_name) {
+  constructor() {
     //Dict of AudioObject {"name" : AudioObject}
     this.dict_audio = {};
-    this.str_name = str_name;
   }
 
-  update_name(str_newName) {
-    this.str_name = str_new_name;
+  /**
+   * Update an AudioObj name inside this TypeA object
+   * 
+   * @param {str_oldName} : old name of the AudioObj you want to change
+   * @param {str_newName} : new name of the AudioObj you want to change
+   */
+  update_audio_name(str_oldName, str_newName) {
+    let obj_audio = this.dict_audio[str_oldName]
+    delete this.dict_audio[str_oldName];
+
+    this.dict_audio[str_newName] = obj_audio;
   }
 
-  get_audio_obj(str_audioObjName) {
+  get_audio(str_audioObjName) {
     return this.dict_audio[str_audioObjName];
   }
   
   // NOTE: we may want this to take a JSON from a form instead
-  add_audio_obj(obj_audio) {
-    this.dict_audio[obj_audio.name] = obj_audio;
+  add_audio(str_name, str_path) {
+    this.dict_audio[str_name] = new AudioObject(str_name, str_path);
   }
   
   // use JSON from form to update the audio object
-  update_audio_obj (str_audioObjName, str_newDataJSON) {
-    
+  update_audio(str_audioObjName, str_newDataJSON) {
+
   }
   
-  //TODO
-  delete_audio_obj(obj_audio) {
-
+  delete_audio(str_audioName) {
+    delete this.dict_audio[str_audioName];
   }
 
   clear_folder() {
     this.dict_audio = {};
   }
-
-  //TODO
-  save_folder (str_path) {
-    utils._save_at_path(str_path, this)
-  }
 }
 
-class TypeF {
+export class TypeF {
   /**
   *TypeF is a container for a group of TypeA objects
   *TODO: Connection to localstorage and updating contents
@@ -145,36 +154,43 @@ class TypeF {
     this.dict_typeA = {};
   }
 
-  update_name(str_newName) {
-    this.str_name = str_newName;
+  /**
+   * Update a typeA object's name inside this TypeF object
+   * 
+   * @param {str_oldName} : old name of the typeA folder you want to change
+   * @param {str_newName} : new name of the typeA folder you want to change
+   */
+  update_typeA_name(str_oldName, str_newName) {
+    let obj_typeA = this.dict_typeA[str_oldName];
+    delete this.dict_typeA[str_oldName];
+    this.dict_typeA[str_newName] = obj_typeA;
   }
 
-  get_typeA_obj(str_typeAName) {
+  get_typeA(str_typeAName) {
     return this.dict_typeA[str_typeAName];
   }
   
-  add_typeA_obj(obj_typeA) {
-    this.dict_typeA[typeA_obj.name] = typeA_obj;
+  add_typeA(str_name) {
+    this.dict_typeA[str_name] = new TypeA(str_name);
   }
   
-  //TODO
-  delete_audio_obj(obj_typeA) {
-
+  delete_typeA(str_typeAName) {
+    delete this.dict_typeA[str_typeAName];
   }
 
   clear() {
     this.array_typeA = {};
   }
 
-  /**
-  *Saves the typeF folders for the whole application, will
-  *need to call get typeF folder function to save. No
-  *input but might change to method in future.
-  *
-  *@param none
-  *@return returns true if successfully, false othewise
-  */
-  save() {
+  // /**
+  // *Saves the typeF folders for the whole application, will
+  // *need to call get typeF folder function to save. No
+  // *input but might change to method in future.
+  // *
+  // *@param none
+  // *@return returns true if successfully, false othewise
+  // */
+  // save() {
 
-  }
+  // }
 }
