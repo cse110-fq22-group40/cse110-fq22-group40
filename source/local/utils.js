@@ -2,7 +2,7 @@ import * as classes from "./classes.js";
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
 
-export function _log (str_message) {
+export function _log(str_message) {
   if (DEBUG_FLAG) {
     console.log(str_message);
   }
@@ -45,6 +45,17 @@ export function clear_typeF(str_typeFName) {
 }
 
 /**
+ * Gets an array of the names of every TypeA folder inside of a TypeF folder
+ * @param {str_typeFName} : String name of the TypeF folder
+ * 
+ * @Usage
+ * Ex: get_all_typeA_names("Bob's Project")
+ */
+ export function get_all_typeA_names(str_typeFName) {
+  dict_typeFs[str_typeFName].get_all_typeA_names();
+}
+
+/**
  * Add a new TypeA folder with the given name
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
@@ -81,6 +92,18 @@ export function delete_typeA(str_typeFName, str_typeAName) {
 export function clear_typeA(str_typeFName, str_typeAName) {
   dict_typeFs[str_typeFName].get_typeA(str_typeAName).clear_folder();
   set_typeF_in_local_storage(str_typeFName);
+}
+
+/**
+ * Gets an array of the names of every AudioObj inside of a TypeA folder
+ * @param {str_typeFName} : String name of the TypeF folder
+ * @param {str_typeAName} : String name of the TypeA folder
+ * 
+ * @Usage
+ * Ex: get_all_audio_names("Bob's Project", "10/11 Practice")
+ */
+export function get_all_audio_names(str_typeFName, str_typeAName) {
+  dict_typeFs[str_typeFName].get_typeA(str_typeAName).get_all_audio_names();
 }
 
 /**

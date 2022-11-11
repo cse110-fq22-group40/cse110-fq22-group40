@@ -8,10 +8,9 @@ export class AudioObject {
   * AudioObject is a container for the path to the audio file
   * and the dictionary of notes
   *
-  * @param {str_name} Name of Audio (TBD)
   * @param {str_path} path to audio file
   */
-  constructor(str_path, ) {
+  constructor(str_path) {
     this.str_path = str_path;
       
     // {"timestamp" : "text"}
@@ -108,10 +107,14 @@ export class TypeA {
   get_audio(str_audioObjName) {
     return this.dict_audio[str_audioObjName];
   }
+
+  get_all_audio_names() {
+    return Object.keys(this.dict_audio);
+  }
   
   // NOTE: we may want this to take a JSON from a form instead
   add_audio(str_name, str_path) {
-    this.dict_audio[str_name] = new AudioObject(str_name, str_path);
+    this.dict_audio[str_name] = new AudioObject(str_path);
   }
   
   // use JSON from form to update the audio object
@@ -153,6 +156,10 @@ export class TypeF {
 
   get_typeA(str_typeAName) {
     return this.dict_typeA[str_typeAName];
+  }
+
+  get_all_typeA_names() {
+    return Object.keys(this.dict_typeA);
   }
   
   add_typeA(str_name) {
