@@ -12,11 +12,9 @@ class AudioCard extends HTMLElement {
     audioimage.alt = "music icon";
 
     let audioname = document.createElement('h2');
-    let audiopath = document.createElement('p');
 
     audiocard.appendChild(audioimage);
     audiocard.appendChild(audioname);
-    audiocard.appendChild(audiopath);
 
     let style = document.createElement('style');
     style.textContent = `
@@ -49,11 +47,6 @@ class AudioCard extends HTMLElement {
   set name(name) {
     const audioname = this.shadowRoot.querySelector("h2");
     audioname.textContent = name;
-  }
-
-  set path(path) {
-    const audiopath = this.shadowRoot.querySelector("p");
-    audiopath.textContent = path;
   }
 }
 

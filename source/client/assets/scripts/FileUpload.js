@@ -10,7 +10,7 @@ addButton.addEventListener("click", () => {
   createAudObject.addEventListener("fileSubmitted", evt => {
     document.body.removeChild(createAudObject);
 
-    createAudioCard(evt.detail.name, evt.detail.path);
+    createAudioCard(evt.detail.name);
 
     const audioFiles = localStorage.audioFiles ? JSON.parse(localStorage.audioFiles) : [];
     audioFiles.push({
@@ -28,18 +28,16 @@ addButton.addEventListener("click", () => {
   });
 });
 
-function createAudioCard(name, path) {
+function createAudioCard(name) {
   const audioCard = document.createElement("audio-card");
   audioContainer.appendChild(audioCard);
-
   audioCard.name = name;
-  audioCard.path = path.split("\\").pop().split("/").pop();
 }
 
 if (localStorage.audioFiles) {
   const audioFiles = JSON.parse(localStorage.audioFiles);
 
   for (const file of audioFiles) {
-    createAudioCard(file.name, file.path);
+    createAudioCard(file.name);
   }
 }
