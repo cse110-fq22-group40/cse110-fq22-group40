@@ -9,6 +9,16 @@ export function _log(str_message) {
 }
 
 /**
+ * Gets an array of the names of every TypeF folder
+ * 
+ * @Usage
+ * Ex: get_all_typeF_names()
+ */
+export function get_all_typeF_names() {
+  return Object.keys(dict_typeFs);
+}
+
+/**
  * Add a new TypeF folder with the given name
  * @param {str_typeFName} : String name of the TypeF folder
  * 
@@ -56,7 +66,7 @@ export function clear_typeF(str_typeFName) {
  * @Usage
  * Ex: get_all_typeA_names("Bob's Project")
  */
- export function get_all_typeA_names(str_typeFName) {
+export function get_all_typeA_names(str_typeFName) {
   return dict_typeFs[str_typeFName].get_all_typeA_names();
 }
 
@@ -160,7 +170,7 @@ export function delete_audio(str_typeFName, str_typeAName, str_audioObjName) {
  * @Usage
  * Ex. update_audio_path("path/to/file.mp3", "Bob's Project", "10/11 Practice", "G Major Scales")
  */
- export function update_audio_path(str_newPath, str_typeFName, str_typeAName, str_audioObjName) {
+export function update_audio_path(str_newPath, str_typeFName, str_typeAName, str_audioObjName) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
@@ -188,7 +198,7 @@ export function delete_audio(str_typeFName, str_typeAName, str_audioObjName) {
  * update_name(str_newName, str_typeFName, str_typeAName, str_audioObjName);
  * Ex. update_name("F Minor Scales", "Bob's Project", "10/11 Practice", "G Major Scales")
  */
- export function update_name(str_newName, str_typeFName, str_typeAName, str_audioObjName) {
+export function update_name(str_newName, str_typeFName, str_typeAName, str_audioObjName) {
   const dict_typeF = dict_typeFs[str_typeFName];
 
   remove_typeF_from_local_storage(str_typeFName);
@@ -225,7 +235,7 @@ export function delete_audio(str_typeFName, str_typeAName, str_audioObjName) {
  * @Usage
  * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00", "Not enough feelings")
  */
- export function add_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp, str_note) {
+export function add_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp, str_note) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
