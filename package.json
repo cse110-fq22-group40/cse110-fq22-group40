@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/cse110-fq21-group40/cse110-fq21-group40#readme",
   "devDependencies": {
-    "electron": "^21.2.2"
+    "electron": "^21.2.3"
   }
 }

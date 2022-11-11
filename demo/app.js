@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
+import { app, BrowserWindow } from "electron";
+import path from ("path");
 
 const loadMainWindow = () => {
     const mainWindow = new BrowserWindow({
