@@ -15,9 +15,14 @@ export function _log(str_message) {
  * @Usage
  * Ex: add_typeF("Bob's Project")
  */
-export function add_typeF(str_typeFName) {
-  dict_typeFs[str_typeFName] = new classes.TypeF(str_typeFName);
-  set_typeF_in_local_storage(str_typeFName);
+export function add_typeF(str_typeFName, save = true) {
+  if (dict_typeFs[str_typeFName])
+    return;
+
+  dict_typeFs[str_typeFName] = new classes.TypeF();
+
+  if (save)
+    set_typeF_in_local_storage(str_typeFName);
 }
 
 /**
@@ -52,7 +57,7 @@ export function clear_typeF(str_typeFName) {
  * Ex: get_all_typeA_names("Bob's Project")
  */
  export function get_all_typeA_names(str_typeFName) {
-  dict_typeFs[str_typeFName].get_all_typeA_names();
+  return dict_typeFs[str_typeFName].get_all_typeA_names();
 }
 
 /**
@@ -63,9 +68,14 @@ export function clear_typeF(str_typeFName) {
  * @Usage
  * Ex: add_typeA("Bob's Project", "10/11 Practice")
  */
-export function add_typeA(str_typeFName, str_typeAName) {
+export function add_typeA(str_typeFName, str_typeAName, save = true) {
+  if (dict_typeFs[str_typeFName].get_typeA(str_typeAName))
+    return;
+
   dict_typeFs[str_typeFName].add_typeA(str_typeAName);
-  set_typeF_in_local_storage(str_typeFName);
+
+  if (save)
+    set_typeF_in_local_storage(str_typeFName);
 }
 
 /**
@@ -103,7 +113,7 @@ export function clear_typeA(str_typeFName, str_typeAName) {
  * Ex: get_all_audio_names("Bob's Project", "10/11 Practice")
  */
 export function get_all_audio_names(str_typeFName, str_typeAName) {
-  dict_typeFs[str_typeFName].get_typeA(str_typeAName).get_all_audio_names();
+  return dict_typeFs[str_typeFName].get_typeA(str_typeAName).get_all_audio_names();
 }
 
 /**
@@ -116,9 +126,14 @@ export function get_all_audio_names(str_typeFName, str_typeAName) {
  * @Usage
  * Ex: add_audio("Bob's Project", "10/11 Practice", "G Major Scales", "path/to/file.mp3")
  */
-export function add_audio(str_typeFName, str_typeAName, str_audioObjName, str_audioPath) {
+export function add_audio(str_typeFName, str_typeAName, str_audioObjName, str_audioPath, save = true) {
+  if (dict_typeFs[str_typeFName].get_typeA(str_typeAName).get_audio(str_audioObjName))
+    return;
+  
   dict_typeFs[str_typeFName].get_typeA(str_typeAName).add_audio(str_audioObjName, str_audioPath);
-  set_typeF_in_local_storage(str_typeFName);
+
+  if (save)
+    set_typeF_in_local_storage(str_typeFName);
 }
 
 /**
@@ -248,7 +263,7 @@ export function delete_note(str_typeFName, str_typeAName, str_audioObjName, str_
  * Ex. get_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00")
  */
 export function get_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp) {
-  dict_typeFs[str_typeFName]
+  return dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
     .get_note(str_timestamp);
@@ -265,7 +280,7 @@ export function get_note(str_typeFName, str_typeAName, str_audioObjName, str_tim
  * Ex. get_all_notes("Bob's Project", "10/11 Practice", "G Major Scales")
  */
 export function get_all_notes(str_typeFName, str_typeAName, str_audioObjName) {
-  dict_typeFs[str_typeFName]
+  return dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
     .get_notes();
@@ -286,6 +301,28 @@ export function clear_notes(str_typeFName, str_typeAName, str_audioObjName) {
     .get_audio(str_audioObjName)
     .clear_notes();
   set_typeF_in_local_storage(str_typeFName);
+}
+
+/**
+ * Load existing data from back-end
+ * 
+ * @Usage
+ * Ex. load_data()
+ */
+export function load_data() {
+  Object.keys(localStorage).forEach(str_typeFName => {
+    add_typeF(str_typeFName, false);
+    const typeF = JSON.parse(localStorage.getItem(str_typeFName));
+
+    for (const str_typeAName in typeF.dict_typeA) {
+      add_typeA(str_typeFName, str_typeAName, false);
+      const typeA = typeF.dict_typeA[str_typeAName];
+
+      for (const str_audioName in typeA.dict_audio) {
+        add_audio(str_typeFName, str_typeAName, str_audioName, typeA.dict_audio[str_audioName].str_path, false);
+      }
+    }
+  })
 }
 
 function set_typeF_in_local_storage(str_typeFName) {

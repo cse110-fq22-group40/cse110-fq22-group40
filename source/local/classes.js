@@ -134,11 +134,8 @@ export class TypeA {
 export class TypeF {
   /**
   * TypeF is a container for a group of TypeA objects
-  *
-  * @param {str_name} Name of Folder
   */
-  constructor(str_name) {
-    this.str_name = str_name;
+  constructor() {
     // Dict of Type A folders {"name" : typeA}
     this.dict_typeA = {};
   }

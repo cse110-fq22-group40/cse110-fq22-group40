@@ -2,13 +2,18 @@ import * as utils from "../../../local/utils.js"
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
+
+// Load existing data from back-end
+utils.load_data();
+
+// Create dummy folders
 utils.add_typeF("dummyF");
 utils.add_typeA("dummyF", "dummyA");
 
 // When the page intializes
 window.addEventListener("load", () => {
   const audioFiles = utils.get_all_audio_names("dummyF", "dummyA");
-  console.log(audioFiles);
+  
   for (const audio of audioFiles) {
     createAudioCard(audio);
   }
@@ -29,7 +34,6 @@ addButton.addEventListener("click", () => {
     createAudioCard(evt.detail.name);
     
     utils.add_audio("dummyF", "dummyA", evt.detail.name, evt.detail.path);
-    console.log(utils.get_all_audio_names("dummyF", "dummyA"));
 
     // Show success screen
     const successScreen = document.createElement("success-screen");
