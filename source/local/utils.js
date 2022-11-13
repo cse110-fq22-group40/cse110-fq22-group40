@@ -1,4 +1,6 @@
 import * as classes from "./classes.js";
+const lz_string = require("lz-string");
+
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
 
@@ -338,7 +340,9 @@ export function clear_notes(str_typeFName, str_typeAName, str_audioObjName) {
 export function load_data() {
   Object.keys(localStorage).forEach(str_typeFName => {
     add_typeF(str_typeFName, false);
-    const typeF = JSON.parse(localStorage.getItem(str_typeFName));
+    const typeF = JSON.parse(
+      lz_string.decompressFromUTF16(localStorage.getItem(str_typeFName))
+    );
 
     for (const str_typeAName in typeF.dict_typeA) {
       add_typeA(str_typeFName, str_typeAName, false);
@@ -352,7 +356,9 @@ export function load_data() {
 }
 
 function set_typeF_in_local_storage(str_typeFName) {
-  localStorage.setItem(str_typeFName, JSON.stringify(dict_typeFs[str_typeFName]));
+  localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
+    JSON.stringify(dict_typeFs[str_typeFName])
+  ));
 }
 
 function remove_typeF_from_local_storage(str_typeFName) { 
