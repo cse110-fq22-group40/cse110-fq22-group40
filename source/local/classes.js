@@ -1,3 +1,5 @@
+const path = require("path");
+
 // function: the_brown_cow
 // classes: StartWithUpper (camel)
 // objects: camelCase
@@ -11,7 +13,7 @@ export class AudioObject {
   * @param {str_path} path to audio file
   */
   constructor(str_path) {
-    this.str_path = str_path;
+    this.str_path = path.relative(__dirname, str_path);
       
     // {"timestamp" : "text"}
     this.notes = {};
@@ -33,7 +35,7 @@ export class AudioObject {
   * @return none
   */
   update_path(str_newPath) {
-    this.str_path = str_newPath;
+    this.str_path = path.relative(__dirname, str_path);
   }
 
   /** 
