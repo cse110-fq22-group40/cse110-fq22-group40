@@ -17,13 +17,13 @@ export class AudioObject {
     this.notes = {};
   }
 
-  /** TBD
-  * Getter for audio file
+  /**
+  * Getter for audio file path
   *
-  * @return Audio file
+  * @return Audio file path
   */
-  get_audio_file() {
-    // TBD
+  get_path() {
+    return this.str_path;
   }
 
   /** 
@@ -117,11 +117,6 @@ export class TypeA {
     this.dict_audio[str_name] = new AudioObject(str_path);
   }
   
-  // use JSON from form to update the audio object
-  update_audio(str_audioObjName, str_newDataJSON) {
-
-  }
-  
   delete_audio(str_audioName) {
     delete this.dict_audio[str_audioName];
   }
@@ -170,16 +165,4 @@ export class TypeF {
   clear_folder() {
     this.array_typeA = {};
   }
-
-  // /**
-  // * Saves the typeF folders for the whole application, will
-  // * need to call get typeF folder function to save. No
-  // * input but might change to method in future.
-  // *
-  // * @param none
-  // * @return returns true if successfully, false othewise
-  // */
-  // save() {
-
-  // }
 }

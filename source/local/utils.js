@@ -161,12 +161,29 @@ export function delete_audio(str_typeFName, str_typeAName, str_audioObjName) {
 }
 
 /**
- * Update audio path for an AudioObj
- * @param {str_newPath} : The new audio path to use
- * @param {str_typeFName} : String name of the TypeF folder 
+ * Get the audio path for an AudioObj
+ * To play, set the "src" attribute of an HTML audio element to the audio path
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * 
+ * @Usage
+ * Ex. get_audio_path("Bob's Project", "10/11 Practice", "G Major Scales")
+ */
+ export function get_audio_path(str_typeFName, str_typeAName, str_audioObjName) {
+  return dict_typeFs[str_typeFName]
+    .get_typeA(str_typeAName)
+    .get_audio(str_audioObjName)
+    .get_path();
+}
+
+/**
+ * Update audio path for an AudioObj
+ * @param {str_newPath} : The new audio path to use
+ * @param {str_typeFName} : String name of the TypeF folder
+ * @param {str_typeAName} : String name of the TypeA folder
+ * @param {str_audioObjName} : String name of the AudioObj
+ *
  * @Usage
  * Ex. update_audio_path("path/to/file.mp3", "Bob's Project", "10/11 Practice", "G Major Scales")
  */
@@ -226,7 +243,7 @@ export function update_name(str_newName, str_typeFName, str_typeAName, str_audio
 
 /**
  * Adds a note to an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder 
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * @param {str_timestamp} : String of the note's timestamp
@@ -245,8 +262,7 @@ export function add_note(str_typeFName, str_typeAName, str_audioObjName, str_tim
 
 /**
  * Deletes a note to an AudioObj given timestamp
- * MUST SPECIFY ENTIRE PATH FROM TYPEF TO AUDIOOBJ
- * @param {str_typeFName} : String name of the TypeF folder 
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * @param {str_timestamp} : String of the note's timestamp
@@ -264,7 +280,7 @@ export function delete_note(str_typeFName, str_typeAName, str_audioObjName, str_
 
 /**
  * Adds a note to an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder 
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * @param {str_timestamp} : String of the note's timestamp
@@ -281,7 +297,7 @@ export function get_note(str_typeFName, str_typeAName, str_audioObjName, str_tim
 
 /**
  * Get all notes from an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder 
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * @param {str_timestamp} : String of the note's timestamp
@@ -298,7 +314,7 @@ export function get_all_notes(str_typeFName, str_typeAName, str_audioObjName) {
 
 /**
  * Clear all notes in an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder 
+ * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
  * 

@@ -5,7 +5,8 @@ const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
     fullscreen: true,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   });
 
