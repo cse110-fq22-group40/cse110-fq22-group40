@@ -460,3 +460,14 @@ function set_typeF_in_local_storage(str_typeFName) {
 function remove_typeF_from_local_storage(str_typeFName) { 
   localStorage.removeItem(str_typeFName);
 }
+
+/**
+ * Does nothing
+ * @param {example} : String name of the TypeF folder
+ * 
+ * @Usage
+ * This does nothing!!
+ */
+function doesNothing(example){
+  console.log(example);
+}
