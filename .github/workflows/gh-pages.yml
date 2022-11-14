@@ -13,11 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./source/local/utils.js
-          output_dir: ./docs
-          config_file: jsdoc.json
+        run: npm run jsdoc
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
