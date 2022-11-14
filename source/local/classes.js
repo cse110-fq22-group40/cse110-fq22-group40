@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 
 // function: the_brown_cow
 // classes: StartWithUpper (camel)
@@ -9,47 +10,61 @@ export class AudioObject {
   /**
   * AudioObject is a container for the path to the audio file
   * and the dictionary of notes
-  *
-  * @param {str_path} path to audio file
+  * @param {str_path} : Path to audio file
+  * 
+  * @throws Error if audio file path does not exist
   */
   constructor(str_path) {
-    this.str_path = path.relative(__dirname, str_path);
+    this.update_path(str_path);
       
     // {"timestamp" : "text"}
     this.notes = {};
   }
 
   /**
+  * Updates path to audio file
+  * @param {str_newPath} : New path to audio file
+  * 
+  * @throws Error if audio file path does not exist
+  */
+  update_path(str_newPath) {
+    if (!fs.existsSync(path.resolve(__dirname, str_newPath)))
+      throw new Error("Invalid audio file path");
+    
+    this.str_path = path.relative(__dirname, str_newPath);
+  }
+
+  /**
   * Getter for audio file path
   *
   * @return Audio file path
+  * 
+  * @throws Error if audio file path has changed or was deleted
   */
   get_path() {
-    return this.str_path;
+    if (fs.existsSync(path.resolve(__dirname, this.str_path)))
+      return this.str_path;
+    
+    throw new Error("Audio file path no longer exists");
   }
 
   /** 
-  * Updates path to audio file
-  * @param {str_newPath} New path to audio file
-  *
-  * @return none
+  * Add specific note with a timestamp
+  * @param {str_timestamp} : Timestamp of the note
+  * @param {str_note} : The note
+  * 
+  * @throws Error if the specified timestamp already exists
   */
-  update_path(str_newPath) {
-    this.str_path = path.relative(__dirname, str_path);
-  }
+  add_note(str_timestamp, str_note) {
+    if (this.notes[str_timestamp])
+      throw new Error(`Note already exists at timestamp ${str_timestamp}`);
 
-  /** 
-  * Getter for all the notes
-  *
-  * @return Note
-  */
-  get_notes() {
-    return this.notes;
+    this.notes[str_timestamp] = str_note;
   }
 
   /** 
   * Getter for specific note given a timestamp
-  * @param {str_timestamp} Timestamp of the note
+  * @param {str_timestamp} : Timestamp of the note
   *
   * @return Note
   */
@@ -57,22 +72,51 @@ export class AudioObject {
     return this.notes[str_timestamp];
   }
 
-  /** 
-  * Add specific note with a timestamp
-  * @param {str_timestamp} Timestamp of the note
-  * @param {str_note} The note
+  /**
+  * Getter for all the notes
   *
-  * @return None
+  * @return Dictionary containing all the notes
   */
-  add_note(str_timestamp, str_note) {
-    this.notes[str_timestamp] = str_note;
+  get_notes() {
+    return this.notes;
+  }
+
+  /**
+   * Change the timestamp of an existing note
+   * @param {str_timestamp} : Timestamp of the note
+   * @param {str_newTimestamp} : New timestamp of the note
+   * 
+   * @throws Error if the old timestamp doesn't exist
+   * @throws Error if the new timestamp already exists
+   */
+  update_timestamp(str_timestamp, str_newTimestamp) {
+    if (!this.notes[str_timestamp])
+      throw new Error(`Note doesn't exist at timestamp ${str_timestamp}`);
+
+    if (this.notes[str_newTimestamp])
+      throw new Error(`Note already exists at timestamp ${str_newTimestamp}`);
+    
+    this.notes[str_newTimestamp] = this.notes[str_timestamp];
+    delete this.notes[str_timestamp];
+  }
+
+  /**
+   * Change the note at a specific timestamp
+   * @param {str_timestamp} : Timestamp of the note
+   * @param {str_newNote} : The new note
+   * 
+   * @throws Error if the specified timestamp doesn't exist
+   */
+  update_note(str_timestamp, str_newNote) {
+    if (!this.notes[str_timestamp])
+      throw new Error(`Note doesn't exist at timestamp ${str_timestamp}`);
+
+    this.notes[str_timestamp] = str_newNote;
   }
   
   /** 
   * Deletes note given timestamp
-  * @param {str_timestamp} Timestamp of the note
-  *
-  * @return None
+  * @param {str_timestamp} : Timestamp of the note
   */
   delete_note(str_timestamp) {
     delete this.notes[str_timestamp];
@@ -96,14 +140,21 @@ export class TypeA {
   }
 
   /**
-   * Update an AudioObj name inside this TypeA object
+   * Create a new audio file
+   * @param {str_name} : Name of the audio file
+   * @param {str_path} : Path of the audio file
    * 
-   * @param {str_oldName} : old name of the AudioObj you want to change
-   * @param {str_newName} : new name of the AudioObj you want to change
+   * @throws Error if the AudioObj name is empty
+   * @throws Error if the AudioObj name already exists
    */
-  update_audio_name(str_oldName, str_newName) {
-    this.dict_audio[str_newName] = this.dict_audio[str_oldName];
-    delete this.dict_audio[str_oldName];
+  add_audio(str_name, str_path) {
+    if (str_name === "")
+      throw new Error("Audio file name cannot be empty");
+
+    if (this.dict_audio[str_name])
+      throw new Error(`Audio file with name "${str_name}" already exists`);
+
+    this.dict_audio[str_name] = new AudioObject(str_path);
   }
 
   get_audio(str_audioObjName) {
@@ -113,10 +164,29 @@ export class TypeA {
   get_all_audio_names() {
     return Object.keys(this.dict_audio);
   }
-  
-  // NOTE: we may want this to take a JSON from a form instead
-  add_audio(str_name, str_path) {
-    this.dict_audio[str_name] = new AudioObject(str_path);
+
+  /**
+   * Update an AudioObj name inside this TypeA object
+   * 
+   * @param {str_oldName} : Old name of the AudioObj you want to change
+   * @param {str_newName} : New name of the AudioObj you want to change
+   * 
+   * @throws Error if the AudioObj name is empty
+   * @throws Error if the old AudioObj name doesn't exist
+   * @throws Error if the new AudioObj name already exists
+   */
+  update_audio_name(str_oldName, str_newName) {
+    if (str_newName === "")
+      throw new Error("Audio file name cannot be empty");
+
+    if (!this.dict_audio[str_oldName])
+      throw new Error(`Audio file with name "${str_oldName}" doesn't exist`);
+
+    if (this.dict_audio[str_newName])
+      throw new Error(`Audio file with name "${str_newName}" already exists`);
+
+    this.dict_audio[str_newName] = this.dict_audio[str_oldName];
+    delete this.dict_audio[str_oldName];
   }
   
   delete_audio(str_audioName) {
@@ -138,14 +208,20 @@ export class TypeF {
   }
 
   /**
-   * Update a typeA object's name inside this TypeF object
+   * Add a new TypeA folder with the specified name
+   * @param {str_name} : The name of the TypeA folder
    * 
-   * @param {str_oldName} : old name of the typeA folder you want to change
-   * @param {str_newName} : new name of the typeA folder you want to change
+   * @throws Error if the TypeA folder name is empty
+   * @throws Error if the TypeA folder name already exists
    */
-  update_typeA_name(str_oldName, str_newName) {
-    this.dict_typeA[str_newName] = this.dict_typeA[str_oldName];
-    delete this.dict_typeA[str_oldName];
+  add_typeA(str_name) {
+    if (str_name === "")
+      throw new Error("TypeA folder name cannot be empty");
+
+    if (this.dict_typeA[str_name])
+      throw new Error(`TypeA folder with name "${str_name}" already exists`);
+
+    this.dict_typeA[str_name] = new TypeA(str_name);
   }
 
   get_typeA(str_typeAName) {
@@ -155,9 +231,29 @@ export class TypeF {
   get_all_typeA_names() {
     return Object.keys(this.dict_typeA);
   }
-  
-  add_typeA(str_name) {
-    this.dict_typeA[str_name] = new TypeA(str_name);
+
+  /**
+   * Update a typeA object's name inside this TypeF object
+   * 
+   * @param {str_oldName} : Old name of the typeA folder you want to change
+   * @param {str_newName} : New name of the typeA folder you want to change
+   * 
+   * @throws Error if the TypeA folder name is empty
+   * @throws Error if the old TypeA folder name doesn't exist
+   * @throws Error if the new TypeA folder name already exists
+   */
+  update_typeA_name(str_oldName, str_newName) {
+    if (str_newName === "")
+      throw new Error("TypeA folder name cannot be empty");
+
+    if (!this.dict_typeA[str_oldName])
+      throw new Error(`TypeA folder with name "${str_oldName}" doesn't exist`);
+    
+    if (this.dict_typeA[str_newName])
+      throw new Error(`TypeA folder with name "${str_newName}" already exists`);
+
+    this.dict_typeA[str_newName] = this.dict_typeA[str_oldName];
+    delete this.dict_typeA[str_oldName];
   }
   
   delete_typeA(str_typeAName) {

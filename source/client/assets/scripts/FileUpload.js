@@ -3,12 +3,28 @@ import * as utils from "../../../local/utils.js"
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
 
+/**
+NOTE TO FRONT-END TEAM FROM BENNETT:
+I added some more helper functions to Utils.js.
+
+I also added error handling in the back-end.
+Please check the updated documentation in Utils.js.
+Whenever you see that a function includes @throws,
+you need to make sure that you call the function within a dedicated
+TRY-CATCH BLOCK. If an error occurs, make sure you display
+some sort of pop-up or whatever to notify the user of what's gone wrong.
+This is very important, or else the
+program will crash and the user won't know why!
+**/
+
 // Load existing data from back-end
 utils.load_data();
 
-// Create dummy folders
-utils.add_typeF("dummyF");
-utils.add_typeA("dummyF", "dummyA");
+if (!utils.get_all_typeF_names().length) {
+  // Create dummy folders
+  utils.add_typeF("dummyF");
+  utils.add_typeA("dummyF", "dummyA");
+}
 
 // When the page intializes
 window.addEventListener("load", () => {
