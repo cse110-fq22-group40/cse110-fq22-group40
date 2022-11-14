@@ -16,7 +16,7 @@
         "monospaceLinks": true
     }, 
     "opts": {
-        "destination": "./jsdoc",
+        "destination": "./docs",
         "recurse": true,
         "tutorials": "./tutorials"
     }
