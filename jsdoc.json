@@ -2,9 +2,9 @@
     "plugins": ["plugins/markdown"],
     "recurseDepth": 10,
     "source": {
-        "include": ["source/"],
+        "include": ["source/local/utils.js", "source/local/classes.js"],
         "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
+        "excludePattern": "(node_modules/|jsdoc)"
     },
     "sourceType": "module",
     "tags": {
@@ -16,7 +16,6 @@
         "monospaceLinks": true
     }, 
     "opts": {
-        "template": "./template",
         "destination": "./jsdoc",
         "recurse": true,
         "tutorials": "./tutorials"
