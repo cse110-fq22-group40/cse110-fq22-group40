@@ -18,7 +18,6 @@ jobs:
           source_dir: ./source/local/utils.js
           output_dir: ./docs
           config_file: conf.json
-        run: npm run jsdoc
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
