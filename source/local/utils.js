@@ -451,13 +451,6 @@ export function load_data() {
   })
 }
 
-/**
- * This is a test!
- * @param {str_typeFName} : String does somthing??????
- * 
- * @Usage
- * Ex. sets type F I guess()
- */
 function set_typeF_in_local_storage(str_typeFName) {
   localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[str_typeFName])
