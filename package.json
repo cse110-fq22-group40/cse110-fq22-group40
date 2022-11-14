@@ -5,7 +5,8 @@
   "main": "source/local/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "jsdoc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   },
   "homepage": "https://github.com/cse110-fq21-group40/cse110-fq21-group40#readme",
   "devDependencies": {
-    "electron": "^21.2.3"
+    "electron": "^21.2.3",
+    "jsdoc": "^4.0.0"
   },
   "dependencies": {
     "lz-string": "^1.4.4"
