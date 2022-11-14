@@ -13,7 +13,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        uses: andstor/jsdoc-action@v1
-        with:
-          config_file: jsdoc.json
-          output_dir: ./docs
+        run: npm run jsdoc
