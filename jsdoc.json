@@ -2,7 +2,7 @@
     "plugins": ["plugins/markdown"],
     "recurseDepth": 10,
     "source": {
-        "include": ["source/local/utils.js", "source/local/classes.js"],
+        "include": ["./source/local/utils.js", "./source/local/classes.js"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|jsdoc)"
     },
