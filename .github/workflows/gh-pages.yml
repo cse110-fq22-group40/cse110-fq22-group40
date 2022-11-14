@@ -15,6 +15,7 @@ jobs:
       - name: Build
         uses: andstor/jsdoc-action@v1
         with:
-          source_dir: ./source/local
+          source_dir: ./source
+          recurse: true
           output_dir: ./docs
           config_file: jsdoc.json
