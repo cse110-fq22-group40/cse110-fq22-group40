@@ -272,20 +272,47 @@ export function update_name(str_newName, str_typeFName, str_typeAName, str_audio
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's timestamp
+ * @param {num_timestamp} : Timestamp of the note (in seconds)
  * @param {str_note} : String of the note's text
  * 
+ * @throws Error if the specified timestamp isn't a valid number (in seconds)
  * @throws Error if the specified timestamp already exists
  * 
  * @Usage
- * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00", "Not enough feelings")
+ * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Not enough feelings")
  */
-export function add_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp, str_note) {
+export function add_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, str_note) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
-    .add_note(str_timestamp, str_note);
+    .add_note(num_timestamp, str_note);
   set_typeF_in_local_storage(str_typeFName);
+}
+
+/**
+ * Takes input as seconds and returns formatted time as hh:mm:ss
+ * @param {time} : Time (in seconds)
+ */
+export function format_time(time) {
+  const hours = Math.floor(time / 3600);
+  let minutes = Math.floor(time / 60) % 60;
+  let seconds = Math.floor(time % 60);
+  
+  // Append a 0 if seconds is only one digit
+  if (seconds < 10)
+      seconds = `0${seconds}`;
+
+  // If the time is an hour or longer
+  if (hours) {
+      // Append a 0 if minutes is only one digit
+      if (minutes < 10)
+          minutes = `0${minutes}`;
+      
+      return `${hours}:${minutes}:${seconds}`;
+  }
+  
+  // If the time is shorter than an hour
+  return `${minutes}:${seconds}`;
 }
 
 /**
@@ -293,16 +320,16 @@ export function add_note(str_typeFName, str_typeAName, str_audioObjName, str_tim
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's timestamp
+ * @param {num_timestamp} : Timestamp of the note (in seconds)
  * 
  * @Usage
- * Ex. get_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00")
+ * Ex. get_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600)
  */
-export function get_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp) {
+export function get_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp) {
   return dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
-    .get_note(str_timestamp);
+    .get_note(num_timestamp);
 }
 
 /**
@@ -310,7 +337,6 @@ export function get_note(str_typeFName, str_typeAName, str_audioObjName, str_tim
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's timestamp
  * 
  * @Usage
  * Ex. get_all_notes("Bob's Project", "10/11 Practice", "G Major Scales")
@@ -327,20 +353,21 @@ export function get_all_notes(str_typeFName, str_typeAName, str_audioObjName) {
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's old timestamp
- * @param {str_newTimestamp} : String of the note's new timestamp
+ * @param {num_timestamp} : Old timestamp of the note (in seconds)
+ * @param {num_newTimestamp} : New timestamp of the note (in seconds)
  * 
+ * @throws Error if the new timestamp isn't a valid number (in seconds)
  * @throws Error if the old timestamp doesn't exist
  * @throws Error if the new timestamp already exists
  * 
  * @Usage
- * Ex. update_timestamp("Bob's Project", "10/11 Practice", "G Major Scales", "12:00", "9:00")
+ * Ex. update_timestamp("Bob's Project", "10/11 Practice", "G Major Scales", 3600, 1250)
  */
-export function update_timestamp(str_typeFName, str_typeAName, str_audioObjName, str_timestamp, str_newTimestamp) {
+export function update_timestamp(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, num_newTimestamp) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
-    .update_timestamp(str_timestamp, str_newTimestamp);
+    .update_timestamp(num_timestamp, num_newTimestamp);
   set_typeF_in_local_storage(str_typeFName);
 }
 
@@ -349,19 +376,19 @@ export function update_timestamp(str_typeFName, str_typeAName, str_audioObjName,
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's timestamp
+ * @param {num_timestamp} : Timestamp of the note (in seconds)
  * @param {str_newNote} : String of the note's new text
  * 
  * @throws Error if the specified timestamp doesn't exist
  * 
  * @Usage
- * Ex. update_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00", "Great improvement")
+ * Ex. update_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Great improvement")
  */
-export function update_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp, str_newNote) {
+export function update_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, str_newNote) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
-    .update_note(str_timestamp, str_newNote);
+    .update_note(num_timestamp, str_newNote);
   set_typeF_in_local_storage(str_typeFName);
 }
 
@@ -370,16 +397,16 @@ export function update_note(str_typeFName, str_typeAName, str_audioObjName, str_
  * @param {str_typeFName} : String name of the TypeF folder
  * @param {str_typeAName} : String name of the TypeA folder
  * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_timestamp} : String of the note's timestamp
+ * @param {num_timestamp} : Timestamp of the note (in seconds)
  * 
  * @Usage
- * Ex. delete_note("Bob's Project", "10/11 Practice", "G Major Scales", "12:00")
+ * Ex. delete_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600)
  */
-export function delete_note(str_typeFName, str_typeAName, str_audioObjName, str_timestamp) {
+export function delete_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp) {
   dict_typeFs[str_typeFName]
     .get_typeA(str_typeAName)
     .get_audio(str_audioObjName)
-    .delete_note(str_timestamp);
+    .delete_note(num_timestamp);
   set_typeF_in_local_storage(str_typeFName);
 }
 

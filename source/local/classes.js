@@ -50,26 +50,32 @@ export class AudioObject {
 
   /** 
   * Add specific note with a timestamp
-  * @param {str_timestamp} : Timestamp of the note
+  * @param {num_timestamp} : Timestamp of the note (in seconds)
   * @param {str_note} : The note
   * 
+  * @throws Error if the specified timestamp isn't a valid number (in seconds)
   * @throws Error if the specified timestamp already exists
   */
-  add_note(str_timestamp, str_note) {
-    if (this.notes[str_timestamp])
-      throw new Error(`Note already exists at timestamp ${str_timestamp}`);
+  add_note(num_timestamp, str_note) {
+    num_timestamp = parseInt(num_timestamp);
 
-    this.notes[str_timestamp] = str_note;
+    if (Number.isNaN(num_timestamp))
+      throw new Error(`Timestamp must be a valid number (in seconds)`);
+
+    if (this.notes[num_timestamp])
+      throw new Error(`Note already exists at timestamp ${num_timestamp}`);
+
+    this.notes[num_timestamp] = str_note;
   }
 
   /** 
   * Getter for specific note given a timestamp
-  * @param {str_timestamp} : Timestamp of the note
+  * @param {num_timestamp} : Timestamp of the note (in seconds)
   *
   * @return Note
   */
-  get_note(str_timestamp) {
-    return this.notes[str_timestamp];
+  get_note(num_timestamp) {
+    return this.notes[num_timestamp];
   }
 
   /**
@@ -83,43 +89,49 @@ export class AudioObject {
 
   /**
    * Change the timestamp of an existing note
-   * @param {str_timestamp} : Timestamp of the note
-   * @param {str_newTimestamp} : New timestamp of the note
+   * @param {num_timestamp} : Old timestamp of the note (in seconds)
+   * @param {num_newTimestamp} : New timestamp of the note (in seconds)
    * 
+   * @throws Error if the new timestamp isn't a valid number (in seconds)
    * @throws Error if the old timestamp doesn't exist
    * @throws Error if the new timestamp already exists
    */
-  update_timestamp(str_timestamp, str_newTimestamp) {
-    if (!this.notes[str_timestamp])
-      throw new Error(`Note doesn't exist at timestamp ${str_timestamp}`);
+  update_timestamp(num_timestamp, num_newTimestamp) {
+    num_newTimestamp = parseInt(num_newTimestamp);
 
-    if (this.notes[str_newTimestamp])
-      throw new Error(`Note already exists at timestamp ${str_newTimestamp}`);
+    if (Number.isNaN(num_newTimestamp))
+      throw new Error(`Timestamp must be a valid number (in seconds)`);
+
+    if (!this.notes[num_timestamp])
+      throw new Error(`Note doesn't exist at timestamp ${num_timestamp}`);
+
+    if (this.notes[num_newTimestamp])
+      throw new Error(`Note already exists at timestamp ${num_newTimestamp}`);
     
-    this.notes[str_newTimestamp] = this.notes[str_timestamp];
-    delete this.notes[str_timestamp];
+    this.notes[num_newTimestamp] = this.notes[num_timestamp];
+    delete this.notes[num_timestamp];
   }
 
   /**
    * Change the note at a specific timestamp
-   * @param {str_timestamp} : Timestamp of the note
+   * @param {num_timestamp} : Timestamp of the note (in seconds)
    * @param {str_newNote} : The new note
    * 
    * @throws Error if the specified timestamp doesn't exist
    */
-  update_note(str_timestamp, str_newNote) {
-    if (!this.notes[str_timestamp])
-      throw new Error(`Note doesn't exist at timestamp ${str_timestamp}`);
+  update_note(num_timestamp, str_newNote) {
+    if (!this.notes[num_timestamp])
+      throw new Error(`Note doesn't exist at timestamp ${num_timestamp}`);
 
-    this.notes[str_timestamp] = str_newNote;
+    this.notes[num_timestamp] = str_newNote;
   }
   
   /** 
   * Deletes note given timestamp
-  * @param {str_timestamp} : Timestamp of the note
+  * @param {num_timestamp} : Timestamp of the note (in seconds)
   */
-  delete_note(str_timestamp) {
-    delete this.notes[str_timestamp];
+  delete_note(num_timestamp) {
+    delete this.notes[num_timestamp];
   }
 
   /**
