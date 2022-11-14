@@ -17,10 +17,10 @@ jobs:
         with:
           source_dir: ./source/local/utils.js
           recurse: true
-          output_dir: ./odocs
+          output_dir: ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
