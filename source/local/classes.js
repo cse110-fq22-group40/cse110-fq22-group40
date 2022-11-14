@@ -31,7 +31,10 @@ export class AudioObject {
     if (!fs.existsSync(path.resolve(__dirname, str_newPath)))
       throw new Error("Invalid audio file path");
     
-    this.str_path = path.relative(__dirname, str_newPath);
+    if (path.isAbsolute(str_newPath))
+      this.str_path = path.relative(__dirname, str_newPath);
+    else
+      this.str_path = str_newPath;
   }
 
   /**
