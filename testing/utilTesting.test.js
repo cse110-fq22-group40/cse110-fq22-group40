@@ -1,5 +1,5 @@
 //import * as utils from "../source/local/utils.js"
-const utils = require("../source/local/Utils.js");
+const utils = require("../source/local/utils");
 
 beforeAll(() => {
     return utils.add_typeF("testProject");
