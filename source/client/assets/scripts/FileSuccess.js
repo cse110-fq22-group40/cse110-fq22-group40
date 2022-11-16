@@ -18,7 +18,7 @@ class FileSuccess extends HTMLElement {
       successimage.className = "success";
 
       let successdescription = document.createElement('h3');
-      successdescription.innerText = "Your file has been added";
+      successdescription.innerText = "Your file/folder has been added";
       successdescription.className = "successDescription"
   
       successcontainer.appendChild(successtitle);

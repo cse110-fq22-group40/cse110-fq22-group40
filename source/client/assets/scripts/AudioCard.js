@@ -1,21 +1,32 @@
+/**
+ * This file defines a class that determines how an Audio Card is rendered 
+ * for each audio file uploaded by the user.
+ */
 class AudioCard extends HTMLElement {
   constructor() {
     super();
     let shadow = this.attachShadow({ mode:'open' });
 
+    // creating the container for the entire audio card
     let audiocard = document.createElement('div');
     audiocard.className = "audioCard";
 
+    // add on click here?
+
+    // setting the icon for the card
     let audioimage = document.createElement('img');
     audioimage.src = "assets/images/musicicon.png";
     audioimage.className = "musicIcon";
     audioimage.alt = "music icon";
 
+    // creating the name of the audio card as given by the user
     let audioname = document.createElement('h2');
 
+    // adding elements to the card
     audiocard.appendChild(audioimage);
     audiocard.appendChild(audioname);
 
+    // adding style unique to the audio cards
     let style = document.createElement('style');
     style.textContent = `
     .audioCard{
@@ -40,14 +51,24 @@ class AudioCard extends HTMLElement {
         margin-top: 20px;
     }
     `
+
+    // adding elements to card
     shadow.append(audiocard);
     shadow.append(style);
+
+    const myShadowDom = this.shadowRoot;
+    myShadowDom.addEventListener("click", () => {
+      localStorage.setItem("TypeA", "Test");
+      window.location = "AudioObject.html"
+    })
   }
 
+  // ? TODO
   set name(name) {
     const audioname = this.shadowRoot.querySelector("h2");
     audioname.textContent = name;
   }
 }
 
+// define a custom HTML element
 customElements.define("audio-card", AudioCard);

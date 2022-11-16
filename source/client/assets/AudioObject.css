@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+    font-family: "Nunito", "Trebuchet MS", sans-serif;
+}
+
+body {
+    margin: 60px auto;
+    width: 750px;
+}
+
+#audio-input {
+    display: block;
+    margin-top: 7px;
+}
+
+::file-selector-button, button {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 6px 10px;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, magenta, cyan) border-box;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+::file-selector-button:hover, button:hover {
+    background: linear-gradient(45deg, magenta, cyan) border-box;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+}
+
+#editor {
+    display: none;
+    animation: fadeIn 0.75s;
+}
+
+@keyframes expand {
+    from {
+      width: 0;
+      height: 0;
+    }
+}
+
+#audio-visualizer {
+    display: block;
+    margin: auto;
+    image-rendering: pixelated;
+    animation: expand 0.75s;
+}
+
+@keyframes expandWidth {
+    from {
+      width: 0;
+    }
+}
+
+#audio-player {
+    width: 100%;
+    animation: expandWidth 0.75s;
+}
+
+#text-editor {
+    display: block;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    width: 100%;
+    height: 500px;
+    border: solid gray 1px;
+    border-radius: 10px;
+    padding: 10px;
+    animation: expand 0.75s;
+}
+
+#note-display {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+@keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+}
+
+.note {
+    margin-bottom: 10px;
+    border: 0.5px solid lightgray;
+    border-radius: 4px;
+    padding: 7px 10px;
+    background-color: #fcfcfc;
+    animation: fadeInDown 0.75s;
+}
+
+.timestamp {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.timestamp:hover {
+    color: deepskyblue;
+    text-decoration: underline;
+}
+
+.timestamp:active {
+    color: skyblue;
+}

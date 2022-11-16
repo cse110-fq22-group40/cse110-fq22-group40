@@ -1,28 +1,48 @@
-class FileName extends HTMLElement {
+/**
+ * This file defines a class that determines the UI for uploading
+ * a new audio file to the workspace.
+ */
+class CreateAudioFlow extends HTMLElement {
   constructor() {
     super();
     let shadow = this.attachShadow({ mode:'open' });
 
-    let filename = document.createElement('div');
-    filename.className = "fileNameContainer";
+    // creating a container for adding audio UI pop up
+    let create_flow = document.createElement('div');
+    create_flow.className = "fileNameContainer";
 
+    // adding a exit for the pop up
+    let fileexit = document.createElement('button');
+    fileexit.innerText = "X";
+    fileexit.className = "exit";
+
+    fileexit.addEventListener("click",() => {
+      const popup = this.shadowRoot.querySelector(".fileNameContainer");
+      popup.remove();
+    });
+
+    // adding a title for the pop up
     let filetitle = document.createElement('h2');
-    filetitle.innerText = "Upload Audio";
+    filetitle.innerText = "Name and upload your audio!";
     filetitle.className = "fileTitle";
 
+    // create a place for the user to add input
     let fileform = document.createElement('form');
 
+    // adding a text input for the name of the audio in app
     let textinput = document.createElement('input');
     textinput.type = "text";
     textinput.className = "fileName";
 
+    // adding an input for the uploaded audio
     let fileinput = document.createElement('input');
     fileinput.type = "file";
     fileinput.className = "fileUpload";
     fileinput.accept = "audio/*";
 
-    let filesubmit = document.createElement('button');
-    filesubmit.textContent = "Create";
+    // TODO
+    let filesubmit = document.createElement('input');
+    filesubmit.type = "submit";
     filesubmit.className = "fileCreate";
 
     filesubmit.addEventListener("click", evt => {
@@ -38,11 +58,12 @@ class FileName extends HTMLElement {
       this.dispatchEvent(submitEvent);
     });
 
-    filename.appendChild(filetitle);
+    create_flow.appendChild(fileexit);
+    create_flow.appendChild(filetitle);
     fileform.appendChild(textinput);
     fileform.appendChild(fileinput);
     fileform.appendChild(filesubmit);
-    filename.appendChild(fileform);
+    create_flow.appendChild(fileform);
 
     let style = document.createElement('style');
     style.textContent = `  
@@ -54,10 +75,6 @@ class FileName extends HTMLElement {
       text-align: center;
       width: 450px;
       height: 250px;
-      border: solid;
-      border-radius: 10px;
-      border-width: 1.5xpx;
-      border-color: rgba(0,128,128,1);
       background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
       top: 50%;
       left: 50%;
@@ -67,7 +84,7 @@ class FileName extends HTMLElement {
     }
 
     .fileTitle{
-    margin-top: 50px;
+    margin-top: 30px;
     }
 
     .fileName{
@@ -97,10 +114,19 @@ class FileName extends HTMLElement {
       margin-bottom: 5px;
       margin-right: 5px;
     }
+
+    .exit{
+      margin-top: 10px;
+      font-size: 20px;
+      border-color: rgba(0,128,128,1);
+      color: red;
+      margin-right: auto;
+      margin-left: 8px;
+    }
     `
-    shadow.append(filename);
+    shadow.append(create_flow);
     shadow.append(style);
   }
 }
 
-customElements.define("create-aud-object", FileName);
+customElements.define("create-aud-object", CreateAudioFlow);
