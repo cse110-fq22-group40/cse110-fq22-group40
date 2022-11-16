@@ -1,0 +1,27 @@
+{
+  "name": "cse110-fq21-group40",
+  "version": "1.0.0",
+  "description": "[Team Page](admin/team.md)",
+  "main": "source/local/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-fq21-group40/cse110-fq21-group40.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-fq21-group40/cse110-fq21-group40/issues"
+  },
+  "homepage": "https://github.com/cse110-fq21-group40/cse110-fq21-group40#readme",
+  "devDependencies": {
+    "electron": "^21.2.3"
+  },
+  "dependencies": {
+    "lz-string": "^1.4.4"
+  }
+}
