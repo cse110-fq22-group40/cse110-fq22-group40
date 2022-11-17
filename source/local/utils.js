@@ -38,7 +38,6 @@ export function add_typeF(str_typeFName, save = true) {
 
   if (save)
     set_typeF_in_local_storage(str_typeFName);
-  return str_typeFName;
 }
 
 /**
@@ -485,14 +484,12 @@ export function get_profile_picture() {
   }
 }
 
-export function set_typeF_in_local_storage(str_typeFName) {
+function set_typeF_in_local_storage(str_typeFName) {
   localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[str_typeFName])
   ));
 }
 
-export function remove_typeF_from_local_storage(str_typeFName) { 
+function remove_typeF_from_local_storage(str_typeFName) { 
   localStorage.removeItem(str_typeFName);
 }
-
-module.exports = {add_typeF, add_typeA, add_audio, delete_typeF, delete_typeA, delete_audio, remove_typeF_from_local_storage};
