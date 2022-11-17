@@ -1,7 +1,8 @@
-import * as utils from "../../../local/utils.js"
+import * as utils from "../../../../local/utils.js"
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
+const backButton = document.querySelector(".back");
 
 /**
 NOTE TO FRONT-END TEAM FROM BENNETT:
@@ -19,16 +20,12 @@ program will crash and the user won't know why!
 
 // Load existing data from back-end
 utils.load_data();
-
-if (!utils.get_all_typeF_names().length) {
-  // Create dummy folders
-  utils.add_typeF("dummyF");
-  utils.add_typeA("dummyF", "dummyA");
-}
+const folderFName = sessionStorage.getItem("FolderF");
+const folderAName = sessionStorage.getItem("FolderA");
 
 // When the page intializes
 window.addEventListener("load", () => {
-  const audioFiles = utils.get_all_audio_names("dummyF", "dummyA");
+  const audioFiles = utils.get_all_audio_names(folderFName,folderAName);
   
   for (const audio of audioFiles) {
     createAudioCard(audio);
@@ -48,8 +45,8 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createAudioCard(evt.detail.name);
-    
-    utils.add_audio("dummyF", "dummyA", evt.detail.name, evt.detail.path);
+
+    utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
 
     // Show success screen
     const successScreen = document.createElement("success-screen");
@@ -68,3 +65,8 @@ function createAudioCard(name) {
   audioContainer.appendChild(audioCard);
   audioCard.name = name;
 }
+
+backButton.addEventListener("click", () => {
+  sessionStorage.removeItem("FolderA");
+  window.location = "TypeF.html";
+});

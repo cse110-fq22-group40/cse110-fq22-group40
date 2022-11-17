@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/AudioObject.css">
+    <link rel="stylesheet" href="assets/UserProfile.css" />
+    <title>Audio Annotator</title>
+</head>
+<body>
+
+    <div id="editor">
+        <canvas id="audio-visualizer" width="696" height="40"></canvas>
+        <audio id="audio-player" controls></audio>
+        <div id="text-editor" contenteditable></div>
+        <button onclick="submit()" id="submit">Submit</button>
+    </div>
+    
+    <div id="note-display">
+        <template id="note-template">
+            <div class="note">
+                <a class="timestamp"></a>
+                <div class="note-text"></div>
+            </div>
+        </template>
+    </div>
+    <script src="assets/scripts/AudioObjectList/AudioObject.js" type="module"></script>
+    <script src="assets/scripts/UserProfile.js" type="module"></script>
+</body>
+</html>
