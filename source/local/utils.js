@@ -1,11 +1,5 @@
 import * as classes from "./classes.js";
-
 const lz_string = require("lz-string");
-const fullName = require("fullname");
-const {exec, execSync} = require("child_process");
-const os = require("os");
-const path = require("path");
-const fs = require("fs");
 
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
@@ -455,37 +449,6 @@ export function load_data() {
       }
     }
   })
-}
-
-export function get_username() {
-  return fullName();
-}
-
-export function get_profile_picture() {
-  if (process.platform === "darwin") {
-    execSync("dscl . -read /Users/${USER} JPEGPhoto | tail -1 | xxd -r -p > ~/profile_picture.jpg");
-    const picture = fs.readFileSync(path.join(os.homedir(), "profile_picture.jpg"));
-    exec("rm ~/profile_picture.jpg");
-    return `data:png;base64,${picture.toString("base64")}`;
-  } else if (process.platform === "win32") {
-    const picturePath = path.join(os.homedir(), "..", "Public", "AccountPictures");
-    fs.readdirSync(picturePath, (err, files) => {
-      fs.readdirSync(path.join(picturePath, files[0].name()), (err, files) => {
-        console.log(files);
-      });
-    });
-    // C:\Users\Public\AccountPictures\S-1-...\{183...}-Image1080.jpg
-    // 192
-    // 208
-    // 240
-    // 32
-    // 40
-    // 424
-    // 448
-    // 48
-    // 64
-    // 96
-  }
 }
 
 function set_typeF_in_local_storage(str_typeFName) {
