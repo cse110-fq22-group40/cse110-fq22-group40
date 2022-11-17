@@ -1,4 +1,4 @@
-import * as utils from "../../../local/utils.js"
+import * as utils from "../../../../local/utils.js"
 
 // Add all your HTML DOM elements here as global variables
 const audioForm = document.getElementById("audio-form");
@@ -15,7 +15,14 @@ const clearButton = document.getElementById("clear-button");
 // Set the source of the audio player, hide the audio input form,
 // show the editor, and set up the audio visualizer
 
-const audio = utils.get_audio_path("dummyF","dummyA","test");
+const folderFName = sessionStorage.getItem("FolderF");
+const folderAName = sessionStorage.getItem("FolderA");
+const audioObject = sessionStorage.getItem("AudObject");
+console.log(folderFName);
+console.log(folderAName);
+console.log(audioObject);
+const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
+
 window.addEventListener("DOMContentLoaded",loadAudio(audio));
 
 function loadAudio(src) {

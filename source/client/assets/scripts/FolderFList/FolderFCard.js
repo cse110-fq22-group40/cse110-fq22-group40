@@ -1,8 +1,8 @@
 /**
- * This file defines a class that determines how an File Card is rendered 
- * for each audio file uploaded by the user.
+ * This file defines a class that determines how an FolderFCard is rendered 
+ * for each F folder that is created by the user.
  */
- class FolderCard extends HTMLElement {
+ class FolderFCard extends HTMLElement {
     constructor() {
       super();
       let shadow = this.attachShadow({ mode:'open' });
@@ -11,22 +11,20 @@
       let audiocard = document.createElement('div');
       audiocard.className = "audioCard";
   
-      // add on click here?
-  
       // setting the icon for the card
       let audioimage = document.createElement('img');
       audioimage.src = "assets/images/folder.png";
       audioimage.className = "musicIcon";
       audioimage.alt = "folder icon";
   
-      // creating the name of the audio card as given by the user
+      // creating the name of the F Folder as given by the user
       let audioname = document.createElement('h2');
   
       // adding elements to the card
       audiocard.appendChild(audioimage);
       audiocard.appendChild(audioname);
   
-      // adding style unique to the audio cards
+      // adding style unique to the Folder F Card
       let style = document.createElement('style');
       style.textContent = `
       .audioCard{
@@ -58,12 +56,13 @@
   
       const myShadowDom = this.shadowRoot;
       myShadowDom.addEventListener("click", () => {
-        //localStorage.setItem("TypeF", "Test");
-        window.location = "TypeA.html"
+        const folderFName = this.shadowRoot.querySelector("h2");
+        sessionStorage.setItem("FolderF",folderFName.textContent);
+        window.location = "TypeF.html"
       })
     }
   
-    // ? TODO
+    // this sets the name of the FolderF card
     set name(name) {
       const audioname = this.shadowRoot.querySelector("h2");
       audioname.textContent = name;
@@ -71,5 +70,5 @@
   }
   
   // define a custom HTML element
-  customElements.define("folder-card", FolderCard);
+  customElements.define("folderf-card", FolderFCard);
   

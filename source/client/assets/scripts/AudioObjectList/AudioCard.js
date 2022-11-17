@@ -1,3 +1,5 @@
+import * as utils from "../../../../local/utils.js"
+
 /**
  * This file defines a class that determines how an Audio Card is rendered 
  * for each audio file uploaded by the user.
@@ -58,7 +60,8 @@ class AudioCard extends HTMLElement {
 
     const myShadowDom = this.shadowRoot;
     myShadowDom.addEventListener("click", () => {
-      localStorage.setItem("TypeA", "Test");
+      const audObjectName = myShadowDom.querySelector("h2").textContent;
+      sessionStorage.setItem("AudObject", audObjectName);
       window.location = "AudioObject.html"
     })
   }
