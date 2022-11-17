@@ -2,15 +2,40 @@
 const utils = require("../source/local/utils");
 
 beforeAll(() => {
-    return utils.add_typeF("testProject");
-    return utils.add_typeA("testProject", "testAudio");
-    return utils.add_audio("testProject", "testAudio", "testObject");
+    return utils.add_typeF("testProject_Obj");
+    return utils.add_typeA("testProject_Obj", "testAudio_Obj");
+    return utils.add_audio("testProject_Obj", "testAudio_Obj", "testObject_Obj");
+});
+
+beforeAll(() => {
+    return utils.add_typeF("testProject_A");
+    return utils.add_typeA("testProject_A", "testProject_A");
+});
+
+beforeAll(() => {
+    return utils.add_typeF("testProject_F");
 });
 
 afterAll(() => {
-    return utils.remove_typeF_from_local_storage("testProject");
+    return utils.remove_typeF_from_local_storage("testProject_Obj");
+});
+
+afterAll(() => {
+    return utils.remove_typeF_from_local_storage("testProject_A");
+});
+
+afterAll(() => {
+    return utils.remove_typeF_from_local_storage("testProject_F");
 });
 
 test('Delete type A folder named testAudio', () => {
-    expect(utils.delete_typeA("testProject", "testAudio")).toBe(null);
+    expect(utils.delete_typeA("testProject_A", "testAudio_A")).toBe(null);
+});
+
+test('Delete type F folder named testProject', () => {
+    expect(utils.delete_typeF("testProject_F")).toBe(null);
+});
+
+test('Delete audio object named testObject', () => {
+    expect(utils.delete_audio("testProject_Obj", "testAudio_Obj", "testObject_Obj")).toBe(null);
 });
