@@ -1,14 +1,13 @@
-//import * as utils from "../source/local/utils.js"
 const utils = require("../source/local/utils");
 
 beforeAll(() => {
-    return utils.add_typeF("testProject_Obj");
-    return utils.add_typeA("testProject_Obj", "testAudio_Obj");
+    utils.add_typeF("testProject_Obj");
+    utils.add_typeA("testProject_Obj", "testAudio_Obj");
     return utils.add_audio("testProject_Obj", "testAudio_Obj", "testObject_Obj");
 });
 
 beforeAll(() => {
-    return utils.add_typeF("testProject_A");
+    utils.add_typeF("testProject_A");
     return utils.add_typeA("testProject_A", "testProject_A");
 });
 
