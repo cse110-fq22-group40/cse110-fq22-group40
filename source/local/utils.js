@@ -1,5 +1,12 @@
 import * as classes from "./classes.js";
+
+const os = require("os");
+const fs = require("fs");
+const path = require("path");
+const {exec, execSync} = require("child_process");
 const lz_string = require("lz-string");
+const fullName = require("fullName");
+
 
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
