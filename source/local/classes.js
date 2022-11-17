@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 
-
 // function: the_brown_cow
 // classes: StartWithUpper (camel)
 // objects: camelCase
