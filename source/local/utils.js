@@ -459,7 +459,7 @@ export function load_data() {
 }
 
 export function get_username() {
-  return fullName();
+  return fullName() || os.userInfo().username;
 }
 
 export function get_profile_picture() {
