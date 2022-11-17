@@ -31,6 +31,7 @@ export function add_typeF(str_typeFName, save = true) {
 
   if (save)
     set_typeF_in_local_storage(str_typeFName);
+  return str_typeFName;
 }
 
 /**
@@ -451,13 +452,13 @@ export function load_data() {
   })
 }
 
-function set_typeF_in_local_storage(str_typeFName) {
+export function set_typeF_in_local_storage(str_typeFName) {
   localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[str_typeFName])
   ));
 }
 
-function remove_typeF_from_local_storage(str_typeFName) { 
+export function remove_typeF_from_local_storage(str_typeFName) { 
   localStorage.removeItem(str_typeFName);
 }
 

@@ -28,8 +28,8 @@
     "jsdoc": "^4.0.0"
   },
   "dependencies": {
-    "jest": "^29.3.1",
-    "lz-string": "^1.4.4"
+    "lz-string": "^1.4.4",
+    "puppeteer": "^19.2.2"
   },
   "jest": {
     "verbose": true
