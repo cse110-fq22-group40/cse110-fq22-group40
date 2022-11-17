@@ -27,7 +27,10 @@ program will crash and the user won't know why!
 utils.load_data();
 
 //When the page intializes
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
+  document.write(`<img src="${utils.get_profile_picture()}" width="80px" height="80px"></img>`);
+  document.write(await utils.get_username());
+
   const fFolder = utils.get_all_typeF_names();
   
   for (const folder of fFolder) {

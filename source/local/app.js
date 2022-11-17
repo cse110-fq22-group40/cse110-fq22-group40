@@ -12,7 +12,7 @@ const loadMainWindow = () => {
 
   mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
-  // TypeA Important for security reasons to protect against cross-site-scripting
+  // Important for security reasons to protect against cross-site-scripting
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
