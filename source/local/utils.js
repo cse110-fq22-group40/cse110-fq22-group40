@@ -461,4 +461,4 @@ function remove_typeF_from_local_storage(str_typeFName) {
   localStorage.removeItem(str_typeFName);
 }
 
-module.exports = {add_typeF, add_typeA, add_audio, delete_typeA, remove_typeF_from_local_storage};
+module.exports = {add_typeF, add_typeA, add_audio, delete_typeF, delete_typeA, delete_audio, remove_typeF_from_local_storage};
