@@ -2,6 +2,7 @@ import * as utils from "../../../../local/utils.js"
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
+const backButton = document.querySelector(".back");
 
 /**
 NOTE TO FRONT-END TEAM FROM BENNETT:
@@ -64,3 +65,8 @@ function createAudioCard(name) {
   audioContainer.appendChild(audioCard);
   audioCard.name = name;
 }
+
+backButton.addEventListener("click", () => {
+  sessionStorage.removeItem("FolderA");
+  window.location = "TypeF.html";
+});

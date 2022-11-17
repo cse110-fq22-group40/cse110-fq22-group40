@@ -4,7 +4,7 @@
  * and contains the event handling when adding a folder is clicked.
  */
 
-import * as utils from "../../../../local/utils.js"
+import * as utils from "../../../../local/utils.js";
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
@@ -26,11 +26,8 @@ program will crash and the user won't know why!
 // Load existing data from back-end
 utils.load_data();
 
-//When the page intializes
-window.addEventListener("load", async () => {
-  document.write(`<img src="${utils.get_profile_picture()}" width="80px" height="80px"></img>`);
-  document.write(await utils.get_username());
-
+// When the page intializes
+window.addEventListener("load", () => {
   const fFolder = utils.get_all_typeF_names();
   
   for (const folder of fFolder) {
