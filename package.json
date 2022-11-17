@@ -28,6 +28,7 @@
     "jsdoc": "^4.0.0"
   },
   "dependencies": {
+    "fullname": "^4.0.1",
     "lz-string": "^1.4.4",
     "puppeteer": "^19.2.2"
   },
