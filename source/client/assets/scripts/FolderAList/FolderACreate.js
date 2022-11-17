@@ -1,13 +1,13 @@
 /**
  * This file defines a class that determines the UI for uploading
- * a new audio file to the workspace.
+ * a new A folder to the workspace.
  */
- class FileFCreate extends HTMLElement {
+ class FolderACreate extends HTMLElement {
     constructor() {
       super();
       let shadow = this.attachShadow({ mode:'open' });
   
-      // creating a container for adding audio UI pop up
+      // creating a container for adding A folder pop up
       let create_flow = document.createElement('div');
       create_flow.className = "fileNameContainer";
   
@@ -29,22 +29,27 @@
       // create a place for the user to add input
       let fileform = document.createElement('form');
   
-      // adding a text input for the name of the audio in app
+      // adding a text input for the name of the A folder in app
       let textinput = document.createElement('input');
       textinput.type = "text";
       textinput.className = "fileName";
-  
-      // TODO
+
+      // adding a submit button for the pop up
       let filesubmit = document.createElement('input');
       filesubmit.type = "submit";
       filesubmit.className = "fileCreate";
   
+      /** when the submit button is clicked a custom event listener is defined
+       * so we keep track of the name we inputted for the folder and the parent
+       * F folder
+      */
       filesubmit.addEventListener("click", evt => {
         evt.preventDefault();
   
         const submitEvent = new CustomEvent("fileSubmitted", {
           detail: {
             name: textinput.value,
+            parent: sessionStorage.getItem("FolderF")
           }
         });
   
@@ -121,4 +126,4 @@
     }
   }
   
-  customElements.define("create-filef-object", FileFCreate);
+  customElements.define("create-foldera-object", FolderACreate);

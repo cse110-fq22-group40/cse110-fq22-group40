@@ -1,4 +1,10 @@
-import * as utils from "../../../local/utils.js"
+/**
+ * This folder contains the implementation for the initialization of the page
+ * that lists all the A folders. It loads the existing A folders, and contains 
+ * the event handling when adding a folder is clicked.
+ */
+
+import * as utils from "../../../../local/utils.js"
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
@@ -19,37 +25,30 @@ program will crash and the user won't know why!
 
 // Load existing data from back-end
 utils.load_data();
+const fFolderName = sessionStorage.getItem("FolderF");
 
-if (!utils.get_all_typeF_names().length) {
-  // Create dummy folders
-  utils.add_typeF("dummyF");
-  utils.add_typeA("dummyF", "dummyA");
-}
-
-// When the page intializes
+//When the page intializes map the existing A Folders
 window.addEventListener("load", () => {
-  const audioFiles = utils.get_all_audio_names("dummyF", "dummyA");
-  
-  for (const audio of audioFiles) {
-    createAudioCard(audio);
+  const aFolder = utils.get_all_typeA_names(fFolderName);
+  for (const folder of aFolder) {
+    createFolderA(folder);
   }
 });
 
 // When the user clicks the add button
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
-  const createAudObject = document.createElement("create-aud-object");
-  document.body.appendChild(createAudObject);
+  const createFolderAObject = document.createElement("create-folderA-object");
+  document.body.appendChild(createFolderAObject);
 
   // When the user submits a new audio file
-  createAudObject.addEventListener("fileSubmitted", evt => {
+  createFolderAObject.addEventListener("fileSubmitted", evt => {
     // Remove the input prompt
-    document.body.removeChild(createAudObject);
+    document.body.removeChild(createFolderAObject);
 
     // Create a new audio card
-    createAudioCard(evt.detail.name);
-    
-    utils.add_audio("dummyF", "dummyA", evt.detail.name, evt.detail.path);
+    createFolderA(evt.detail.name);
+    utils.add_typeA(evt.detail.parent,evt.detail.name);
 
     // Show success screen
     const successScreen = document.createElement("success-screen");
@@ -62,9 +61,9 @@ addButton.addEventListener("click", () => {
   });
 });
 
-// Create a new audio card and display it on the screen
-function createAudioCard(name) {
-  const audioCard = document.createElement("audio-card");
-  audioContainer.appendChild(audioCard);
-  audioCard.name = name;
+// Create a new A Folder and display it on the screen
+function createFolderA(name) {
+  const folderA = document.createElement("foldera-card");
+  audioContainer.appendChild(folderA);
+  folderA.name = name;
 }

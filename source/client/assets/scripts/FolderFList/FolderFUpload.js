@@ -1,4 +1,10 @@
-import * as utils from "../../../local/utils.js"
+/**
+ * This folder contains the implementation for the initialization of the main
+ * page which contains all the F folders. It loads the existing F folders,
+ * and contains the event handling when adding a folder is clicked.
+ */
+
+import * as utils from "../../../../local/utils.js"
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
@@ -21,9 +27,7 @@ program will crash and the user won't know why!
 utils.load_data();
 
 //When the page intializes
-
 window.addEventListener("load", () => {
-  console.log("test");
   const fFolder = utils.get_all_typeF_names();
   
   for (const folder of fFolder) {
@@ -44,7 +48,6 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createFolderF(evt.detail.name);
-    
     utils.add_typeF(evt.detail.name);
 
     // Show success screen
@@ -58,9 +61,9 @@ addButton.addEventListener("click", () => {
   });
 });
 
-// Create a new audio card and display it on the screen
+// Create a new F folder and display it on the screen
 function createFolderF(name) {
-  const fileF = document.createElement("folder-card");
+  const fileF = document.createElement("folderf-card");
   audioContainer.appendChild(fileF);
   fileF.name = name;
 }
