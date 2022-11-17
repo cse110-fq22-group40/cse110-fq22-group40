@@ -1,12 +1,33 @@
-import * as classes from "./classes.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils.js</title>
 
-const os = require("os");
-const fs = require("fs");
-const path = require("path");
-const {exec, execSync} = require("child_process");
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as classes from "./classes.js";
 const lz_string = require("lz-string");
-const fullName = require("fullName");
-
 
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
@@ -38,7 +59,6 @@ export function add_typeF(str_typeFName, save = true) {
 
   if (save)
     set_typeF_in_local_storage(str_typeFName);
-  return str_typeFName;
 }
 
 /**
@@ -307,13 +327,13 @@ export function format_time(time) {
   let seconds = Math.floor(time % 60);
   
   // Append a 0 if seconds is only one digit
-  if (seconds < 10)
+  if (seconds &lt; 10)
       seconds = `0${seconds}`;
 
   // If the time is an hour or longer
   if (hours) {
       // Append a 0 if minutes is only one digit
-      if (minutes < 10)
+      if (minutes &lt; 10)
           minutes = `0${minutes}`;
       
       return `${hours}:${minutes}:${seconds}`;
@@ -459,40 +479,34 @@ export function load_data() {
   })
 }
 
-export function get_username() {
-  return fullName() || os.userInfo().username;
-}
-
-export function get_profile_picture() {
-  if (process.platform === "darwin") {
-    execSync("dscl . -read /Users/${USER} JPEGPhoto | tail -1 | xxd -r -p > ~/profile_picture.jpg");
-    const picture = fs.readFileSync(path.join(os.homedir(), "profile_picture.jpg"));
-    exec("rm ~/profile_picture.jpg");
-    return `data:png;base64,${picture.toString("base64")}`;
-  } else if (process.platform === "win32") {
-    const picturePath = path.join(os.homedir(), "..", "Public", "AccountPictures");
-    const directories = fs.readdirSync(picturePath);
-    for (const dir of directories) {
-      if (dir.indexOf("-") >= 0) {
-        let pictures = fs.readdirSync(path.join(picturePath, dir));
-        pictures = pictures.map(pic => {
-          return [parseInt(pic.match(/Image\d*/)[0].substring(5)) || 0, pic]
-        }).sort((a, b) => b[0] - a[0]);
-        const picture = fs.readFileSync(path.join(picturePath, dir, pictures[0][1]));
-        return `data:png;base64,${picture.toString("base64")}`;
-      }
-    }
-  }
-}
-
-export function set_typeF_in_local_storage(str_typeFName) {
+function set_typeF_in_local_storage(str_typeFName) {
   localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[str_typeFName])
   ));
 }
 
-export function remove_typeF_from_local_storage(str_typeFName) { 
+function remove_typeF_from_local_storage(str_typeFName) { 
   localStorage.removeItem(str_typeFName);
-}
+}</code></pre>
+        </article>
+    </section>
 
-module.exports = {add_typeF, add_typeA, add_audio, delete_typeF, delete_typeA, delete_audio, remove_typeF_from_local_storage};
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AudioObject_AudioObject.html">AudioObject</a></li><li><a href="TypeA_TypeA.html">TypeA</a></li><li><a href="TypeF_TypeF.html">TypeF</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-tutorial.html">tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#add_audio">add_audio</a></li><li><a href="global.html#add_note">add_note</a></li><li><a href="global.html#add_typeA">add_typeA</a></li><li><a href="global.html#add_typeF">add_typeF</a></li><li><a href="global.html#clear_notes">clear_notes</a></li><li><a href="global.html#clear_typeA">clear_typeA</a></li><li><a href="global.html#clear_typeF">clear_typeF</a></li><li><a href="global.html#delete_audio">delete_audio</a></li><li><a href="global.html#delete_note">delete_note</a></li><li><a href="global.html#delete_typeA">delete_typeA</a></li><li><a href="global.html#delete_typeF">delete_typeF</a></li><li><a href="global.html#format_time">format_time</a></li><li><a href="global.html#get_all_audio_names">get_all_audio_names</a></li><li><a href="global.html#get_all_notes">get_all_notes</a></li><li><a href="global.html#get_all_typeA_names">get_all_typeA_names</a></li><li><a href="global.html#get_all_typeF_names">get_all_typeF_names</a></li><li><a href="global.html#get_audio_path">get_audio_path</a></li><li><a href="global.html#get_note">get_note</a></li><li><a href="global.html#load_data">load_data</a></li><li><a href="global.html#update_audio_path">update_audio_path</a></li><li><a href="global.html#update_name">update_name</a></li><li><a href="global.html#update_note">update_note</a></li><li><a href="global.html#update_timestamp">update_timestamp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Nov 14 2022 01:27:43 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
