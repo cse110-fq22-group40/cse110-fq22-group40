@@ -469,22 +469,17 @@ export function get_profile_picture() {
     return `data:png;base64,${picture.toString("base64")}`;
   } else if (process.platform === "win32") {
     const picturePath = path.join(os.homedir(), "..", "Public", "AccountPictures");
-    fs.readdirSync(picturePath, (err, files) => {
-      fs.readdirSync(path.join(picturePath, files[0].name()), (err, files) => {
-        console.log(files);
-      });
-    });
-    // C:\Users\Public\AccountPictures\S-1-...\{183...}-Image1080.jpg
-    // 192
-    // 208
-    // 240
-    // 32
-    // 40
-    // 424
-    // 448
-    // 48
-    // 64
-    // 96
+    const directories = fs.readdirSync(picturePath);
+    for (const dir of directories) {
+      if (dir.indexOf("-") >= 0) {
+        let pictures = fs.readdirSync(path.join(picturePath, dir));
+        pictures = pictures.map(pic => {
+          return [parseInt(pic.match(/Image\d*/)[0].substring(5)) || 0, pic]
+        }).sort((a, b) => b[0] - a[0]);
+        const picture = fs.readFileSync(path.join(picturePath, dir, pictures[0][1]));
+        return `data:png;base64,${picture.toString("base64")}`;
+      }
+    }
   }
 }
 
