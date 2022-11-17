@@ -57,9 +57,9 @@
       const myShadowDom = this.shadowRoot;
       myShadowDom.addEventListener("click", () => {
         const folderFName = this.shadowRoot.querySelector("h2");
-        sessionStorage.setItem("FolderF",folderFName.textContent);
-        window.location = "TypeF.html"
-      })
+        sessionStorage.setItem("FolderF", folderFName.textContent);
+        window.location = "TypeF.html";
+      });
     }
   
     // this sets the name of the FolderF card

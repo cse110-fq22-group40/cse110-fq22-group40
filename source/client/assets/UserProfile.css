@@ -1,0 +1,59 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.profile-container div {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  background-size: 100% 100%;
+  opacity: inherit;
+}
+
+.profile-container div::after {
+  content: "\2718";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Helvetica;
+  font-size: 150px;
+  text-align: center;
+  line-height: 100%;
+  color: red;
+  opacity: inherit;
+  transition: opacity 2s;
+  transition-delay: 3.6s;
+}
+
+.profile-container b {
+  margin-top: 50px;
+  font-family: Tahoma;
+  font-size: 30px;
+  color: red;
+  opacity: inherit;
+  transition: opacity 2s;
+}
+
+.text2 {
+  transition-delay: 1.8s !important;
+}
+
+.show {
+  opacity: 100% !important;
+  pointer-events: all;
+}

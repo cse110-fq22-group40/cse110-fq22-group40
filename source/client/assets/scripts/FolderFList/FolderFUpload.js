@@ -4,7 +4,7 @@
  * and contains the event handling when adding a folder is clicked.
  */
 
-import * as utils from "../../../../local/utils.js"
+import * as utils from "../../../../local/utils.js";
 
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
@@ -26,7 +26,7 @@ program will crash and the user won't know why!
 // Load existing data from back-end
 utils.load_data();
 
-//When the page intializes
+// When the page intializes
 window.addEventListener("load", () => {
   const fFolder = utils.get_all_typeF_names();
   
