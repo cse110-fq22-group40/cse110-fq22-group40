@@ -44,8 +44,9 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createAudioCard(evt.detail.name);
-
+    console.log(evt.detail.path);
     utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
+    console.log(utils.get_all_typeF_names());
 
     // Show success screen
     const successScreen = document.createElement("success-screen");

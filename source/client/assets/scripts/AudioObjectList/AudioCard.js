@@ -1,7 +1,7 @@
 import * as utils from "../../../../local/utils.js"
 
 /**
- * This file defines a class that determines how an Audio Card is rendered 
+ * This file defines a class that determines how an Audio Card is rendered
  * for each audio file uploaded by the user.
  */
 class AudioCard extends HTMLElement {
