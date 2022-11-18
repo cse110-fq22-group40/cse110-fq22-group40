@@ -7,6 +7,7 @@
 body {
     margin: 60px auto;
     width: 750px;
+    background: linear-gradient(180deg, rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
 }
 
 #audio-input {
@@ -14,18 +15,18 @@ body {
     margin-top: 7px;
 }
 
-::file-selector-button, button {
+#submit {
     border: 2px solid transparent;
     border-radius: 8px;
     padding: 6px 10px;
     background: linear-gradient(white, white) padding-box,
-                linear-gradient(45deg, magenta, cyan) border-box;
+                rgba(0,128,128,1) border-box;
     font-family: inherit;
     font-size: 13px;
 }
 
-::file-selector-button:hover, button:hover {
-    background: linear-gradient(45deg, magenta, cyan) border-box;
+#submit:hover{
+    background: rgba(0,128,128,1) border-box;
     color: white;
 }
 
@@ -75,16 +76,36 @@ body {
     margin: 10px 0px;
     width: 100%;
     height: 500px;
-    border: solid gray 1px;
+    border: solid black 1px;
     border-radius: 10px;
     padding: 10px;
     animation: expand 0.75s;
+    background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
 }
 
 #note-display {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+}
+
+#update-note{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    height: 250px;
+    background: linear-gradient(180deg, rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -225px;
+    border-radius: 10px;
+    border: 1px black solid;
+    color: white;
+    font-size: 22px;
+    text-align: center;
 }
 
 @keyframes fadeInDown {
@@ -101,7 +122,7 @@ body {
 
 .note {
     margin-bottom: 10px;
-    border: 0.5px solid lightgray;
+    border: 1px solid black;
     border-radius: 4px;
     padding: 7px 10px;
     background-color: #fcfcfc;
@@ -120,4 +141,46 @@ body {
 
 .timestamp:active {
     color: skyblue;
+}
+
+.back{
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 30px;
+}
+
+.yes-no-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.update-title{
+    margin-top: 50px;
+}
+
+.update-yes{
+    border: 2px solid green;
+    border-radius: 8px;
+    width: 100px;
+    height: 50px;
+    margin-right: 50px;
+}
+
+.update-yes:hover{
+    background: green;
+    color: white;
+}
+
+.update-no{
+    border: 2px solid red;
+    border-radius: 8px;
+    width: 100px;
+    height: 50px;
+}
+
+.update-no:hover{
+    background: red;
+    color: white;
 }

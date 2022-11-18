@@ -1,35 +1,43 @@
 import * as utils from "../../../../local/utils.js"
 
 // Add all your HTML DOM elements here as global variables
-const audioForm = document.getElementById("audio-form");
-const audioInput = document.getElementById("audio-input");
 const editor = document.getElementById("editor");
 const audioVisualizer = document.getElementById("audio-visualizer");
 const audioPlayer = document.getElementById("audio-player");
 const textEditor = document.getElementById("text-editor");
 const noteDisplay = document.getElementById("note-display");
 const noteTemplate = document.getElementById("note-template");
-const clearButton = document.getElementById("clear-button");
+const submitButton = document.getElementById("submit");
+const updateForm = document.getElementById("update-note");
+const updateFormYes = document.getElementsByClassName("update-yes")[0];
+const updateFormNo = document.getElementsByClassName("update-no")[0];
 
-
-// Set the source of the audio player, hide the audio input form,
-// show the editor, and set up the audio visualizer
-
+// Set the source of the audio player, show the editor, hide the update form, 
+// and set up the audio visualizer
+utils.load_data();
 const folderFName = sessionStorage.getItem("FolderF");
 const folderAName = sessionStorage.getItem("FolderA");
 const audioObject = sessionStorage.getItem("AudObject");
-console.log(folderFName);
-console.log(folderAName);
-console.log(audioObject);
 const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
+const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
 
-window.addEventListener("DOMContentLoaded",loadAudio(audio));
+window.addEventListener("load", loadAudio(audio));
+window.addEventListener("load", loadNotes(notes));
 
+//Load the audio and initialize the visualizer
 function loadAudio(src) {
+    console.log(src);
     audioPlayer.src = src;
-    audioForm.style.display = "none";
     editor.style.display = "block";
     initAudioVisualizer();
+}
+
+//Load the pre-existing notes if they exist and map them onto the screen
+function loadNotes(notes){
+    console.log(notes);
+    for (const timestamp in notes) {
+        displayNote(timestamp, notes[timestamp]);
+    }
 }
 
 // Set up the audio visualizer
@@ -86,51 +94,32 @@ function initAudioVisualizer() {
     }
 }
 
-// Convert audio file to Base64
-function getData(audioFile, callback) {
-    const reader = new FileReader();
-    reader.readAsDataURL(audioFile);
-    reader.onload = evt => {
-        callback(evt.target.result);
-    };
-}
-
-// Takes input as seconds and returns time formatted as hh:mm:ss
-function formatTime(time) {
-    const hours = Math.floor(time / 3600);
-    let minutes = Math.floor(time / 60) % 60;
-    let seconds = Math.floor(time % 60);
-    
-    // Append a 0 if seconds is only one digit
-    if (seconds < 10)
-        seconds = `0${seconds}`;
-
-    // If the time is an hour or longer
-    if (hours) {
-        // Append a 0 if minutes is only one digit
-        if (minutes < 10)
-            minutes = `0${minutes}`;
-        
-        return `${hours}:${minutes}:${seconds}`;
-    }
-    
-    // If the time is shorter than an hour
-    return `${minutes}:${seconds}`;
-}
-
 // Called when submit button is pressed
-function submit() {
+
+function submitNote() {
     const timestamp = Math.floor(audioPlayer.currentTime);
-    displayNote(timestamp, textEditor.innerHTML);
 
-    // Store notes in local storage
-    const notes = localStorage.notes ? JSON.parse(localStorage.notes) : {};
-    notes[timestamp] = textEditor.innerHTML;
-    localStorage.notes = JSON.stringify(notes);
-
+    // Store notes in backend
+    try{
+        utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+        displayNote(timestamp, textEditor.innerHTML);
+    }catch(err){
+        //If a note already exists at the timestamp ask the user if they want to update it
+        updateForm.style.display = "flex";
+        updateFormYes.addEventListener("click",() => {
+            utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+            location.reload();
+        })
+        updateFormNo.addEventListener("click",() => {
+            updateForm.style.display = "none";
+        })
+    }
+    console.log(utils.get_all_notes(folderFName, folderAName, audioObject));
     // Clear text editor
     textEditor.innerHTML = "";
 }
+
+submitButton.addEventListener("click", submitNote);
 
 // Display note on screen
 function displayNote(timestamp, text) {
@@ -142,7 +131,7 @@ function displayNote(timestamp, text) {
 
     // Link that sets the audio player to the timestamp when clicked
     const timestampLink = note.querySelector(".timestamp");
-    timestampLink.textContent = formatTime(timestamp);
+    timestampLink.textContent = utils.format_time(timestamp);
 
     timestampLink.addEventListener("click", () => {
         audioPlayer.currentTime = timestamp;
@@ -153,17 +142,4 @@ function displayNote(timestamp, text) {
 
     // Display the note on screen
     noteDisplay.appendChild(note);
-}
-
-// Load audio from local storage
-if (localStorage.audio)
-    loadAudio(localStorage.audio);
-
-// Load notes from local storage
-if (localStorage.notes) {
-    const notes = JSON.parse(localStorage.notes);
-
-    // Loop through notes and display them on screen
-    for (const timestamp in notes)
-        displayNote(timestamp, notes[timestamp]);
 }

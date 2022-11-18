@@ -45,7 +45,6 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createAudioCard(evt.detail.name);
-
     utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
 
     // Show success screen
