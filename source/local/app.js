@@ -25,14 +25,26 @@ const loadMainWindow = () => {
 
 app.on("ready", loadMainWindow);
 
-app.on("window-all-closed", () => {
+/*app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
-});
+});*/
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     loadMainWindow();
   }
+});
+
+app.on("before-quit", evt => {
+  evt.preventDefault();
+});
+
+app.on("will-quit", evt => {
+  evt.preventDefault();
+});
+
+app.on("window-all-closed", evt => {
+  evt.preventDefault();
 });
