@@ -21,8 +21,8 @@ const audioObject = sessionStorage.getItem("AudObject");
 const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
 const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
 
-window.addEventListener("load",loadAudio(audio));
-window.addEventListener("load",loadNotes(notes));
+window.addEventListener("load", loadAudio(audio));
+window.addEventListener("load", loadNotes(notes));
 
 //Load the audio and initialize the visualizer
 function loadAudio(src) {
@@ -35,8 +35,10 @@ function loadAudio(src) {
 //Load the pre-existing notes if they exist and map them onto the screen
 function loadNotes(notes){
     console.log(notes);
+    for (const timestamp in notes) {
+        displayNote(timestamp, notes[timestamp]);
+    }
 }
-
 
 // Set up the audio visualizer
 function initAudioVisualizer() {
