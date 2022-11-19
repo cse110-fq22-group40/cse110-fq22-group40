@@ -1,3 +1,4 @@
+/*
 const utils = require("../source/local/utils");
 
 beforeAll(() => {
@@ -38,3 +39,4 @@ test('Delete type F folder named testProject', () => {
 test('Delete audio object named testObject', () => {
     expect(utils.delete_audio("testProject_Obj", "testAudio_Obj", "testObject_Obj")).toBe(null);
 });
+*/
