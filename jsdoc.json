@@ -2,7 +2,13 @@
     "plugins": ["plugins/markdown"],
     "recurseDepth": 10,
     "source": {
-        "include": ["./source/local/utils.js", "./source/local/classes.js"],
+        "include": ["./source/local/utils.js", "./source/local/classes.js", 
+        "./source/client/assets/scripts/FileSuccess.js", "./source/client/assets/scripts/UserProfile.js", 
+        "./source/client/assets/scripts/AudioObjectList/AudioCard.js", "./source/client/assets/scripts/AudioObjectList/AudioObject.js", "./source/client/assets/scripts/AudioObjectList/CreateAudioFlow.js", "./source/client/assets/scripts/AudioObjectList/FileUpload.js",
+        "./source/client/assets/scripts/FolderAList/FolderACard.js", "./source/client/assets/scripts/FolderAList/FolderACreate.js", "./source/client/assets/scripts/FolderAList/FolderAUpload.js",
+        "./source/client/assets/scripts/FolderFList/FolderFCard.js", "./source/client/assets/scripts/FolderFList/FolderFCreate.js", "./source/client/assets/scripts/FolderFList/FolderFUpload.js"
+
+        ],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|jsdoc)"
     },
