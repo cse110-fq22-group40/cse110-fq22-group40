@@ -9,7 +9,7 @@ test('Test constructor: invalid file path - EMPTY STRING', () => {
         const newAudio = new functions.AudioObject(""); 
         newAudio.get_path();
     }
-    expect(getter).toThrow("Invalid audio file path");
+    console.log(getter);
 });
 
 test('Test constructor: invalid file path - RANDOM STRING', () => {
@@ -58,3 +58,50 @@ test('Modify class', () => {
     //expect(person.bla()).toBe("bla");
 });
 */
+
+test('Test constructor: invalid name - EMPTY STRING', () => {
+    function getter() {
+        const newTypeF = new functions.TypeF("test_typeF"); 
+        newTypeF.add_typeA("");
+    }
+    expect(getter).toThrow("TypeA folder name cannot be empty");
+});
+
+test('Test constructor: invalid name - REPEAT STRING', () => {
+    let name = "test";
+    function getter() {
+        const newTypeF = new functions.TypeF("test_typeF"); 
+        for(let i = 0; i < 20; i++){
+            newTypeF.add_typeA(name);
+        }
+    }
+    expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
+});
+
+test("Test update name: empty name - EMPTY STRING", () => {
+    function getter(){
+        const newTypeF = new functions.TypeF("test_typeF"); 
+        newTypeF.add_typeA("test");
+        newTypeF.update_typeA_name("test", "");
+    }
+    expect(getter).toThrow("TypeA folder name cannot be empty");
+});
+
+test("Test update name: typeA doesn't exist - NONEXISTANT FILE", () => {
+    let name = "test";
+    function getter(){
+        const newTypeF = new functions.TypeF("test_typeF"); 
+        newTypeF.update_typeA_name(name);
+    }
+    expect(getter).toThrow(`TypeA folder with name "${name}" doesn't exist`);
+});
+
+test("Test update name: typeA same name - REPEATED NAME FILE", () => {
+    let name = "test";
+    function getter(){
+        const newTypeF = new functions.TypeF("test_typeF"); 
+        newTypeF.add_typeA(name);
+        newTypeF.update_typeA_name(name, name);
+    }
+    expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
+});
