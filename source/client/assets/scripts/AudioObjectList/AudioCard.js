@@ -1,7 +1,5 @@
-import * as utils from "../../../../local/utils.js"
-
 /**
- * This file defines a class that determines how an Audio Card is rendered 
+ * This file defines a class that determines how an Audio Card is rendered
  * for each audio file uploaded by the user.
  */
 class AudioCard extends HTMLElement {
@@ -12,8 +10,6 @@ class AudioCard extends HTMLElement {
     // creating the container for the entire audio card
     let audiocard = document.createElement('div');
     audiocard.className = "audioCard";
-
-    // add on click here?
 
     // setting the icon for the card
     let audioimage = document.createElement('img');
@@ -58,7 +54,16 @@ class AudioCard extends HTMLElement {
     shadow.append(audiocard);
     shadow.append(style);
 
+    // obtain the root of the shadowDOM so it can be targeted
     const myShadowDom = this.shadowRoot;
+
+    /**
+     * When the AudioCard object is clicked, set the path in sessionStorage
+     * and go to the AudioObject.html page
+     *
+     * @type {shadowRoot} - the target of the event
+     * @listens shadowRoot#click - when the AudioCard component is clicked
+     */
     myShadowDom.addEventListener("click", () => {
       const audObjectName = myShadowDom.querySelector("h2").textContent;
       sessionStorage.setItem("AudObject", audObjectName);
@@ -66,7 +71,7 @@ class AudioCard extends HTMLElement {
     })
   }
 
-  // ? TODO
+  // set the name of the AudioObject
   set name(name) {
     const audioname = this.shadowRoot.querySelector("h2");
     audioname.textContent = name;

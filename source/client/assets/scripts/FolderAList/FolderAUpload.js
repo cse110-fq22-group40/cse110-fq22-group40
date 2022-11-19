@@ -1,34 +1,27 @@
 /**
  * This folder contains the implementation for the initialization of the page
  * that lists all the A folders. It loads the existing A folders, and contains 
- * the event handling when adding a folder is clicked.
+ * the event handling for adding an A Folder.
  */
 
 import * as utils from "../../../../local/utils.js"
 
+//obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
 const backButton = document.querySelector(".back");
-
-/**
-NOTE TO FRONT-END TEAM FROM BENNETT:
-I added some more helper functions to Utils.js.
-
-I also added error handling in the back-end.
-Please check the updated documentation in Utils.js.
-Whenever you see that a function includes @throws,
-you need to make sure that you call the function within a dedicated
-TRY-CATCH BLOCK. If an error occurs, make sure you display
-some sort of pop-up or whatever to notify the user of what's gone wrong.
-This is very important, or else the
-program will crash and the user won't know why!
-**/
 
 // Load existing data from back-end
 utils.load_data();
 const fFolderName = sessionStorage.getItem("FolderF");
 
-//When the page intializes map the existing A Folders
+/**
+ * When the F folder page loads grab all the existing A Folders and map them
+ * onto the screen
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
 window.addEventListener("load", () => {
   const aFolder = utils.get_all_typeA_names(fFolderName);
   for (const folder of aFolder) {
@@ -36,7 +29,13 @@ window.addEventListener("load", () => {
   }
 });
 
-// When the user clicks the add button
+/**
+ * When the add button is clicked for the AFolder add an AFolder to the
+ * page and store into backend
+ *
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
   const createFolderAObject = document.createElement("create-folderA-object");
@@ -62,13 +61,26 @@ addButton.addEventListener("click", () => {
   });
 });
 
-// Create a new A Folder and display it on the screen
+/**
+ * Create an FolderA component that the user made
+ * @param {string} name - name of A Folder user inputted
+ * 
+ * @Usage
+ * Ex: createAudioObject("Bach")
+ */
 function createFolderA(name) {
   const folderA = document.createElement("foldera-card");
   audioContainer.appendChild(folderA);
   folderA.name = name;
 }
 
+
+/**
+ * When the back button is clicked on the page go back to the previous page
+ *
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
 backButton.addEventListener("click", () => {
   sessionStorage.removeItem("FolderF");
   window.location = "index.html";

@@ -6,27 +6,20 @@
 
 import * as utils from "../../../../local/utils.js";
 
+//obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
-
-/**
-NOTE TO FRONT-END TEAM FROM BENNETT:
-I added some more helper functions to Utils.js.
-
-I also added error handling in the back-end.
-Please check the updated documentation in Utils.js.
-Whenever you see that a function includes @throws,
-you need to make sure that you call the function within a dedicated
-TRY-CATCH BLOCK. If an error occurs, make sure you display
-some sort of pop-up or whatever to notify the user of what's gone wrong.
-This is very important, or else the
-program will crash and the user won't know why!
-**/
 
 // Load existing data from back-end
 utils.load_data();
 
-// When the page intializes
+/**
+ * When the F folder page loads grab all the existing A Folders and map them
+ * onto the screen
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
 window.addEventListener("load", () => {
   const fFolder = utils.get_all_typeF_names();
   
@@ -35,7 +28,13 @@ window.addEventListener("load", () => {
   }
 });
 
-// When the user clicks the add button
+/**
+ * When the add button is clicked for the FFolder add an FFolder to the
+ * page and store into backend
+ *
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
   const createFileFObject = document.createElement("create-filef-object");
@@ -61,7 +60,13 @@ addButton.addEventListener("click", () => {
   });
 });
 
-// Create a new F folder and display it on the screen
+/**
+ * Create an FolderF component that the user made
+ * @param {string} name - name of F Folder user inputted
+ * 
+ * @Usage
+ * Ex: createAudioObject("Bach")
+ */
 function createFolderF(name) {
   const fileF = document.createElement("folderf-card");
   audioContainer.appendChild(fileF);

@@ -441,18 +441,27 @@ export function clear_notes(str_typeFName, str_typeAName, str_audioObjName) {
  * Ex. load_data()
  */
 export function load_data() {
+  // Load TypeF folders
   Object.keys(localStorage).forEach(str_typeFName => {
     add_typeF(str_typeFName, false);
     const typeF = JSON.parse(
       lz_string.decompressFromUTF16(localStorage.getItem(str_typeFName))
     );
 
+    // Load TypeA folders
     for (const str_typeAName in typeF.dict_typeA) {
       add_typeA(str_typeFName, str_typeAName, false);
       const typeA = typeF.dict_typeA[str_typeAName];
 
+      // Load AudioObjs
       for (const str_audioName in typeA.dict_audio) {
         add_audio(str_typeFName, str_typeAName, str_audioName, typeA.dict_audio[str_audioName].str_path, false);
+        const audioObj = typeA.dict_audio[str_audioName];
+
+        // Load Notes
+        for (const num_timestamp in audioObj.notes) {
+          add_note(str_typeFName, str_typeAName, str_audioName, num_timestamp, audioObj.notes[num_timestamp]);
+        }
       }
     }
   })

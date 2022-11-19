@@ -54,7 +54,16 @@
       shadow.append(audiocard);
       shadow.append(style);
   
+      //obtain the root of the shadowDOM
       const myShadowDom = this.shadowRoot;
+
+      /**
+       * When the FolderFCard object is clicked, set the path in sessionStorage
+       * and go to the TypeF.html page
+       *
+       * @type {shadowRoot} - the target of the event
+       * @listens shadowRoot#click - when the AudioCard component is clicked
+       */
       myShadowDom.addEventListener("click", () => {
         const folderFName = this.shadowRoot.querySelector("h2");
         sessionStorage.setItem("FolderF", folderFName.textContent);
@@ -62,7 +71,7 @@
       });
     }
   
-    // this sets the name of the FolderF card
+    // sets the name of the FolderF card
     set name(name) {
       const audioname = this.shadowRoot.querySelector("h2");
       audioname.textContent = name;

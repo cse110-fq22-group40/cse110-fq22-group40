@@ -1,38 +1,82 @@
+/**
+ * This folder contains the implementation for the note taking page of an
+ * AudioObject. It contains all the functions necessary to manage the notes for
+ * an uploaded mp3 file.
+ */
+
 import * as utils from "../../../../local/utils.js"
 
 // Add all your HTML DOM elements here as global variables
-const audioForm = document.getElementById("audio-form");
-const audioInput = document.getElementById("audio-input");
 const editor = document.getElementById("editor");
 const audioVisualizer = document.getElementById("audio-visualizer");
 const audioPlayer = document.getElementById("audio-player");
 const textEditor = document.getElementById("text-editor");
 const noteDisplay = document.getElementById("note-display");
 const noteTemplate = document.getElementById("note-template");
-const clearButton = document.getElementById("clear-button");
+const submitButton = document.getElementById("submit");
+const updateForm = document.getElementById("update-note");
+const updateFormYes = document.getElementsByClassName("update-yes")[0];
+const updateFormNo = document.getElementsByClassName("update-no")[0];
+const backButton = document.getElementById("back");
 
-
-// Set the source of the audio player, hide the audio input form,
-// show the editor, and set up the audio visualizer
-
+// Set the source of the audio player, show the editor, hide the update form, 
+// and set up the audio visualizer
+utils.load_data();
 const folderFName = sessionStorage.getItem("FolderF");
 const folderAName = sessionStorage.getItem("FolderA");
 const audioObject = sessionStorage.getItem("AudObject");
-console.log(folderFName);
-console.log(folderAName);
-console.log(audioObject);
 const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
+const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
 
-window.addEventListener("DOMContentLoaded",loadAudio(audio));
+/**
+ * When the page loads, call loadAudio
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
+window.addEventListener("load", loadAudio(audio));
 
+/**
+ * When the page loads, call loadNotes
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
+window.addEventListener("load", loadNotes(notes));
+
+/**
+ * Loads the audio into the player when the audio object page loads
+ * @param {string} src - path of the mp3 file
+ * 
+ * @Usage
+ * Ex: loadAudio("path/of/music.mp3")
+ */
 function loadAudio(src) {
+    console.log(src);
     audioPlayer.src = src;
-    audioForm.style.display = "none";
     editor.style.display = "block";
     initAudioVisualizer();
 }
 
-// Set up the audio visualizer
+/**
+ * Loads the notes into the container the audio object page loads
+ * @param {Object} notes - Key is the timestamp and value is the note
+ * 
+ * @Usage
+ * Ex: loadAudio({1: "musical note"})
+ */
+function loadNotes(notes){
+    for (const timestamp in notes) {
+        displayNote(timestamp, notes[timestamp]);
+    }
+}
+
+/**
+ * Initializes the audio visualization bar that appears when the audio is played
+ * 
+ * @Usage
+ * Ex: initAudioVisualizer()
+ */
 function initAudioVisualizer() {
     // Set CSS dimensions to equal canvas dimensions
     audioVisualizer.style.width = audioVisualizer.width + "px";
@@ -65,7 +109,12 @@ function initAudioVisualizer() {
 
     animateAudioVisualizer();
 
-    // Draw audio visualization onto canvas
+    /**
+     * Draws the audio visualizer onto the canvas
+     * 
+     * @Usage
+     * Ex: animateAudioVisualizer()
+     */
     function animateAudioVisualizer() {
         // Copy current frequency data into array
         analyser.getByteFrequencyData(data);
@@ -86,53 +135,47 @@ function initAudioVisualizer() {
     }
 }
 
-// Convert audio file to Base64
-function getData(audioFile, callback) {
-    const reader = new FileReader();
-    reader.readAsDataURL(audioFile);
-    reader.onload = evt => {
-        callback(evt.target.result);
-    };
-}
-
-// Takes input as seconds and returns time formatted as hh:mm:ss
-function formatTime(time) {
-    const hours = Math.floor(time / 3600);
-    let minutes = Math.floor(time / 60) % 60;
-    let seconds = Math.floor(time % 60);
-    
-    // Append a 0 if seconds is only one digit
-    if (seconds < 10)
-        seconds = `0${seconds}`;
-
-    // If the time is an hour or longer
-    if (hours) {
-        // Append a 0 if minutes is only one digit
-        if (minutes < 10)
-            minutes = `0${minutes}`;
-        
-        return `${hours}:${minutes}:${seconds}`;
-    }
-    
-    // If the time is shorter than an hour
-    return `${minutes}:${seconds}`;
-}
-
-// Called when submit button is pressed
-function submit() {
+/**
+ * Submits a note to be displayed onto the screen and stores into the backend
+ * 
+ * @Usage
+ * Ex: submitNote()
+ */
+function submitNote() {
     const timestamp = Math.floor(audioPlayer.currentTime);
-    displayNote(timestamp, textEditor.innerHTML);
 
-    // Store notes in local storage
-    const notes = localStorage.notes ? JSON.parse(localStorage.notes) : {};
-    notes[timestamp] = textEditor.innerHTML;
-    localStorage.notes = JSON.stringify(notes);
-
+    // Store notes in backend
+    try{
+        utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+        displayNote(timestamp, textEditor.innerHTML);
+    }catch(err){
+        //If a note already exists at the timestamp ask the user if they want to update it
+        updateForm.style.display = "flex";
+        updateFormYes.addEventListener("click",() => {
+            utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+            location.reload();
+        })
+        updateFormNo.addEventListener("click",() => {
+            updateForm.style.display = "none";
+        })
+    }
+    console.log(utils.get_all_notes(folderFName, folderAName, audioObject));
     // Clear text editor
     textEditor.innerHTML = "";
 }
 
-// Display note on screen
+submitButton.addEventListener("click", submitNote);
+
+/**
+ * Called when a note is submitted, performs the operation to display the note
+ * onto the screen
+ * 
+ * @param {string} timeStamp - current timestamp of the where the note exists
+ * @param {string} text - the note the user types
+ * 
+ * @Usage 
+ * Ex: displayNote("1","perfect technique")
+ */
 function displayNote(timestamp, text) {
     // Create copy of notes template
     const note = noteTemplate.content.cloneNode(true);
@@ -142,7 +185,7 @@ function displayNote(timestamp, text) {
 
     // Link that sets the audio player to the timestamp when clicked
     const timestampLink = note.querySelector(".timestamp");
-    timestampLink.textContent = formatTime(timestamp);
+    timestampLink.textContent = utils.format_time(timestamp);
 
     timestampLink.addEventListener("click", () => {
         audioPlayer.currentTime = timestamp;
@@ -155,15 +198,13 @@ function displayNote(timestamp, text) {
     noteDisplay.appendChild(note);
 }
 
-// Load audio from local storage
-if (localStorage.audio)
-    loadAudio(localStorage.audio);
-
-// Load notes from local storage
-if (localStorage.notes) {
-    const notes = JSON.parse(localStorage.notes);
-
-    // Loop through notes and display them on screen
-    for (const timestamp in notes)
-        displayNote(timestamp, notes[timestamp]);
-}
+/**
+ * When the back button is clicked on the page go back to the previous page
+ *
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
+backButton.addEventListener("click", () => {
+    sessionStorage.removeItem("AudObject");
+    window.location = "TypeA.html";
+  });
