@@ -9,7 +9,7 @@ test('Test constructor: invalid file path - EMPTY STRING', () => {
         const newAudio = new functions.AudioObject(""); 
         newAudio.get_path();
     }
-    console.log(getter);
+    //expect(getter).toThrow("Invalid audio file path");
 });
 
 test('Test constructor: invalid file path - RANDOM STRING', () => {
@@ -59,7 +59,16 @@ test('Modify class', () => {
 });
 */
 
-test('Test constructor: invalid name - EMPTY STRING', () => {
+// Test: Type F
+
+
+// Basic Tests: constructor, adders, delete
+test('Test constructor:', () => {
+    const newTypeF = new functions.TypeF("test_typeF"); 
+    expect(newTypeF).toEqual({"dict_typeA": {}});
+});
+
+test('Test adder: invalid name - EMPTY STRING', () => {
     function getter() {
         const newTypeF = new functions.TypeF("test_typeF"); 
         newTypeF.add_typeA("");
@@ -67,7 +76,7 @@ test('Test constructor: invalid name - EMPTY STRING', () => {
     expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 
-test('Test constructor: invalid name - REPEAT STRING', () => {
+test('Test adder: invalid name - REPEAT STRING', () => {
     let name = "test";
     function getter() {
         const newTypeF = new functions.TypeF("test_typeF"); 
@@ -78,6 +87,17 @@ test('Test constructor: invalid name - REPEAT STRING', () => {
     expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 
+test("Test delete: correct delete - CORRECT STORAGE", () => {
+    let name1 = "test1";
+    let name2 = "test2";
+    const newTypeF = new functions.TypeF("test_typeF"); 
+    newTypeF.add_typeA(name1);
+    newTypeF.add_typeA(name2);
+    newTypeF.delete_typeA(name1);
+    expect(newTypeF).toEqual({"dict_typeA": { "test2": {"dict_audio": {} } } } );
+});
+
+//testing updating name of files.
 test("Test update name: empty name - EMPTY STRING", () => {
     function getter(){
         const newTypeF = new functions.TypeF("test_typeF"); 
@@ -104,4 +124,16 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
         newTypeF.update_typeA_name(name, name);
     }
     expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
+});
+
+//testing clear
+test('Testing clear:', () => {
+    const newTypeF = new functions.TypeF("test_typeF"); 
+    let name = "-";
+    for(let i = 0; i < 100; i++){
+        newTypeF.add_typeA(name);
+        name += "-";
+    }
+    newTypeF.clear_folder();
+    expect(newTypeF).toEqual({"dict_typeA": {}});
 });

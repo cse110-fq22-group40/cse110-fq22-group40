@@ -277,6 +277,6 @@ export class TypeF {
   }
 
   clear_folder() {
-    this.array_typeA = {};
+    this.dict_typeA = {};
   }
 }
