@@ -1,9 +1,10 @@
-name: GitHub pages
-
+name: Deploy JSDoc
+# TO-DO: Currently buggy, need to edit it automatically build jsdoc and deploy on github pages
 on:
   push:
     branches:
       - qa-dev
+
 
 jobs:
   deploy:
