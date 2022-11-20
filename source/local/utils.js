@@ -11,39 +11,44 @@ const fullName = require("fullName");
 const DEBUG_FLAG = true;
 const dict_typeFs = {};
 
-export function _log(str_message) {
+/**
+ * Output the input debug message to the web console
+ * @param {string} message The debug message
+ *  
+ */
+export function _log(message) {
   if (DEBUG_FLAG) {
-    console.log(str_message);
+    console.log(message);
   }
 }
 
 /**
  * Add a new TypeF folder with the given name
- * @param {str_typeFName} : String name of the TypeF folder
+ * @param {string} typeFName Name of the typeF folder
  * 
  * @throws Error if the TypeF folder name is empty
  * @throws Error if the TypeF folder name already exists
  * 
- * @Usage
+ * @usage
  * Ex: add_typeF("Bob's Project")
  */
-export function add_typeF(str_typeFName, save = true) {
-  if (str_typeFName === "")
+export function add_typeF(typeFName, save = true) {
+  if (typeFName === "")
     throw new Error("TypeF folder name cannot be empty");
 
-  if (dict_typeFs[str_typeFName])
-    throw new Error(`TypeF folder with name "${str_typeFName}" already exists`);
+  if (dict_typeFs[typeFName])
+    throw new Error(`TypeF folder with name "${typeFName}" already exists`);
 
-  dict_typeFs[str_typeFName] = new classes.TypeF();
+  dict_typeFs[typeFName] = new classes.TypeF();
 
   if (save)
-    set_typeF_in_local_storage(str_typeFName);
+    set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Gets an array of the names of every TypeF folder
  * 
- * @Usage
+ * @usage
  * Ex: get_all_typeF_names()
  */
 export function get_all_typeF_names() {
@@ -51,254 +56,282 @@ export function get_all_typeF_names() {
 }
 
 /**
- * Delete a TypeF folder given name
- * @param {str_typeFName} : String name of the TypeF folder
+ * Delete a TypeF folder given its name
+ * @param {string} typeFName Name of the TypeF folder
  * 
- * @Usage
+ * @usage
  * Ex: delete_typeF("Bob's Project")
  */
-export function delete_typeF(str_typeFName) {
-  delete dict_typeFs[str_typeFName];
-  remove_typeF_from_local_storage(str_typeFName);
+export function delete_typeF(typeFName) {
+  delete dict_typeFs[typeFName];
+  remove_typeF_from_local_storage(typeFName);
 }
 
 /**
  * Clear the contents of a TypeF folder
- * @param {str_typeFName} : String name of the TypeF folder
+ * @param {string} typeFName Name of the TypeF folder
  * 
- * @Usage
+ * @usage
  * Ex: clear_typeF("Bob's Project")
  */
-export function clear_typeF(str_typeFName) {
-  dict_typeFs[str_typeFName].clear_folder();
-  set_typeF_in_local_storage(str_typeFName);
+export function clear_typeF(typeFName) {
+  dict_typeFs[typeFName].clear_folder();
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Add a new TypeA folder with the given name
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
  * 
  * @throws Error if the TypeA folder name is empty
  * @throws Error if the TypeA folder name already exists
  * 
- * @Usage
+ * @usage
  * Ex: add_typeA("Bob's Project", "10/11 Practice")
  */
-export function add_typeA(str_typeFName, str_typeAName, save = true) {
-  dict_typeFs[str_typeFName].add_typeA(str_typeAName);
+export function add_typeA(typeFName, typeAName, save = true) {
+  if (typeAName === "")
+    throw new Error("TypeA folder name cannot be empty");
+
+  if (dict_typeFs[typeFName].get_typeA(typeAName))
+    throw new Error(`TypeA folder with name "${typeAName}" already exists`);
+
+  dict_typeFs[typeFName].add_typeA(typeAName);
 
   if (save)
-    set_typeF_in_local_storage(str_typeFName);
+    set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Gets an array of the names of every TypeA folder inside of a TypeF folder
- * @param {str_typeFName} : String name of the TypeF folder
+ * @param {string} typeFName Name of the TypeF folder
  * 
- * @Usage
+ * @usage
  * Ex: get_all_typeA_names("Bob's Project")
  */
-export function get_all_typeA_names(str_typeFName) {
-  return dict_typeFs[str_typeFName].get_all_typeA_names();
+export function get_all_typeA_names(typeFName) {
+  return dict_typeFs[typeFName].get_all_typeA_names();
 }
 
 /**
  * Delete a TypeA folder given name
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
  * 
- * @Usage
+ * @usage
  * Ex: delete_typeA("Bob's Project", "10/11 Practice")
  */
-export function delete_typeA(str_typeFName, str_typeAName) {
-  dict_typeFs[str_typeFName].delete_typeA(str_typeAName);
-  set_typeF_in_local_storage(str_typeFName);
+export function delete_typeA(typeFName, typeAName) {
+  dict_typeFs[typeFName].delete_typeA(typeAName);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Clear the contents of a TypeA folder
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
  * 
- * @Usage
+ * @usage
  * Ex: clear_typeA("Bob's Project", "10/11 Practice")
  */
-export function clear_typeA(str_typeFName, str_typeAName) {
-  dict_typeFs[str_typeFName].get_typeA(str_typeAName).clear_folder();
-  set_typeF_in_local_storage(str_typeFName);
+export function clear_typeA(typeFName, typeAName) {
+  dict_typeFs[typeFName].get_typeA(typeAName).clear_folder();
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Add a new AudioObj with the given name and audio path
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_audioPath} : String path of the audio file
+ * @param {typeFName} typeFName Name of the TypeF folder
+ * @param {typeAName} typeAName Name of the TypeA folder
+ * @param {audioObjName} audioObjName Name of the AudioObj
+ * @param {audioPath} audioPath Path of the audio file
  * 
  * @throws Error if the AudioObj name is empty
  * @throws Error if the AudioObj name already exists
  * @throws Error if audio file path does not exist
  * 
- * @Usage
+ * @usage
  * Ex: add_audio("Bob's Project", "10/11 Practice", "G Major Scales", "path/to/file.mp3")
  */
-export function add_audio(str_typeFName, str_typeAName, str_audioObjName, str_audioPath, save = true) {  
-  dict_typeFs[str_typeFName].get_typeA(str_typeAName).add_audio(str_audioObjName, str_audioPath);
+export function add_audio(typeFName, typeAName, audioObjName, audioPath, save = true) { 
+  if (audioObjName === "")
+    throw new Error("AudioObj name cannot be empty");
+
+  if (dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" already exists`);
+
+//  if (!fs.existsSync(audioPath))
+//    throw new Error(`AudioObj with path "${audioPath}" does not exist`);
+
+  dict_typeFs[typeFName].get_typeA(typeAName).add_audio(audioObjName, audioPath);
 
   if (save)
-    set_typeF_in_local_storage(str_typeFName);
+    set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Gets an array of the names of every AudioObj inside of a TypeA folder
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
+ * @param {string} typeFName name of the TypeF folder
+ * @param {string} typeAName name of the TypeA folder
  * 
- * @Usage
+ * @usage
  * Ex: get_all_audio_names("Bob's Project", "10/11 Practice")
  */
-export function get_all_audio_names(str_typeFName, str_typeAName) {
-  return dict_typeFs[str_typeFName].get_typeA(str_typeAName).get_all_audio_names();
+export function get_all_audio_names(typeFName, typeAName) {
+  return dict_typeFs[typeFName].get_typeA(typeAName).get_all_audio_names();
 }
 
 /**
  * Get the audio path for an AudioObj
  * To play, set the "src" attribute of an HTML audio element to the audio path
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
  * 
- * @throws Error if audio file path has changed or was deleted
+ * @throws Error if audioObj does not exist
  * 
- * @Usage
+ * @usage
  * Ex. get_audio_path("Bob's Project", "10/11 Practice", "G Major Scales")
  */
-export function get_audio_path(str_typeFName, str_typeAName, str_audioObjName) {
-  return dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
+export function get_audio_path(typeFName, typeAName, audioObjName) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" does not exist`);
+
+  return dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
     .get_path();
 }
 
 /**
  * Update audio path for an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {str_newPath} : The new audio path to use
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {string} newPath The new audio path to use
  * 
- * @throws Error if audio file path does not exist
+ * @throws Error if audioObj does not exist
+ * @throws Error if new file path does not exist
  *
- * @Usage
+ * @usage
  * Ex. update_audio_path("Bob's Project", "10/11 Practice", "G Major Scales", "path/to/file.mp3")
  */
-export function update_audio_path(str_typeFName, str_typeAName, str_audioObjName, str_newPath) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .update_path(str_newPath);
-  set_typeF_in_local_storage(str_typeFName);
+export function update_audio_path(typeFName, typeAName, audioObjName, newPath) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" does not exist`);
+
+//  if (!fs.existsSync(newPath))
+//    throw new Error(`AudioObj with path "${newPath}" does not exist`);
+
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .update_path(newPath);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Delete an AudioObj with the given name
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
  * 
- * @Usage
+ * @usage
  * Ex: delete_audio("Bob's Project", "10/11 Practice", "G Major Scales")
  */
-export function delete_audio(str_typeFName, str_typeAName, str_audioObjName) {
-  dict_typeFs[str_typeFName].get_typeA(str_typeAName).delete_audio(str_audioObjName);
-  set_typeF_in_local_storage(str_typeFName);
+export function delete_audio(typeFName, typeAName, audioObjName) {
+  dict_typeFs[typeFName].get_typeA(typeAName).delete_audio(audioObjName);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Update the name of a TypeF folder, TypeA folder, or AudioObj
- * @param {str_newName} : The new name to use
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder (Optional)
- * @param {str_audioObjName} : String name of the AudioObj (Optional)
+ * @param {string} newName The new name to use
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder (Optional)
+ * @param {string} audioObjName Name of the AudioObj (Optional)
  * 
  * @throws Error if the new name is empty
  * @throws Error if the old name doesn't exist
  * @throws Error if the new name already exists
  * 
- * @Usage
+ * @usage
  * To update TypeF folder name:
- * update_name(str_newName, str_typeFName);
+ * update_name(newName, typeFName);
  * Ex. update_name("Joe's Project", "Bob's Project")
  * 
  * To update TypeA folder name:
- * update_name(str_newName, str_typeFName, str_typeAName);
+ * update_name(newName, typeFName, typeAName);
  * Ex. update_name("9/23 Practice", "Bob's Project", "10/11 Practice")
  *
  * To update AudioObj name:
- * update_name(str_newName, str_typeFName, str_typeAName, str_audioObjName);
+ * update_name(newName, typeFName, typeAName, audioObjName);
  * Ex. update_name("F Minor Scales", "Bob's Project", "10/11 Practice", "G Major Scales")
  */
-export function update_name(str_newName, str_typeFName, str_typeAName, str_audioObjName) {
-  const dict_typeF = dict_typeFs[str_typeFName];
+export function update_name(newName, typeFName, typeAName, audioObjName) {
+  const dict_typeF = dict_typeFs[typeFName];
 
-  remove_typeF_from_local_storage(str_typeFName);
+  remove_typeF_from_local_storage(typeFName);
 
-  if (str_typeAName) {
-    const dict_typeA = dict_typeF.get_typeA(str_typeAName);
+  if (typeAName) {
+    const dict_typeA = dict_typeF.get_typeA(typeAName);
 
-    if (str_audioObjName) {
+    if (audioObjName) {
       // User wants to rename AudioObj
-      dict_typeA.update_audio_name(str_audioObjName, str_newName);
+      dict_typeA.update_audio_name(audioObjName, newName);
     } else {
       // User wants to rename TypeA folder
-      dict_typeF.update_typeA_name(str_typeAName, str_newName);
+      dict_typeF.update_typeA_name(typeAName, newName);
     }
 
-    set_typeF_in_local_storage(str_typeFName);
+    set_typeF_in_local_storage(typeFName);
   } else {
-    if (str_typeFName === "")
+    if (typeFName === "")
       throw new Error("TypeF folder name cannot be empty");
 
     // User wants to rename TypeF folder
-    if (!dict_typeFs[str_typeFName])
-      throw new Error(`TypeF folder with name "${str_typeFName}" doesn't exist`);
+    if (!dict_typeFs[typeFName])
+      throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
 
-    if (dict_typeFs[str_newName])
-      throw new Error(`TypeF folder with name "${str_newName}" already exists`);
+    if (dict_typeFs[newName])
+      throw new Error(`TypeF folder with name "${newName}" already exists`);
 
-    dict_typeFs[str_newName] = dict_typeFs[str_typeFName];
-    delete dict_typeFs[str_typeFName];
+    dict_typeFs[newName] = dict_typeFs[typeFName];
+    delete dict_typeFs[typeFName];
 
-    set_typeF_in_local_storage(str_newName);
+    set_typeF_in_local_storage(newName);
   }
 }
 
 /**
  * Adds a note to an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {num_timestamp} : Timestamp of the note (in seconds)
- * @param {str_note} : String of the note's text
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {number} timestamp Timestamp of the note (in seconds)
+ * @param {note} note Note's text
  * 
  * @throws Error if the specified timestamp isn't a valid number (in seconds)
  * @throws Error if the specified timestamp already exists
  * 
- * @Usage
+ * @usage
  * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Not enough feelings")
  */
-export function add_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, str_note) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .add_note(num_timestamp, str_note);
-  set_typeF_in_local_storage(str_typeFName);
+export function add_note(typeFName, typeAName, audioObjName, timestamp, note) {
+  if (dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+	  throw new Error(`Note with timestamp "${timestamp}" already exists`);
+
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .add_note(timestamp, note);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Takes input as seconds and returns formatted time as hh:mm:ss
- * @param {time} : Time (in seconds)
+ * @param {number} time Time (in seconds)
  */
 export function format_time(time) {
   const hours = Math.floor(time / 3600);
@@ -324,143 +357,152 @@ export function format_time(time) {
 
 /**
  * Gets a note from an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {num_timestamp} : Timestamp of the note (in seconds)
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {number} timestamp Timestamp of the note (in seconds)
  * 
- * @Usage
+ * @usage
  * Ex. get_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600)
  */
-export function get_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp) {
-  return dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .get_note(num_timestamp);
+export function get_note(typeFName, typeAName, audioObjName, timestamp) {
+  return dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .get_note(timestamp);
 }
 
 /**
  * Get all notes from an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
  * 
- * @Usage
+ * @usage
  * Ex. get_all_notes("Bob's Project", "10/11 Practice", "G Major Scales")
  */
-export function get_all_notes(str_typeFName, str_typeAName, str_audioObjName) {
-  return dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
+export function get_all_notes(typeFName, typeAName, audioObjName) {
+  return dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
     .get_notes();
 }
 
 /**
  * Updates the timestamp of an existing note in an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {num_timestamp} : Old timestamp of the note (in seconds)
- * @param {num_newTimestamp} : New timestamp of the note (in seconds)
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {number} timestamp Old timestamp of the note (in seconds)
+ * @param {number} newTimestamp New timestamp of the note (in seconds)
  * 
  * @throws Error if the new timestamp isn't a valid number (in seconds)
  * @throws Error if the old timestamp doesn't exist
  * @throws Error if the new timestamp already exists
  * 
- * @Usage
+ * @usage
  * Ex. update_timestamp("Bob's Project", "10/11 Practice", "G Major Scales", 3600, 1250)
  */
-export function update_timestamp(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, num_newTimestamp) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .update_timestamp(num_timestamp, num_newTimestamp);
-  set_typeF_in_local_storage(str_typeFName);
+export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, newTimestamp) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+	throw new Error(`Note with the old timestamp "${timestamp}" does not exist`);
+
+  if (dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(newTimestamp)))
+	throw new Error(`Note with the new timestamp "${newTimestamp}" already exists`);
+
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .update_timestamp(timestamp, newTimestamp);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Updates a note in an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {num_timestamp} : Timestamp of the note (in seconds)
- * @param {str_newNote} : String of the note's new text
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {number} timestamp Timestamp of the note (in seconds)
+ * @param {string} newNote note's new text
  * 
  * @throws Error if the specified timestamp doesn't exist
  * 
- * @Usage
+ * @usage
  * Ex. update_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Great improvement")
  */
-export function update_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp, str_newNote) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .update_note(num_timestamp, str_newNote);
-  set_typeF_in_local_storage(str_typeFName);
+export function update_note(typeFName, typeAName, audioObjName, timestamp, newNote) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+	throw new Error(`Note with timestamp "${timestamp}" does not exist`);
+
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .update_note(timestamp, newNote);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Deletes a note to an AudioObj given timestamp
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
- * @param {num_timestamp} : Timestamp of the note (in seconds)
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {number} timestamp Timestamp of the note (in seconds)
  * 
- * @Usage
+ * @usage
  * Ex. delete_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600)
  */
-export function delete_note(str_typeFName, str_typeAName, str_audioObjName, num_timestamp) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
-    .delete_note(num_timestamp);
-  set_typeF_in_local_storage(str_typeFName);
+export function delete_note(typeFName, typeAName, audioObjName, timestamp) {
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .delete_note(timestamp);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Clear all notes in an AudioObj
- * @param {str_typeFName} : String name of the TypeF folder
- * @param {str_typeAName} : String name of the TypeA folder
- * @param {str_audioObjName} : String name of the AudioObj
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
  * 
- * @Usage
+ * @usage
  * Ex. clear_notes("Bob's Project", "10/11 Practice", "G Major Scales")
  */
-export function clear_notes(str_typeFName, str_typeAName, str_audioObjName) {
-  dict_typeFs[str_typeFName]
-    .get_typeA(str_typeAName)
-    .get_audio(str_audioObjName)
+export function clear_notes(typeFName, typeAName, audioObjName) {
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
     .clear_notes();
-  set_typeF_in_local_storage(str_typeFName);
+  set_typeF_in_local_storage(typeFName);
 }
 
 /**
  * Load existing data from back-end
  * 
- * @Usage
+ * @usage
  * Ex. load_data()
  */
 export function load_data() {
   // Load TypeF folders
-  Object.keys(localStorage).forEach(str_typeFName => {
-    add_typeF(str_typeFName, false);
+  Object.keys(localStorage).forEach(typeFName => {
+    add_typeF(typeFName, false);
     const typeF = JSON.parse(
-      lz_string.decompressFromUTF16(localStorage.getItem(str_typeFName))
+      lz_string.decompressFromUTF16(localStorage.getItem(typeFName))
     );
 
     // Load TypeA folders
-    for (const str_typeAName in typeF.dict_typeA) {
-      add_typeA(str_typeFName, str_typeAName, false);
-      const typeA = typeF.dict_typeA[str_typeAName];
+    for (const typeAName in typeF.dict_typeA) {
+      add_typeA(typeFName, typeAName, false);
+      const typeA = typeF.dict_typeA[typeAName];
 
       // Load AudioObjs
-      for (const str_audioName in typeA.dict_audio) {
-        add_audio(str_typeFName, str_typeAName, str_audioName, typeA.dict_audio[str_audioName].str_path, false);
-        const audioObj = typeA.dict_audio[str_audioName];
+      for (const audioName in typeA.dict_audio) {
+        add_audio(typeFName, typeAName, audioName, typeA.dict_audio[audioName].path, false);
+        const audioObj = typeA.dict_audio[audioName];
 
         // Load Notes
-        for (const num_timestamp in audioObj.notes) {
-          add_note(str_typeFName, str_typeAName, str_audioName, num_timestamp, audioObj.notes[num_timestamp]);
+        for (const timestamp in audioObj.notes) {
+          add_note(typeFName, typeAName, audioName, timestamp, audioObj.notes[timestamp]);
         }
       }
     }
@@ -493,14 +535,26 @@ export function get_profile_picture() {
   }
 }
 
-function set_typeF_in_local_storage(str_typeFName) {
-  localStorage.setItem(str_typeFName, lz_string.compressToUTF16(
-    JSON.stringify(dict_typeFs[str_typeFName])
+/**
+ * Store the typeF folder object to the localStorage with its name as the key
+ * @param {string} typeFName Name of the typeF folder
+ * 
+ * @usage 
+ * Ex. set_typeF_in_local_storage("nameOfThisFolder");
+ */
+function set_typeF_in_local_storage(typeFName) {
+  localStorage.setItem(typeFName, lz_string.compressToUTF16(
+    JSON.stringify(dict_typeFs[typeFName])
   ));
 }
 
-function remove_typeF_from_local_storage(str_typeFName) { 
-  localStorage.removeItem(str_typeFName);
+/**
+ * Remove the typeF folder object from the localStorage using its name as the key
+ * @param {string} typeFName Name of the typeF folder
+ * 
+ * @usage 
+ * Ex. remove_typeF_from_local_storage("nameOfThisFolder");
+ */
+function remove_typeF_from_local_storage(typeFName) { 
+  localStorage.removeItem(typeFName);
 }
-
-module.exports = {add_typeF, add_typeA, add_audio, delete_typeF, delete_typeA, delete_audio, remove_typeF_from_local_storage};
