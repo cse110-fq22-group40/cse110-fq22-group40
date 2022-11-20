@@ -1,3 +1,9 @@
+/**
+ * FILE HEADER HERE
+ * 
+ * This will describe how to do local and automated testing.
+ */
+
 // importing file to test
 const functions = require('../source/local/classes.js');
 
@@ -37,25 +43,25 @@ test('Test constructor: invalid file path - NON-STRING TYPE', () => {
 });
 
 test('Test constructor: valid file path - RELATIVE PATH', () => {
-    const input = TESTING_REL_PATH + "/moonlight-sonata.mp3";
+    const input = TESTING_REL_PATH;
     function getter() {
         const newAudio = new functions.AudioObject(input);
         // note: this error is thrown by fs.existsSync() i think ???
         return newAudio.get_path();
     }
     var call_to_func = getter();
-    expect(call_to_func).toBe(TESTING_REL_PATH + "/moonlight-sonata.mp3");
+    expect(call_to_func).toBe(TESTING_REL_PATH);
 });
 
 test('Test constructor: valid file path - ABSOLUTE PATH', () => {
-    const input = TESTING_ABS_PATH + "/moonlight-sonata.mp3";
+    const input = TESTING_ABS_PATH;
     function getter() {
         const newAudio = new functions.AudioObject(input);
         // note: this error is thrown by fs.existsSync() i think ???
         return newAudio.get_path();
     }
     var call_to_func = getter();
-    expect(call_to_func).toBe(TESTING_REL_PATH + "/moonlight-sonata.mp3");
+    expect(call_to_func).toBe(TESTING_REL_PATH);
 });
 
 /** TO-DO: Add test cases to test existing files */
