@@ -36,7 +36,7 @@ test('Test constructor: invalid file path - NON-STRING TYPE', () => {
     expect(getter).toThrow();
 });
 
-test('Test constructor: valid file path - RELATIVE PATH?', () => {
+test('Test constructor: valid file path - RELATIVE PATH', () => {
     const input = TESTING_REL_PATH + "moonlight-sonata.mp3";
     function getter() {
         const newAudio = new functions.AudioObject(input);
