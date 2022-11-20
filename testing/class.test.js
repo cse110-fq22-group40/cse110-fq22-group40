@@ -2,10 +2,10 @@
 const functions = require('../source/local/classes.js');
 
 // this needs to be changed for testing - TODO: find github absolute path
-const TESTING_ABS_PATH = "/Users/sailoreichhorn/Desktop/UCSD/Q4.1/CSE 110/Group 40/REPO/cse110-fq22-group40/testing/testFiles/";
+const TESTING_ABS_PATH = "/Users/sailoreichhorn/Desktop/UCSD/Q4.1/CSE 110/Group 40/REPO/cse110-fq22-group40/testing/testFiles";
 
 // this can stay the same... add new comment here though :)
-const TESTING_REL_PATH = "../../testing/testFiles/";
+const TESTING_REL_PATH = "../../testing/testFiles";
 
 // Test: AudioObject
 
