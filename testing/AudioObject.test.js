@@ -13,6 +13,9 @@ const TESTING_ABS_PATH = "/Users/sailoreichhorn/Desktop/UCSD/Q4.1/CSE 110/Group 
 // this can stay the same... add new comment here though :)
 const TESTING_REL_PATH = "../../testing/testFiles";
 
+const MP3 = "/moonlight-sonata.mp3";
+const TESTFILE = TESTING_REL_PATH + MP3;
+
 // Basic Tests: constructor + update_path() + get_path()
 test('Test constructor: invalid file path - EMPTY STRING', () => {
     function getter() {
