@@ -75,10 +75,11 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
 //testing clear
 test('Testing clear typeF:', () => {
     const newTypeF = new functions.TypeF("test_typeF"); 
-    let name = "-";
+    let name = "test";
     for(let i = 0; i < 100; i++){
-        newTypeF.add_typeA(name);
-        name += "-";
+        let addOne = i + 1;
+        let mod = addOne.toString();
+        name += mod;
     }
     newTypeF.clear_folder();
     expect(newTypeF).toEqual({"dict_typeA": {}});
