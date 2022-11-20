@@ -327,7 +327,7 @@ export class TypeF {
   * @param {string} typeAName Name of the type A folder
   */
   delete_typeA(typeAName) {
-    if (!this.dict_typeA([typeAName]))
+    if (!this.dict_typeA[typeAName])
       throw new Error(`TypeA folder with name "${typeAName} doesn't exist`);
       
     delete this.dict_typeA[typeAName];
