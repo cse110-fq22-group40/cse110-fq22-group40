@@ -8,7 +8,8 @@
 const functions = require('../source/local/classes.js');
 
 // this needs to be changed for testing - TODO: find github absolute path
-const TESTING_ABS_PATH = "/Users/sailoreichhorn/Desktop/UCSD/Q4.1/CSE 110/Group 40/REPO/cse110-fq22-group40/testing/testFiles";
+const {resolve} = require('path');
+const TESTING_ABS_PATH = resolve('./testFiles');
 
 // this can stay the same... add new comment here though :)
 const TESTING_REL_PATH = "../../testing/testFiles";
@@ -57,16 +58,16 @@ test('Test constructor: valid file path - RELATIVE PATH', () => {
     expect(call_to_func).toBe(TESTING_REL_PATH);
 });
 
-test('Test constructor: valid file path - ABSOLUTE PATH', () => {
-    const input = TESTING_ABS_PATH;
-    function getter() {
-        const newAudio = new functions.AudioObject(input);
-        // note: this error is thrown by fs.existsSync() i think ???
-        return newAudio.get_path();
-    }
-    var call_to_func = getter();
-    expect(call_to_func).toBe(TESTING_REL_PATH);
-});
+// test('Test constructor: valid file path - ABSOLUTE PATH', () => {
+//     const input = TESTING_ABS_PATH;
+//     function getter() {
+//         const newAudio = new functions.AudioObject(input);
+//         // note: this error is thrown by fs.existsSync() i think ???
+//         return newAudio.get_path();
+//     }
+//     var call_to_func = getter();
+//     expect(call_to_func).toBe(TESTING_REL_PATH);
+// });
 
 /**
  * add_note(num_timestamp, str_note)
@@ -91,7 +92,23 @@ test('Test constructor: valid file path - ABSOLUTE PATH', () => {
 /**
  * delete_note(num_timestamp)
  */
+test("Testing delete note: bad timestamp - TIMESTAMP NOT A NUMBER", () => {
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.add_note(10, "this is a test");
+    expect(newAudio.delete_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+});
+
 
 /**
  * clear_notes()
  */
+test("Testing clear notes: ", () => {
+    const newAudio = new functions.AudioObject(TESTFILE);
+    let note = "";
+    for(let i = 0; i < 100; i++){
+        newAudio.add_note(i, note);
+        note += "-";
+    }
+    newAudio.clear_notes()
+    expect(newAudio).toEqual({"path": TESTFILE, "notes": { } } );
+});

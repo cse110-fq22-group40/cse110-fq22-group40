@@ -39,6 +39,7 @@ test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
     newTypeF.add_typeA(name1);
     newTypeF.add_typeA(name2);
     newTypeF.delete_typeA(name1);
+    console.log(newTypeF);
     expect(newTypeF).toEqual({"dict_typeA": { "test2": {"dict_audio": {} } } } );
 });
 
