@@ -40,3 +40,8 @@ test('Delete audio object named testObject', () => {
     expect(utils.delete_audio("testProject_Obj", "testAudio_Obj", "testObject_Obj")).toBe(null);
 });
 */
+
+//template test
+test("template test", ()=>{
+
+});
