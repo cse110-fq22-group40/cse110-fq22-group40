@@ -44,30 +44,34 @@ test('Test adder typeA: invalid name - REPEAT STRING', () => {
     expect(getter).toThrow(`Audio file with name "${name}" already exists`);
 });
 
-test("Test adder typeA: invalid address - NO PATH", () =>{
-    const newTypeA = new functions.TypeA("test_typeA");
-    expect(newTypeA.add_audio("test", "")).toThrow("Invalid audio file path");
+test("Test adder typeA: invalid address - NO PATH", () => {
+    function getter(){
+        const newTypeA = new functions.TypeA("test_typeA");
+        newTypeA.add_audio("test", "");
+    }
+    expect(getter).toThrow("Invalid audio file path");
 });
 
-// test("Test delete typeA: correct delete - CORRECT STORAGE", () => {
-//     let name1 = "test1";
-//     let name2 = "test2";
-//     const newTypeA = new functions.TypeA("test_typeA"); 
-//     newTypeA.add_audio(name1, TESTFILE);
-//     newTypeA.add_audio(name2, TESTFILE);
-//     newTypeA.delete_audio(name1, TESTFILE);
-//     expect(newTypeA).toEqual({"dict_typeA": { "test2": {"dict_audio": {} } } } ); //needs some work
-// });
+test("Test delete typeA: correct delete - CORRECT STORAGE", () => {
+    let name1 = "test1";
+    let name2 = "test2";
+    const newTypeA = new functions.TypeA("test_typeA"); 
+    newTypeA.add_audio(name1, TESTFILE);
+    newTypeA.add_audio(name2, TESTFILE);
+    newTypeA.delete_audio(name1, TESTFILE);
+    console.log(newTypeA);
+    expect(newTypeA).toEqual({"dict_audio": { "test2": {"path": TESTFILE, "notes": {} } } } );
+});
 
 // //testing updating name of files.
-// test("Test update Audio name: empty name - EMPTY STRING", () => {
-//     function getter(){
-//         const newTypeA = new functions.TypeA("test_typeA"); 
-//         newTypeA.add_audio("test");
-//         newTypeA.update_audio_name("test", "");
-//     }
-//     expect(getter).toThrow("Audio file name cannot be empty");
-// });
+test("Test update Audio name: empty name - EMPTY STRING", () => {
+    function getter(){
+        const newTypeA = new functions.TypeA("test_typeA"); 
+        newTypeA.add_audio("test", TESTFILE);
+        newTypeA.update_audio_name("test", "");
+    }
+    expect(getter).toThrow("Audio file name cannot be empty");
+});
 
 // test("Test update Audio name: Audio doesn't exist - NONEXISTANT FILE", () => {
 //     let name = "test";
