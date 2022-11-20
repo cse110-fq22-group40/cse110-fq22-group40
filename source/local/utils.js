@@ -497,7 +497,7 @@ export function load_data() {
 
       // Load AudioObjs
       for (const audioName in typeA.dict_audio) {
-        add_audio(typeFName, typeAName, audioName, typeA.dict_audio[audioName].str_path, false);
+        add_audio(typeFName, typeAName, audioName, typeA.dict_audio[audioName].path, false);
         const audioObj = typeA.dict_audio[audioName];
 
         // Load Notes
