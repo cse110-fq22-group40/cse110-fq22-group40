@@ -26,7 +26,7 @@ test('Test constructor: invalid file path - EMPTY STRING', () => {
         const newAudio = new functions.AudioObject(""); 
         newAudio.get_path();
     }
-    expect(getter).toThrow("Invalid audio file path");
+    expect(getter).toThrow("Invalid audio file path: File path cannot be empty");
 });
 
 test('Test constructor: invalid file path - RANDOM STRING', () => {
