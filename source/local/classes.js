@@ -25,9 +25,14 @@ export class AudioObject {
   * Updates path to audio file
   * @param {string} newPath New path to audio file
   * 
+  * @throws Error if audio file path is empty string
   * @throws Error if audio file path does not exist
   */
   update_path(newPath) {
+    if (newPath === "") {
+      throw new Error("Invalid audio file path: File path cannot be empty");
+    }
+
     if (!fs.existsSync(path.resolve(__dirname, newPath)))
       throw new Error("Invalid audio file path");
     
@@ -186,13 +191,9 @@ export class TypeA {
    * Getter for an audio object in dict_audio
    * @param {string} audioObjName Name of the audio file
    * 
-   * @throws Error if the audio object does not exist
    * @return Audio Object
    */
   get_audio(audioObjName) {
-    if (!this.dict_audio[audioObjName])
-      throw new Error(`Audio file with name "${audioObjName}" does not exist`);
-
     return this.dict_audio[audioObjName];
   }
 
@@ -280,13 +281,9 @@ export class TypeF {
    * Getter for a type A folder 
    * @param {string} typeAName Name of the type A folder
    * 
-   * @throws Error if type A folder doesn't exist
    * @return Type A Object
   */
   get_typeA(typeAName) {
-    if (!this.dict_typeA[typeAName])
-      throw new Error(`TypeA folder with name "${audioname}" doesn't exist`);
-
     return this.dict_typeA[typeAName];
   }
 
