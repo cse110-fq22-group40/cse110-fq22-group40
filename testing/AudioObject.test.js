@@ -16,7 +16,10 @@ const TESTING_REL_PATH = "../../testing/testFiles";
 const MP3 = "/moonlight-sonata.mp3";
 const TESTFILE = TESTING_REL_PATH + MP3;
 
-// Basic Tests: constructor + update_path() + get_path()
+/**
+ * Basic Tests: constructor + update_path() + get_path()
+ */
+
 test('Test constructor: invalid file path - EMPTY STRING', () => {
     function getter() {
         const newAudio = new functions.AudioObject(""); 
@@ -64,3 +67,31 @@ test('Test constructor: valid file path - ABSOLUTE PATH', () => {
     var call_to_func = getter();
     expect(call_to_func).toBe(TESTING_REL_PATH);
 });
+
+/**
+ * add_note(num_timestamp, str_note)
+ */
+
+/**
+ * get_note(num_timestamp)
+ */
+
+/**
+ * get_notes()
+ */
+
+/**
+ * update_timestamp(num_timestamp, num_newTimestamp)
+ */
+
+/**
+ * update_note(num_timestamp, str_newNote)
+ */
+
+/**
+ * delete_note(num_timestamp)
+ */
+
+/**
+ * clear_notes()
+ */

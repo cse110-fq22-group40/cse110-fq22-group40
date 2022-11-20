@@ -17,7 +17,6 @@ const TESTING_ABS_PATH = resolve('./testFiles');
 const TESTING_REL_PATH = "../../testing/testFiles";
 
 
-
 // Basic Tests: constructor, adders, delete
 test('Test constructor typeA:', () => {
     const newTypeA = new functions.TypeA("test_typeA"); 
