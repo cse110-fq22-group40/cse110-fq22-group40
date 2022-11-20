@@ -37,25 +37,25 @@ test('Test constructor: invalid file path - NON-STRING TYPE', () => {
 });
 
 test('Test constructor: valid file path - RELATIVE PATH', () => {
-    const input = TESTING_REL_PATH + "moonlight-sonata.mp3";
+    const input = TESTING_REL_PATH + "/moonlight-sonata.mp3";
     function getter() {
         const newAudio = new functions.AudioObject(input);
         // note: this error is thrown by fs.existsSync() i think ???
         return newAudio.get_path();
     }
     var call_to_func = getter();
-    expect(call_to_func).toBe(TESTING_REL_PATH + "moonlight-sonata.mp3");
+    expect(call_to_func).toBe(TESTING_REL_PATH + "/moonlight-sonata.mp3");
 });
 
 test('Test constructor: valid file path - ABSOLUTE PATH', () => {
-    const input = TESTING_ABS_PATH + "moonlight-sonata.mp3";
+    const input = TESTING_ABS_PATH + "/moonlight-sonata.mp3";
     function getter() {
         const newAudio = new functions.AudioObject(input);
         // note: this error is thrown by fs.existsSync() i think ???
         return newAudio.get_path();
     }
     var call_to_func = getter();
-    expect(call_to_func).toBe(TESTING_REL_PATH + "moonlight-sonata.mp3");
+    expect(call_to_func).toBe(TESTING_REL_PATH + "/moonlight-sonata.mp3");
 });
 
 /** TO-DO: Add test cases to test existing files */
