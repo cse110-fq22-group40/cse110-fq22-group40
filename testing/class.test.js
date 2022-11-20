@@ -97,12 +97,12 @@ test('Modify class', () => {
 
 
 // Basic Tests: constructor, adders, delete
-test('Test constructor:', () => {
+test('Test constructor typeF:', () => {
     const newTypeF = new functions.TypeF("test_typeF"); 
     expect(newTypeF).toEqual({"dict_typeA": {}});
 });
 
-test('Test adder: invalid name - EMPTY STRING', () => {
+test('Test adder typeF: invalid name - EMPTY STRING', () => {
     function getter() {
         const newTypeF = new functions.TypeF("test_typeF"); 
         newTypeF.add_typeA("");
@@ -110,7 +110,7 @@ test('Test adder: invalid name - EMPTY STRING', () => {
     expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 
-test('Test adder: invalid name - REPEAT STRING', () => {
+test('Test adder typeF: invalid name - REPEAT STRING', () => {
     let name = "test";
     function getter() {
         const newTypeF = new functions.TypeF("test_typeF"); 
@@ -121,7 +121,7 @@ test('Test adder: invalid name - REPEAT STRING', () => {
     expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 
-test("Test delete: correct delete - CORRECT STORAGE", () => {
+test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
     let name1 = "test1";
     let name2 = "test2";
     const newTypeF = new functions.TypeF("test_typeF"); 
@@ -161,7 +161,7 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
 });
 
 //testing clear
-test('Testing clear:', () => {
+test('Testing clear typeF:', () => {
     const newTypeF = new functions.TypeF("test_typeF"); 
     let name = "-";
     for(let i = 0; i < 100; i++){
@@ -170,4 +170,42 @@ test('Testing clear:', () => {
     }
     newTypeF.clear_folder();
     expect(newTypeF).toEqual({"dict_typeA": {}});
+});
+
+// Test: Type A
+
+
+// Basic Tests: constructor, adders, delete
+test('Test constructor typeA:', () => {
+    const newTypeA = new functions.TypeA("test_typeA"); 
+    expect(newTypeA).toEqual({"dict_audio": {}});
+});
+
+test('Test adder typeA: invalid name - EMPTY STRING', () => {
+    function getter() {
+        const newTypeA = new functions.TypeA("test_typeA"); 
+        newTypeA.add_audio("");
+    }
+    expect(getter).toThrow("Audio file name cannot be empty");
+});
+
+test('Test adder typeF: invalid name - REPEAT STRING', () => {
+    let name = "test";
+    function getter() {
+        const newTypeA = new functions.TypeA("test_typeA"); 
+        for(let i = 0; i < 20; i++){
+            newTypeA.add_audio(name, "./testing/testAudio.mp3");
+        }
+    }
+    expect(getter).toThrow(`Audio file with name "${name}" already exists`);
+});
+
+test("Test delete typeA: correct delete - CORRECT STORAGE", () => {
+    let name1 = "test1";
+    let name2 = "test2";
+    const newTypeA = new functions.TypeA("test_typeA"); 
+    newTypeF.add_audio(name1);
+    newTypeF.add_audio(name2);
+    newTypeF.delete_audio(name1);
+    expect(newTypeF).toEqual({ "test2": {"dict_audio": {} } } );
 });
