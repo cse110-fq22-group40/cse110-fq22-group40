@@ -337,6 +337,6 @@ export class TypeF {
    * Deletes all type A folders
    */
   clear_folder() {
-    this.array_typeA = {};
+    this.dict_typeA = {};
   }
 }
