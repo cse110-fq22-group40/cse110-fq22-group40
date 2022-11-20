@@ -14,6 +14,7 @@ const TESTING_REL_PATH = "../../testing/testFiles";
 
 const MP3 = "/moonlight-sonata.mp3";
 const NON_EXISTENT_MP3 = "/fake.mp3";
+const TESTFILE = TESTING_REL_PATH + MP3;
 
 const TEST_REL_PATH_EX1 = TESTING_REL_PATH + MP3;
 const TEST_ABS_PATH_EX1 = TESTING_ABS_PATH + MP3;
