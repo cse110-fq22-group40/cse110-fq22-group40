@@ -7,23 +7,27 @@ const {resolve} = require('path');
  * Ben
  */
 
-
 // Constants
 const TESTING_ABS_PATH = resolve(__dirname, 'testFiles');
 const TESTING_REL_PATH = '../../testing/testFiles';
 
 const MP3 = '/moonlight-sonata.mp3';
+const FAKE_MP3 = '/fake-mp3.mp3';
+
 const TESTFILE_REL = TESTING_REL_PATH + MP3;
 const TESTFILE_ABS = TESTING_ABS_PATH + MP3;
 
-// Basic Tests: constructor, adders, delete
+const FAKEFILE_REL = TESTING_REL_PATH + FAKE_MP3;
+const FAKEFILE_ABS = TESTING_ABS_PATH + FAKE_MP3;
+
+// Test constructor
 test('Test constructor typeA:', () => {
     const newTypeA = new functions.TypeA("test_typeA"); 
     expect(newTypeA).toEqual({"dict_audio": {}});
 });
 
-//Test add_audio
-test('Test adder typeA: invalid name relative path - EMPTY STRING', () => {
+//Test add_audio(name, path) 
+test('Test add_audio: invalid name relative path - EMPTY STRING', () => {
     function getter() {
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio("", TESTFILE_REL);
@@ -31,7 +35,7 @@ test('Test adder typeA: invalid name relative path - EMPTY STRING', () => {
     expect(getter).toThrow("Audio file name cannot be empty");
 });
 
-test('Test adder typeA: invalid name absolute path - EMPTY STRING', () => {
+test('Test add_audio: invalid name absolute path - EMPTY STRING', () => {
     function getter() {
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio("", TESTFILE_ABS);
@@ -39,7 +43,7 @@ test('Test adder typeA: invalid name absolute path - EMPTY STRING', () => {
     expect(getter).toThrow("Audio file name cannot be empty");
 });
 
-test('Test adder typeA: invalid name relative path - REPEAT STRING', () => {
+test('Test add_audio: invalid name relative path - REPEAT STRING', () => {
     let name = "test";
     function getter() {
         const newTypeA = new functions.TypeA("test_typeA"); 
@@ -50,7 +54,7 @@ test('Test adder typeA: invalid name relative path - REPEAT STRING', () => {
     expect(getter).toThrow(`Audio file with name "${name}" already exists`);
 });
 
-test('Test adder typeA: invalid name absolute path - REPEAT STRING', () => {
+test('Test add_audio: invalid name absolute path - REPEAT STRING', () => {
     let name = "test";
     function getter() {
         const newTypeA = new functions.TypeA("test_typeA"); 
@@ -61,7 +65,7 @@ test('Test adder typeA: invalid name absolute path - REPEAT STRING', () => {
     expect(getter).toThrow(`Audio file with name "${name}" already exists`);
 });
 
-test('Test adder typeA: invalid address - NO PATH', () => {
+test('Test add_audio: invalid address - NO PATH', () => {
     function getter(){
         const newTypeA = new functions.TypeA("test_typeA");
         newTypeA.add_audio("test", "");
@@ -69,20 +73,20 @@ test('Test adder typeA: invalid address - NO PATH', () => {
     expect(getter).toThrow("Invalid audio file path");
 });
 
-// //Test get_audio
-// test('Test get_audio typeA: correct return - CORRECT NAME', () => {
+// //Test get_audio(audioObjName)
+// test('Test get_audio: correct return - CORRECT NAME', () => {
 //     const newTypeA = new functions.TypeA("test_typeA");
 //     newTypeA.add_audio("test", TESTFILE_REL);
     
 // });
 
-// //Test get_audio
-// test('Test get_all_audio typeA: correct return - CORRECT USAGE', () => {
+// //Test get_all_audio_names()
+// test('Test get_all_audio: correct return - CORRECT USAGE', () => {
 
 // });
 
-//Test updating name of files.
-test('Test update Audio name: empty name relative path - EMPTY STRING', () => {
+//Test update_audio_name(oldName, newName)
+test('Test update_audio_name: empty newName relative path - EMPTY STRING', () => {
     function getter(){
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio("test", TESTFILE_REL);
@@ -91,7 +95,7 @@ test('Test update Audio name: empty name relative path - EMPTY STRING', () => {
     expect(getter).toThrow("Audio file name cannot be empty");
 });
 
-test('Test update Audio name: empty name absolute path - EMPTY STRING', () => {
+test('Test update_audio_name: empty newName absolute path - EMPTY STRING', () => {
     function getter(){
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio("test", TESTFILE_ABS);
@@ -100,7 +104,25 @@ test('Test update Audio name: empty name absolute path - EMPTY STRING', () => {
     expect(getter).toThrow("Audio file name cannot be empty");
 });
 
-test('Test update Audio name: Audio doesnt exist - NONEXISTANT FILE', () => {
+test('Test update_audio_name: empty oldName relative path - EMPTY STRING', () => {
+    function getter(){
+        const newTypeA = new functions.TypeA("test_typeA"); 
+        newTypeA.add_audio("test", TESTFILE_REL);
+        newTypeA.update_audio_name("", "test");
+    }
+    expect(getter).toThrow("Audio file with name \"\" doesn't exist");
+});
+
+test('Test update_audio_name: empty oldName absolute path - EMPTY STRING', () => {
+    function getter(){
+        const newTypeA = new functions.TypeA("test_typeA"); 
+        newTypeA.add_audio("test", TESTFILE_ABS);
+        newTypeA.update_audio_name("", "test");
+    }
+    expect(getter).toThrow("Audio file with name \"\" doesn't exist");
+});
+
+test('Test update_audio_name: invalid name - DOES NOT EXIST', () => {
     let name = "test";
     function getter(){
         const newTypeA = new functions.TypeA("test_typeA"); 
@@ -109,7 +131,7 @@ test('Test update Audio name: Audio doesnt exist - NONEXISTANT FILE', () => {
     expect(getter).toThrow(`Audio file with name "${name}" doesn't exist`);
 });
 
-test('Test update Audio name: Audio same name relative path - REPEATED NAME FILE', () => {
+test('Test update_audio_name: Audio same name relative path - REPEATED NAME FILE', () => {
     let name1 = "test";
     let name2 = "test2";
     function getter(){
@@ -121,7 +143,7 @@ test('Test update Audio name: Audio same name relative path - REPEATED NAME FILE
     expect(getter).toThrow(`Audio file with name "${name1}" already exists`);
 });
 
-test('Test update Audio name: Audio same name absolute path - REPEATED NAME FILE', () => {
+test('Test update_audio_name: Audio same name absolute path - REPEATED NAME FILE', () => {
     let name1 = "test";
     let name2 = "test2";
     function getter(){
@@ -133,8 +155,8 @@ test('Test update Audio name: Audio same name absolute path - REPEATED NAME FILE
     expect(getter).toThrow(`Audio file with name "${name1}" already exists`);
 });
 
-//Test delete_audio
-test('Test delete typeA: correct delete relative path - CORRECT STORAGE', () => {
+//Test delete_audio(audioName)
+test('Test delete_audio: correct delete relative path - CORRECT STORAGE', () => {
     let name1 = "test1";
     let name2 = "test2";
     const newTypeA = new functions.TypeA("test_typeA"); 
@@ -145,7 +167,7 @@ test('Test delete typeA: correct delete relative path - CORRECT STORAGE', () => 
 });
 
 // TODO: Figure out why the abolsute path is being formatted oddly
-// test('Test delete typeA: correct delete absolute path - CORRECT STORAGE', () => {
+// test('Test delete_audio: correct delete absolute path - CORRECT STORAGE', () => {
 //     let name1 = "test1";
 //     let name2 = "test2";
 //     const newTypeA = new functions.TypeA("test_typeA"); 
@@ -156,7 +178,7 @@ test('Test delete typeA: correct delete relative path - CORRECT STORAGE', () => 
 //     expect(newTypeA).toEqual({"dict_audio": { "test2": {"path": TESTFILE_REL, "notes": {} } } } );
 // });
 
-test('Test delete typeA: invalid name relative path - DOES NOT EXIST', () => {
+test('Test delete_audio: invalid name relative path - DOES NOT EXIST', () => {
     let name1 = "test1";
     let name2 = "test2";
     let name3 = "test3";
@@ -169,7 +191,7 @@ test('Test delete typeA: invalid name relative path - DOES NOT EXIST', () => {
     expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
 
-test('Test delete typeA: invalid name absolute path- DOES NOT EXIST', () => {
+test('Test delete_audio: invalid name absolute path- DOES NOT EXIST', () => {
     let name1 = "test1";
     let name2 = "test2";
     let name3 = "test3";
@@ -182,8 +204,8 @@ test('Test delete typeA: invalid name absolute path- DOES NOT EXIST', () => {
     expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
 
-//testing clear
-test('Testing clear typeA: relative path', () => {
+//Test clear_folder()
+test('Testing clear_folder: relative path', () => {
     const newTypeA = new functions.TypeA("test_typeA"); 
     let name = "test";
     for(let i = 0; i < 100; i++){
@@ -196,7 +218,7 @@ test('Testing clear typeA: relative path', () => {
     expect(newTypeA).toEqual({"dict_audio": {}});
 });
 
-test('Testing clear typeA: absolute path', () => {
+test('Testing clear_folder: absolute path', () => {
     const newTypeA = new functions.TypeA("test_typeA"); 
     let name = "test";
     for(let i = 0; i < 100; i++){
@@ -208,5 +230,3 @@ test('Testing clear typeA: absolute path', () => {
     newTypeA.clear_folder();
     expect(newTypeA).toEqual({"dict_audio": {}});
 });
-
-console.log(TESTFILE_ABS);
