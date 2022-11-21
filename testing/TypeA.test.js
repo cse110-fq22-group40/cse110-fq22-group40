@@ -186,7 +186,7 @@ test('Test delete_audio: invalid name relative path - DOES NOT EXIST', () => {
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio(name1, TESTFILE_REL);
         newTypeA.add_audio(name2, TESTFILE_REL);
-        newTypeA.delete_audio(name3, TESTFILE_REL);
+        newTypeA.delete_audio(name3);
     }
     expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
@@ -199,7 +199,7 @@ test('Test delete_audio: invalid name absolute path- DOES NOT EXIST', () => {
         const newTypeA = new functions.TypeA("test_typeA"); 
         newTypeA.add_audio(name1, TESTFILE_ABS);
         newTypeA.add_audio(name2, TESTFILE_ABS);
-        newTypeA.delete_audio(name3, TESTFILE_ABS);
+        newTypeA.delete_audio(name3);
     }
     expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
