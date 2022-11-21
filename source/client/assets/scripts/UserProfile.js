@@ -1,4 +1,4 @@
-import * as utils from "../../../local/utils.js";
+import {utils} from "../../../local/imports.js";
 
 let container, img, text1, text2;
 

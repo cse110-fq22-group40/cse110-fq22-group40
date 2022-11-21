@@ -1,4 +1,4 @@
-const functions = require('../source/local/classes.js');
+const functions = require('../source/local/classes/TypeA.js');
 const {resolve} = require('path');
 
 /**
@@ -9,7 +9,7 @@ const {resolve} = require('path');
 
 // Constants
 const TESTING_ABS_PATH = resolve(__dirname, 'testFiles');
-const TESTING_REL_PATH = '../../testing/testFiles';
+const TESTING_REL_PATH = '../../../testing/testFiles';
 
 const MP3 = '/moonlight-sonata.mp3';
 const FAKE_MP3 = '/fake-mp3.mp3';

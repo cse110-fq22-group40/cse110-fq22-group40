@@ -4,7 +4,7 @@
  * an uploaded mp3 file.
  */
 
-import * as utils from "../../../../local/utils.js"
+ import {utils, audio_utils, notes_utils} from "../../../../local/imports.js"
 
 // Add all your HTML DOM elements here as global variables
 const editor = document.getElementById("editor");
@@ -25,8 +25,8 @@ utils.load_data();
 const folderFName = sessionStorage.getItem("FolderF");
 const folderAName = sessionStorage.getItem("FolderA");
 const audioObject = sessionStorage.getItem("AudObject");
-const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
-const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
+const audio = audio_utils.get_audio_path(folderFName, folderAName, audioObject);
+const notes = notes_utils.get_all_notes(folderFName, folderAName, audioObject);
 
 /**
  * When the page loads, call loadAudio
@@ -146,20 +146,20 @@ function submitNote() {
 
     // Store notes in backend
     try{
-        utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+        notes_utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
         displayNote(timestamp, textEditor.innerHTML);
     }catch(err){
         //If a note already exists at the timestamp ask the user if they want to update it
         updateForm.style.display = "flex";
         updateFormYes.addEventListener("click",() => {
-            utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+            notes_utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
             location.reload();
         })
         updateFormNo.addEventListener("click",() => {
             updateForm.style.display = "none";
         })
     }
-    console.log(utils.get_all_notes(folderFName, folderAName, audioObject));
+    console.log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
     // Clear text editor
     textEditor.innerHTML = "";
 }

@@ -5,7 +5,7 @@
  */
 
 // importing file to test
-const functions = require('../source/local/classes.js');
+const functions = require('../source/local/classes/TypeF.js');
 
 // Basic Tests: constructor, adders, delete
 test('Test constructor typeF:', () => {
