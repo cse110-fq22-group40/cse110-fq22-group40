@@ -1,3 +1,9 @@
+/**
+ * This folder contains the implementation for the note taking page of an
+ * AudioObject. It contains all the functions necessary to manage the notes for
+ * an uploaded mp3 file.
+ */
+
 import * as utils from "../../../../local/utils.js"
 
 // Add all your HTML DOM elements here as global variables
@@ -11,6 +17,7 @@ const submitButton = document.getElementById("submit");
 const updateForm = document.getElementById("update-note");
 const updateFormYes = document.getElementsByClassName("update-yes")[0];
 const updateFormNo = document.getElementsByClassName("update-no")[0];
+const backButton = document.getElementById("back");
 
 // Set the source of the audio player, show the editor, hide the update form, 
 // and set up the audio visualizer
@@ -21,10 +28,29 @@ const audioObject = sessionStorage.getItem("AudObject");
 const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
 const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
 
+/**
+ * When the page loads, call loadAudio
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
 window.addEventListener("load", loadAudio(audio));
+
+/**
+ * When the page loads, call loadNotes
+ *
+ * @type {window} - the target of the event
+ * @listens window#load - when the window loads
+ */
 window.addEventListener("load", loadNotes(notes));
 
-//Load the audio and initialize the visualizer
+/**
+ * Loads the audio into the player when the audio object page loads
+ * @param {string} src - path of the mp3 file
+ * 
+ * @Usage
+ * Ex: loadAudio("path/of/music.mp3")
+ */
 function loadAudio(src) {
     console.log(src);
     audioPlayer.src = src;
@@ -32,15 +58,25 @@ function loadAudio(src) {
     initAudioVisualizer();
 }
 
-//Load the pre-existing notes if they exist and map them onto the screen
+/**
+ * Loads the notes into the container the audio object page loads
+ * @param {Object} notes - Key is the timestamp and value is the note
+ * 
+ * @Usage
+ * Ex: loadAudio({1: "musical note"})
+ */
 function loadNotes(notes){
-    console.log(notes);
     for (const timestamp in notes) {
         displayNote(timestamp, notes[timestamp]);
     }
 }
 
-// Set up the audio visualizer
+/**
+ * Initializes the audio visualization bar that appears when the audio is played
+ * 
+ * @Usage
+ * Ex: initAudioVisualizer()
+ */
 function initAudioVisualizer() {
     // Set CSS dimensions to equal canvas dimensions
     audioVisualizer.style.width = audioVisualizer.width + "px";
@@ -73,7 +109,12 @@ function initAudioVisualizer() {
 
     animateAudioVisualizer();
 
-    // Draw audio visualization onto canvas
+    /**
+     * Draws the audio visualizer onto the canvas
+     * 
+     * @Usage
+     * Ex: animateAudioVisualizer()
+     */
     function animateAudioVisualizer() {
         // Copy current frequency data into array
         analyser.getByteFrequencyData(data);
@@ -94,8 +135,12 @@ function initAudioVisualizer() {
     }
 }
 
-// Called when submit button is pressed
-
+/**
+ * Submits a note to be displayed onto the screen and stores into the backend
+ * 
+ * @Usage
+ * Ex: submitNote()
+ */
 function submitNote() {
     const timestamp = Math.floor(audioPlayer.currentTime);
 
@@ -121,7 +166,16 @@ function submitNote() {
 
 submitButton.addEventListener("click", submitNote);
 
-// Display note on screen
+/**
+ * Called when a note is submitted, performs the operation to display the note
+ * onto the screen
+ * 
+ * @param {string} timeStamp - current timestamp of the where the note exists
+ * @param {string} text - the note the user types
+ * 
+ * @Usage 
+ * Ex: displayNote("1","perfect technique")
+ */
 function displayNote(timestamp, text) {
     // Create copy of notes template
     const note = noteTemplate.content.cloneNode(true);
@@ -143,3 +197,14 @@ function displayNote(timestamp, text) {
     // Display the note on screen
     noteDisplay.appendChild(note);
 }
+
+/**
+ * When the back button is clicked on the page go back to the previous page
+ *
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
+backButton.addEventListener("click", () => {
+    sessionStorage.removeItem("AudObject");
+    window.location = "TypeA.html";
+  });

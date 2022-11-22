@@ -16,6 +16,13 @@ class CreateAudioFlow extends HTMLElement {
     fileexit.innerText = "X";
     fileexit.className = "exit";
 
+    /**
+     * When the exit button is clicked for creating an AudioObject, close the
+     * popup
+     *
+     * @type {HTMLElement} - the target of the event
+     * @listens document#click - when the exit buttonis clicked
+     */
     fileexit.addEventListener("click",() => {
       const popup = this.shadowRoot.querySelector(".fileNameContainer");
       popup.remove();
@@ -40,11 +47,18 @@ class CreateAudioFlow extends HTMLElement {
     fileinput.className = "fileUpload";
     fileinput.accept = "audio/*";
 
-    // TODO
+    // adding the submit button for the uploaded audio
     let filesubmit = document.createElement('input');
     filesubmit.type = "submit";
     filesubmit.className = "fileCreate";
 
+    /**
+     * When the submit button is clicked, create a new eventlistener that can
+     * keeps track of the name of the AudioObject and the path of the mp3 file
+     *
+     * @type {HTMLElement} - the target of the event
+     * @listens document#click - when the AudioCard component is clicked
+     */
     filesubmit.addEventListener("click", evt => {
       evt.preventDefault();
 
@@ -58,6 +72,7 @@ class CreateAudioFlow extends HTMLElement {
       this.dispatchEvent(submitEvent);
     });
 
+    //appending all the elements to its respective parents
     create_flow.appendChild(fileexit);
     create_flow.appendChild(filetitle);
     fileform.appendChild(textinput);
@@ -65,6 +80,7 @@ class CreateAudioFlow extends HTMLElement {
     fileform.appendChild(filesubmit);
     create_flow.appendChild(fileform);
 
+    //setting the style of the shadowDOM
     let style = document.createElement('style');
     style.textContent = `  
     .fileNameContainer{

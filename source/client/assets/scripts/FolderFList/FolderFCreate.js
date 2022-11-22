@@ -17,7 +17,13 @@
       fileexit.innerText = "X";
       fileexit.className = "exit";
   
-      //removing the popup if the exit is clicked
+      /**
+       * When the exit button is clicked for creating a FolderFCard, close the
+       * popup
+       *
+       * @type {HTMLElement} - the target of the event
+       * @listens document#click - when the exit buttonis clicked
+       */
       fileexit.addEventListener("click",() => {
         const popup = this.shadowRoot.querySelector(".fileNameContainer");
         popup.remove();
@@ -41,9 +47,13 @@
       filesubmit.type = "submit";
       filesubmit.className = "fileCreate";
   
-      /** when the submit button is clicked a custom event listener is defined
-       * so we keep track of the name we inputted for the folder
-      */
+      /**
+       * When the submit button is clicked, create a new eventlistener that can
+       * keeps track of the name of the FolderFCard
+       *
+       * @type {HTMLElement} - the target of the event
+       * @listens document#click - when the AudioCard component is clicked
+       */
       filesubmit.addEventListener("click", evt => {
         evt.preventDefault();
   
@@ -63,6 +73,7 @@
       fileform.appendChild(filesubmit);
       create_flow.appendChild(fileform);
   
+      //set the style of the FolderFCard
       let style = document.createElement('style');
       style.textContent = `  
       .fileNameContainer{
