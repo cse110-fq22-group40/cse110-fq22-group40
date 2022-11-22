@@ -52,7 +52,7 @@ window.addEventListener("load", loadNotes(notes));
  * Ex: loadAudio("path/of/music.mp3")
  */
 function loadAudio(src) {
-    console.log(src);
+    utils._log(src);
     audioPlayer.src = src;
     editor.style.display = "block";
     initAudioVisualizer();
@@ -143,25 +143,33 @@ function initAudioVisualizer() {
  */
 function submitNote() {
     const timestamp = Math.floor(audioPlayer.currentTime);
-
-    // Store notes in backend
-    try{
-        notes_utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
-        displayNote(timestamp, textEditor.innerHTML);
-    }catch(err){
-        //If a note already exists at the timestamp ask the user if they want to update it
-        updateForm.style.display = "flex";
-        updateFormYes.addEventListener("click",() => {
-            notes_utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
-            location.reload();
-        })
-        updateFormNo.addEventListener("click",() => {
-            updateForm.style.display = "none";
-        })
+    
+    if (!(textEditor.innerHTML === '')){
+        // Store notes in backend
+        try{
+            notes_utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+            displayNote(timestamp, textEditor.innerHTML);
+            // Clear text editor
+            textEditor.innerHTML = "";
+        } catch(err){
+            //If a note already exists at the timestamp ask the user if they want to update it
+            updateForm.style.display = "flex";
+            updateFormYes.addEventListener("click",() => {
+                updateForm.style.display = "none";
+                notes_utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+                
+                // Clear text editor
+                textEditor.innerHTML = "";
+                // TODO
+                location.reload();
+            })
+            updateFormNo.addEventListener("click",() => {
+                updateForm.style.display = "none";
+                // Clear text editor
+            })
+        }
+        utils._log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
     }
-    console.log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
-    // Clear text editor
-    textEditor.innerHTML = "";
 }
 
 submitButton.addEventListener("click", submitNote);

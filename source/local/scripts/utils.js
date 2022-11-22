@@ -125,17 +125,17 @@ export function format_time(time) {
  * Ex. update_timestamp("Bob's Project", "10/11 Practice", "G Major Scales", 3600, 1250)
  */
 export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, newTimestamp) {
-  if (!dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+  if (!dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).does_note_exist(timestamp)))
 	  throw new Error(`Note with the old timestamp "${timestamp}" does not exist`);
 
-  if (dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(newTimestamp)))
+  if (dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).does_note_exist(newTimestamp)))
 	  throw new Error(`Note with the new timestamp "${newTimestamp}" already exists`);
 
   dict_typeFs[typeFName]
     .get_typeA(typeAName)
     .get_audio(audioObjName)
     .update_timestamp(timestamp, newTimestamp);
-    data_utils.set_typeF_in_local_storage(typeFName);
+  data_utils.set_typeF_in_local_storage(typeFName);
 }
 
 

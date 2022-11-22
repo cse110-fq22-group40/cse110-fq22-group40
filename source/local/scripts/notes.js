@@ -1,5 +1,5 @@
 
-import {data_utils, dict_typeFs} from "../imports.js";
+import {data_utils, dict_typeFs, utils} from "../imports.js";
 
 /**
  * Clear all notes in an AudioObj
@@ -15,7 +15,7 @@ import {data_utils, dict_typeFs} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .clear_notes();
-      data_utils.set_typeF_in_local_storage(typeFName);
+    data_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -33,7 +33,7 @@ import {data_utils, dict_typeFs} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .delete_note(timestamp);
-      data_utils.set_typeF_in_local_storage(typeFName);
+    data_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -50,14 +50,15 @@ import {data_utils, dict_typeFs} from "../imports.js";
    * Ex. update_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Great improvement")
    */
   export function update_note(typeFName, typeAName, audioObjName, timestamp, newNote) {
-    if (!dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+    utils._log("Inside update_note in notes.js");
+    if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName).does_note_exist(timestamp))
       throw new Error(`Note with timestamp "${timestamp}" does not exist`);
   
     dict_typeFs[typeFName]
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .update_note(timestamp, newNote);
-      data_utils.set_typeF_in_local_storage(typeFName);
+    data_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -75,14 +76,16 @@ import {data_utils, dict_typeFs} from "../imports.js";
    * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Not enough feelings")
    */
   export function add_note(typeFName, typeAName, audioObjName, timestamp, note) {
-    if (dict_typeFs[typeFName].get_typeA(typeAName.get_audio(audioObjName).get_note(timestamp)))
+    // check for existing note
+    utils._log("Inside add_note in notes.js");
+    if (dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName).does_note_exist(timestamp))
       throw new Error(`Note with timestamp "${timestamp}" already exists`);
   
     dict_typeFs[typeFName]
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .add_note(timestamp, note);
-      data_utils.set_typeF_in_local_storage(typeFName);
+    data_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -112,6 +115,7 @@ import {data_utils, dict_typeFs} from "../imports.js";
    * Ex. get_all_notes("Bob's Project", "10/11 Practice", "G Major Scales")
    */
   export function get_all_notes(typeFName, typeAName, audioObjName) {
+    utils._log("inside get_all_notes in notes.js");
     return dict_typeFs[typeFName]
       .get_typeA(typeAName)
       .get_audio(audioObjName)

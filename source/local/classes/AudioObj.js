@@ -85,10 +85,23 @@ export class AudioObject {
   * @return Note
   */
   get_note(timestamp) {
-    if (!this.notes[timestamp])
-      throw new Error(`Note with timstamp "${timestamp}" does not exist.`);
+    // if (!this.notes[timestamp])
+    //   throw new Error(`Note with timstamp "${timestamp}" does not exist.`);
 
     return this.notes[timestamp];
+  }
+  
+  /** 
+  * Checks if a note exists that the given timestamp for this AudioObject
+  * @param {number} timestamp Timestamp of the note (in seconds)
+  * 
+  * @return True if a note exits at the timestamp, False otherwise
+  */
+  does_note_exist(timestamp) {
+    if (this.notes[timestamp])
+      return true;
+    else
+      return false;
   }
 
   /**
