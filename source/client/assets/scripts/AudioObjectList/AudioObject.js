@@ -4,7 +4,7 @@
  * an uploaded mp3 file.
  */
 
- import {utils, audio_utils, notes_utils} from "../../../../local/imports.js"
+import { utils, audio_utils, notes_utils } from "../../../../local/imports.js";
 
 // Add all your HTML DOM elements here as global variables
 const editor = document.getElementById("editor");
