@@ -4,7 +4,7 @@
  * the event handling for adding an A Folder.
  */
 
-import {utils, data_utils} from "../../../../local/imports.js"
+import {utils, folder_utils} from "../../../../local/imports.js"
 
 //obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".addButton");
@@ -23,7 +23,7 @@ const fFolderName = sessionStorage.getItem("FolderF");
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
-  const aFolder = data_utils.get_all_typeA_names(fFolderName);
+  const aFolder = folder_utils.get_all_typeA_names(fFolderName);
   for (const folder of aFolder) {
     createFolderA(folder);
   }
@@ -48,7 +48,7 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createFolderA(evt.detail.name);
-    data_utils.add_typeA(evt.detail.parent,evt.detail.name);
+    folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
 
     // Show success screen
     const successScreen = document.createElement("success-screen");

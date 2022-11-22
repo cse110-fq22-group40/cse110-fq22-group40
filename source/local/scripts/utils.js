@@ -1,4 +1,4 @@
-import {dict_typeFs, data_utils, audio_utils, notes_utils, DEBUG_FLAG} from "../imports.js";
+import {dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG} from "../imports.js";
 
 // CONSTANST FOR APPLICATION HERE
 const os = require("os");
@@ -46,7 +46,7 @@ export function _log(message) {
 export function update_name(newName, typeFName, typeAName, audioObjName) {
   const dict_typeF = dict_typeFs[typeFName];
 
-  data_utils.remove_typeF_from_local_storage(typeFName);
+  folder_utils.remove_typeF_from_local_storage(typeFName);
 
   if (typeAName) {
     const dict_typeA = dict_typeF.get_typeA(typeAName);
@@ -59,7 +59,7 @@ export function update_name(newName, typeFName, typeAName, audioObjName) {
       dict_typeF.update_typeA_name(typeAName, newName);
     }
 
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
   } else {
     if (typeFName === "")
       throw new Error("TypeF folder name cannot be empty");
@@ -74,7 +74,7 @@ export function update_name(newName, typeFName, typeAName, audioObjName) {
     dict_typeFs[newName] = dict_typeFs[typeFName];
     delete dict_typeFs[typeFName];
 
-    data_utils.set_typeF_in_local_storage(newName);
+    folder_utils.set_typeF_in_local_storage(newName);
   }
 }
 
@@ -135,7 +135,7 @@ export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, 
     .get_typeA(typeAName)
     .get_audio(audioObjName)
     .update_timestamp(timestamp, newTimestamp);
-  data_utils.set_typeF_in_local_storage(typeFName);
+  folder_utils.set_typeF_in_local_storage(typeFName);
 }
 
 
@@ -151,14 +151,14 @@ export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, 
 export function load_data() {
   // Load TypeF folders
   Object.keys(localStorage).forEach(typeFName => {
-    data_utils.add_typeF(typeFName, false);
+    folder_utils.add_typeF(typeFName, false);
     const typeF = JSON.parse(
       lz_string.decompressFromUTF16(localStorage.getItem(typeFName))
     );
 
     // Load TypeA folders
     for (const typeAName in typeF.dict_typeA) {
-      data_utils.add_typeA(typeFName, typeAName, false);
+      folder_utils.add_typeA(typeFName, typeAName, false);
       const typeA = typeF.dict_typeA[typeAName];
 
       // Load AudioObjs

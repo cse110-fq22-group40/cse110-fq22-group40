@@ -4,7 +4,7 @@
  * and contains the event handling when adding a folder is clicked.
  */
 
-import {utils, data_utils} from "../../../../local/imports.js";
+import {utils, folder_utils} from "../../../../local/imports.js";
 
 //obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".addButton");
@@ -21,7 +21,7 @@ utils.load_data();
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
-  const fFolder = data_utils.get_all_typeF_names();
+  const fFolder = folder_utils.get_all_typeF_names();
   
   for (const folder of fFolder) {
     createFolderF(folder);
@@ -47,7 +47,7 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createFolderF(evt.detail.name);
-    data_utils.add_typeF(evt.detail.name);
+    folder_utils.add_typeF(evt.detail.name);
 
     // Show success screen
     const successScreen = document.createElement("success-screen");

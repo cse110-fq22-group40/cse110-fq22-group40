@@ -5,7 +5,7 @@ export * from "./classes/AudioObj.js";
 
 // FUNCTIONS
 export * as notes_utils from "./scripts/notes.js";
-export * as data_utils from "./scripts/data.js";
+export * as folder_utils from "./scripts/folders.js";
 export * as audio_utils from "./scripts/audio.js";
 
 // UTILS

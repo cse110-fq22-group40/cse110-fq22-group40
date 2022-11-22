@@ -1,4 +1,4 @@
-import {data_utils, dict_typeFs} from "../imports.js";
+import {folder_utils, dict_typeFs} from "../imports.js";
 
 /**
  * Gets an array of the names of every AudioObj inside of a TypeA folder
@@ -39,7 +39,7 @@ export function add_audio(typeFName, typeAName, audioObjName, audioPath, save = 
   dict_typeFs[typeFName].get_typeA(typeAName).add_audio(audioObjName, audioPath);
 
   if (save)
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
 }
 
 /**
@@ -75,7 +75,7 @@ export function get_audio_path(typeFName, typeAName, audioObjName) {
  */
 export function delete_audio(typeFName, typeAName, audioObjName) {
   dict_typeFs[typeFName].get_typeA(typeAName).delete_audio(audioObjName);
-  data_utils.set_typeF_in_local_storage(typeFName);
+  folder_utils.set_typeF_in_local_storage(typeFName);
 }
 
 /**
@@ -102,5 +102,5 @@ export function update_audio_path(typeFName, typeAName, audioObjName, newPath) {
     .get_typeA(typeAName)
     .get_audio(audioObjName)
     .update_path(newPath);
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
 }

@@ -161,14 +161,15 @@ function submitNote() {
                 // Clear text editor
                 textEditor.innerHTML = "";
                 // TODO
-                location.reload();
+                
             })
             updateFormNo.addEventListener("click",() => {
                 updateForm.style.display = "none";
                 // Clear text editor
             })
         }
-        utils._log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
+        let new_notes = notes_utils.get_all_notes(folderFName, folderAName, audioObject)
+        utils._log(new_notes);
     }
 }
 

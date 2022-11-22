@@ -1,5 +1,5 @@
 
-import {data_utils, dict_typeFs, utils} from "../imports.js";
+import {folder_utils, dict_typeFs, utils} from "../imports.js";
 
 /**
  * Clear all notes in an AudioObj
@@ -15,7 +15,7 @@ import {data_utils, dict_typeFs, utils} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .clear_notes();
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -33,7 +33,7 @@ import {data_utils, dict_typeFs, utils} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .delete_note(timestamp);
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -58,7 +58,7 @@ import {data_utils, dict_typeFs, utils} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .update_note(timestamp, newNote);
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
@@ -85,7 +85,7 @@ import {data_utils, dict_typeFs, utils} from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .add_note(timestamp, note);
-    data_utils.set_typeF_in_local_storage(typeFName);
+    folder_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
