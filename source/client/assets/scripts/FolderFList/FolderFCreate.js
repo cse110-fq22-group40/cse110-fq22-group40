@@ -35,7 +35,7 @@
       filetitle.className = "fileTitle";
   
       // create a place for the user to add input
-      let fileform = document.createElement('form');
+    let fileform = document.createElement("form");
   
       // adding a text input for the name of the F folder in app
       let textinput = document.createElement('input');
