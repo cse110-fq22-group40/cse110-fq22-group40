@@ -8,7 +8,7 @@
       let shadow = this.attachShadow({ mode:'open' });
   
       // creating the container for the entire audio card
-      let audiocard = document.createElement('div');
+    let audiocard = document.createElement("div");
       audiocard.className = "audioCard";
   
       // setting the icon for the card
