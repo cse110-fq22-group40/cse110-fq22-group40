@@ -83,7 +83,7 @@ export class TypeA {
 	 */
 	delete_audio(audioName) {
 		if (!this.dict_audio[audioName])
-			throw new Error(`Audio file with name "${audioname}" doesn't exist`);
+			throw new Error(`Audio file with name "${audioName}" doesn't exist`);
 	
 		delete this.dict_audio[audioName];
 	}
