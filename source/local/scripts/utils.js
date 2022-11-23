@@ -4,7 +4,7 @@ import {dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG} from ".
 const os = require("os");
 const fs = require("fs");
 const path = require("path");
-const {exec, execSync} = require("child_process");
+const { exec, execSync } = require("child_process");
 const lz_string = require("lz-string");
 const fullName = require("fullName");
 
