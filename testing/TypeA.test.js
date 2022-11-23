@@ -65,7 +65,7 @@ test('Test add_audio: invalid name absolute path - REPEAT STRING', () => {
   expect(getter).toThrow(`Audio file with name "${name}" already exists`);
 });
 
-test('Test add_audio: invalid address - NO PATH', () => {
+test("Test add_audio: invalid address - NO PATH", () => {
   function getter(){
     const newTypeA = new functions.TypeA("test_typeA");
     newTypeA.add_audio("test", "");
