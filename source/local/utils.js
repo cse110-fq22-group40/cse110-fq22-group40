@@ -13,7 +13,7 @@ const dict_typeFs = {};
 
 /**
  * Output the input debug message to the web console
- * @param {string} message TODO fix this
+ * @param {string} message TODO fix this please
  *  
  */
 export function _log(message) {
