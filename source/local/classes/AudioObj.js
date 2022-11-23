@@ -85,8 +85,8 @@ export class AudioObject {
   * @return Note
   */
   get_note(timestamp) {
-    // if (!this.notes[timestamp])
-    //   throw new Error(`Note with timstamp "${timestamp}" does not exist.`);
+    //if (!this.notes[timestamp])
+    //  throw new Error(`Note with timstamp "${timestamp}" does not exist.`);
 
     return this.notes[timestamp];
   }
