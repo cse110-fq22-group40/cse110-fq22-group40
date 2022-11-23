@@ -22,7 +22,7 @@ jobs:
       - name: Install and build docs
         run: |
           npm install
-          npm jsdoc
+          npm run jsdoc
       
       - name: Commit changes in jsdoc build folder
         run: |

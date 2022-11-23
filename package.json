@@ -28,7 +28,6 @@
     "jsdoc": "^4.0.0"
   },
   "dependencies": {
-    "jest": "^29.3.1",
     "fullname": "^4.0.1",
     "lz-string": "^1.4.4"
   },
