@@ -21,8 +21,8 @@ jobs:
       
       - name: Install and build docs
         run: |
-          yarn install
-          yarn build_jsdoc
+          npm install
+          npm jsdoc
       
       - name: Commit changes in jsdoc build folder
         run: |
