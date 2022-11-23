@@ -1,4 +1,4 @@
-*{
+* {
   font-family: 'sans-serif';
 }
 
@@ -7,19 +7,19 @@ body {
   min-height: 100vh;
 }
 
-.buttonContainer{
+.buttonContainer {
   display: flex;
   justify-content: center;
 }
 
-.audioContainer{
+.audioContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.addButton{
+.addButton {
   margin-top: 100px;
   width: 280px;
   height: 60px;
@@ -32,7 +32,7 @@ body {
   border-width: 2px;
   font-weight: bolder;
 }
-.successContainer{
+.successContainer {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -47,24 +47,24 @@ body {
   border-radius: 10px;
 }
 
-.successTitle{
+.successTitle {
   display: flex;
   flex-direction: row;
   margin-top: 40px;
   font-size: 35px;
 }
-.success{
+.success {
   width: 75px;
   height: 75px;
   margin-top: 35px;
 }
 
-.successDescription{
+.successDescription {
   font-size: 30px;
   margin-top: -20px;
 }
 
-.path{
+.path {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
@@ -73,7 +73,7 @@ body {
   font-weight: bolder;
 }
 
-.back{
+.back {
   position: absolute;
   top: 10px;
   left: 5px;
