@@ -95,7 +95,7 @@ test('Test update_audio_name: empty newName relative path - EMPTY STRING', () =>
   expect(getter).toThrow("Audio file name cannot be empty");
 });
 
-test('Test update_audio_name: empty newName absolute path - EMPTY STRING', () => {
+test("Test update_audio_name: empty newName absolute path - EMPTY STRING", () => {
   function getter(){
     const newTypeA = new functions.TypeA("test_typeA"); 
     newTypeA.add_audio("test", TESTFILE_ABS);
