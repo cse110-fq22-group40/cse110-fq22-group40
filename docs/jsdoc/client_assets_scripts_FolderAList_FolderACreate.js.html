@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: client/assets/scripts/FolderAList/FolderACreate.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: client/assets/scripts/FolderAList/FolderACreate.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This file defines a class that determines the UI for uploading
+ * a new A folder to the workspace.
+ */
+ class FolderACreate extends HTMLElement {
+    constructor() {
+      super();
+      let shadow = this.attachShadow({ mode:'open' });
+  
+      // creating a container for adding A folder pop up
+      let create_flow = document.createElement('div');
+      create_flow.className = "fileNameContainer";
+  
+      // adding a exit for the pop up
+      let fileexit = document.createElement('button');
+      fileexit.innerText = "X";
+      fileexit.className = "exit";
+  
+      /**
+       * When the exit button is clicked for creating a FolderACard, close the
+       * popup
+       *
+       * @type {HTMLElement} - the target of the event
+       * @listens document#click - when the exit buttonis clicked
+       */
+      fileexit.addEventListener("click",() => {
+        const popup = this.shadowRoot.querySelector(".fileNameContainer");
+        popup.remove();
+      });
+  
+      // adding a title for the pop up
+      let filetitle = document.createElement('h2');
+      filetitle.innerText = "Name and upload your folder!";
+      filetitle.className = "fileTitle";
+  
+      // create a place for the user to add input
+      let fileform = document.createElement('form');
+  
+      // adding a text input for the name of the A folder in app
+      let textinput = document.createElement('input');
+      textinput.type = "text";
+      textinput.className = "fileName";
+
+      // adding a submit button for the pop up
+      let filesubmit = document.createElement('input');
+      filesubmit.type = "submit";
+      filesubmit.className = "fileCreate";
+  
+      /**
+       * When the submit button is clicked, create a new eventlistener that can
+       * keeps track of the name of the FolderACard and the parent F folder
+       *
+       * @type {HTMLElement} - the target of the event
+       * @listens document#click - when the AudioCard component is clicked
+       */
+      filesubmit.addEventListener("click", evt => {
+        evt.preventDefault();
+  
+        const submitEvent = new CustomEvent("fileSubmitted", {
+          detail: {
+            name: textinput.value,
+            parent: sessionStorage.getItem("FolderF")
+          }
+        });
+  
+        this.dispatchEvent(submitEvent);
+      });
+  
+      // append all the elements to its respective parents
+      create_flow.appendChild(fileexit);
+      create_flow.appendChild(filetitle);
+      fileform.appendChild(textinput);
+      fileform.appendChild(filesubmit);
+      create_flow.appendChild(fileform);
+  
+      //set the style of the FolderACard
+      let style = document.createElement('style');
+      style.textContent = `  
+      .fileNameContainer{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 450px;
+        height: 250px;
+        background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+        top: 50%;
+        left: 50%;
+        margin-top: -150px;
+        margin-left: -225px;
+        border-radius: 10px;
+      }
+  
+      .fileTitle{
+      margin-top: 30px;
+      }
+  
+      .fileName{
+      resize: none;
+        width: 375px;
+        height: 50px;
+        border-radius: 10px;
+        border-width: 2px;
+        border-color: black;
+        font-size: 20px;
+      }
+  
+      .fileUpload{
+      margin-top: 10px;
+      margin-left: 75px;
+      }
+  
+      .fileCreate{
+        position: absolute;
+        background: none;
+        border-radius: 5px;
+        border-color: rgba(0,128,128,1);
+        border-width: 1.5px;
+        font-size: 16px;
+        right: 0%;
+        bottom: 0%;
+        margin-bottom: 5px;
+        margin-right: 5px;
+      }
+  
+      .exit{
+        margin-top: 10px;
+        font-size: 20px;
+        border-color: rgba(0,128,128,1);
+        color: red;
+        margin-right: auto;
+        margin-left: 8px;
+      }
+      `
+      shadow.append(create_flow);
+      shadow.append(style);
+    }
+  }
+  
+  customElements.define("create-foldera-object", FolderACreate);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AudioCard.html">AudioCard</a></li><li><a href="AudioObject_AudioObject.html">AudioObject</a></li><li><a href="CreateAudioFlow.html">CreateAudioFlow</a></li><li><a href="FolderACard.html">FolderACard</a></li><li><a href="FolderACreate.html">FolderACreate</a></li><li><a href="FolderFCard.html">FolderFCard</a></li><li><a href="FolderFCreate.html">FolderFCreate</a></li><li><a href="TypeA_TypeA.html">TypeA</a></li><li><a href="TypeF_TypeF.html">TypeF</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-tutorial.html">tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_log">_log</a></li><li><a href="global.html#add_audio">add_audio</a></li><li><a href="global.html#add_note">add_note</a></li><li><a href="global.html#add_typeA">add_typeA</a></li><li><a href="global.html#add_typeF">add_typeF</a></li><li><a href="global.html#clear_notes">clear_notes</a></li><li><a href="global.html#clear_typeA">clear_typeA</a></li><li><a href="global.html#clear_typeF">clear_typeF</a></li><li><a href="global.html#createAudioCard">createAudioCard</a></li><li><a href="global.html#createFolderA">createFolderA</a></li><li><a href="global.html#createFolderF">createFolderF</a></li><li><a href="global.html#delete_audio">delete_audio</a></li><li><a href="global.html#delete_note">delete_note</a></li><li><a href="global.html#delete_typeA">delete_typeA</a></li><li><a href="global.html#delete_typeF">delete_typeF</a></li><li><a href="global.html#displayNote">displayNote</a></li><li><a href="global.html#format_time">format_time</a></li><li><a href="global.html#get_all_audio_names">get_all_audio_names</a></li><li><a href="global.html#get_all_notes">get_all_notes</a></li><li><a href="global.html#get_all_typeA_names">get_all_typeA_names</a></li><li><a href="global.html#get_all_typeF_names">get_all_typeF_names</a></li><li><a href="global.html#get_audio_path">get_audio_path</a></li><li><a href="global.html#get_note">get_note</a></li><li><a href="global.html#initAudioVisualizer">initAudioVisualizer</a></li><li><a href="global.html#loadAudio">loadAudio</a></li><li><a href="global.html#loadNotes">loadNotes</a></li><li><a href="global.html#load_data">load_data</a></li><li><a href="global.html#remove_typeF_from_local_storage">remove_typeF_from_local_storage</a></li><li><a href="global.html#set_typeF_in_local_storage">set_typeF_in_local_storage</a></li><li><a href="global.html#submitNote">submitNote</a></li><li><a href="global.html#update_audio_path">update_audio_path</a></li><li><a href="global.html#update_name">update_name</a></li><li><a href="global.html#update_note">update_note</a></li><li><a href="global.html#update_timestamp">update_timestamp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Nov 23 2022 14:35:54 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
