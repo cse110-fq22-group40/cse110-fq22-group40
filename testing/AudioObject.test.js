@@ -164,49 +164,49 @@ test('Test get_notes: No Notes', () => {
  */
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
     function getter(){
-        const newAudio = new functions.AudioObject(TESTFILE);
-        expect(newAudio.update_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
-        expect(newAudio.update_note("37")).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+      const newAudio = new functions.AudioObject(TESTFILE);
+      expect(newAudio.update_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+      expect(newAudio.update_note("37")).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
     }
 });
 
 test("Testing update note: correct update", () => {
-    function getter(){
-        const newAudio = new functions.AudioObject(TESTFILE);
-        newAudio.add_note(10, "this is a test");
-        expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
-        newAudio.update_note(10, "this is the new test")
-        expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is the new test"} } );
-    }
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.add_note(10, "this is a test");
+    expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
+    newAudio.update_note(10, "this is the new test")
+    expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is the new test"} } );
+  }
 });
 
 /**
  * delete_note(num_timestamp)
  */
 test("Testing delete note: bad timestamp - INVALID TIMESTAMP", () => {
-    function getter(){
-        const newAudio = new functions.AudioObject(TESTFILE);
-        newAudio.add_note(10, "this is a test");
-        expect(newAudio.delete_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
-    }
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.add_note(10, "this is a test");
+    expect(newAudio.delete_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+  }
 });
 
 test("Testing delete note: correct delete", () => {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    newAudio.add_note(10, "this is a test");
-    expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
+  const newAudio = new functions.AudioObject(TESTFILE);
+  newAudio.add_note(10, "this is a test");
+  expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
 });
 
 /**
  * clear_notes()
  */
 test("Testing clear notes: correct clear", () => {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    let note = "";
-    for(let i = 0; i < 100; i++){
-        newAudio.add_note(i, note);
-        note += "-";
-    }
-    newAudio.clear_notes()
-    expect(newAudio).toEqual({"path": TESTFILE, "notes": { } } );
+  const newAudio = new functions.AudioObject(TESTFILE);
+  let note = "";
+  for(let i = 0; i < 100; i++){
+    newAudio.add_note(i, note);
+    note += "-";
+  }
+  newAudio.clear_notes()
+  expect(newAudio).toEqual({"path": TESTFILE, "notes": { } } );
 });
