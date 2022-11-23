@@ -13,7 +13,7 @@ const dict_typeFs = {};
 
 /**
  * Output the input debug message to the web console
- * @param {string} message THIS IS TO TEST JSDOCS
+ * @param {string} message ANOTHER TEST
  *  
  */
 export function _log(message) {
