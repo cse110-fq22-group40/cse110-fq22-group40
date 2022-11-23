@@ -7,7 +7,7 @@
 body {
   margin: 60px auto;
   width: 750px;
-  background: linear-gradient(180deg, rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
+  background: linear-gradient(180deg,rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
 }
 
 #audio-input {
@@ -19,10 +19,9 @@ body {
   border: 2px solid transparent;
   border-radius: 8px;
   padding: 6px 10px;
-  background: linear-gradient(white, white) padding-box,
-            rgba(0,128,128,1) border-box;
+  background: linear-gradient(white, white) padding-box,rgba(0,128,128,1) border-box;
   font-family: inherit;
-    ont-size: 13px;
+  font-size: 13px;
 }
 
 #submit:hover{

@@ -91,13 +91,13 @@ export function format_time(time) {
   
   // Append a 0 if seconds is only one digit
   if (seconds < 10)
-      seconds = `0${seconds}`;
+    seconds = `0${seconds}`;
 
   // If the time is an hour or longer
   if (hours) {
-      // Append a 0 if minutes is only one digit
-      if (minutes < 10)
-          minutes = `0${minutes}`;
+    // Append a 0 if minutes is only one digit
+    if (minutes < 10)
+      minutes = `0${minutes}`;
       
       return `${hours}:${minutes}:${seconds}`;
   }
