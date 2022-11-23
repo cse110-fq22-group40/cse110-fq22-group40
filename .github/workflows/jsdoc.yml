@@ -28,6 +28,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "SailorForSchool@users.noreply.github.com"
-          git add ./docs
+          git add .
           git commit -m "Updating Jsdoc documentation" || echo "No changes to commit"
           git push
