@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: client/assets/scripts/AudioObjectList/AudioCard.js</title>
+    <title>JSDoc: Source: local/classes/TypeA.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: client/assets/scripts/AudioObjectList/AudioCard.js</h1>
+    <h1 class="page-title">Source: local/classes/TypeA.js</h1>
 
     
 
@@ -27,87 +27,102 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * This file defines a class that determines how an Audio Card is rendered
- * for each audio file uploaded by the user.
+ * This file has the TypeA class....
+ * TODO
  */
-class AudioCard extends HTMLElement {
+import {AudioObject} from "../imports.js";
+
+export class TypeA {
+  /**
+   * TypeA is a container for a group of audio objects
+   */
   constructor() {
-    super();
-    let shadow = this.attachShadow({ mode:'open' });
+	  // Dict of AudioObject {"name" : AudioObject}
+		this.dict_audio = {};
+	}
+	
+	/**
+	 * Create a new audio file
+	 * @param {string} name Name of the audio file
+	 * @param {string} path Path of the audio file
+	 * 
+	 * @throws Error if the AudioObj name is empty
+	 * @throws Error if the AudioObj name already exists
+	 * @throws Error if audio file path does not exist
+	 */
+	add_audio(name, path) {
+		if (name === "")
+		  throw new Error("Audio file name cannot be empty");
+	
+		if (this.dict_audio[name])
+		  throw new Error(`Audio file with name "${name}" already exists`);
 
-    // creating the container for the entire audio card
-    let audiocard = document.createElement('div');
-    audiocard.className = "audioCard";
+		this.dict_audio[name] = new AudioObject(path);
+	}
 
-    // setting the icon for the card
-    let audioimage = document.createElement('img');
-    audioimage.src = "assets/images/musicicon.png";
-    audioimage.className = "musicIcon";
-    audioimage.alt = "music icon";
-
-    // creating the name of the audio card as given by the user
-    let audioname = document.createElement('h2');
-
-    // adding elements to the card
-    audiocard.appendChild(audioimage);
-    audiocard.appendChild(audioname);
-
-    // adding style unique to the audio cards
-    let style = document.createElement('style');
-    style.textContent = `
-    .audioCard{
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        min-width: 150px;
-        height: 200px;
-        background: linear-gradient(180deg, #FFECD2 0%, #FCB69F 100%);;
-        border-style: solid;
-        border-width: 2px;
-        box-shadow: 2px 2px 2px; 
-        margin: 35px 20px 20px 20px;
-    }
-    
-    .musicIcon{
-        width: 50px;
-        height: 50px;
-        margin-top: 20px;
-    }
-    `
-
-    // adding elements to card
-    shadow.append(audiocard);
-    shadow.append(style);
-
-    // obtain the root of the shadowDOM so it can be targeted
-    const myShadowDom = this.shadowRoot;
-
-    /**
-     * When the AudioCard object is clicked, set the path in sessionStorage
-     * and go to the AudioObject.html page
-     *
-     * @type {shadowRoot} - the target of the event
-     * @listens shadowRoot#click - when the AudioCard component is clicked
-     */
-    myShadowDom.addEventListener("click", () => {
-      const audObjectName = myShadowDom.querySelector("h2").textContent;
-      sessionStorage.setItem("AudObject", audObjectName);
-      window.location = "AudioObject.html"
-    })
-  }
-
-  // set the name of the AudioObject
-  set name(name) {
-    const audioname = this.shadowRoot.querySelector("h2");
-    audioname.textContent = name;
-  }
+	/**
+	 * Getter for an audio object in dict_audio
+	 * @param {string} audioObjName Name of the audio file
+	 * 
+	 * @return Audio Object
+	 */
+	get_audio(audioObjName) {
+		return this.dict_audio[audioObjName];
+	}
+	
+	/**
+	 * Getter for all audio object names in dict_audio
+	 * 
+	 * @return String names of all audio objects in dict_audio
+	 */
+	get_all_audio_names() {
+		return Object.keys(this.dict_audio);
+	}
+	
+	/**
+	 * Update an AudioObj name inside this TypeA object
+	 * 
+	 * @param {string} oldName Old name of the AudioObj you want to change
+	 * @param {string} newName New name of the AudioObj you want to change
+	 * 
+	 * @throws Error if the AudioObj name is empty
+	 * @throws Error if the old AudioObj name doesn't exist
+	 * @throws Error if the new AudioObj name already exists
+	 */
+	update_audio_name(oldName, newName) {
+		if (newName === "")
+		  throw new Error("Audio file name cannot be empty");
+	
+		if (!this.dict_audio[oldName])
+		  throw new Error(`Audio file with name "${oldName}" doesn't exist`);
+	
+		if (this.dict_audio[newName])
+		  throw new Error(`Audio file with name "${newName}" already exists`);
+	
+		this.dict_audio[newName] = this.dict_audio[oldName];
+		delete this.dict_audio[oldName];
+	}
+	
+	/**
+	 * Deletes an audio object given the named
+	 * @param {string} audioName Name of the audio file
+	 * 
+	 * @throws Error if the audio object does not exist
+	 */
+	delete_audio(audioName) {
+		if (!this.dict_audio[audioName])
+			throw new Error(`Audio file with name "${audioName}" doesn't exist`);
+	
+		delete this.dict_audio[audioName];
+	}
+	
+	/**
+	 * Clears all audio objects in this folder
+	 */
+	clear_folder() {
+		this.dict_audio = {};
+	}
 }
-
-// define a custom HTML element
-customElements.define("audio-card", AudioCard);
 </code></pre>
         </article>
     </section>
