@@ -19,7 +19,7 @@
       audioimage.alt = "folder icon";
   
       // creating the name of the A Folder as given by the user
-      let audioname = document.createElement('h2');
+    let audioname = document.createElement("h2");
   
       // adding elements to the card
       audiocard.appendChild(audioimage);
