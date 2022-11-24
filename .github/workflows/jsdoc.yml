@@ -1,0 +1,33 @@
+name: Deploy JSDoc
+# TO-DO: Currently buggy, need to edit it automatically build jsdoc and deploy on github pages
+on:
+  push:
+    branches:
+      - 67-jsdoctest
+
+jobs:
+  generate-jsdocs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./docs
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      
+      - name: Install and build docs
+        run: |
+          npm install
+          npm run jsdoc
+      
+      - name: Commit changes in jsdoc build folder
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "kmwong@ucsd.edu"
+          git add .
+          git commit -m "Updating Jsdoc documentation" || echo "No changes to commit"
+          git push

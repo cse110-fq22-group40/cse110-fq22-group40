@@ -1,0 +1,37 @@
+{
+  "name": "cse110-fq21-group40",
+  "version": "1.0.0",
+  "description": "[Team Page](admin/team.md)",
+  "main": "source/local/app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "electron .",
+    "jsdoc": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-fq21-group40/cse110-fq21-group40.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-fq21-group40/cse110-fq21-group40/issues"
+  },
+  "homepage": "https://github.com/cse110-fq21-group40/cse110-fq21-group40#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.3.1",
+    "electron": "^21.2.3",
+    "jest": "^29.3.1",
+    "jsdoc": "^4.0.0"
+  },
+  "dependencies": {
+    "fullname": "^4.0.1",
+    "lz-string": "^1.4.4"
+  },
+  "jest": {
+    "verbose": true
+  }
+}

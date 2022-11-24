@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+}
+
+body {
+  margin: 60px auto;
+  width: 750px;
+  background: linear-gradient(180deg,rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
+}
+
+#audio-input {
+  display: block;
+  margin-top: 7px;
+}
+
+#submit {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(white, white) padding-box,rgba(0,128,128,1) border-box;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+#submit:hover{
+  background: rgba(0,128,128,1) border-box;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  
+  to {
+    opacity: 1;
+  }
+}
+
+#editor {
+  display: none;
+  animation: fadeIn 0.75s;
+}
+
+@keyframes expand {
+  from {
+    width: 0;
+    height: 0;
+  }
+}
+
+#audio-visualizer {
+  display: block;
+  margin: auto;
+  image-rendering: pixelated;
+  animation: expand 0.75s;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+}
+
+#audio-player {
+  width: 100%;
+  animation: expandWidth 0.75s;
+}
+
+#text-editor {
+  display: block;
+  box-sizing: border-box;
+  margin: 10px 0px;
+  width: 100%;
+  height: 500px;
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  animation: expand 0.75s;
+  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+}
+
+#note-display {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+#update-note{
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 250px;
+  background: linear-gradient(180deg, rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -225px;
+  border-radius: 10px;
+  border: 1px black solid;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.note {
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 7px 10px;
+  background-color: #fcfcfc;
+  animation: fadeInDown 0.75s;
+}
+
+.timestamp {
+  color: dodgerblue;
+  cursor: pointer;
+}
+
+.timestamp:hover {
+  color: deepskyblue;
+  text-decoration: underline;
+}
+
+.timestamp:active {
+  color: skyblue;
+}
+
+.back{
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 30px;
+}
+
+.yes-no-container{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.update-title{
+  margin-top: 50px;
+}
+
+.update-yes{
+  border: 2px solid green;
+  border-radius: 8px;
+  width: 100px;
+  height: 50px;
+  margin-right: 50px;
+}
+
+.update-yes:hover{
+  background: green;
+  color: white;
+}
+
+.update-no{
+  border: 2px solid red;
+  border-radius: 8px;
+  width: 100px;
+  height: 50px;
+}
+
+.update-no:hover{
+  background: red;
+  color: white;
+}

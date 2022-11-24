@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: local/scripts/audio.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: local/scripts/audio.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {folder_utils, dict_typeFs} from "../imports.js";
+
+/**
+ * Gets an array of the names of every AudioObj inside of a TypeA folder
+ * @param {string} typeFName name of the TypeF folder
+ * @param {string} typeAName name of the TypeA folder
+ * 
+ * @usage
+ * Ex: get_all_audio_names("Bob's Project", "10/11 Practice")
+ */
+export function get_all_audio_names(typeFName, typeAName) {
+  return dict_typeFs[typeFName].get_typeA(typeAName).get_all_audio_names();
+}
+
+/**
+ * Add a new AudioObj with the given name and audio path
+ * @param {typeFName} typeFName Name of the TypeF folder
+ * @param {typeAName} typeAName Name of the TypeA folder
+ * @param {audioObjName} audioObjName Name of the AudioObj
+ * @param {audioPath} audioPath Path of the audio file
+ * 
+ * @throws Error if the AudioObj name is empty
+ * @throws Error if the AudioObj name already exists
+ * @throws Error if audio file path does not exist
+ * 
+ * @usage
+ * Ex: add_audio("Bob's Project", "10/11 Practice", "G Major Scales", "path/to/file.mp3")
+ */
+export function add_audio(typeFName, typeAName, audioObjName, audioPath, save = true) { 
+  if (audioObjName === "")
+    throw new Error("AudioObj name cannot be empty");
+
+  if (dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" already exists`);
+
+  // if (!fs.existsSync(audioPath))
+  // throw new Error(`AudioObj with path "${audioPath}" does not exist`);
+
+  dict_typeFs[typeFName].get_typeA(typeAName).add_audio(audioObjName, audioPath);
+
+  if (save)
+    folder_utils.set_typeF_in_local_storage(typeFName);
+}
+
+/**
+ * Get the audio path for an AudioObj
+ * To play, set the "src" attribute of an HTML audio element to the audio path
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * 
+ * @throws Error if audioObj does not exist
+ * 
+ * @usage
+ * Ex. get_audio_path("Bob's Project", "10/11 Practice", "G Major Scales")
+ */
+export function get_audio_path(typeFName, typeAName, audioObjName) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" does not exist`);
+
+  return dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .get_path();
+}
+
+/**
+ * Delete an AudioObj with the given name
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * 
+ * @usage
+ * Ex: delete_audio("Bob's Project", "10/11 Practice", "G Major Scales")
+ */
+export function delete_audio(typeFName, typeAName, audioObjName) {
+  dict_typeFs[typeFName].get_typeA(typeAName).delete_audio(audioObjName);
+  folder_utils.set_typeF_in_local_storage(typeFName);
+}
+
+/**
+ * Update audio path for an AudioObj
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {string} newPath The new audio path to use
+ * 
+ * @throws Error if audioObj does not exist
+ * @throws Error if new file path does not exist
+ *
+ * @usage
+ * Ex. update_audio_path("Bob's Project", "10/11 Practice", "G Major Scales", "path/to/file.mp3")
+ */
+export function update_audio_path(typeFName, typeAName, audioObjName, newPath) {
+  if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
+    throw new Error(`AudioObj with name "${audioObjName}" does not exist`);
+
+// if (!fs.existsSync(newPath))
+// throw new Error(`AudioObj with path "${newPath}" does not exist`);
+
+  dict_typeFs[typeFName]
+    .get_typeA(typeAName)
+    .get_audio(audioObjName)
+    .update_path(newPath);
+    folder_utils.set_typeF_in_local_storage(typeFName);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AudioCard.html">AudioCard</a></li><li><a href="AudioObject_AudioObject.html">AudioObject</a></li><li><a href="CreateAudioFlow.html">CreateAudioFlow</a></li><li><a href="FolderACard.html">FolderACard</a></li><li><a href="FolderACreate.html">FolderACreate</a></li><li><a href="FolderFCard.html">FolderFCard</a></li><li><a href="FolderFCreate.html">FolderFCreate</a></li><li><a href="TypeA_TypeA.html">TypeA</a></li><li><a href="TypeF.html">TypeF</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-tutorial.html">tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_log">_log</a></li><li><a href="global.html#add_audio">add_audio</a></li><li><a href="global.html#add_note">add_note</a></li><li><a href="global.html#add_typeA">add_typeA</a></li><li><a href="global.html#add_typeF">add_typeF</a></li><li><a href="global.html#clear_notes">clear_notes</a></li><li><a href="global.html#clear_typeA">clear_typeA</a></li><li><a href="global.html#clear_typeF">clear_typeF</a></li><li><a href="global.html#createAudioCard">createAudioCard</a></li><li><a href="global.html#createFolderA">createFolderA</a></li><li><a href="global.html#createFolderF">createFolderF</a></li><li><a href="global.html#delete_audio">delete_audio</a></li><li><a href="global.html#delete_note">delete_note</a></li><li><a href="global.html#delete_typeA">delete_typeA</a></li><li><a href="global.html#delete_typeF">delete_typeF</a></li><li><a href="global.html#displayNote">displayNote</a></li><li><a href="global.html#format_time">format_time</a></li><li><a href="global.html#fs">fs</a></li><li><a href="global.html#get_all_audio_names">get_all_audio_names</a></li><li><a href="global.html#get_all_notes">get_all_notes</a></li><li><a href="global.html#get_all_typeA_names">get_all_typeA_names</a></li><li><a href="global.html#get_all_typeF_names">get_all_typeF_names</a></li><li><a href="global.html#get_audio_path">get_audio_path</a></li><li><a href="global.html#get_note">get_note</a></li><li><a href="global.html#initAudioVisualizer">initAudioVisualizer</a></li><li><a href="global.html#loadAudio">loadAudio</a></li><li><a href="global.html#loadNotes">loadNotes</a></li><li><a href="global.html#load_data">load_data</a></li><li><a href="global.html#remove_typeF_from_local_storage">remove_typeF_from_local_storage</a></li><li><a href="global.html#set_typeF_in_local_storage">set_typeF_in_local_storage</a></li><li><a href="global.html#submitNote">submitNote</a></li><li><a href="global.html#update_audio_path">update_audio_path</a></li><li><a href="global.html#update_name">update_name</a></li><li><a href="global.html#update_note">update_note</a></li><li><a href="global.html#update_timestamp">update_timestamp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Nov 24 2022 00:20:58 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
