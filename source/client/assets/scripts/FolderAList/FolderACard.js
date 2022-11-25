@@ -36,12 +36,17 @@
           align-items: center;
           text-align: center;
           min-width: 150px;
-          height: 200px;
+          min-height: 200px;
           background: linear-gradient(180deg, #FFECD2 0%, #FCB69F 100%);;
           border-style: solid;
           border-width: 2px;
           box-shadow: 2px 2px 2px; 
           margin: 35px 20px 20px 20px;
+          max-width: 150px;
+          max-height: 300px;
+          word-wrap: break-word;
+          white-space: pre-wrap;
+          word-break: break-word;
       }
       
       .musicIcon{
