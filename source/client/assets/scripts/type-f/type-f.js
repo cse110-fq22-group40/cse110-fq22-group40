@@ -16,7 +16,7 @@ const path = document.getElementById("path");
 // Load existing data from back-end
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
-path.innerHTML = `/ ${typeFName}`;
+path.innerHTML = `/\u2009${typeFName}`;
 
 /**
  * When the F folder page loads grab all the existing A Folders and map them

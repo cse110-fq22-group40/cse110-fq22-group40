@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Testing</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folder</title>
   <!-- Importing the scripts needed for logic -->
   <script src="assets/scripts/type-a/type-a.js" type="module"></script>
   <script src="assets/scripts/type-a/audio-object-card.js" type="module"></script>
   <script src="assets/scripts/type-a/audio-object-create-screen.js" type="module"></script>
   <script src="assets/scripts/file-success-screen.js" type="module"></script>
   <!-- Importing the styling -->
-  <link rel="stylesheet" href="assets/styles/main.css" />
-  <link rel="stylesheet" href="assets/styles/background-colors.css" />
-  <link rel="stylesheet" href="assets/styles/upload.css" />
+  <link rel="stylesheet" href="assets/styles/main.css">
+  <link rel="stylesheet" href="assets/styles/background-colors.css">
+  <link rel="stylesheet" href="assets/styles/upload.css">
 </head>
 <body class="type-a-background">
   <nav>
-    <img src="./assets/images/logo.png" alt="logo" id="home">
-    <img src="./assets/images/back.png" alt="back navigation arrow" id="back">
+    <img src="./assets/images/logo.png" alt="logo" id="home" draggable="false">
+    <img src="./assets/images/back.png" alt="back navigation arrow" id="back" draggable="false">
     <div class="spacer"></div>
     <div id="path"></div>
   </nav>
@@ -29,37 +29,37 @@
   
   <div class="card-container">
     <template id="card-template">
-      <link rel="stylesheet" href="assets/styles/card.css" />
-      <link rel="stylesheet" href="assets/styles/background-colors.css" />
+      <link rel="stylesheet" href="assets/styles/card.css">
+      <link rel="stylesheet" href="assets/styles/background-colors.css">
 
       <div class="card audio-object-background">
-        <img src="assets/images/musicicon.png" class="icon" alt="music icon">
+        <img src="assets/images/musicicon.png" class="icon" alt="music icon" draggable="false">
         <h2></h2>
       </div>
     </template>
   </div>
 
   <template id="create-screen-template">
-    <link rel="stylesheet" href="assets/styles/create-screen.css" />
+    <link rel="stylesheet" href="assets/styles/create-screen.css">
 
     <div class="container">
       <button class="exit"></button>
       <h2 class="title">Name and upload your audio!</h2>
       <form>
-        <input type="text" class="name" />
+        <input type="text" class="name">
         <input type="file" class="upload" accept="audio/*">
-        <input type="submit" class="create" />
+        <input type="submit" class="create">
       </form>
     </div>
   </template>
 
   <template id="success-screen-template">
-    <link rel="stylesheet" href="assets/styles/success-screen.css" />
+    <link rel="stylesheet" href="assets/styles/success-screen.css">
 
     <div class="container">
       <div class="title">
         <h2>Success!</h2>
-        <img src="assets/images/success.png" class="success" alt="checkmark">
+        <img src="assets/images/success.png" class="success" alt="checkmark" draggable="false">
       </div>
       <h3 class="description">Your file has been added.</h3>
     </div>

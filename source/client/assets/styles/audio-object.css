@@ -5,15 +5,19 @@
 #submit {
   border: none;
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 7px 10px;
   background: var(--secondary-color);
   font-family: inherit;
   font-size: 13px;
   user-select: none;
 }
 
-#submit:hover{
+#submit:hover {
   filter: brightness(95%);
+}
+
+#submit:active {
+  filter: brightness(90%);
 }
 
 @keyframes fadeIn {
@@ -77,25 +81,6 @@
   margin-top: 10px;
 }
 
-#update-note{
-  position: absolute;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  width: 450px;
-  height: 250px;
-  background: linear-gradient(180deg, rgba(0,128,128,1) 0%, rgba(200,147,116,1) 100%);
-  top: 50%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -225px;
-  border-radius: 10px;
-  border: 1px black solid;
-  color: white;
-  font-size: 22px;
-  text-align: center;
-}
-
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -131,37 +116,61 @@
   color: skyblue;
 }
 
+@keyframes zoom {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+#update-note {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 450px;
+  height: 150px;
+  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -225px;
+  border-radius: 20px;
+  padding: 40px;
+  user-select: none;
+  animation: zoom 0.5s;
+}
+
 .yes-no-container {
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  gap: 50px;
+  margin-top: 5px;
 }
 
-.update-title {
-  margin-top: 50px;
-}
-
-.update-yes {
-  border: 2px solid green;
+.update-yes, .update-no {
+  background: white;
   border-radius: 8px;
-  width: 100px;
-  height: 50px;
-  margin-right: 50px;
+  border: black solid 1px;
+  padding: 5px 15px;
+  font-size: 16px;
 }
 
 .update-yes:hover {
-  background: green;
+  background: #0c8e69;
   color: white;
-}
-
-.update-no {
-  border: 2px solid red;
-  border-radius: 8px;
-  width: 100px;
-  height: 50px;
 }
 
 .update-no:hover {
-  background: red;
+  background: #FF0051;
   color: white;
+}
+
+.update-yes:active, .update-no:active {
+  filter: brightness(90%);
 }

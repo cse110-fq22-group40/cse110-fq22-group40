@@ -30,7 +30,7 @@ const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObject);
 const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObject);
 
 const path = document.getElementById("path");
-path.innerHTML = `/ ${typeFName} / ${typeAName} / ${audioObject}`;
+path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObject}`;
 /**
  * When the page loads, call loadAudio
  *
@@ -155,7 +155,8 @@ function submitNote() {
     } catch(err) {
       // If a note already exists at the timestamp ask the user if they want to update it
       updateForm.style.display = "flex";
-      updateFormYes.addEventListener("click",() => {
+      
+      updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
         notes_utils.update_note(typeFName,typeAName,audioObject,timestamp, textEditor.innerHTML);
                 
@@ -163,12 +164,14 @@ function submitNote() {
         textEditor.innerHTML = "";
         // TODO
         location.reload();
-      })
-      updateFormNo.addEventListener("click",() => {
+      });
+
+      updateFormNo.addEventListener("click", () => {
         updateForm.style.display = "none";
         // Clear text editor
-      })
+      });
     }
+
     utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObject));
   }
 }
