@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Annotator</title>
   <!-- Importing the scripts needed for logic -->
   <script src="assets/scripts/audio-object/audio-object.js" type="module"></script>
   <!-- Importing the styling -->
-  <link rel="stylesheet" href="assets/styles/main.css" />
-  <link rel="stylesheet" href="assets/styles/background-colors.css" />
-  <link rel="stylesheet" href="assets/styles/audio-object.css" />
-  <title>Audio Annotator</title>
+  <link rel="stylesheet" href="assets/styles/main.css">
+  <link rel="stylesheet" href="assets/styles/background-colors.css">
+  <link rel="stylesheet" href="assets/styles/audio-object.css">
 </head>
 <body class="audio-object-background">
   <nav>
-    <img src="./assets/images/logo.png" alt="logo" id="home">
-    <img src="./assets/images/back.png" alt="back navigation arrow" id="back">
+    <img src="./assets/images/logo.png" alt="logo" id="home" draggable="false">
+    <img src="./assets/images/back.png" alt="back navigation arrow" id="back" draggable="false">
     <div class="spacer"></div>
     <div id="path"></div>
   </nav>
@@ -34,7 +34,7 @@
     </template>
   </div>
   <div id="update-note">
-    <div class="update-title">A note at this timestamp already exists. Update it?</div>
+    <h2 class="update-title">A note at this timestamp already exists. Update it?</h2>
     <div class="yes-no-container">
       <button class="update-yes" type="submit">Yes</button>
       <button class="update-no" type="submit">No</button>
