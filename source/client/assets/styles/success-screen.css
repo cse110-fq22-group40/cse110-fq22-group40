@@ -1,0 +1,47 @@
+@keyframes zoom {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 250px;
+  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -225px;
+  border-radius: 20px;
+  padding: 20px;
+  user-select: none;
+  animation: zoom 0.5s;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  font-size: 35px;
+}
+
+.success {
+  width: 75px;
+  height: 75px;
+  margin-left: 10px;
+  margin-top: 38px;
+}
+
+.description {
+  font-size: 30px;
+  margin-top: -20px;
+}

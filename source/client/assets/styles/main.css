@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+}
+
+body {
+  background-attachment: fixed;
+  margin: 35px 40px;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  z-index: 10;
+}
+
+#home, #back {
+  width: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+#path {
+  font-size: 35px;
+  font-weight: bolder;
+  word-spacing: -0.15ch;
+}

@@ -17,17 +17,20 @@ const submitButton = document.getElementById("submit");
 const updateForm = document.getElementById("update-note");
 const updateFormYes = document.getElementsByClassName("update-yes")[0];
 const updateFormNo = document.getElementsByClassName("update-no")[0];
+const homeButton = document.getElementById("home");
 const backButton = document.getElementById("back");
 
 // Set the source of the audio player, show the editor, hide the update form, 
 // and set up the audio visualizer
 utils.load_data();
-const folderFName = sessionStorage.getItem("FolderF");
-const folderAName = sessionStorage.getItem("FolderA");
-const audioObject = sessionStorage.getItem("AudObject");
-const audio = audio_utils.get_audio_path(folderFName, folderAName, audioObject);
-const notes = notes_utils.get_all_notes(folderFName, folderAName, audioObject);
+const typeFName = sessionStorage.getItem("TypeF");
+const typeAName = sessionStorage.getItem("TypeA");
+const audioObject = sessionStorage.getItem("AudioObject");
+const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObject);
+const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObject);
 
+const path = document.getElementById("path");
+path.innerHTML = `/ ${typeFName} / ${typeAName} / ${audioObject}`;
 /**
  * When the page loads, call loadAudio
  *
@@ -55,7 +58,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  initAudioVisualizer();
+  //initAudioVisualizer();
 }
 
 /**
@@ -65,7 +68,7 @@ function loadAudio(src) {
  * @Usage
  * Ex: loadAudio({1: "musical note"})
  */
-function loadNotes(notes){
+function loadNotes(notes) {
   for (const timestamp in notes) {
     displayNote(timestamp, notes[timestamp]);
   }
@@ -98,7 +101,7 @@ function initAudioVisualizer() {
   const data = new Uint8Array(analyser.frequencyBinCount);
 
   // Calculate width of each bar
-  const barWidth = Math.round(audioVisualizer.width / data.length * 4);
+  const barWidth = Math.round(audioVisualizer.width / data.length * 20);
 
   // Linear gradient to use when displaying bars
   const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
@@ -145,7 +148,7 @@ function submitNote() {
   if (!(textEditor.innerHTML === '')) {
     // Store notes in backend
     try {
-      notes_utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+      notes_utils.add_note(typeFName, typeAName, audioObject, timestamp, textEditor.innerHTML);
       displayNote(timestamp, textEditor.innerHTML);
       // Clear text editor
       textEditor.innerHTML = "";
@@ -154,7 +157,7 @@ function submitNote() {
       updateForm.style.display = "flex";
       updateFormYes.addEventListener("click",() => {
         updateForm.style.display = "none";
-        notes_utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+        notes_utils.update_note(typeFName,typeAName,audioObject,timestamp, textEditor.innerHTML);
                 
         // Clear text editor
         textEditor.innerHTML = "";
@@ -166,7 +169,7 @@ function submitNote() {
         // Clear text editor
       })
     }
-    utils._log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
+    utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObject));
   }
 }
 
@@ -204,6 +207,10 @@ function displayNote(timestamp, text) {
   noteDisplay.appendChild(note);
 }
 
+homeButton.addEventListener("click", () => {
+  window.location = "index.html";
+});
+
 /**
  * When the back button is clicked on the page go back to the previous page
  *
@@ -211,6 +218,6 @@ function displayNote(timestamp, text) {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("AudObject");
-  window.location = "TypeA.html";
+  sessionStorage.removeItem("AudioObject");
+  window.location = "type-a.html";
 });

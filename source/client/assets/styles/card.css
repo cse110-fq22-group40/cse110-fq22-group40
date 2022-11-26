@@ -1,0 +1,45 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 150px;
+  min-height: 200px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
+  margin: 35px 20px 20px 20px;
+  max-width: 150px;
+  max-height: 300px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: none;
+  transition: transform 1s, color 0.8s;
+  cursor: pointer;
+}
+
+.card:hover {
+  filter: brightness(95%);
+}
+
+.full-screen {
+  transform: scale(20, 20);
+  color: transparent;
+  z-index: 1;
+  cursor: auto;
+  filter: none !important;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+  transition: opacity 0.8s;
+}
+
+.full-screen .icon {
+  opacity: 0;
+}
