@@ -75,10 +75,10 @@ body {
   font-weight: bolder;
 }
 
-.back{
-  position: absolute;
-  top: 10px;
-  left: 5px;
+.home{
   width: 30px;
-  cursor: pointer;
+  height: 50px;
+  margin: 5px;
+  float: left;
+  padding-right: 10px;
 }
