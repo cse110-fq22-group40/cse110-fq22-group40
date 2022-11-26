@@ -10,11 +10,13 @@
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
 const backButton = document.querySelector(".back");
+const path = document.getElementById("path");
 
 // Load existing data from back-end
 utils.load_data();
 const folderFName = sessionStorage.getItem("FolderF");
 const folderAName = sessionStorage.getItem("FolderA");
+path.innerHTML = `/${folderFName}/${folderAName}`;
 
 /**
  * When the A folder page loads grab all the existing AudioObjects and map them

@@ -184,7 +184,16 @@ body {
   color: white;
 }
 
-.home{
+.path {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 0;
+  font-size: 35px;
+  font-weight: bolder;
+}
+
+.home {
   width: 30px;
   height: 50px;
   margin: 5px;
