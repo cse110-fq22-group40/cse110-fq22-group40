@@ -4,7 +4,7 @@
  * an uploaded mp3 file.
  */
 
-import * as utils from "../../../../local/utils.js"
+import {utils, audio_utils, notes_utils} from "../../../../local/imports.js"
 
 // Add all your HTML DOM elements here as global variables
 const editor = document.getElementById("editor");
@@ -25,8 +25,8 @@ utils.load_data();
 const folderFName = sessionStorage.getItem("FolderF");
 const folderAName = sessionStorage.getItem("FolderA");
 const audioObject = sessionStorage.getItem("AudObject");
-const audio = utils.get_audio_path(folderFName, folderAName, audioObject);
-const notes = utils.get_all_notes(folderFName, folderAName, audioObject);
+const audio = audio_utils.get_audio_path(folderFName, folderAName, audioObject);
+const notes = notes_utils.get_all_notes(folderFName, folderAName, audioObject);
 
 /**
  * When the page loads, call loadAudio
@@ -52,10 +52,10 @@ window.addEventListener("load", loadNotes(notes));
  * Ex: loadAudio("path/of/music.mp3")
  */
 function loadAudio(src) {
-    console.log(src);
-    audioPlayer.src = src;
-    editor.style.display = "block";
-    initAudioVisualizer();
+  utils._log(src);
+  audioPlayer.src = src;
+  editor.style.display = "block";
+  initAudioVisualizer();
 }
 
 /**
@@ -66,9 +66,9 @@ function loadAudio(src) {
  * Ex: loadAudio({1: "musical note"})
  */
 function loadNotes(notes){
-    for (const timestamp in notes) {
-        displayNote(timestamp, notes[timestamp]);
-    }
+  for (const timestamp in notes) {
+    displayNote(timestamp, notes[timestamp]);
+  }
 }
 
 /**
@@ -78,61 +78,59 @@ function loadNotes(notes){
  * Ex: initAudioVisualizer()
  */
 function initAudioVisualizer() {
-    // Set CSS dimensions to equal canvas dimensions
-    audioVisualizer.style.width = audioVisualizer.width + "px";
-    audioVisualizer.style.height = audioVisualizer.height + "px";
+  // Set CSS dimensions to equal canvas dimensions
+  audioVisualizer.style.width = audioVisualizer.width + "px";
+  audioVisualizer.style.height = audioVisualizer.height + "px";
 
-    // Drawing context for the canvas
-    const ctx = audioVisualizer.getContext("2d");
+  // Drawing context for the canvas
+  const ctx = audioVisualizer.getContext("2d");
 
-    const audioCtx = new AudioContext(); // Audio-processing graph
-    const analyser = audioCtx.createAnalyser(); // Exposes audio time and frequency data
-    analyser.fftSize = 2048; // Window size of Fast Fourier Transform
+  const audioCtx = new AudioContext(); // Audio-processing graph
+  const analyser = audioCtx.createAnalyser(); // Exposes audio time and frequency data
+  analyser.fftSize = 2048; // Window size of Fast Fourier Transform
 
-    // Connect audio nodes together
-    const source = audioCtx.createMediaElementSource(audioPlayer);
-    source.connect(analyser);
-    source.connect(audioCtx.destination);
+  // Connect audio nodes together
+  const source = audioCtx.createMediaElementSource(audioPlayer);
+  source.connect(analyser);
+  source.connect(audioCtx.destination);
 
-    // Stores frequency data of audio
-    const data = new Uint8Array(analyser.frequencyBinCount);
+  // Stores frequency data of audio
+  const data = new Uint8Array(analyser.frequencyBinCount);
 
-    // Calculate width of each bar
-    const barWidth = Math.round(audioVisualizer.width / data.length * 4);
+  // Calculate width of each bar
+  const barWidth = Math.round(audioVisualizer.width / data.length * 4);
 
-    // Linear gradient to use when displaying bars
-    const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
-    gradient.addColorStop(0, "#FF00FF");
-    gradient.addColorStop(0.5, "#00FFFF");
-    gradient.addColorStop(1, "#00FFCC");
-    ctx.fillStyle = gradient;
+  // Linear gradient to use when displaying bars
+  const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
+  gradient.addColorStop(0, "#FF00FF");
+  gradient.addColorStop(0.5, "#00FFFF");
+  gradient.addColorStop(1, "#00FFCC");
+  ctx.fillStyle = gradient;
 
-    animateAudioVisualizer();
+  animateAudioVisualizer();
 
-    /**
-     * Draws the audio visualizer onto the canvas
-     * 
-     * @Usage
-     * Ex: animateAudioVisualizer()
-     */
-    function animateAudioVisualizer() {
-        // Copy current frequency data into array
-        analyser.getByteFrequencyData(data);
+  /**
+   * Draws the audio visualizer onto the canvas
+   * 
+   * @Usage
+   * Ex: animateAudioVisualizer()
+   */
+  function animateAudioVisualizer() {
+    // Copy current frequency data into array
+    analyser.getByteFrequencyData(data);
 
-        // Clear canvas
-        ctx.clearRect(0, 0, audioVisualizer.width, audioVisualizer.height);
+    // Clear canvas
+    ctx.clearRect(0, 0, audioVisualizer.width, audioVisualizer.height);
 
-        // Loop through frequencies
-        for (let i = 0; i < data.length; i++) {
-            // Calculate height of each bar
-            const barHeight = Math.round(audioVisualizer.height * Math.sqrt(data[i] / 255));
-
-            // Draw bar
-            ctx.fillRect(barWidth * i, audioVisualizer.height, barWidth, -barHeight);
-        }
-
-        requestAnimationFrame(animateAudioVisualizer);
+    // Loop through frequencies
+    for (let i = 0; i < data.length; i++) {
+      // Calculate height of each bar
+      const barHeight = Math.round(audioVisualizer.height * Math.sqrt(data[i] / 255));
+      // Draw bar
+      ctx.fillRect(barWidth * i, audioVisualizer.height, barWidth, -barHeight);
     }
+    requestAnimationFrame(animateAudioVisualizer);
+  }
 }
 
 /**
@@ -142,26 +140,34 @@ function initAudioVisualizer() {
  * Ex: submitNote()
  */
 function submitNote() {
-    const timestamp = Math.floor(audioPlayer.currentTime);
-
+  const timestamp = Math.floor(audioPlayer.currentTime);
+    
+  if (!(textEditor.innerHTML === '')) {
     // Store notes in backend
-    try{
-        utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
-        displayNote(timestamp, textEditor.innerHTML);
-    }catch(err){
-        //If a note already exists at the timestamp ask the user if they want to update it
-        updateForm.style.display = "flex";
-        updateFormYes.addEventListener("click",() => {
-            utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
-            location.reload();
-        })
-        updateFormNo.addEventListener("click",() => {
-            updateForm.style.display = "none";
-        })
+    try {
+      notes_utils.add_note(folderFName, folderAName, audioObject, timestamp, textEditor.innerHTML);
+      displayNote(timestamp, textEditor.innerHTML);
+      // Clear text editor
+      textEditor.innerHTML = "";
+    } catch(err) {
+      // If a note already exists at the timestamp ask the user if they want to update it
+      updateForm.style.display = "flex";
+      updateFormYes.addEventListener("click",() => {
+        updateForm.style.display = "none";
+        notes_utils.update_note(folderFName,folderAName,audioObject,timestamp, textEditor.innerHTML);
+                
+        // Clear text editor
+        textEditor.innerHTML = "";
+        // TODO
+        location.reload();
+      })
+      updateFormNo.addEventListener("click",() => {
+        updateForm.style.display = "none";
+        // Clear text editor
+      })
     }
-    console.log(utils.get_all_notes(folderFName, folderAName, audioObject));
-    // Clear text editor
-    textEditor.innerHTML = "";
+    utils._log(notes_utils.get_all_notes(folderFName, folderAName, audioObject));
+  }
 }
 
 submitButton.addEventListener("click", submitNote);
@@ -177,25 +183,25 @@ submitButton.addEventListener("click", submitNote);
  * Ex: displayNote("1","perfect technique")
  */
 function displayNote(timestamp, text) {
-    // Create copy of notes template
-    const note = noteTemplate.content.cloneNode(true);
+  // Create copy of notes template
+  const note = noteTemplate.content.cloneNode(true);
 
-    // Order the notes by timestamp
-    note.querySelector(".note").style.order = timestamp;
+  // Order the notes by timestamp
+  note.querySelector(".note").style.order = timestamp;
 
-    // Link that sets the audio player to the timestamp when clicked
-    const timestampLink = note.querySelector(".timestamp");
-    timestampLink.textContent = utils.format_time(timestamp);
+  // Link that sets the audio player to the timestamp when clicked
+  const timestampLink = note.querySelector(".timestamp");
+  timestampLink.textContent = utils.format_time(timestamp);
 
-    timestampLink.addEventListener("click", () => {
-        audioPlayer.currentTime = timestamp;
-    });
+  timestampLink.addEventListener("click", () => {
+    audioPlayer.currentTime = timestamp;
+  });
 
-    // Add the text to the note
-    note.querySelector(".note-text").innerHTML = text;
+  // Add the text to the note
+  note.querySelector(".note-text").innerHTML = text;
 
-    // Display the note on screen
-    noteDisplay.appendChild(note);
+  // Display the note on screen
+  noteDisplay.appendChild(note);
 }
 
 /**
@@ -205,6 +211,6 @@ function displayNote(timestamp, text) {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-    sessionStorage.removeItem("AudObject");
-    window.location = "TypeA.html";
-  });
+  sessionStorage.removeItem("AudObject");
+  window.location = "TypeA.html";
+});

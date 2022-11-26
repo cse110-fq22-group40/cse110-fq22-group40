@@ -32,7 +32,7 @@ test('Delete type A folder named testAudio', () => {
     expect(utils.delete_typeA("testProject_A", "testAudio_A")).toBe(null);
 });
 
-test('Delete type F folder named testProject', () => {
+test("Delete type F folder named testProject", () => {
     expect(utils.delete_typeF("testProject_F")).toBe(null);
 });
 

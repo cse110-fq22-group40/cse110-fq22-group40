@@ -4,7 +4,7 @@
  * the event handling when adding a AudioObject is created.
  */
 
-import * as utils from "../../../../local/utils.js"
+ import {utils, audio_utils} from "../../../../local/imports.js"
 
 // Obtain the elements that need to be targeted
 const addButton = document.querySelector(".addButton");
@@ -24,7 +24,7 @@ const folderAName = sessionStorage.getItem("FolderA");
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
-  const audioFiles = utils.get_all_audio_names(folderFName,folderAName);
+  const audioFiles = audio_utils.get_all_audio_names(folderFName,folderAName);
   
   for (const audio of audioFiles) {
     createAudioCard(audio);
@@ -50,7 +50,7 @@ addButton.addEventListener("click", () => {
 
     // Create a new audio card
     createAudioCard(evt.detail.name);
-    utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
+    audio_utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
 
     // Show success screen
     const successScreen = document.createElement("success-screen");

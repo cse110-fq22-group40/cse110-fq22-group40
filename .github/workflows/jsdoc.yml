@@ -3,20 +3,31 @@ name: Deploy JSDoc
 on:
   push:
     branches:
-      - qa-dev
-
+      - 67-jsdoctest
 
 jobs:
-  deploy:
+  generate-jsdocs:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./docs
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      - name: Build
-        uses: andstor/jsdoc-action@v1.2.1
+      - uses: actions/setup-node@v2
         with:
-          source_dir: ./source
-          recurse: true
-          output_dir: ./docs
-          config_file: jsdoc.json
+          node-version: "14"
+      
+      - name: Install and build docs
+        run: |
+          npm install
+          npm run jsdoc
+      
+      - name: Commit changes in jsdoc build folder
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "kmwong@ucsd.edu"
+          git add .
+          git commit -m "Updating Jsdoc documentation" || echo "No changes to commit"
+          git push
