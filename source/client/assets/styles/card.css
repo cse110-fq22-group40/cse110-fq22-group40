@@ -17,7 +17,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   user-select: none;
-  transition: transform 1s, color 1s;
+  transition: transform 1s, color 0.8s;
   cursor: pointer;
 }
 
@@ -26,17 +26,18 @@
 }
 
 .full-screen {
-  transform: scale(16, 16);
+  transform: scale(20, 20);
   color: transparent;
   z-index: 1;
   cursor: auto;
+  filter: none !important;
 }
 
 .icon {
   width: 50px;
   height: 50px;
   margin-top: 20px;
-  transition: opacity 1s;
+  transition: opacity 0.8s;
 }
 
 .full-screen .icon {

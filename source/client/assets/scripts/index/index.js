@@ -60,7 +60,7 @@ addButton.addEventListener("click", () => {
         document.body.removeChild(successScreen);
       }, 1400);
 
-    } catch (err){
+    } catch (err) {
       window.alert(`The folder name "${evt.detail.name}"
         is either taken or not allowed. Please try again.`);
     }
