@@ -1,4 +1,4 @@
-const functions = require('../source/local/classes/TypeA.js');
+const functions = require('../source/local/classes/type-a.js');
 const {resolve} = require('path');
 
 /**
