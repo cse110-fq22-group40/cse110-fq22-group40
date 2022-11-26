@@ -43,6 +43,10 @@ class AudioObjectCreateScreen extends HTMLElement {
       if (textinput.value.length > 40){
         window.alert("Invalid name. Please use 40 or less characters");
       }
+	  
+	  if (fileinput.value == ""){
+		window.alert("No file attached. Please choose your audio file");
+	  }
 
       else{
         const submitEvent = new CustomEvent("fileSubmitted", {
