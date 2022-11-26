@@ -43,21 +43,27 @@ addButton.addEventListener("click", () => {
 
   // When the user submits a new audio file
   createFolderAObject.addEventListener("fileSubmitted", evt => {
-    // Remove the input prompt
-    document.body.removeChild(createFolderAObject);
+    try{
+      // Create a new audio card
+      folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
+      createFolderA(evt.detail.name);
 
-    // Create a new audio card
-    createFolderA(evt.detail.name);
-    folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
+      // Remove the input prompt
+      document.body.removeChild(createFolderAObject);
 
-    // Show success screen
-    const successScreen = document.createElement("success-screen");
-    document.body.appendChild(successScreen);
+      // Show success screen
+      const successScreen = document.createElement("success-screen");
+      document.body.appendChild(successScreen);
 
-    // Remove success screen after some time
-    setTimeout(() => {
-      document.body.removeChild(successScreen);
-    }, 1400);
+      // Remove success screen after some time
+      setTimeout(() => {
+        document.body.removeChild(successScreen);
+      }, 1400);
+
+    } catch(err){
+      window.alert(`The folder name "${evt.detail.name}" 
+        is either taken or not allowed. Please try again.`);
+    }
   });
 });
 
