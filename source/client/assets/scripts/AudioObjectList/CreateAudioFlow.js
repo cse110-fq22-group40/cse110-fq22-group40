@@ -62,14 +62,20 @@ class CreateAudioFlow extends HTMLElement {
     filesubmit.addEventListener("click", evt => {
       evt.preventDefault();
 
-      const submitEvent = new CustomEvent("fileSubmitted", {
-        detail: {
-          name: textinput.value,
-          path: fileinput.files[0].path
-        }
-      });
+      if (textinput.value.length > 40){
+        window.alert("Invalid name. Please use 40 or less characters");
+      }
 
-      this.dispatchEvent(submitEvent);
+      else{
+        const submitEvent = new CustomEvent("fileSubmitted", {
+          detail: {
+            name: textinput.value,
+            path: fileinput.files[0].path
+          }
+        });
+
+        this.dispatchEvent(submitEvent);
+      }
     });
 
     //appending all the elements to its respective parents

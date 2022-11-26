@@ -57,13 +57,19 @@ class FolderFCreate extends HTMLElement {
     filesubmit.addEventListener("click", evt => {
       evt.preventDefault();
   
-      const submitEvent = new CustomEvent("fileSubmitted", {
-        detail: {
-          name: textinput.value,
-        }
-      });
-  
-      this.dispatchEvent(submitEvent);
+      if (textinput.value.length > 40){
+        window.alert("Invalid name. Please use 40 or less characters");
+      }
+      
+      else{
+        const submitEvent = new CustomEvent("fileSubmitted", {
+          detail: {
+            name: textinput.value,
+          }
+        });
+    
+        this.dispatchEvent(submitEvent);
+      }
     });
   
     // appending all the elements created

@@ -47,21 +47,27 @@ addButton.addEventListener("click", () => {
 
   // When the user submits a new audio file
   createAudObject.addEventListener("fileSubmitted", evt => {
-    // Remove the input prompt
-    document.body.removeChild(createAudObject);
+    try{
+      // Create a new audio card
+      audio_utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
+      createAudioCard(evt.detail.name);
 
-    // Create a new audio card
-    createAudioCard(evt.detail.name);
-    audio_utils.add_audio(folderFName, folderAName, evt.detail.name, evt.detail.path);
+      // Remove the input prompt
+      document.body.removeChild(createAudObject);
 
-    // Show success screen
-    const successScreen = document.createElement("success-screen");
-    document.body.appendChild(successScreen);
+      // Show success screen
+      const successScreen = document.createElement("success-screen");
+      document.body.appendChild(successScreen);
 
-    // Remove success screen after some time
-    setTimeout(() => {
-      document.body.removeChild(successScreen);
-    }, 1400);
+      // Remove success screen after some time
+      setTimeout(() => {
+        document.body.removeChild(successScreen);
+      }, 1400);
+
+    } catch(err){
+      window.alert(`The file name "${evt.detail.name}" 
+        is either taken or not allowed. Please try again.`);
+    }
   });
 });
 
