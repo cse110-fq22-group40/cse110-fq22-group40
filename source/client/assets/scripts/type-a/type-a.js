@@ -6,9 +6,9 @@
 
 import {utils, audio_utils} from "../../../../local/imports.js"
 
-// Obtain the elements that need to be targeted
+// Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
-const audioContainer = document.querySelector(".card-container");
+const cardContainer = document.querySelector(".card-container");
 const homeButton = document.getElementById("home");
 const backButton = document.getElementById("back");
 const path = document.getElementById("path");
@@ -81,7 +81,7 @@ addButton.addEventListener("click", () => {
  */
 function createAudioCard(name) {
   const audioCard = document.createElement("audio-object-card");
-  audioContainer.appendChild(audioCard);
+  cardContainer.appendChild(audioCard);
   audioCard.name = name;
 }
 

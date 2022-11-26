@@ -7,20 +7,38 @@
   text-align: center;
   min-width: 150px;
   min-height: 200px;
-  background: linear-gradient(180deg, #FFECD2 0%, #FCB69F 100%);
-  border-style: solid;
-  border-width: 2px;
-  box-shadow: 2px 2px 2px; 
+  border: none;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   margin: 35px 20px 20px 20px;
   max-width: 150px;
   max-height: 300px;
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
+  user-select: none;
+  transition: transform 1s, color 1s;
+  cursor: pointer;
+}
+
+.card:hover {
+  filter: brightness(95%);
+}
+
+.full-screen {
+  transform: scale(16, 16);
+  color: transparent;
+  z-index: 1;
+  cursor: auto;
 }
 
 .icon {
   width: 50px;
   height: 50px;
   margin-top: 20px;
+  transition: opacity 1s;
+}
+
+.full-screen .icon {
+  opacity: 0;
 }

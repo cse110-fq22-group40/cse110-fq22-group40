@@ -20,9 +20,14 @@ class TypeFCard extends HTMLElement {
      * @listens shadowRoot#click - when the AudioCard component is clicked
      */
     this.shadowRoot.addEventListener("click", () => {
-      const typeFName = this.shadowRoot.querySelector("h2");
-      sessionStorage.setItem("TypeF", typeFName.textContent);
-      window.location = "type-f.html";
+      const card = this.shadowRoot.querySelector(".card");
+      card.classList.add("full-screen");
+
+      setTimeout(() => {
+        const typeFName = this.shadowRoot.querySelector("h2");
+        sessionStorage.setItem("TypeF", typeFName.textContent);
+        window.location = "type-f.html";
+      }, 1000);
     });
   }
   

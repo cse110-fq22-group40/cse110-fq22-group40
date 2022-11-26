@@ -6,9 +6,9 @@
 
 import {utils, folder_utils} from "../../../../local/imports.js";
 
-//obtains all the HTML elements that need to be targeted
+// Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
-const audioContainer = document.querySelector(".card-container");
+const cardContainer = document.querySelector(".card-container");
 const homeButton = document.getElementById("home");
 
 // Load existing data from back-end
@@ -76,7 +76,7 @@ addButton.addEventListener("click", () => {
  */
 function createFolderF(name) {
   const fileF = document.createElement("type-f-card");
-  audioContainer.appendChild(fileF);
+  cardContainer.appendChild(fileF);
   fileF.name = name;
 }
 

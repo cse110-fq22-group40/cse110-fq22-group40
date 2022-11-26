@@ -58,7 +58,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  initAudioVisualizer();
+  //initAudioVisualizer();
 }
 
 /**
@@ -68,7 +68,7 @@ function loadAudio(src) {
  * @Usage
  * Ex: loadAudio({1: "musical note"})
  */
-function loadNotes(notes){
+function loadNotes(notes) {
   for (const timestamp in notes) {
     displayNote(timestamp, notes[timestamp]);
   }
@@ -101,7 +101,7 @@ function initAudioVisualizer() {
   const data = new Uint8Array(analyser.frequencyBinCount);
 
   // Calculate width of each bar
-  const barWidth = Math.round(audioVisualizer.width / data.length * 4);
+  const barWidth = Math.round(audioVisualizer.width / data.length * 20);
 
   // Linear gradient to use when displaying bars
   const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);

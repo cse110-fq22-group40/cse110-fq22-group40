@@ -37,7 +37,7 @@
   position: absolute;
   background: none;
   border-radius: 5px;
-  border-color: rgba(0,128,128,1);
+  border-color: rgb(0, 128, 128);
   border-width: 1.5px;
   font-size: 16px;
   right: 0%;
@@ -49,7 +49,7 @@
 .exit {
   margin-top: 10px;
   font-size: 20px;
-  border-color: rgba(0,128,128,1);
+  border-color: rgb(0, 128, 128);
   color: red;
   margin-right: auto;
   margin-left: 8px;

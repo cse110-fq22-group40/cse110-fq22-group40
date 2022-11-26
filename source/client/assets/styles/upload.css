@@ -1,20 +1,32 @@
+@keyframes zoom {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
 .button-container {
   display: flex;
   justify-content: center;
+  animation: zoom 0.8s;
 }
 
 .add-button {
   margin-top: 100px;
-  width: 280px;
-  height: 60px;
+  padding: 15px 25px;
   font-size: 25px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px; 
-  background: linear-gradient(90deg, #FFECD2 0%, #FCB69F 100%);
-  border-style: solid;
-  border-color: black;
-  border-width: 2px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   font-weight: bolder;
+  user-select: none;
+}
+
+.add-button:hover {
+  filter: brightness(95%);
 }
 
 .card-container {
@@ -22,4 +34,5 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  animation: zoom 0.8s;
 }
