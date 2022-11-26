@@ -57,7 +57,6 @@
         evt.preventDefault();
   
         if (textinput.value.length > 40){
-          console.log("test");
           window.alert("Invalid name. Please use 40 or less characters");
         }
 
