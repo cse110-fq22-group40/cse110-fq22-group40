@@ -5,21 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Importing the scripts needed for logic -->
-  <script src="assets/scripts/AudioObjectList/AudioObject.js" type="module"></script>
-  <script src="assets/scripts/UserProfile.js" type="module"></script>
-  <!-- Importing the styling needed for logic -->
-  <link rel="stylesheet" href="assets/AudioObject.css">
-  <link rel="stylesheet" href="assets/UserProfile.css" />
+  <script src="assets/scripts/audio-object/audio-object.js" type="module"></script>
+  <!-- Importing the styling -->
+  <link rel="stylesheet" href="assets/styles/main.css" />
+  <link rel="stylesheet" href="assets/styles/audio-object.css" />
   <title>Audio Annotator</title>
 </head>
 <body>
-  <div class="path" id="path"></div>
-  <div class = "home">
-    <a href="./index.html" class="home"><img src="./assets/images/logo.png" alt="logo" class="home"></a>
-  </div>
-  <div class = "home">
-    <a><img src="./assets/images/back.png" alt="back navigation arrow" class="back"></a>
-  </div>
+  <nav>
+    <img src="./assets/images/logo.png" alt="logo" id="home">
+    <img src="./assets/images/back.png" alt="back navigation arrow" id="back">
+    <div class="spacer"></div>
+    <div id="path"></div>
+  </nav>
   <div id="editor">
     <canvas id="audio-visualizer" width="696" height="40"></canvas>
     <audio id="audio-player" controls></audio>

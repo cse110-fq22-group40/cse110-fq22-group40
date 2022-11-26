@@ -4,18 +4,20 @@
  * the event handling for adding an A Folder.
  */
 
-import {utils, folder_utils} from "../../../../local/imports.js"
+import {utils, folder_utils} from "../../../../local/imports.js";
 
 //obtains all the HTML elements that need to be targeted
-const addButton = document.querySelector(".addButton");
-const audioContainer = document.querySelector(".audioContainer");
-const backButton = document.querySelector(".back");
+const addButton = document.querySelector(".add-button");
+const audioContainer = document.querySelector(".card-container");
+const homeButton = document.getElementById("home");
+const backButton = document.getElementById("back");
 const path = document.getElementById("path");
 
 // Load existing data from back-end
 utils.load_data();
-const fFolderName = sessionStorage.getItem("FolderF");
-path.innerHTML = "/" + fFolderName;
+const typeFName = sessionStorage.getItem("TypeF");
+path.innerHTML = `/ ${typeFName}`;
+
 /**
  * When the F folder page loads grab all the existing A Folders and map them
  * onto the screen
@@ -24,7 +26,7 @@ path.innerHTML = "/" + fFolderName;
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
-  const aFolder = folder_utils.get_all_typeA_names(fFolderName);
+  const aFolder = folder_utils.get_all_typeA_names(typeFName);
   for (const folder of aFolder) {
     createFolderA(folder);
   }
@@ -39,18 +41,18 @@ window.addEventListener("load", () => {
  */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
-  const createFolderAObject = document.createElement("create-folderA-object");
-  document.body.appendChild(createFolderAObject);
+  const typeACreate = document.createElement("type-a-create-screen");
+  document.body.appendChild(typeACreate);
 
   // When the user submits a new audio file
-  createFolderAObject.addEventListener("fileSubmitted", evt => {
-    try{
+  typeACreate.addEventListener("fileSubmitted", evt => {
+    try {
       // Create a new audio card
       folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
       createFolderA(evt.detail.name);
 
       // Remove the input prompt
-      document.body.removeChild(createFolderAObject);
+      document.body.removeChild(typeACreate);
 
       // Show success screen
       const successScreen = document.createElement("success-screen");
@@ -76,11 +78,14 @@ addButton.addEventListener("click", () => {
  * Ex: createAudioObject("Bach")
  */
 function createFolderA(name) {
-  const folderA = document.createElement("foldera-card");
+  const folderA = document.createElement("type-a-card");
   audioContainer.appendChild(folderA);
   folderA.name = name;
 }
 
+homeButton.addEventListener("click", () => {
+  window.location = "index.html";
+});
 
 /**
  * When the back button is clicked on the page go back to the previous page
@@ -89,6 +94,6 @@ function createFolderA(name) {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("FolderF");
+  sessionStorage.removeItem("TypeF");
   window.location = "index.html";
 });

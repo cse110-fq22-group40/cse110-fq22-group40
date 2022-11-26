@@ -1,0 +1,25 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-button {
+  margin-top: 100px;
+  width: 280px;
+  height: 60px;
+  font-size: 25px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px; 
+  background: linear-gradient(90deg, #FFECD2 0%, #FCB69F 100%);
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  font-weight: bolder;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}

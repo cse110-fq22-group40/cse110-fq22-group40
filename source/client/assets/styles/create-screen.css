@@ -1,0 +1,56 @@
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 450px;
+  height: 250px;
+  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -225px;
+  border-radius: 10px;
+}
+
+.title {
+  margin-top: 30px;
+}
+
+.name {
+  resize: none;
+  width: 375px;
+  height: 50px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: black;
+  font-size: 20px;
+}
+
+.upload {
+  margin-top: 10px;
+  margin-left: 75px;
+}
+
+.create {
+  position: absolute;
+  background: none;
+  border-radius: 5px;
+  border-color: rgba(0,128,128,1);
+  border-width: 1.5px;
+  font-size: 16px;
+  right: 0%;
+  bottom: 0%;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.exit {
+  margin-top: 10px;
+  font-size: 20px;
+  border-color: rgba(0,128,128,1);
+  color: red;
+  margin-right: auto;
+  margin-left: 8px;
+}

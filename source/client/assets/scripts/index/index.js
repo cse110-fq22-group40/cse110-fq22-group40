@@ -7,14 +7,15 @@
 import {utils, folder_utils} from "../../../../local/imports.js";
 
 //obtains all the HTML elements that need to be targeted
-const addButton = document.querySelector(".addButton");
-const audioContainer = document.querySelector(".audioContainer");
+const addButton = document.querySelector(".add-button");
+const audioContainer = document.querySelector(".card-container");
+const homeButton = document.getElementById("home");
 
 // Load existing data from back-end
 utils.load_data();
 
 /**
- * When the F folder page loads grab all the existing A Folders and map them
+ * When the index page loads grab all the existing F Folders and map them
  * onto the screen
  *
  * @type {window} - the target of the event
@@ -37,18 +38,18 @@ window.addEventListener("load", () => {
  */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
-  const createFileFObject = document.createElement("create-filef-object");
-  document.body.appendChild(createFileFObject);
+  const typeFCreate = document.createElement("type-f-create-screen");
+  document.body.appendChild(typeFCreate);
 
   // When the user submits a new audio file
-  createFileFObject.addEventListener("fileSubmitted", evt => {
-    try{
+  typeFCreate.addEventListener("fileSubmitted", evt => {
+    try {
       // Create a new audio card
       folder_utils.add_typeF(evt.detail.name);
       createFolderF(evt.detail.name);
 
       // Remove the input prompt
-      document.body.removeChild(createFileFObject);
+      document.body.removeChild(typeFCreate);
 
       // Show success screen
       const successScreen = document.createElement("success-screen");
@@ -74,7 +75,11 @@ addButton.addEventListener("click", () => {
  * Ex: createAudioObject("Bach")
  */
 function createFolderF(name) {
-  const fileF = document.createElement("folderf-card");
+  const fileF = document.createElement("type-f-card");
   audioContainer.appendChild(fileF);
   fileF.name = name;
 }
+
+homeButton.addEventListener("click", () => {
+  window.location = "index.html";
+});
