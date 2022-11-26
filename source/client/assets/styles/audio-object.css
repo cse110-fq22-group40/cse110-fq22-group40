@@ -9,6 +9,7 @@
   background: var(--secondary-color);
   font-family: inherit;
   font-size: 13px;
+  user-select: none;
 }
 
 #submit:hover{

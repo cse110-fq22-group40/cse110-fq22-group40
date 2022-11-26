@@ -48,7 +48,7 @@ addButton.addEventListener("click", () => {
 
   // When the user submits a new audio file
   createAudObject.addEventListener("fileSubmitted", evt => {
-    try{
+    try {
       // Create a new audio card
       audio_utils.add_audio(typeFName, typeAName, evt.detail.name, evt.detail.path);
       createAudioCard(evt.detail.name);
@@ -65,7 +65,7 @@ addButton.addEventListener("click", () => {
         document.body.removeChild(successScreen);
       }, 1400);
 
-    } catch(err){
+    } catch(err) {
       window.alert(`The file name "${evt.detail.name}" 
         is either taken or not allowed. Please try again.`);
     }
