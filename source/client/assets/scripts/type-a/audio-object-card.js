@@ -20,9 +20,14 @@ class AudioObjectCard extends HTMLElement {
      * @listens shadowRoot#click - when the AudioObjectCard component is clicked
      */
     this.shadowRoot.addEventListener("click", () => {
-      const audObjectName = this.shadowRoot.querySelector("h2").textContent;
-      sessionStorage.setItem("AudioObject", audObjectName);
-      window.location = "audio-object.html"
+      const card = this.shadowRoot.querySelector(".card");
+      card.classList.add("full-screen");
+
+      setTimeout(() => {
+        const audObjectName = this.shadowRoot.querySelector("h2").textContent;
+        sessionStorage.setItem("AudioObject", audObjectName);
+        window.location = "audio-object.html"
+      }, 1000);
     })
   }
 

@@ -8,10 +8,11 @@
   <script src="assets/scripts/audio-object/audio-object.js" type="module"></script>
   <!-- Importing the styling -->
   <link rel="stylesheet" href="assets/styles/main.css" />
+  <link rel="stylesheet" href="assets/styles/background-colors.css" />
   <link rel="stylesheet" href="assets/styles/audio-object.css" />
   <title>Audio Annotator</title>
 </head>
-<body>
+<body class="audio-object-background">
   <nav>
     <img src="./assets/images/logo.png" alt="logo" id="home">
     <img src="./assets/images/back.png" alt="back navigation arrow" id="back">
@@ -19,7 +20,7 @@
     <div id="path"></div>
   </nav>
   <div id="editor">
-    <canvas id="audio-visualizer" width="696" height="40"></canvas>
+    <!-- <canvas id="audio-visualizer" width="696" height="40"></canvas> -->
     <audio id="audio-player" controls></audio>
     <div id="text-editor" contenteditable></div>
     <button id="submit" type="submit">Submit</button>

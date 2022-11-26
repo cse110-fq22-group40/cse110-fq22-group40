@@ -12,9 +12,10 @@
   <script src="assets/scripts/file-success-screen.js" type="module"></script>
   <!-- Importing the styling -->
   <link rel="stylesheet" href="assets/styles/main.css" />
+  <link rel="stylesheet" href="assets/styles/background-colors.css" />
   <link rel="stylesheet" href="assets/styles/upload.css" />
 </head>
-<body>
+<body class="type-f-background">
   <nav>
     <img src="./assets/images/logo.png" alt="logo" id="home">
     <img src="./assets/images/back.png" alt="back navigation arrow" id="back">
@@ -23,14 +24,15 @@
   </nav>
   
   <div class="button-container">
-    <button class="add-button">+ Create a New Folder</button>
+    <button class="add-button type-a-background">+ Create a New Folder</button>
   </div>
 
   <div class="card-container">
     <template id="card-template">
       <link rel="stylesheet" href="assets/styles/card.css" />
+      <link rel="stylesheet" href="assets/styles/background-colors.css" />
 
-      <div class="card">
+      <div class="card type-a-background">
         <img src="assets/images/folder.png" class="icon" alt="folder icon">
         <h2></h2>
       </div>
