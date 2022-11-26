@@ -28,6 +28,8 @@ const audioObject = sessionStorage.getItem("AudObject");
 const audio = audio_utils.get_audio_path(folderFName, folderAName, audioObject);
 const notes = notes_utils.get_all_notes(folderFName, folderAName, audioObject);
 
+const path = document.getElementById("path");
+path.innerHTML = `/${folderFName}/${folderAName}/${audioObject}`;
 /**
  * When the page loads, call loadAudio
  *

@@ -10,11 +10,12 @@ import {utils, folder_utils} from "../../../../local/imports.js"
 const addButton = document.querySelector(".addButton");
 const audioContainer = document.querySelector(".audioContainer");
 const backButton = document.querySelector(".back");
+const path = document.getElementById("path");
 
 // Load existing data from back-end
 utils.load_data();
 const fFolderName = sessionStorage.getItem("FolderF");
-
+path.innerHTML = "/" + fFolderName;
 /**
  * When the F folder page loads grab all the existing A Folders and map them
  * onto the screen
