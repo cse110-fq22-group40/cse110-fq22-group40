@@ -161,7 +161,7 @@ function submitNote() {
         location.reload();
       })
       
-	  // Remove the prompt if user doesn't want to update the note 
+      // Remove the prompt if user doesn't want to update the note 
       updateFormNo.addEventListener("click",() => {
         updateForm.style.display = "none";
       })

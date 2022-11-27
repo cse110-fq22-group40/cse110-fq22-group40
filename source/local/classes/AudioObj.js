@@ -1,7 +1,7 @@
 /**
  * This file defines the AudioObject Class. It contains the implementation for
  * creating an AudioObject and modifying an AudioObject. It has all the functions
- * that are necessary to manage the audio file path, notes, and the according 
+ * that are necessary to manage the audio file path, notes, and the according
  * timestamps of the notes.
  */
 
