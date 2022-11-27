@@ -3,7 +3,7 @@ name: Deploy JSDoc
 on:
   push:
     branches:
-      - 67-jsdoctest
+      - main
 
 jobs:
   generate-jsdocs:
