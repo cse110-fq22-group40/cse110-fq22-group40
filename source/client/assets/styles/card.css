@@ -45,7 +45,7 @@
   z-index: 5;
   cursor: auto;
   filter: none !important;
-  animation: expand 1s;
+  animation: expand 1s forwards;
 }
 
 .icon {
