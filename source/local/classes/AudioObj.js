@@ -1,12 +1,17 @@
 /**
- * File Header:
- * This file defines the AudioObject Class. Add more...
- * 
- * 
+ * This file defines the AudioObject Class. It contains the implementation for
+ * creating an AudioObject and modifying an AudioObject. It has all the functions
+ * that are necessary to manage the audio file path, notes, and the according 
+ * timestamps of the notes. 
  */
+
 const fs = require("fs");
 const path = require("path");
 
+/**
+ * AudioObject is a class for creating an AudioObject and has all the functions
+ * that manage its audio file path, notes, and corresponding timestamps.
+ */
 export class AudioObject {
   /**
   * AudioObject is a container for the path to the audio file

@@ -1,15 +1,19 @@
 /**
- * This file has the Type F code
- * TODO
+ * This file defines the TypeF object. It contains the implementation for
+ * creating a TypeF object and modifying a TypeF object. It has all the functions
+ * that are necessary to manage the TypeA objects contained in the TypeF object.
+ * It also contains all the functions that are necessary to manage the TypeF 
+ * objects including initiating/deleting. It also enables the write/delete of 
+ * TypeF objects to/from the localStorage. 
  */
 
-// TODO
 import {TypeA} from "../imports.js";
 export const dict_typeFs = {};
 const lz_string = require("lz-string");
 
 /**
- * Class header
+ * TypeF is a class for creating a TypeF object which contains a group of 
+ * TypeA objects. It also has all the funtions that manage those TypeA objects.
  */
 export class TypeF {
   /**
