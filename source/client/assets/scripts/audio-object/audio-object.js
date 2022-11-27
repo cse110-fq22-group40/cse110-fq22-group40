@@ -58,7 +58,7 @@ window.addEventListener("load", () => {
         ["bold", "italic", "underline", "strike"],
         [{ script: "sub" }, { script: "super" }],
         [{ color: [] }, { background: [] }],
-        [{"align": ""}, {"align": "center"}, {"align": "right"}, {"align": "justify"}, {"direction": "rtl"}],
+        [
         [
         ["blockquote", "code-block"],
         ["link", "image", "video", "formula"],
