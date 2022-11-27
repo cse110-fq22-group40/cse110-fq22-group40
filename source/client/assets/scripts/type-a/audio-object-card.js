@@ -20,8 +20,6 @@ class AudioObjectCard extends HTMLElement {
      * @listens shadowRoot#click - when the AudioObjectCard component is clicked
      */
     this.shadowRoot.addEventListener("click", () => {
-      document.body.className = "audio-object-background";
-
       const card = this.shadowRoot.querySelector(".card");
       card.classList.add("full-screen");
 

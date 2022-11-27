@@ -20,8 +20,6 @@ class TypeACard extends HTMLElement {
      * @listens shadowRoot#click - when the AudioCard component is clicked
      */
     this.shadowRoot.addEventListener("click", () => {
-      document.body.className = "type-a-background";
-
       const card = this.shadowRoot.querySelector(".card");
       card.classList.add("full-screen");
 
