@@ -2,7 +2,7 @@
  * This file defines the TypeF object. It contains the implementation for
  * creating a TypeF object and modifying a TypeF object. It has all the functions
  * that are necessary to manage the TypeA objects contained in the TypeF object.
- * It also contains all the functions that are necessary to manage the TypeF 
+ * It also contains all the functions that are necessary to manage the TypeF
  * objects including initiating/deleting. It also enables the write/delete of 
  * TypeF objects to/from the localStorage.
  */
