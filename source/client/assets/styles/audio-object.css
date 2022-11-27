@@ -93,6 +93,7 @@
   padding: 7px 10px;
   background-color: var(--secondary-color);
   animation: fadeIn 0.75s;
+  word-wrap: break-word;
 }
 
 .timestamp {
