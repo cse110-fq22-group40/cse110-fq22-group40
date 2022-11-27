@@ -4,7 +4,7 @@
  * that are necessary to manage the TypeA objects contained in the TypeF object.
  * It also contains all the functions that are necessary to manage the TypeF 
  * objects including initiating/deleting. It also enables the write/delete of 
- * TypeF objects to/from the localStorage. 
+ * TypeF objects to/from the localStorage.
  */
 
 import {TypeA} from "../imports.js";
