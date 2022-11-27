@@ -10,7 +10,7 @@ const loadMainWindow = () => {
   });
 
   mainWindow.maximize();
-
+  mainWindow.show();
   mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
   // TypeA Important for security reasons to protect against cross-site-scripting
