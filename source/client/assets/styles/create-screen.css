@@ -52,7 +52,7 @@
 }
 
 .upload::file-selector-button, .create {
-  background: white;
+  background-color: white;
   border-radius: 5px;
   border: black solid 1px;
   font-size: 16px;
@@ -77,7 +77,7 @@
   border: none;
   border-radius: 9px;
   padding-top: 2.5px;
-  background: #ED6A5E;
+  background-color: #ED6A5E;
   color: #941C13;
   margin-top: 10px;
   margin-left: 10px;

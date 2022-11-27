@@ -40,7 +40,7 @@ Take a peek at our notes on **[Notion](https://www.notion.so/The-Lit-Hub-24ded02
 You should have NodeJS installed (If you get stuck check out this [page](https://nodejs.dev/en/learn/how-to-install-nodejs)).
 ### Installing our software
 1. Navigate to our main repository page and look for the green button above the files labeled **< >Code**.
-2. After clicking the button, copy the link to the repository pressing this button ![Copybutton](./readMeimgs/copy.png)
+2. After clicking the button, copy the link to the repository pressing this button ![Copybutton](./readme-images/copy.png)
 3. Open your favorite code editor and in their terminal run the command ***git clone*** along with what you copied (You may need to specify where you want this on your file system).
 4. Once again in the terminal run the command ***npm install*** to get all dependancies 
     
