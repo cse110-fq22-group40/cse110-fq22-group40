@@ -25,12 +25,17 @@ const backButton = document.getElementById("back");
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
 const typeAName = sessionStorage.getItem("TypeA");
-const audioObject = sessionStorage.getItem("AudioObject");
-const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObject);
-const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObject);
+const audioObjectName = sessionStorage.getItem("AudioObject");
+const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObjectName);
+const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 
 const path = document.getElementById("path");
-path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObject}`;
+
+window.addEventListener("load", () => {
+  document.title += ` ❖ ${audioObjectName}`;
+  path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObjectName}`;
+});
+
 /**
  * When the page loads, call loadAudio
  *
@@ -149,7 +154,7 @@ function submitNote() {
   if (!(textEditor.innerHTML === "")) {
     // Store notes in backend
     try {
-      notes_utils.add_note(typeFName, typeAName, audioObject, timestamp, textEditor.innerHTML);
+      notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, textEditor.innerHTML);
       displayNote(timestamp, textEditor.innerHTML);
       // Clear text editor
       textEditor.innerHTML = "";
@@ -159,7 +164,7 @@ function submitNote() {
       
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObject,timestamp, textEditor.innerHTML);
+        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, textEditor.innerHTML);
                 
         // Clear text editor
         textEditor.innerHTML = "";
@@ -173,7 +178,7 @@ function submitNote() {
       });
     }
 
-    utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObject));
+    utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObjectName));
   }
 }
 

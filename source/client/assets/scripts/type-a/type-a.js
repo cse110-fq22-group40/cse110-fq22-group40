@@ -17,7 +17,6 @@ const path = document.getElementById("path");
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
 const typeAName = sessionStorage.getItem("TypeA");
-path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}`;
 
 /**
  * When the A folder page loads grab all the existing AudioObjects and map them
@@ -27,6 +26,9 @@ path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}`;
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
+  document.title += ` ❖ ${typeAName}`;
+  path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}`;
+
   const audioFiles = audio_utils.get_all_audio_names(typeFName,typeAName);
   
   for (const audio of audioFiles) {
