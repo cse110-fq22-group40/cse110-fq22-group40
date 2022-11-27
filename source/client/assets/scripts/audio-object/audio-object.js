@@ -57,7 +57,7 @@ window.addEventListener("load", () => {
         [{"header": [1, 2, 3, 4, 5, 6, false]}, {"font": []}, {"size": fontSizeArr}],
         ["bold", "italic", "underline", "strike"],
         [{"script": "sub"}, {"script": "super"}],
-        [{"color": []}, {"background": []}],
+        [{ color: [] }, { background: [] }],
         [{"align": ""}, {"align": "center"}, {"align": "right"}, {"align": "justify"}, {"direction": "rtl"}],
         [{"list": "bullet"}, {"list": "ordered"}, {"indent": "-1"}, {"indent": "+1"}],
         ["blockquote", "code-block"],
