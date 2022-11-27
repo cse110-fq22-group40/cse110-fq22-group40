@@ -1,5 +1,6 @@
 /**
- * This file has the TypeA class....
+ * This file has the TypeA code
+ * 
  * TODO
  */
 import {AudioObject} from "../imports.js";

@@ -42,7 +42,7 @@
 }
 
 .full-screen {
-  z-index: 1;
+  z-index: 5;
   cursor: auto;
   filter: none !important;
   animation: expand 1s;
