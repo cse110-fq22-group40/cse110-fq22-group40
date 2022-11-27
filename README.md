@@ -1,5 +1,7 @@
 # cse110-fq21-group40
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c960592e28074c9d9c09c4f4eade4181)](https://app.codacy.com/gh/cse110-fq22-group40/cse110-fq22-group40?utm_source=github.com&utm_medium=referral&utm_content=cse110-fq22-group40/cse110-fq22-group40&utm_campaign=Badge_Grade_Settings)
+
 [Team Page](admin/team.md)
 
 [Team Miro](https://miro.com/app/board/uXjVPJ88Awg=/?share_link_id=881331704226)  
