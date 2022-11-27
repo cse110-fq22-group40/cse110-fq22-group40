@@ -54,7 +54,7 @@ window.addEventListener("load", () => {
   quill = new Quill("#text-editor", {
     modules: {
       toolbar: [
-        [{"header": [1, 2, 3, 4, 5, 6, false]}, {"font": []}, {"size": fontSizeArr}],
+        [
         ["bold", "italic", "underline", "strike"],
         [{"script": "sub"}, {"script": "super"}],
         [{ color: [] }, { background: [] }],
