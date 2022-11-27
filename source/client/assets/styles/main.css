@@ -27,7 +27,18 @@ nav {
   flex-grow: 1;
 }
 
+/* @keyframes slideInLeft {
+  from {
+    transform: translate(100%, 0);
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+} */
+
 #path {
   font-size: 35px;
   font-weight: bolder;
+  /* animation: slideInLeft 0.75s; */
 }

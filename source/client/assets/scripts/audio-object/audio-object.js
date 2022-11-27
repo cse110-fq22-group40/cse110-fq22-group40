@@ -132,6 +132,7 @@ function initAudioVisualizer() {
       // Draw bar
       ctx.fillRect(barWidth * i, audioVisualizer.height, barWidth, -barHeight);
     }
+
     requestAnimationFrame(animateAudioVisualizer);
   }
 }
@@ -145,7 +146,7 @@ function initAudioVisualizer() {
 function submitNote() {
   const timestamp = Math.floor(audioPlayer.currentTime);
     
-  if (!(textEditor.innerHTML === '')) {
+  if (!(textEditor.innerHTML === "")) {
     // Store notes in backend
     try {
       notes_utils.add_note(typeFName, typeAName, audioObject, timestamp, textEditor.innerHTML);
@@ -186,14 +187,14 @@ submitButton.addEventListener("click", submitNote);
  * @param {string} text - the note the user types
  * 
  * @Usage 
- * Ex: displayNote("1","perfect technique")
+ * Ex: displayNote("1", "perfect technique")
  */
 function displayNote(timestamp, text) {
   // Create copy of notes template
-  const note = noteTemplate.content.cloneNode(true);
+  const note = noteTemplate.content.cloneNode(true).querySelector(".note");
 
   // Order the notes by timestamp
-  note.querySelector(".note").style.order = timestamp;
+  note.style.order = timestamp;
 
   // Link that sets the audio player to the timestamp when clicked
   const timestampLink = note.querySelector(".timestamp");
@@ -208,6 +209,17 @@ function displayNote(timestamp, text) {
 
   // Display the note on screen
   noteDisplay.appendChild(note);
+
+  const computedStyle = getComputedStyle(note);
+  const height = parseInt(computedStyle.height);
+  const paddingTop = parseInt(computedStyle.paddingTop);
+  const paddingBottom = parseInt(computedStyle.paddingBottom);
+  const marginBottom = parseInt(computedStyle.marginBottom);
+  note.style.marginTop = `-${height + paddingTop + paddingBottom + marginBottom}px`;
+  
+  setTimeout(() => {
+    note.classList.add("slide-down");
+  }, 0);
 }
 
 homeButton.addEventListener("click", () => {
@@ -221,6 +233,5 @@ homeButton.addEventListener("click", () => {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("AudioObject");
   window.location = "type-a.html";
 });
