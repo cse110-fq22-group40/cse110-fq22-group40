@@ -97,6 +97,5 @@ homeButton.addEventListener("click", () => {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("TypeA");
   window.location = "type-f.html";
 });

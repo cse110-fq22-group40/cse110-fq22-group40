@@ -81,16 +81,9 @@
   margin-top: 10px;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+.slide-down {
+  margin-top: 0 !important;
+  transition: margin-top 0.75s;
 }
 
 .note {
@@ -99,7 +92,7 @@
   border-radius: 4px;
   padding: 7px 10px;
   background-color: var(--secondary-color);
-  animation: fadeInDown 0.75s;
+  animation: fadeIn 0.75s;
 }
 
 .timestamp {

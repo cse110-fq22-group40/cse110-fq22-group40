@@ -3,12 +3,13 @@ const path = require("path");
 
 const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
-    fullscreen: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
     }
   });
+
+  mainWindow.maximize();
 
   mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
