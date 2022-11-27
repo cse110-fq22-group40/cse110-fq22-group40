@@ -15,7 +15,6 @@ const Quill = require("quill");
 const editor = document.getElementById("editor");
 const audioVisualizer = document.getElementById("audio-visualizer");
 const audioPlayer = document.getElementById("audio-player");
-const textEditor = document.getElementById("text-editor");
 const noteDisplay = document.getElementById("note-display");
 const noteTemplate = document.getElementById("note-template");
 const submitButton = document.getElementById("submit");
@@ -54,12 +53,12 @@ window.addEventListener("load", () => {
   quill = new Quill("#text-editor", {
     modules: {
       toolbar: [
-        [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }, { size: fontSizeArr }],
         ["bold", "italic", "underline", "strike"],
         [{ script: "sub" }, { script: "super" }],
         [{ color: [] }, { background: [] }],
-        [
-        [
+        [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }, { direction: "rtl" }],
+        [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
         ["link", "image", "video", "formula"],
         ["clean"]

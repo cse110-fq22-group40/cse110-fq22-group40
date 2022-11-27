@@ -45,21 +45,17 @@
   background-color: var(--secondary-color);
 }
 
-#text-editor {
-  margin-bottom: 10px;
-  height: 500px;
-  border: none;
-  border-radius: 0 0 10px 10px;
-  background-color: var(--secondary-color);
-}
-
-.ql-snow.ql-container {
-  font-size: 14px;
-  border: none !important;
-}
-
 .ql-snow .ql-picker.ql-size {
   width: 70px !important;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  color: black !important;
+  border-color: black !important;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+  stroke: black !important;
 }
 
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="8px"]::before {
@@ -172,6 +168,19 @@
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="98px"]::before {
   content: "98 px";
+}
+
+#text-editor {
+  margin-bottom: 10px;
+  height: 500px;
+  border: none;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--secondary-color);
+}
+
+.ql-snow.ql-container {
+  font-size: 14px;
+  border: none !important;
 }
 
 blockquote {
