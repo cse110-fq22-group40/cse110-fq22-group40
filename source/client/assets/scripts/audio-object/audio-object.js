@@ -59,7 +59,7 @@ window.addEventListener("load", () => {
         [{"script": "sub"}, {"script": "super"}],
         [{ color: [] }, { background: [] }],
         [{"align": ""}, {"align": "center"}, {"align": "right"}, {"align": "justify"}, {"direction": "rtl"}],
-        [{"list": "bullet"}, {"list": "ordered"}, {"indent": "-1"}, {"indent": "+1"}],
+        [
         ["blockquote", "code-block"],
         ["link", "image", "video", "formula"],
         ["clean"]
