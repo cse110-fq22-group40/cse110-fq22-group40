@@ -168,13 +168,12 @@ function submitNote() {
                 
         // Clear text editor
         textEditor.innerHTML = "";
-        // TODO
         location.reload();
       });
 
+      // Clear the prompt window if user doesn't want to update the note
       updateFormNo.addEventListener("click", () => {
         updateForm.style.display = "none";
-        // Clear text editor
       });
     }
 
