@@ -1,5 +1,6 @@
 /**
- * This file has the TypeA class....
+ * This file has the TypeA code
+ * 
  * TODO
  */
 import {AudioObject} from "../imports.js";
@@ -9,7 +10,7 @@ export class TypeA {
    * TypeA is a container for a group of audio objects
    */
   constructor() {
-	  // Dict of AudioObject {"name" : AudioObject}
+		// Dict of AudioObject {"name" : AudioObject}
 		this.dict_audio = {};
 	}
 	

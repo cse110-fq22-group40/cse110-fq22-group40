@@ -3,13 +3,14 @@ const path = require("path");
 
 const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
-    fullscreen: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
     }
   });
 
+  mainWindow.maximize();
+  mainWindow.show();
   mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
   // TypeA Important for security reasons to protect against cross-site-scripting
@@ -25,26 +26,14 @@ const loadMainWindow = () => {
 
 app.on("ready", loadMainWindow);
 
-/*app.on("window-all-closed", () => {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
-});*/
+});
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     loadMainWindow();
   }
-});
-
-app.on("before-quit", evt => {
-  evt.preventDefault();
-});
-
-app.on("will-quit", evt => {
-  evt.preventDefault();
-});
-
-app.on("window-all-closed", evt => {
-  evt.preventDefault();
 });

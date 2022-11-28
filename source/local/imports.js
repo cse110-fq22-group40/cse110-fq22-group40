@@ -1,7 +1,7 @@
 // CLASSES
-export * from "./classes/TypeA.js";
-export * from "./classes/TypeF.js";
-export * from "./classes/AudioObj.js";
+export * from "./classes/type-a.js";
+export * from "./classes/type-f.js";
+export * from "./classes/audio-object.js";
 
 // FUNCTIONS
 export * as notes_utils from "./scripts/notes.js";

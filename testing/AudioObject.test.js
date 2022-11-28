@@ -1,4 +1,4 @@
-const functions = require('../source/local/classes/AudioObj.js');
+const functions = require('../source/local/classes/audio-object.js');
 const {resolve} = require('path');
 
 /**

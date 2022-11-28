@@ -1,0 +1,97 @@
+@keyframes zoom {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 450px;
+  height: 250px;
+  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -225px;
+  border-radius: 20px;
+  user-select: none;
+  animation: zoom 0.5s;
+}
+
+.title {
+  margin-top: 30px;
+}
+
+.name {
+  resize: none;
+  width: 375px;
+  height: 50px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: black;
+  font-size: 20px;
+}
+
+.upload {
+  margin-top: 10px;
+  margin-left: 75px;
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+}
+
+.upload::file-selector-button {
+  margin-right: 8px;
+}
+
+.upload::file-selector-button, .create {
+  background: white;
+  border-radius: 5px;
+  border: black solid 1px;
+  font-size: 16px;
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+}
+
+.create {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.exit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  border: none;
+  border-radius: 9px;
+  padding-top: 2.5px;
+  background: #ED6A5E;
+  color: #941C13;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+.exit::before {
+  content: "×";
+}
+
+.upload::file-selector-button:hover, .create:hover, .exit:hover {
+  filter: brightness(95%);
+}
+
+.upload::file-selector-button:active, .create:active, .exit:active {
+  filter: brightness(90%);
+}

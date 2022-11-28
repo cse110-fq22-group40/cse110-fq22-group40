@@ -1,9 +1,9 @@
 /**
- * This file has the Type F code
+ * This file has the TypeF code
+ * 
  * TODO
  */
 
-// TODO
 import {TypeA} from "../imports.js";
 export const dict_typeFs = {};
 const lz_string = require("lz-string");
