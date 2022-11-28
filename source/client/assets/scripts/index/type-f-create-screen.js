@@ -8,7 +8,7 @@ const template = document.getElementById("create-screen-template");
 class TypeFCreateScreen extends HTMLElement {
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode:"open" });
+    const shadow = this.attachShadow({ mode: "open" });
     shadow.appendChild(template.content.cloneNode("true"));
     const fileexit = this.shadowRoot.querySelector(".exit");
 
@@ -22,7 +22,7 @@ class TypeFCreateScreen extends HTMLElement {
     fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
       popup.remove();
-    } );
+    });
     const filesubmit = this.shadowRoot.querySelector(".create");
     const textinput = this.shadowRoot.querySelector(".name");
 
@@ -43,10 +43,10 @@ class TypeFCreateScreen extends HTMLElement {
           detail: {
             name: textinput.value,
           }
-        } );
+        });
         this.dispatchEvent(submitEvent);
       }
-    } );
+    });
   }
 }
 customElements.define("type-f-create-screen", TypeFCreateScreen);

@@ -122,7 +122,7 @@ export function clear_typeF(typeFName) {
  * @usage 
  * Ex. remove_typeF_from_local_storage("nameOfThisFolder");
  */
-export function remove_typeF_from_local_storage(typeFName) { 
+export function remove_typeF_from_local_storage(typeFName) {
   localStorage.removeItem(typeFName);
 }
 
@@ -135,5 +135,5 @@ export function remove_typeF_from_local_storage(typeFName) {
  */
 export function set_typeF_in_local_storage(typeFName) {
   localStorage.setItem(typeFName, lz_string.compressToUTF16(
-    JSON.stringify(dict_typeFs[typeFName] ) ) );
+    JSON.stringify(dict_typeFs[typeFName])));
 }
