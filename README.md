@@ -1,5 +1,7 @@
 # cse110-fq21-group40
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/621b1b029c954167abb89180db26f150)](https://www.codacy.com/gh/cse110-fq22-group40/cse110-fq22-group40/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cse110-fq22-group40/cse110-fq22-group40&amp;utm_campaign=Badge_Grade)
+
 ## Application description
 We are aiming to create an audio note taking app geared towards musicians, where users can take notes on audio files with HTML, CSS and JavaScript.  
 
