@@ -110,8 +110,6 @@ window.addEventListener("load", () => {
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow"
   });
-
-  window.quill = quill;
 });
 
 /**
