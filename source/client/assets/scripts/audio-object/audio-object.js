@@ -4,12 +4,35 @@
  * an uploaded mp3 file.
  */
 
-import {utils, audio_utils, notes_utils} from "../../../../local/imports.js"
+import { utils, audio_utils, notes_utils } from "../../../../local/imports.js";
 
 // See https://github.com/quilljs/awesome-quill for Quill add-ons
+
+// Syntax highlighting for code-blocks
 window.hljs = require("highlight.js");
+
+// LaTeX support for inserting math equations
 window.katex = require("katex");
+
 const Quill = require("quill");
+
+// Automatically convert markdown into rich-text!
+const markdownShortcuts = require("quill-markdown-shortcuts");
+
+// Emoji toolbar
+const emoji = require("quill-emoji");
+
+// Auto-detect URLs and convert them into functioning links
+const magicUrl = require("quill-magic-url").default;
+
+// Resize images and videos
+const blotFormatter = require("quill-blot-formatter").default;
+
+// Compress images to take up less space
+const imageCompressor = require("quill-image-compress").imageCompressor;
+
+// Prevents user from pasting invalid HTML
+require("quill-paste-smart");
 
 // Add all your HTML DOM elements here as global variables
 const editor = document.getElementById("editor");
@@ -44,6 +67,12 @@ hljs.configure({
   languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
 });
 
+Quill.register("modules/markdownShortcuts", markdownShortcuts);
+Quill.register("modules/emoji", emoji);
+Quill.register("modules/magicUrl", magicUrl);
+Quill.register("modules/blotFormatter", blotFormatter);
+Quill.register("modules/imageCompress", imageCompressor);
+
 let quill;
 
 window.addEventListener("load", () => {
@@ -60,10 +89,23 @@ window.addEventListener("load", () => {
         [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }, { direction: "rtl" }],
         [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
-        ["link", "image", "video", "formula"],
+        ["emoji", "link", "image", "video", "formula"],
         ["clean"]
       ],
-      syntax: true
+      syntax: true,
+      markdownShortcuts: true,
+      "emoji-toolbar": true,
+      "emoji-shortname": true,
+      magicUrl: true,
+      blotFormatter: true,
+      imageCompress: {
+        quality: 0.7,
+        maxWidth: 400,
+        maxHeight: 400
+      },
+      clipboard:  {
+        keepSelection: true
+      }
     },
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow"

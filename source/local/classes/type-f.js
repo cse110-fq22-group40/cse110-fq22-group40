@@ -4,7 +4,7 @@
  * TODO
  */
 
-import {TypeA} from "../imports.js";
+import { TypeA } from "../imports.js";
 export const dict_typeFs = {};
 const lz_string = require("lz-string");
 

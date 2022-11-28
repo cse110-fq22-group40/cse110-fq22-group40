@@ -170,6 +170,16 @@
   content: "98 px";
 }
 
+#emoji-palette #tab-panel {
+  height: 220px;
+  max-height: none;
+  resize: vertical;
+}
+
+.bem {
+  margin: 4px 5px 4px 5px !important;
+}
+
 #text-editor {
   margin-bottom: 10px;
   border-radius: 0 0 10px 10px;
@@ -195,7 +205,7 @@ blockquote {
   border-left-color: #C2552D !important;
 }
 
-pre, pre span {
+pre, pre span, code {
   font-family: monospace;
 }
 

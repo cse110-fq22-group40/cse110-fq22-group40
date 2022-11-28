@@ -1,5 +1,5 @@
 
-import {folder_utils, dict_typeFs, utils} from "../imports.js";
+import { folder_utils, dict_typeFs, utils } from "../imports.js";
 
 /**
  * Clear all notes in an AudioObj

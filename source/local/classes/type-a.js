@@ -3,7 +3,7 @@
  * 
  * TODO
  */
-import {AudioObject} from "../imports.js";
+import { AudioObject } from "../imports.js";
 
 export class TypeA {
   /**

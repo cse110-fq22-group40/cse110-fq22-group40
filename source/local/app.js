@@ -5,8 +5,8 @@ const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-      devTools: false
+      contextIsolation: false
+      /*devTools: false*/
     }
   });
 
