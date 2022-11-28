@@ -3,13 +3,15 @@ const path = require("path");
 
 const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
-    fullscreen: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
+      /*devTools: false*/
     }
   });
 
+  mainWindow.maximize();
+  mainWindow.show();
   mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
   // TypeA Important for security reasons to protect against cross-site-scripting
@@ -17,7 +19,7 @@ const loadMainWindow = () => {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        "Content-Security-Policy": ["script-src 'self'"]
+        "Content-Security-Policy": ["script-src 'self' 'unsafe-inline'"]
       }
     });
   });

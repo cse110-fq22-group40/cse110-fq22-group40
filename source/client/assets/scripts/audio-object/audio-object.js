@@ -4,13 +4,40 @@
  * an uploaded mp3 file.
  */
 
-import {utils, audio_utils, notes_utils} from "../../../../local/imports.js"
+import { utils, audio_utils, notes_utils } from "../../../../local/imports.js";
+
+// See https://github.com/quilljs/awesome-quill for Quill add-ons
+
+// Syntax highlighting for code-blocks
+window.hljs = require("highlight.js");
+
+// LaTeX support for inserting math equations
+window.katex = require("katex");
+
+const Quill = require("quill");
+
+// Automatically convert markdown into rich-text!
+const markdownShortcuts = require("quill-markdown-shortcuts");
+
+// Emoji toolbar
+const emoji = require("quill-emoji");
+
+// Auto-detect URLs and convert them into functioning links
+const magicUrl = require("quill-magic-url").default;
+
+// Resize images and videos
+const blotFormatter = require("quill-blot-formatter").default;
+
+// Compress images to take up less space
+const imageCompressor = require("quill-image-compress").imageCompressor;
+
+// Prevents user from pasting invalid HTML
+require("quill-paste-smart");
 
 // Add all your HTML DOM elements here as global variables
 const editor = document.getElementById("editor");
 const audioVisualizer = document.getElementById("audio-visualizer");
 const audioPlayer = document.getElementById("audio-player");
-const textEditor = document.getElementById("text-editor");
 const noteDisplay = document.getElementById("note-display");
 const noteTemplate = document.getElementById("note-template");
 const submitButton = document.getElementById("submit");
@@ -25,12 +52,68 @@ const backButton = document.getElementById("back");
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
 const typeAName = sessionStorage.getItem("TypeA");
-const audioObject = sessionStorage.getItem("AudioObject");
-const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObject);
-const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObject);
+const audioObjectName = sessionStorage.getItem("AudioObject");
+const audio = audio_utils.get_audio_path(typeFName, typeAName, audioObjectName);
+const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 
 const path = document.getElementById("path");
-path.innerHTML = `/ ${typeFName} / ${typeAName} / ${audioObject}`;
+
+const Size = Quill.import("attributors/style/size");
+const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+Size.whitelist = fontSizeArr;
+Quill.register(Size, true);
+
+hljs.configure({
+  languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
+});
+
+Quill.register("modules/markdownShortcuts", markdownShortcuts);
+Quill.register("modules/emoji", emoji);
+Quill.register("modules/magicUrl", magicUrl);
+Quill.register("modules/blotFormatter", blotFormatter);
+Quill.register("modules/imageCompress", imageCompressor);
+
+let quill;
+
+window.addEventListener("load", () => {
+  document.title += ` ❖ ${audioObjectName}`;
+  path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObjectName}`;
+
+  quill = new Quill("#text-editor", {
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }, { size: fontSizeArr }],
+        ["bold", "italic", "underline", "strike"],
+        [{ script: "sub" }, { script: "super" }],
+        [{ color: [] }, { background: [] }],
+        [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }, { direction: "rtl" }],
+        [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
+        ["blockquote", "code-block"],
+        ["emoji", "link", "image", "video", "formula"],
+        ["clean"]
+      ],
+      syntax: true,
+      markdownShortcuts: true,
+      "emoji-toolbar": true,
+      "emoji-shortname": true,
+      magicUrl: true,
+      blotFormatter: true,
+      imageCompress: {
+        quality: 0.7,
+        maxWidth: 400,
+        maxHeight: 400
+      },
+      clipboard:  {
+        keepSelection: true
+      }
+    },
+    placeholder: "Take notes at your desired timestamp…",
+    theme: "snow"
+  });
+
+  window.quill = quill;
+});
+
 /**
  * When the page loads, call loadAudio
  *
@@ -132,6 +215,7 @@ function initAudioVisualizer() {
       // Draw bar
       ctx.fillRect(barWidth * i, audioVisualizer.height, barWidth, -barHeight);
     }
+
     requestAnimationFrame(animateAudioVisualizer);
   }
 }
@@ -145,31 +229,38 @@ function initAudioVisualizer() {
 function submitNote() {
   const timestamp = Math.floor(audioPlayer.currentTime);
     
-  if (!(textEditor.innerHTML === '')) {
+  if (quill.getLength() > 1) {
+    const contents = JSON.stringify(quill.getContents());
+
     // Store notes in backend
     try {
-      notes_utils.add_note(typeFName, typeAName, audioObject, timestamp, textEditor.innerHTML);
-      displayNote(timestamp, textEditor.innerHTML);
+      notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, contents);
+      displayNote(timestamp, contents);
+
       // Clear text editor
-      textEditor.innerHTML = "";
+      quill.setContents();
     } catch(err) {
       // If a note already exists at the timestamp ask the user if they want to update it
       updateForm.style.display = "flex";
-      updateFormYes.addEventListener("click",() => {
+      
+      updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObject,timestamp, textEditor.innerHTML);
+        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
                 
         // Clear text editor
-        textEditor.innerHTML = "";
+        quill.setContents();
+        
         // TODO
         location.reload();
-      })
-      updateFormNo.addEventListener("click",() => {
+      });
+
+      // Clear the prompt window if user doesn't want to update the note
+      updateFormNo.addEventListener("click", () => {
         updateForm.style.display = "none";
-        // Clear text editor
-      })
+      });
     }
-    utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObject));
+
+    utils._log(notes_utils.get_all_notes(typeFName, typeAName, audioObjectName));
   }
 }
 
@@ -183,14 +274,14 @@ submitButton.addEventListener("click", submitNote);
  * @param {string} text - the note the user types
  * 
  * @Usage 
- * Ex: displayNote("1","perfect technique")
+ * Ex: displayNote("1", "perfect technique")
  */
 function displayNote(timestamp, text) {
   // Create copy of notes template
-  const note = noteTemplate.content.cloneNode(true);
+  const note = noteTemplate.content.cloneNode(true).querySelector(".note");
 
   // Order the notes by timestamp
-  note.querySelector(".note").style.order = timestamp;
+  note.style.order = timestamp;
 
   // Link that sets the audio player to the timestamp when clicked
   const timestampLink = note.querySelector(".timestamp");
@@ -201,10 +292,29 @@ function displayNote(timestamp, text) {
   });
 
   // Add the text to the note
-  note.querySelector(".note-text").innerHTML = text;
+  const noteQuill = new Quill(note.querySelector(".note-text"), {
+    modules: {
+      toolbar: false,
+      syntax: true
+    },
+    theme: "snow"
+  });
+  noteQuill.setContents(JSON.parse(text));
+  noteQuill.disable();
 
   // Display the note on screen
   noteDisplay.appendChild(note);
+
+  const computedStyle = getComputedStyle(note);
+  const height = parseInt(computedStyle.height);
+  const paddingTop = parseInt(computedStyle.paddingTop);
+  const paddingBottom = parseInt(computedStyle.paddingBottom);
+  const marginBottom = parseInt(computedStyle.marginBottom);
+  note.style.marginTop = `-${height + paddingTop + paddingBottom + marginBottom}px`;
+  
+  setTimeout(() => {
+    note.classList.add("slide-down");
+  }, 0);
 }
 
 homeButton.addEventListener("click", () => {
@@ -218,6 +328,5 @@ homeButton.addEventListener("click", () => {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("AudioObject");
   window.location = "type-a.html";
 });

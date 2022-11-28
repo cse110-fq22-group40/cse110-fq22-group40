@@ -4,7 +4,7 @@
  * the event handling for adding an A Folder.
  */
 
-import {utils, folder_utils} from "../../../../local/imports.js";
+import { utils, folder_utils } from "../../../../local/imports.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
@@ -16,7 +16,6 @@ const path = document.getElementById("path");
 // Load existing data from back-end
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
-path.innerHTML = `/ ${typeFName}`;
 
 /**
  * When the F folder page loads grab all the existing A Folders and map them
@@ -26,6 +25,9 @@ path.innerHTML = `/ ${typeFName}`;
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
+  document.title += ` ❖ ${typeFName}`;
+  path.innerHTML = `/\u2009${typeFName}`;
+
   const aFolder = folder_utils.get_all_typeA_names(typeFName);
   for (const folder of aFolder) {
     createFolderA(folder);
@@ -94,6 +96,5 @@ homeButton.addEventListener("click", () => {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("TypeF");
   window.location = "index.html";
 });

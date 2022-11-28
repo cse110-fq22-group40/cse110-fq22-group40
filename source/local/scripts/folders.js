@@ -1,4 +1,4 @@
-import {TypeF, dict_typeFs} from "../imports.js";
+import { TypeF, dict_typeFs } from "../imports.js";
 
 const lz_string = require("lz-string");
 

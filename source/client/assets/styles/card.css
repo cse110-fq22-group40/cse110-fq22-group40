@@ -17,20 +17,35 @@
   white-space: pre-wrap;
   word-break: break-word;
   user-select: none;
-  transition: transform 1s, color 0.8s;
+  transition: transform 0.4s cubic-bezier(.64, -0.63, .47, 3.05);
   cursor: pointer;
 }
 
 .card:hover {
   filter: brightness(95%);
+  transform: scale(1.2, 1.2);
+}
+
+.card:active {
+  transform: scale(0.95, 0.95);
+}
+
+@keyframes expand {
+  80% {
+    color: transparent;
+  }
+
+  100% {
+    transform: scale(20, 20);
+    color: transparent;
+  }
 }
 
 .full-screen {
-  transform: scale(20, 20);
-  color: transparent;
-  z-index: 1;
+  z-index: 5;
   cursor: auto;
   filter: none !important;
+  animation: expand 1s forwards;
 }
 
 .icon {

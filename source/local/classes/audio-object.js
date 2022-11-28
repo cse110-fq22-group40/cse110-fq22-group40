@@ -1,8 +1,8 @@
 /**
  * File Header:
- * This file defines the AudioObject Class. Add more...
+ * This file defines the AudioObject Class.
  * 
- * 
+ * TODO
  */
 const fs = require("fs");
 const path = require("path");

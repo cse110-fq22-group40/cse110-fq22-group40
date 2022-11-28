@@ -21,7 +21,7 @@ class AudioObjectCreateScreen extends HTMLElement {
      * @type {HTMLElement} - the target of the event
      * @listens document#click - when the exit buttonis clicked
      */
-    fileexit.addEventListener("click",() => {
+    fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
       popup.remove();
     });
@@ -40,11 +40,15 @@ class AudioObjectCreateScreen extends HTMLElement {
     filesubmit.addEventListener("click", evt => {
       evt.preventDefault();
 
-      if (textinput.value.length > 40){
-        window.alert("Invalid name. Please use 40 or less characters");
+      if (textinput.value.length > 40) {
+        window.alert("Invalid name. Please use 40 characters or fewer.");
       }
 
-      else{
+      else if (fileinput.value === "") {
+        window.alert("No file attached. Please choose your audio file.");
+      }
+
+      else {
         const submitEvent = new CustomEvent("fileSubmitted", {
           detail: {
             name: textinput.value,

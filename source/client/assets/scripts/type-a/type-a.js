@@ -4,7 +4,7 @@
  * the event handling when adding a AudioObject is created.
  */
 
-import {utils, audio_utils} from "../../../../local/imports.js"
+import { utils, audio_utils } from "../../../../local/imports.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
@@ -17,7 +17,6 @@ const path = document.getElementById("path");
 utils.load_data();
 const typeFName = sessionStorage.getItem("TypeF");
 const typeAName = sessionStorage.getItem("TypeA");
-path.innerHTML = `/ ${typeFName} / ${typeAName}`;
 
 /**
  * When the A folder page loads grab all the existing AudioObjects and map them
@@ -27,6 +26,9 @@ path.innerHTML = `/ ${typeFName} / ${typeAName}`;
  * @listens window#load - when the window loads
  */
 window.addEventListener("load", () => {
+  document.title += ` ❖ ${typeAName}`;
+  path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}`;
+
   const audioFiles = audio_utils.get_all_audio_names(typeFName,typeAName);
   
   for (const audio of audioFiles) {
@@ -97,6 +99,5 @@ homeButton.addEventListener("click", () => {
  * @listens document#click - when the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
-  sessionStorage.removeItem("TypeA");
   window.location = "type-f.html";
 });

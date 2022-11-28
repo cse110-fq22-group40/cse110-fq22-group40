@@ -21,7 +21,7 @@ class TypeFCreateScreen extends HTMLElement {
      * @type {HTMLElement} - the target of the event
      * @listens document#click - when the exit buttonis clicked
      */
-    fileexit.addEventListener("click",() => {
+    fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
       popup.remove();
     });
@@ -40,10 +40,10 @@ class TypeFCreateScreen extends HTMLElement {
       evt.preventDefault();
   
       if (textinput.value.length > 40) {
-        window.alert("Invalid name. Please use 40 or less characters");
+        window.alert("Invalid name. Please use 40 characters or fewer.");
       }
       
-      else{
+      else {
         const submitEvent = new CustomEvent("fileSubmitted", {
           detail: {
             name: textinput.value,
