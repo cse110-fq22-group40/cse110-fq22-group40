@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="assets/styles/main.css">
   <link rel="stylesheet" href="assets/styles/background-colors.css">
   <link rel="stylesheet" href="assets/styles/audio-object.css">
+  <link rel="stylesheet" href="../../node_modules/quill/dist/quill.snow.css">
+  <link rel="stylesheet" href="../../node_modules/highlight.js/styles/monokai-sublime.css">
+  <link rel="stylesheet" href="../../node_modules/katex/dist/katex.min.css">
+  <link rel="stylesheet" href="../../node_modules/quill-emoji/dist/quill-emoji.css">
 </head>
 <body class="audio-object-background">
   <nav>
@@ -22,7 +26,7 @@
   <div id="editor">
     <!-- <canvas id="audio-visualizer" width="696" height="40"></canvas> -->
     <audio id="audio-player" controls></audio>
-    <div id="text-editor" contenteditable></div>
+    <div id="text-editor"></div>
     <button id="submit" type="submit">Submit</button>
   </div>
   <div id="note-display">

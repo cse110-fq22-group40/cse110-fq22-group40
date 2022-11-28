@@ -1,4 +1,4 @@
-import {folder_utils, dict_typeFs} from "../imports.js";
+import { folder_utils, dict_typeFs } from "../imports.js";
 
 /**
  * Gets an array of the names of every AudioObj inside of a TypeA folder
