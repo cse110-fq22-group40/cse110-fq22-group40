@@ -247,8 +247,6 @@ function submitNote() {
                 
         // Clear text editor
         quill.setContents();
-        
-        // TODO
         location.reload();
       });
 
