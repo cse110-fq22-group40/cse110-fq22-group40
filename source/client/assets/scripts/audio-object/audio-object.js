@@ -59,7 +59,9 @@ const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 const path = document.getElementById("path");
 
 const Size = Quill.import("attributors/style/size");
-const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+const fontSizeArr = [
+  "8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"
+];
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
@@ -139,7 +141,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  //initAudioVisualizer();
+  // initAudioVisualizer();
 }
 
 /**
@@ -243,7 +245,7 @@ function submitNote() {
       
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
+        notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);
                 
         // Clear text editor
         quill.setContents();
@@ -291,7 +293,8 @@ function displayNote(timestamp, text) {
   const noteQuill = new Quill(note.querySelector(".note-text"), {
     modules: {
       toolbar: false,
-      syntax: true
+      syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });
