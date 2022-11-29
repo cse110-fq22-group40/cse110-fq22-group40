@@ -2,7 +2,7 @@
  * This file defines a class that determines how a TypeACard is rendered 
  * for each A Folder created by the user.
  */
-
+import { utils, folder_utils } from "../../../../local/imports.js";
 const template = document.getElementById("card-template");
 
 class TypeACard extends HTMLElement {
@@ -29,6 +29,81 @@ class TypeACard extends HTMLElement {
         window.location = "type-a.html"
       }, 1000);
     })
+    const renameButton = shadow.getElementById("rename-button");
+    const deleteButton = shadow.getElementById("delete-button");
+
+    const deletePopup = document.getElementById("delete-popup");
+    const renamePopup = document.getElementById("rename-popup");
+
+    renameButton.addEventListener("click", event => {
+      event.stopPropagation();
+      // Do rename stuff
+      const popup = renamePopup.content.cloneNode("true");
+
+      popup.querySelector("#outside-area").addEventListener("click", event => {
+        event.stopPropagation();
+      });
+
+      popup.querySelector(".rename-popup-screen").addEventListener("click", event => {
+        event.stopPropagation();
+      });
+
+      popup.querySelector(".rename-submit").addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        try {
+          const h2 = shadow.querySelector("h2");
+          const name = h2.textContent;
+          const newName = shadow.querySelector(".new-name").value;
+          
+          utils.update_name(newName, sessionStorage.getItem("TypeF"),name);
+          shadow.querySelector("#outside-area").remove();
+          h2.textContent = newName;
+        } catch (err) {
+          window.alert(err.message);
+        }
+      });
+
+      popup.querySelector(".exit").addEventListener("click", event => {
+        event.stopPropagation();
+        shadow.querySelector("#outside-area").remove();
+      });
+
+      shadow.appendChild(popup);
+    });
+
+    deleteButton.addEventListener("click", event => {
+      event.stopPropagation();
+      console.log("Clicked delete button");
+      // Do delete stuff
+      const popup = deletePopup.content.cloneNode("true");
+
+      popup.querySelector("#outside-area").addEventListener("click", event => {
+        event.stopPropagation();
+      });
+
+      // If user clicks yes
+      popup.querySelector(".update-yes").addEventListener("click", event => {
+        event.stopPropagation();
+        const name = shadow.querySelector("h2").textContent;
+
+        try {
+          folder_utils.delete_typeA(sessionStorage.getItem("TypeF"), name);
+          this.remove();
+        } catch (err) {
+          window.alert(err.message);
+        }
+      });
+
+      // If user click no
+      popup.querySelector(".update-no").addEventListener("click", event => {
+        event.stopPropagation();
+        shadow.querySelector("#outside-area").remove();
+      });
+
+      shadow.appendChild(popup);
+    });
   }
 
   /**
