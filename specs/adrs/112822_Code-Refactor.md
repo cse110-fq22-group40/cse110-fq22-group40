@@ -5,7 +5,7 @@
     deciders: {Sailor Eichhorn, Emmanuel Serrano}
     consulted: {Allison Turner}
     informed: {Rest of Team}
-    ---
+---
 
 # Refactoring the Codebase
 
@@ -46,8 +46,15 @@ Chosen Option: Decided to go for the refactor because it is a better long-term s
 
 ## More Information
 
-Officially we will be refactoring the code (utils.js) to be divided into two folders: classes and scripts. Classes contains objects that we define a class for (AudioObject, Type A Folder, and Type F Folder) with their associated methods. Scripts contains files that details broader functions that can call from the class object methods.
+### Splitting Utils.js
 
-File Organization
+Officially we will be refactoring the code (utils.js) to be divided into two folders: classes and scripts. Classes contains objects that we define a class for (AudioObject, Type A Folder, and Type F Folder) with their associated methods. Scripts contains files that details broader functions that can call from the class object methods. To make using the refactored codebase easier, we decided to create an imports.js folder that exports all the functions from the backend using their primary use to name them. For instance, the notes.js functions are exported as notes_utils form imports.js. To import and use a function, see the example below.
+
+    import {notes_utils, utils, etc} from "<local_path>/local/import.js";
+
+    // to call a function:
+    notes_utils.function();
+
+### File Organization
 
 ![diagram](CodeRefactorVisual.png)
