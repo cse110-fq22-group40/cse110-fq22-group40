@@ -1,5 +1,5 @@
 /**
- * This folder contains the implementation for the note taking page of an
+ * This file contains the implementation for the note taking page of an
  * AudioObject. It contains all the functions necessary to manage the notes for
  * an uploaded mp3 file.
  */
