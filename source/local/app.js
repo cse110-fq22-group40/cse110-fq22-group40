@@ -6,6 +6,7 @@ const loadMainWindow = () => {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
+      /*devTools: false*/
     }
   });
 
@@ -18,7 +19,7 @@ const loadMainWindow = () => {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        "Content-Security-Policy": ["script-src 'self'"]
+        "Content-Security-Policy": ["script-src 'self' 'unsafe-inline'"]
       }
     });
   });

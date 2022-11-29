@@ -8,9 +8,9 @@ on:
   # Triggers the workflow on push or pull request events but only for the
   # "main" branch
   push:
-    branches: ["main"]
+    branches: [main, staging]
   pull_request:
-    branches: ["main"]
+    branches: [main, staging]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,5 +34,6 @@ jobs:
         uses: github/super-linter@v4.9.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_MARKDOWN: false
-          VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_HTML: true

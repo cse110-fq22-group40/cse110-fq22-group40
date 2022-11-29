@@ -1,4 +1,4 @@
-import {dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG} from "../imports.js";
+import { dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG } from "../imports.js";
 
 // CONSTANST FOR APPLICATION HERE
 const os = require("os");
