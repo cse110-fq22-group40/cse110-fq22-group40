@@ -2,29 +2,10 @@
   --secondary-color: #f4d0af;
 }
 
-#submit {
-  border: none;
-  border-radius: 8px;
-  padding: 7px 10px;
-  background: var(--secondary-color);
-  font-family: inherit;
-  font-size: 13px;
-  user-select: none;
-}
-
-#submit:hover {
-  filter: brightness(95%);
-}
-
-#submit:active {
-  filter: brightness(90%);
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-  
   to {
     opacity: 1;
   }
@@ -35,19 +16,12 @@
   animation: fadeIn 0.75s;
 }
 
-@keyframes expand {
-  from {
-    width: 0;
-    height: 0;
-  }
-}
-
-#audio-visualizer {
+/* #audio-visualizer {
   display: block;
   margin: auto;
   image-rendering: pixelated;
   animation: expand 0.75s;
-}
+} */
 
 @keyframes expandWidth {
   from {
@@ -62,17 +36,196 @@
   filter: invert(100%);
 }
 
+.ql-toolbar {
+  margin-top: 10px;
+  border: none !important;
+  border-bottom: 0.5px solid black !important;
+  border-radius: 10px 10px 0 0;
+  background-color: var(--secondary-color);
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  color: black !important;
+  border-color: black !important;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+  stroke: black !important;
+}
+
+.ql-snow .ql-picker.ql-size {
+  width: 70px !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="8px"]::before {
+  content: "8 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="9px"]::before {
+  content: "9 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="10px"]::before {
+  content: "10 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before {
+  content: "12 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label:not([data-value])::before {
+  content: "14 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before {
+  content: "16 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="20px"]::before {
+  content: "20 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="24px"]::before {
+  content: "24 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="32px"]::before {
+  content: "32 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="42px"]::before {
+  content: "42 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="54px"]::before {
+  content: "54 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="68px"]::before {
+  content: "68 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="84px"]::before {
+  content: "84 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="98px"]::before {
+  content: "98 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="8px"]::before {
+  content: "8 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="9px"]::before {
+  content: "9 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
+  content: "10 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+  content: "12 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item:not([data-value])::before {
+  content: "14 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+  content: "16 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before {
+  content: "20 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before {
+  content: "24 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="32px"]::before {
+  content: "32 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="42px"]::before {
+  content: "42 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="54px"]::before {
+  content: "54 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="68px"]::before {
+  content: "68 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="84px"]::before {
+  content: "84 px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="98px"]::before {
+  content: "98 px";
+}
+
+#emoji-palette #tab-panel {
+  height: 220px;
+  max-height: none;
+  resize: vertical;
+}
+
+.bem {
+  margin: 4px 5px 4px 5px !important;
+}
+
 #text-editor {
-  display: block;
-  box-sizing: border-box;
-  margin: 10px 0px;
-  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--secondary-color);
+}
+
+.ql-snow.ql-container {
+  border: none !important;
+  font-size: 14px;
+}
+
+.note .ql-editor {
+  padding: 0;
+}
+
+#text-editor .ql-editor {
+  min-height: 50px;
   height: 500px;
+  resize: vertical;
+}
+
+blockquote {
+  border-left-color: #c2552d !important;
+}
+
+pre,
+pre span,
+code {
+  font-family: monospace;
+}
+
+#submit {
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  animation: expand 0.75s;
-  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: 7px 10px;
+  background-color: var(--secondary-color);
+  font-family: inherit;
+  font-size: 13px;
+  user-select: none;
+}
+
+#submit:hover {
+  filter: brightness(95%);
+}
+
+#submit:active {
+  filter: brightness(90%);
 }
 
 #note-display {
@@ -89,8 +242,8 @@
 .note {
   margin-bottom: 10px;
   border: none;
-  border-radius: 4px;
-  padding: 7px 10px;
+  border-radius: 10px;
+  padding: 12px 15px;
   background-color: var(--secondary-color);
   animation: fadeIn 0.75s;
 }
@@ -127,7 +280,7 @@
   text-align: center;
   width: 450px;
   height: 150px;
-  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #dfe9f3 0%, #fff 100%);
   box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   top: 50%;
   left: 50%;
@@ -146,8 +299,9 @@
   margin-top: 5px;
 }
 
-.update-yes, .update-no {
-  background: white;
+.update-yes,
+.update-no {
+  background-color: white;
   border-radius: 8px;
   border: black solid 1px;
   padding: 5px 15px;
@@ -155,15 +309,16 @@
 }
 
 .update-yes:hover {
-  background: #0c8e69;
+  background-color: #0c8e69;
   color: white;
 }
 
 .update-no:hover {
-  background: #FF0051;
+  background-color: #ff0051;
   color: white;
 }
 
-.update-yes:active, .update-no:active {
+.update-yes:active,
+.update-no:active {
   filter: brightness(90%);
 }

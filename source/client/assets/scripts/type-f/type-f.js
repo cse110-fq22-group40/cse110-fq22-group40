@@ -4,7 +4,7 @@
  * the event handling for adding an A Folder.
  */
 
-import {utils, folder_utils} from "../../../../local/imports.js";
+import { utils, folder_utils } from "../../../../local/imports.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
