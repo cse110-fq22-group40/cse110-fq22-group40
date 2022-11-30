@@ -63,7 +63,7 @@ const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px"
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
-hljs.configure({
+window.hljs.configure({
   languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
 });
 
@@ -90,7 +90,7 @@ window.addEventListener("load", () => {
         [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
         ["emoji", "link", "image", "video", "formula"],
-        ["clean"]
+        ["clean"],
       ],
       syntax: true,
       markdownShortcuts: true,
@@ -101,14 +101,14 @@ window.addEventListener("load", () => {
       imageCompress: {
         quality: 0.7,
         maxWidth: 400,
-        maxHeight: 400
+        maxHeight: 400,
       },
-      clipboard:  {
-        keepSelection: true
-      }
+      clipboard: {
+        keepSelection: true,
+      },
     },
     placeholder: "Take notes at your desired timestamp…",
-    theme: "snow"
+    theme: "snow",
   });
 });
 
@@ -182,7 +182,7 @@ function initAudioVisualizer() {
   const data = new Uint8Array(analyser.frequencyBinCount);
 
   // Calculate width of each bar
-  const barWidth = Math.round(audioVisualizer.width / data.length * 20);
+  const barWidth = Math.round((audioVisualizer.width / data.length) * 20);
 
   // Linear gradient to use when displaying bars
   const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
