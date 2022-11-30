@@ -93,4 +93,5 @@
 }
 
 .upload::file-selector-button:active, .create:active, .exit:active {
-  filter: brightness(90%);}
+  filter: brightness(90%);
+}
