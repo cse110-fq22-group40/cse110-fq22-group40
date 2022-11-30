@@ -260,8 +260,6 @@ function submitNote() {
       quill.setContents();
     } catch(err) {
       // If a note already exists at the timestamp ask the user if they want to update it
-      updateForm.style.display = "flex";
-      
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
         notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);

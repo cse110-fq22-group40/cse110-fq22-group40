@@ -305,6 +305,7 @@ code {
   padding: 40px;
   user-select: none;
   animation: zoom 0.5s;
+  z-index: 20;
 }
 
 .yes-no-container {
