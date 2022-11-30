@@ -1,5 +1,5 @@
 /**
- * This folder contains the implementation for the note taking page of an
+ * This file contains the implementation for the note taking page of an
  * AudioObject. It contains all the functions necessary to manage the notes for
  * an uploaded mp3 file.
  */
@@ -65,7 +65,11 @@ const fontSizeArr = [
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
+<<<<<<< HEAD
 hljs.configure({
+=======
+window.hljs.configure({
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
 });
 
@@ -92,7 +96,11 @@ window.addEventListener("load", () => {
         [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
         ["emoji", "link", "image", "video", "formula"],
+<<<<<<< HEAD
         ["clean"]
+=======
+        ["clean"],
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
       ],
       syntax: true,
       markdownShortcuts: true,
@@ -103,6 +111,7 @@ window.addEventListener("load", () => {
       imageCompress: {
         quality: 0.7,
         maxWidth: 400,
+<<<<<<< HEAD
         maxHeight: 400
       },
       clipboard:  {
@@ -111,6 +120,16 @@ window.addEventListener("load", () => {
     },
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow"
+=======
+        maxHeight: 400,
+      },
+      clipboard: {
+        keepSelection: true,
+      },
+    },
+    placeholder: "Take notes at your desired timestamp…",
+    theme: "snow",
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   });
 });
 
@@ -184,7 +203,7 @@ function initAudioVisualizer() {
   const data = new Uint8Array(analyser.frequencyBinCount);
 
   // Calculate width of each bar
-  const barWidth = Math.round(audioVisualizer.width / data.length * 20);
+  const barWidth = Math.round((audioVisualizer.width / data.length) * 20);
 
   // Linear gradient to use when displaying bars
   const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
@@ -305,10 +324,10 @@ function displayNote(timestamp, text) {
   noteDisplay.appendChild(note);
 
   const computedStyle = getComputedStyle(note);
-  const height = parseInt(computedStyle.height);
-  const paddingTop = parseInt(computedStyle.paddingTop);
-  const paddingBottom = parseInt(computedStyle.paddingBottom);
-  const marginBottom = parseInt(computedStyle.marginBottom);
+  const height = parseInt(computedStyle.height, 10);
+  const paddingTop = parseInt(computedStyle.paddingTop, 10);
+  const paddingBottom = parseInt(computedStyle.paddingBottom, 10);
+  const marginBottom = parseInt(computedStyle.marginBottom, 10);
   note.style.marginTop = `-${height + paddingTop + paddingBottom + marginBottom}px`;
   
   setTimeout(() => {
