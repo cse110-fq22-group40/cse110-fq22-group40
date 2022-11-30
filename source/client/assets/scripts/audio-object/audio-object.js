@@ -59,7 +59,9 @@ const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 const path = document.getElementById("path");
 
 const Size = Quill.import("attributors/style/size");
-const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+const fontSizeArr = [
+  "8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"
+];
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
@@ -239,8 +241,6 @@ function submitNote() {
       quill.setContents();
     } catch(err) {
       // If a note already exists at the timestamp ask the user if they want to update it
-      updateForm.style.display = "flex";
-      
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
         notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
