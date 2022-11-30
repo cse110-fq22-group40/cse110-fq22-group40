@@ -302,10 +302,10 @@ function displayNote(timestamp, text) {
   noteDisplay.appendChild(note);
 
   const computedStyle = getComputedStyle(note);
-  const height = parseInt(computedStyle.height);
-  const paddingTop = parseInt(computedStyle.paddingTop);
-  const paddingBottom = parseInt(computedStyle.paddingBottom);
-  const marginBottom = parseInt(computedStyle.marginBottom);
+  const height = parseInt(computedStyle.height, 10);
+  const paddingTop = parseInt(computedStyle.paddingTop, 10);
+  const paddingBottom = parseInt(computedStyle.paddingBottom, 10);
+  const marginBottom = parseInt(computedStyle.marginBottom, 10);
   note.style.marginTop = `-${height + paddingTop + paddingBottom + marginBottom}px`;
   
   setTimeout(() => {
