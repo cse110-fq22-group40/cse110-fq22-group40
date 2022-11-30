@@ -2,7 +2,7 @@
  * This file defines a class that determines how an AudioObjectCard is rendered
  * for each audio file uploaded by the user.
  */
-import { utils, folder_utils, audio_utils } from "../../../../local/imports.js";
+import { utils, audio_utils } from "../../../../local/imports.js";
 const template = document.getElementById("card-template");
 
 class AudioObjectCard extends HTMLElement {

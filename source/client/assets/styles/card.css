@@ -64,18 +64,18 @@
   flex-direction: row;
 }
 
-#rename-button, #delete-button{
+#rename-button, #delete-button {
   background: none;
   border: none;
   opacity: 0.5;
 }
 
-#rename-button:hover, #delete-button:hover{
+#rename-button:hover, #delete-button:hover{ 
   background: none;
   border: none;
   opacity: 1;
 }
 
-#rename-icon, #delete-icon{
+#rename-icon, #delete-icon {
   width: 25px;
 }

@@ -170,7 +170,7 @@ class TypeFCard extends HTMLElement {
         } catch (err) {
           // Alert the user if the delete doesn't work
           window.alert(err.message);
-        };
+        }
       });
 
       /**
