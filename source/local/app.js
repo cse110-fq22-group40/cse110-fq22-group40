@@ -5,8 +5,13 @@ const loadMainWindow = () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
+<<<<<<< HEAD
       contextIsolation: false
       /*devTools: false*/
+=======
+      contextIsolation: false,
+      devTools: true
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
     }
   });
 

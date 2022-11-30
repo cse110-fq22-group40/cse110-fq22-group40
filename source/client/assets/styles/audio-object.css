@@ -6,7 +6,6 @@
   from {
     opacity: 0;
   }
-  
   to {
     opacity: 1;
   }
@@ -191,12 +190,20 @@
   font-size: 14px;
 }
 
+<<<<<<< HEAD
+=======
+.note .ql-editor {
+  padding: 0;
+}
+
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
 #text-editor .ql-editor {
   min-height: 50px;
   height: 500px;
   resize: vertical;
 }
 
+<<<<<<< HEAD
 .note .ql-editor {
   padding: 0;
 }
@@ -206,6 +213,15 @@ blockquote {
 }
 
 pre, pre span, code {
+=======
+blockquote {
+  border-left-color: #c2552d !important;
+}
+
+pre,
+pre span,
+code {
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   font-family: monospace;
 }
 
@@ -279,7 +295,7 @@ pre, pre span, code {
   text-align: center;
   width: 450px;
   height: 150px;
-  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #dfe9f3 0%, #fff 100%);
   box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   top: 50%;
   left: 50%;
@@ -298,7 +314,12 @@ pre, pre span, code {
   margin-top: 5px;
 }
 
+<<<<<<< HEAD
 .update-yes, .update-no {
+=======
+.update-yes,
+.update-no {
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   background-color: white;
   border-radius: 8px;
   border: black solid 1px;
@@ -312,10 +333,15 @@ pre, pre span, code {
 }
 
 .update-no:hover {
+<<<<<<< HEAD
   background-color: #FF0051;
+=======
+  background-color: #ff0051;
+>>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   color: white;
 }
 
-.update-yes:active, .update-no:active {
+.update-yes:active,
+.update-no:active {
   filter: brightness(90%);
 }
