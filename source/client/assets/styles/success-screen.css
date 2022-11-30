@@ -15,7 +15,7 @@
   align-items: center;
   width: 450px;
   height: 250px;
-  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #dfe9f3 0%, #fff 100%);
   box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   top: 50%;
   left: 50%;
@@ -43,5 +43,4 @@
 
 .description {
   font-size: 30px;
-  margin-top: -20px;
-}
+  margin-top: -20px;}
