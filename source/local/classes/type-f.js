@@ -41,6 +41,24 @@ export class TypeF {
   }
 
   /**
+   * Add an existing TypeA folder to the specified name
+   * @param {string} name The name of the TypeA folder
+   * @param {Object} typeAObject The existing TypeA folder object
+   * 
+   * @throws Error if the TypeA folder name is empty
+   * @throws Error if the TypeA folder name already exists
+   */
+   add_existing_typeA(name) {
+    if (name === "")
+      throw new Error("TypeA folder name cannot be empty");
+
+    if (this.dict_typeA[name])
+      throw new Error(`TypeA folder with name "${name}" already exists`);
+
+    this.dict_typeA[name] = typeAObject;
+  }
+
+  /**
    * Getter for a type A folder 
    * @param {string} typeAName Name of the type A folder
    * 
@@ -58,16 +76,16 @@ export class TypeF {
     return Object.keys(this.dict_typeA);
   }
 
-/**
- * Update a typeA object's name inside this TypeF object
- * 
- * @param {string} oldName Old name of the typeA folder you want to change
- * @param {string} newName New name of the typeA folder you want to change
- * 
- * @throws Error if the TypeA folder name is empty
- * @throws Error if the old TypeA folder name doesn't exist
- * @throws Error if the new TypeA folder name already exists
- */
+  /**
+   * Update a typeA object's name inside this TypeF object
+   * 
+   * @param {string} oldName Old name of the typeA folder you want to change
+   * @param {string} newName New name of the typeA folder you want to change
+   * 
+   * @throws Error if the TypeA folder name is empty
+   * @throws Error if the old TypeA folder name doesn't exist
+   * @throws Error if the new TypeA folder name already exists
+   */
   update_typeA_name(oldName, newName) {
     if (newName === "")
       throw new Error("TypeA folder name cannot be empty");

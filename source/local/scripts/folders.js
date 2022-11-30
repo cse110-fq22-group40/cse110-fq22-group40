@@ -137,3 +137,23 @@ export function set_typeF_in_local_storage(typeFName) {
   localStorage.setItem(typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[typeFName])));
 }
+
+/**
+ * Move a type a folder with the given name to a new location
+ * from typeFName/ to newTypeFName/
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * 
+ * @param {string} newTypeFName Name of the TypeF folder
+ * 
+ * @usage
+ * Ex: delete_audio("Bob's Project", "10/11 Practice", "G Major Scales")
+ */
+ export function update_typeA_location(typeFName, typeAName, newTypeFName) {
+
+  // TODO: add error handling
+  let temp_typeA_obj = dict_typeFs[typeFName].get_typeA(typeAName)
+  delete_typeA(typeFName, typeAName);
+  dict_typeFs[newTypeFName].add_existing_typeA(typeAName, temp_typeA_obj);
+  folder_utils.set_typeF_in_local_storage(newTypeFName);
+}

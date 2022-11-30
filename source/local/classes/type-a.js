@@ -40,6 +40,27 @@ export class TypeA {
 	}
 
 	/**
+	 * Create a new audio file
+	 * @param {string} name Name of the audio file
+	 * @param {string} audio_object Audio object to be added
+	 * 
+	 * @throws Error if the AudioObj name is empty
+	 * @throws Error if the AudioObj name already exists
+	 * @throws Error if audio-object is not an AudioObject
+	 */
+	 add_existing_audio(name, audio_object) {
+		if (name === "")
+		  throw new Error("Audio file name cannot be empty");
+	
+		if (this.dict_audio[name])
+		  throw new Error(`Audio file with name "${name}" already exists`);
+
+		// TODO: check type and throw error
+
+		this.dict_audio[name] = audio_object;
+	}
+
+	/**
 	 * Getter for an audio object in dict_audio
 	 * @param {string} audioObjName Name of the audio file
 	 * 

@@ -14,10 +14,10 @@ export function get_all_audio_names(typeFName, typeAName) {
 
 /**
  * Add a new AudioObj with the given name and audio path
- * @param {typeFName} typeFName Name of the TypeF folder
- * @param {typeAName} typeAName Name of the TypeA folder
- * @param {audioObjName} audioObjName Name of the AudioObj
- * @param {audioPath} audioPath Path of the audio file
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * @param {string} audioPath Path of the audio file
  * 
  * @throws Error if the AudioObj name is empty
  * @throws Error if the AudioObj name already exists
@@ -102,5 +102,27 @@ export function update_audio_path(typeFName, typeAName, audioObjName, newPath) {
     .get_typeA(typeAName)
     .get_audio(audioObjName)
     .update_path(newPath);
-    folder_utils.set_typeF_in_local_storage(typeFName);
+  folder_utils.set_typeF_in_local_storage(typeFName);
+}
+
+/**
+ * Move an AudioObj with the given name to a new location
+ * from typeFName/typeAName/ to newTypeFName/newTypeAName/
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
+ * @param {string} audioObjName Name of the AudioObj
+ * 
+ * @param {string} newTypeFName Name of the TypeF folder
+ * @param {string} newTypeAName Name of the TypeA folder
+ * 
+ * @usage
+ * Ex: delete_audio("Bob's Project", "10/11 Practice", "G Major Scales")
+ */
+ export function update_audio_location(typeFName, typeAName, audioObjName, newTypeFName, newTypeAName) {
+
+  // TODO: add error handling
+  let temp_aud_obj = dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName)
+  delete_audio(typeFName, typeAName, audioObjName);
+  dict_typeFs[newTypeFName].get_typeA(newTypeAName).add_existing_audio(audioObjName, temp_aud_obj);
+  folder_utils.set_typeF_in_local_storage(newTypeFName);
 }
