@@ -7,8 +7,7 @@ const template = document.getElementById("card-template");
 
 class TypeFCard extends HTMLElement {
   constructor() {
-    super();
-    
+    super();  
     const shadow = this.attachShadow({ mode: "open" });
     shadow.appendChild(template.content.cloneNode("true"));
 

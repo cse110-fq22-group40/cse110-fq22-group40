@@ -4,7 +4,7 @@
  * and contains the event handling when adding a folder is clicked.
  */
 
-import {utils, folder_utils} from "../../../../local/imports.js";
+import { utils, folder_utils } from "../../../../local/imports.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
@@ -23,7 +23,6 @@ utils.load_data();
  */
 window.addEventListener("load", () => {
   const fFolder = folder_utils.get_all_typeF_names();
-  
   for (const folder of fFolder) {
     createFolderF(folder);
   }
@@ -42,7 +41,7 @@ addButton.addEventListener("click", () => {
   document.body.appendChild(typeFCreate);
 
   // When the user submits a new audio file
-  typeFCreate.addEventListener("fileSubmitted", evt => {
+  typeFCreate.addEventListener("fileSubmitted", (evt) => {
     try {
       // Create a new audio card
       folder_utils.add_typeF(evt.detail.name);
@@ -70,7 +69,6 @@ addButton.addEventListener("click", () => {
 /**
  * Create an FolderF component that the user made
  * @param {string} name - name of F Folder user inputted
- * 
  * @Usage
  * Ex: createAudioObject("Bach")
  */
