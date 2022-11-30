@@ -196,7 +196,7 @@ class TypeFCard extends HTMLElement {
   set name(name) {
     const audioname = this.shadowRoot.querySelector("h2");
     audioname.textContent = name;
-  };
+  }
 }
   
 // define a custom HTML element
