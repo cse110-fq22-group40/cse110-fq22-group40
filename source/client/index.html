@@ -46,6 +46,7 @@
 
   <template id="rename-popup">
     <link rel="stylesheet" href="assets/styles/popup.css">
+
     <div id="outside-area">
       <div class="rename-popup-screen">
         <button class="exit"></button>
@@ -60,6 +61,7 @@
 
   <template id="delete-popup">
     <link rel=stylesheet href="assets/styles/popup.css">
+
     <div id="outside-area">
       <div id="delete-popup-screen">
         <h2 class="popup-title">Are you sure you want to delete?</h2>
@@ -74,13 +76,16 @@
   
   <template id="create-screen-template">
     <link rel="stylesheet" href="assets/styles/create-screen.css">
-    <div class="container">
-      <button class="exit"></button>
-      <h2 class="title">Name and create your folder!</h2>
-      <form>
-        <input type="text" class="name">
-        <input type="submit" class="create">
-      </form>
+
+    <div id="outside-area">
+      <div class="container">
+        <button class="exit"></button>
+        <h2 class="title">Name and create your folder!</h2>
+        <form>
+          <input type="text" class="name">
+          <input type="submit" class="create">
+        </form>
+      </div>
     </div>
   </template>
 
