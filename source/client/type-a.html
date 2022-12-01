@@ -35,21 +35,60 @@
       <div class="card audio-object-background">
         <img src="assets/images/musicicon.png" class="icon" alt="music icon" draggable="false">
         <h2></h2>
+        <div class="button-container">
+          <button id="rename-button">
+            <img src="./assets/images/pencil.png" alt="pencil" id="rename-icon">
+          </button>
+          <button id="delete-button">
+            <img src="./assets/images/trash.png" alt="trash" id="delete-icon">
+          </button>
+        </div>
       </div>
     </template>
   </div>
 
+  <template id="rename-popup">
+    <link rel="stylesheet" href="assets/styles/popup.css">
+
+    <div id="outside-area">
+      <div class="rename-popup-screen">
+        <button class="exit"></button>
+        <h2 class="title">Rename your audio file!</h2>
+        <form>
+          <input type="text" class="new-name">
+          <input type="submit" class="rename-submit">
+        </form>
+      </div>
+    </div>
+  </template>
+
+  <template id="delete-popup">
+    <link rel=stylesheet href="assets/styles/popup.css">
+
+    <div id="outside-area">
+      <div id="delete-popup-screen">
+        <h2 class="popup-title">Are you sure you want to delete?</h2>
+        <div class="yes-no-container">
+          <button class="update-yes" type="submit">Yes</button>
+          <button class="update-no" type="submit">No</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
   <template id="create-screen-template">
     <link rel="stylesheet" href="assets/styles/create-screen.css">
 
-    <div class="container">
-      <button class="exit"></button>
-      <h2 class="title">Name and upload your audio!</h2>
-      <form>
-        <input type="text" class="name">
-        <input type="file" class="upload" accept="audio/*">
-        <input type="submit" class="create">
-      </form>
+    <div id="outside-area">
+      <div class="container">
+        <button class="exit"></button>
+        <h2 class="title">Name and upload your audio!</h2>
+        <form>
+          <input type="text" class="name">
+          <input type="file" class="upload" accept="audio/*">
+          <input type="submit" class="create">
+        </form>
+      </div>
     </div>
   </template>
 

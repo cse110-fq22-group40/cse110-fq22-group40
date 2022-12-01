@@ -18,7 +18,8 @@ nav {
   z-index: 10;
 }
 
-#home, #back {
+#home,
+#back {
   width: 30px;
   cursor: pointer;
   user-select: none;
@@ -41,5 +42,4 @@ nav {
 #path {
   font-size: 35px;
   font-weight: bolder;
-  /* animation: slideInLeft 0.75s; */
 }

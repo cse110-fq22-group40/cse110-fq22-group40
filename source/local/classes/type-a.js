@@ -1,10 +1,16 @@
 /**
- * This file has the TypeA code
- * 
- * TODO
+ * This file defines the TypeA object. It contains the implementation for
+ * creating a TypeA object and modifying a TypeA object. It has all the functions
+ * that are necessary to manage the audioObjects contained in the TypeA object,
+ * including the audioObject's name and audio file path.
  */
+
 import { AudioObject } from "../imports.js";
 
+/**
+ * TypeA is a class for creating a TypeA object which contains a group of
+ * audio objects. It also has all the functions that manage those audio objects.
+ */
 export class TypeA {
   /**
    * TypeA is a container for a group of audio objects
