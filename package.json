@@ -4,7 +4,7 @@
   "description": "[Team Page](admin/team.md)",
   "main": "source/local/app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "electron .",
     "jsdoc": "jsdoc -c jsdoc.json"
   },
