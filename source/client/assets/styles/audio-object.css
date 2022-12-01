@@ -6,7 +6,6 @@
   from {
     opacity: 0;
   }
-  
   to {
     opacity: 1;
   }
@@ -191,21 +190,23 @@
   font-size: 14px;
 }
 
+.note .ql-editor {
+  padding: 0;
+}
+
 #text-editor .ql-editor {
   min-height: 50px;
   height: 500px;
   resize: vertical;
 }
 
-.note .ql-editor {
-  padding: 0;
-}
-
 blockquote {
-  border-left-color: #C2552D !important;
+  border-left-color: #c2552d !important;
 }
 
-pre, pre span, code {
+pre,
+pre span,
+code {
   font-family: monospace;
 }
 
@@ -279,7 +280,7 @@ pre, pre span, code {
   text-align: center;
   width: 450px;
   height: 150px;
-  background: linear-gradient(180deg, #DFE9F3 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #dfe9f3 0%, #fff 100%);
   box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
   top: 50%;
   left: 50%;
@@ -289,6 +290,7 @@ pre, pre span, code {
   padding: 40px;
   user-select: none;
   animation: zoom 0.5s;
+  z-index: 20;
 }
 
 .yes-no-container {
@@ -298,7 +300,8 @@ pre, pre span, code {
   margin-top: 5px;
 }
 
-.update-yes, .update-no {
+.update-yes,
+.update-no {
   background-color: white;
   border-radius: 8px;
   border: black solid 1px;
@@ -312,10 +315,11 @@ pre, pre span, code {
 }
 
 .update-no:hover {
-  background-color: #FF0051;
+  background-color: #ff0051;
   color: white;
 }
 
-.update-yes:active, .update-no:active {
+.update-yes:active,
+.update-no:active {
   filter: brightness(90%);
 }

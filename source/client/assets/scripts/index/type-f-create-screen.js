@@ -21,6 +21,9 @@ class TypeFCreateScreen extends HTMLElement {
      */
     fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
+      const outsideArea = this.shadowRoot.getElementById("outside-area");
+
+      outsideArea.remove();
       popup.remove();
     });
     const filesubmit = this.shadowRoot.querySelector(".create");
@@ -47,6 +50,10 @@ class TypeFCreateScreen extends HTMLElement {
         this.dispatchEvent(submitEvent);
       }
     });
+  }
+
+  focus() {
+    this.shadowRoot.querySelector(".name").focus();
   }
 }
 customElements.define("type-f-create-screen", TypeFCreateScreen);

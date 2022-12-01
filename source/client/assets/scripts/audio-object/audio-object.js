@@ -1,5 +1,5 @@
 /**
- * This folder contains the implementation for the note taking page of an
+ * This file contains the implementation for the note taking page of an
  * AudioObject. It contains all the functions necessary to manage the notes for
  * an uploaded mp3 file.
  */
@@ -60,11 +60,13 @@ const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 const path = document.getElementById("path");
 
 const Size = Quill.import("attributors/style/size");
-const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+const fontSizeArr = [
+  "8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"
+];
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
-hljs.configure({
+window.hljs.configure({
   languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
 });
 
@@ -91,7 +93,7 @@ window.addEventListener("load", () => {
         [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
         ["emoji", "link", "image", "video", "formula"],
-        ["clean"]
+        ["clean"],
       ],
       syntax: true,
       markdownShortcuts: true,
@@ -102,15 +104,20 @@ window.addEventListener("load", () => {
       imageCompress: {
         quality: 0.7,
         maxWidth: 400,
-        maxHeight: 400
+        maxHeight: 400,
       },
-      clipboard:  {
-        keepSelection: true
-      }
+      clipboard: {
+        keepSelection: true,
+      },
     },
     placeholder: "Take notes at your desired timestamp…",
-    theme: "snow"
+    theme: "snow",
   });
+
+  quill.focus();
+
+  // Only format blots that aren't inside of a note
+  quill.getModule("blotFormatter").specs[1].selector = "iframe.ql-video:not(.note *)";
 });
 
 /**
@@ -140,7 +147,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  //initAudioVisualizer();
+  // initAudioVisualizer();
 }
 
 /**
@@ -183,7 +190,7 @@ function initAudioVisualizer() {
   const data = new Uint8Array(analyser.frequencyBinCount);
 
   // Calculate width of each bar
-  const barWidth = Math.round(audioVisualizer.width / data.length * 20);
+  const barWidth = Math.round((audioVisualizer.width / data.length) * 20);
 
   // Linear gradient to use when displaying bars
   const gradient = ctx.createLinearGradient(0, 0, audioVisualizer.width, 0);
@@ -248,17 +255,21 @@ function submitNote() {
     // Store notes in backend
     try {
       notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, contents);
+
+      // Hide image/video resizer
+      quill.getModule("blotFormatter").hide();
+
       displayNote(timestamp, contents);
 
       // Clear text editor
       quill.setContents();
     } catch(err) {
-      // If a note already exists at the timestamp ask the user if they want to update it
       updateForm.style.display = "flex";
-      
+
+      // If a note already exists at the timestamp ask the user if they want to update it
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
+        notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);
                 
         // Clear text editor
         quill.setContents();
@@ -306,10 +317,12 @@ function displayNote(timestamp, text) {
   const noteQuill = new Quill(note.querySelector(".note-text"), {
     modules: {
       toolbar: false,
-      syntax: true
+      syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });
+  
   noteQuill.setContents(JSON.parse(text));
   noteQuill.disable();
 
@@ -317,10 +330,10 @@ function displayNote(timestamp, text) {
   noteDisplay.appendChild(note);
 
   const computedStyle = getComputedStyle(note);
-  const height = parseInt(computedStyle.height);
-  const paddingTop = parseInt(computedStyle.paddingTop);
-  const paddingBottom = parseInt(computedStyle.paddingBottom);
-  const marginBottom = parseInt(computedStyle.marginBottom);
+  const height = parseInt(computedStyle.height, 10);
+  const paddingTop = parseInt(computedStyle.paddingTop, 10);
+  const paddingBottom = parseInt(computedStyle.paddingBottom, 10);
+  const marginBottom = parseInt(computedStyle.marginBottom, 10);
   note.style.marginTop = `-${height + paddingTop + paddingBottom + marginBottom}px`;
   
   setTimeout(() => {
