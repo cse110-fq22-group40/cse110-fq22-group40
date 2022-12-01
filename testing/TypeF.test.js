@@ -8,12 +8,12 @@
 const functions = require('../source/local/classes/type-f.js');
 
 // Basic Tests: constructor, adders, delete
-test('Test constructor typeF:', () => {
+test("Test constructor typeF:", () => {
   const newTypeF = new functions.TypeF("test_typeF"); 
   expect(newTypeF).toEqual({"dict_typeA": {}});
 });
 
-test('Test adder typeF: invalid name - EMPTY STRING', () => {
+test("Test adder typeF: invalid name - EMPTY STRING", () => {
   function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.add_typeA("");
@@ -21,7 +21,7 @@ test('Test adder typeF: invalid name - EMPTY STRING', () => {
   expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 
-test('Test adder typeF: invalid name - REPEAT STRING', () => {
+test("Test adder typeF: invalid name - REPEAT STRING", () => {
   let name = "test";
   function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 

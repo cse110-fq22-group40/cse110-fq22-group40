@@ -34,3 +34,12 @@ const TEST_ABS_PATH_EX2 = TESTING_ABS_PATH + NON_EXISTENT_MP3;
 //     newTypeA.add_audio("test_aud", TESTFILE);
 //     console.log(aud.get_all_audio_names("test_typeF", "test_typeA"));
 //   });
+
+test("Test add_audio: invalid name - EMPTY STRING", () =>{
+    const newTypeF = new f_fun.TypeF("test_typeF"); 
+    const newTypeA = new a_fun.TypeA("test_typeA");
+    const newAudio = new aud_fun.AudioObject(TESTFILE);
+    f_fun.add_typeF("test_typeF");
+    newTypeF.add_typeA("test_typeA");
+    newTypeA.add_audio("test_aud", TESTFILE);
+});
