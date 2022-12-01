@@ -13,4 +13,4 @@ export * as utils from "./scripts/utils.js";
 
 // CONSTANTS
 export const dict_typeFs = {};
-export const DEBUG_FLAG = false;
+export const DEBUG_FLAG = true;

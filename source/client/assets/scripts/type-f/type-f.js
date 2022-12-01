@@ -50,6 +50,7 @@ addButton.addEventListener("click", () => {
   // When the user submits a new audio file
   typeACreateScreen.addEventListener("fileSubmitted", evt => {
     try {
+      utils._log("in fileSubmitted event listener");
       // Create a new audio card
       folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
       createFolderA(evt.detail.name);
