@@ -60,6 +60,10 @@ class AudioObjectCreateScreen extends HTMLElement {
       }
     });
   }
+
+  focus() {
+    this.shadowRoot.querySelector(".name").focus();
+  }
 }
 
 customElements.define("audio-object-create-screen", AudioObjectCreateScreen);
