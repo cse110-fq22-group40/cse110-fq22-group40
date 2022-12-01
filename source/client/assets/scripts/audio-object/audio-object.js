@@ -65,11 +65,7 @@ const fontSizeArr = [
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
-<<<<<<< HEAD
-hljs.configure({
-=======
 window.hljs.configure({
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   languages: ["javascript", "typescript", "html", "css", "python", "java", "c", "c++", "csharp", "php", "sql", "r"]
 });
 
@@ -96,11 +92,7 @@ window.addEventListener("load", () => {
         [{ list: "bullet" }, { list: "ordered" }, { indent: "-1" }, { indent: "+1" }],
         ["blockquote", "code-block"],
         ["emoji", "link", "image", "video", "formula"],
-<<<<<<< HEAD
-        ["clean"]
-=======
         ["clean"],
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
       ],
       syntax: true,
       markdownShortcuts: true,
@@ -111,16 +103,6 @@ window.addEventListener("load", () => {
       imageCompress: {
         quality: 0.7,
         maxWidth: 400,
-<<<<<<< HEAD
-        maxHeight: 400
-      },
-      clipboard:  {
-        keepSelection: true
-      }
-    },
-    placeholder: "Take notes at your desired timestamp…",
-    theme: "snow"
-=======
         maxHeight: 400,
       },
       clipboard: {
@@ -129,7 +111,6 @@ window.addEventListener("load", () => {
     },
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow",
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   });
 });
 
@@ -259,6 +240,8 @@ function submitNote() {
       // Clear text editor
       quill.setContents();
     } catch(err) {
+      updateForm.style.display = "flex";
+
       // If a note already exists at the timestamp ask the user if they want to update it
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";

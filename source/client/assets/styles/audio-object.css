@@ -190,30 +190,16 @@
   font-size: 14px;
 }
 
-<<<<<<< HEAD
-=======
 .note .ql-editor {
   padding: 0;
 }
 
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
 #text-editor .ql-editor {
   min-height: 50px;
   height: 500px;
   resize: vertical;
 }
 
-<<<<<<< HEAD
-.note .ql-editor {
-  padding: 0;
-}
-
-blockquote {
-  border-left-color: #C2552D !important;
-}
-
-pre, pre span, code {
-=======
 blockquote {
   border-left-color: #c2552d !important;
 }
@@ -221,7 +207,6 @@ blockquote {
 pre,
 pre span,
 code {
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   font-family: monospace;
 }
 
@@ -315,12 +300,8 @@ code {
   margin-top: 5px;
 }
 
-<<<<<<< HEAD
-.update-yes, .update-no {
-=======
 .update-yes,
 .update-no {
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   background-color: white;
   border-radius: 8px;
   border: black solid 1px;
@@ -334,11 +315,7 @@ code {
 }
 
 .update-no:hover {
-<<<<<<< HEAD
-  background-color: #FF0051;
-=======
   background-color: #ff0051;
->>>>>>> 314d7d213c2fd39dd66caa9eae887629b91ce88d
   color: white;
 }
 
