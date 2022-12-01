@@ -169,7 +169,7 @@ export function load_data() {
 
         // Load Notes
         for (const timestamp in audioObj.notes) {
-          notes_utils.add_note(typeFName, typeAName, audioName, timestamp, audioObj.notes[timestamp]);
+          notes_utils.add_note(typeFName, typeAName, audioName, timestamp, audioObj.notes[timestamp], false);
         }
       }
     }
