@@ -303,6 +303,7 @@ function displayNote(timestamp, text) {
     modules: {
       toolbar: false,
       syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });
