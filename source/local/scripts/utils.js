@@ -150,6 +150,7 @@ export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, 
  */
 export function load_data() {
   // Load TypeF folders
+  _log("inside load_data");
   Object.keys(localStorage).forEach(typeFName => {
     folder_utils.add_typeF(typeFName, false);
     const typeF = JSON.parse(
@@ -168,7 +169,7 @@ export function load_data() {
 
         // Load Notes
         for (const timestamp in audioObj.notes) {
-          notes_utils.add_note(typeFName, typeAName, audioName, timestamp, audioObj.notes[timestamp]);
+          notes_utils.add_note(typeFName, typeAName, audioName, timestamp, audioObj.notes[timestamp], false);
         }
       }
     }

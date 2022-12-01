@@ -52,5 +52,9 @@ class TypeFCreateScreen extends HTMLElement {
       }
     });
   }
+
+  focus() {
+    this.shadowRoot.querySelector(".name").focus();
+  }
 }
 customElements.define("type-f-create-screen", TypeFCreateScreen);
