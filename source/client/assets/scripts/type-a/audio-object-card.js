@@ -89,18 +89,18 @@ class AudioObjectCard extends HTMLElement {
         event.stopPropagation();
         
         try {
-          //Obtain the original name of the audio object
+          // Obtain the original name of the audio object
           const h2 = shadow.querySelector("h2");
           const name = h2.textContent;
 
-          //Obtain the new name of the audio object
+          // Obtain the new name of the audio object
           const newName = shadow.querySelector(".new-name").value;
           
-          //Call the backend function
+          // Call the backend function
           utils.update_name(newName, sessionStorage["TypeF"],
             sessionStorage["TypeA"], name);
 
-          //Remove the popup and update the card
+          // Remove the popup and update the card
           shadow.querySelector("#outside-area").remove();
           h2.textContent = newName;
 
@@ -122,6 +122,7 @@ class AudioObjectCard extends HTMLElement {
       });
 
       shadow.appendChild(popup);
+      shadow.querySelector(".new-name").focus();
     });
 
     /**
