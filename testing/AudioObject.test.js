@@ -1,5 +1,6 @@
 const functions = require('../source/local/classes/audio-object.js');
 const {resolve} = require('path');
+const { time } = require('console');
 
 /**
  * This file is used to test the AudioObject Class
@@ -239,11 +240,21 @@ test("Testing does note exists: false - INVALID NOTE", () => {
     expect(newAudio.does_note_exist(10)).toBe(false);
 });
 
-/**
- * does_note_exist(timestamp)
- */
  test("Testing does note exists: true", () => {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "test_note");
     expect(newAudio.does_note_exist(10)).toBeTruthy;
+});
+
+/**
+ * update_timestamp(timestamp, newTimestamp)
+ */
+ test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
+  let timestamp = 10;
+  function getter(){
+  const newAudio = new functions.AudioObject(TESTFILE);
+  newAudio.add_note(timestamp, "test_note");
+  expect(newAudio.update_timestamp(timestamp, timestamp)).toThrow(`Note already exists at timestamp ${timestamp}`)
+  }
+  
 });
