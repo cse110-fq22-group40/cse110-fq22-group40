@@ -5,7 +5,6 @@
  */
 
 import { utils, folder_utils } from "../../../../local/imports.js";
-import { _log } from "../../../../local/scripts/utils.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
