@@ -89,17 +89,17 @@ class TypeFCard extends HTMLElement {
         event.stopPropagation();
         
         try {
-          //Obtain the original name of the folder
+          // Obtain the original name of the folder
           const h2 = shadow.querySelector("h2");
           const name = h2.textContent;
 
-          //Obtain the new name of the folder
+          // Obtain the new name of the folder
           const newName = shadow.querySelector(".new-name").value;
           
-          //Call the backend function
+          // Call the backend function
           utils.update_name(newName, name);
           
-          //Remove the popup and update the card
+          // Remove the popup and update the card
           shadow.querySelector("#outside-area").remove();
           h2.textContent = newName;
 
@@ -121,6 +121,7 @@ class TypeFCard extends HTMLElement {
       });
 
       shadow.appendChild(popup);
+      shadow.querySelector(".new-name").focus();
     });
 
     /**
@@ -183,7 +184,6 @@ class TypeFCard extends HTMLElement {
         event.stopPropagation();
         shadow.querySelector("#outside-area").remove();
       });
-
       shadow.appendChild(popup);
     });
   }

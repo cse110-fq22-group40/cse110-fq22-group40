@@ -43,18 +43,19 @@ window.addEventListener("load", () => {
  */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
-  const typeACreate = document.createElement("type-a-create-screen");
-  document.body.appendChild(typeACreate);
+  const typeACreateScreen = document.createElement("type-a-create-screen");
+  document.body.appendChild(typeACreateScreen);
+  typeACreateScreen.focus();
 
   // When the user submits a new audio file
-  typeACreate.addEventListener("fileSubmitted", evt => {
+  typeACreateScreen.addEventListener("fileSubmitted", evt => {
     try {
       // Create a new audio card
       folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
       createFolderA(evt.detail.name);
 
       // Remove the input prompt
-      document.body.removeChild(typeACreate);
+      document.body.removeChild(typeACreateScreen);
 
       // Show success screen
       const successScreen = document.createElement("success-screen");
