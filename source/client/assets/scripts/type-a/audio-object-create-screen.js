@@ -23,6 +23,9 @@ class AudioObjectCreateScreen extends HTMLElement {
      */
     fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
+      const outsideArea = this.shadowRoot.getElementById("outside-area");
+
+      outsideArea.remove();
       popup.remove();
     });
 

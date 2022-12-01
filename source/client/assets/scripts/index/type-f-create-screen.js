@@ -21,8 +21,12 @@ class TypeFCreateScreen extends HTMLElement {
      */
     fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
+      const outsideArea = this.shadowRoot.getElementById("outside-area");
+
+      outsideArea.remove();
       popup.remove();
     });
+
     const filesubmit = this.shadowRoot.querySelector(".create");
     const textinput = this.shadowRoot.querySelector(".name");
 
