@@ -141,7 +141,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  //initAudioVisualizer();
+  // initAudioVisualizer();
 }
 
 /**
@@ -240,10 +240,12 @@ function submitNote() {
       // Clear text editor
       quill.setContents();
     } catch(err) {
+      updateForm.style.display = "flex";
+
       // If a note already exists at the timestamp ask the user if they want to update it
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
+        notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);
                 
         // Clear text editor
         quill.setContents();
@@ -291,7 +293,8 @@ function displayNote(timestamp, text) {
   const noteQuill = new Quill(note.querySelector(".note-text"), {
     modules: {
       toolbar: false,
-      syntax: true
+      syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });

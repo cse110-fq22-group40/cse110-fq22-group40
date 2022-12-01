@@ -1,10 +1,14 @@
 /**
- * This file defines a class that determines how a TypeACard is rendered 
+ * This file defines a class that determines how a TypeACard is rendered
  * for each A Folder created by the user.
  */
 import { utils, folder_utils } from "../../../../local/imports.js";
 const template = document.getElementById("card-template");
 
+/**
+ * This class implements the rendering process for users to create a
+ * typeAObject as a TypeACard.
+ */
 class TypeACard extends HTMLElement {
   constructor() {
     super();
@@ -26,9 +30,9 @@ class TypeACard extends HTMLElement {
       setTimeout(() => {
         const typeAName = this.shadowRoot.querySelector("h2");
         sessionStorage.setItem("TypeA", typeAName.textContent);
-        window.location = "type-a.html"
+        window.location = "type-a.html";
       }, 1000);
-    })
+    });
 
     // Obtain the buttons to target rename and deleting
     const renameButton = shadow.getElementById("rename-button");
@@ -191,7 +195,7 @@ class TypeACard extends HTMLElement {
   /**
    * Sets the name of the TypeACard
    * 
-   * @param {string} name
+   * @param {string} name - name of the TypeACard user inputted
    */
   set name(name) {
     const audioname = this.shadowRoot.querySelector("h2");
