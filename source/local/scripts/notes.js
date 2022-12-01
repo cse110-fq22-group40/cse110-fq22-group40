@@ -68,6 +68,7 @@ import { folder_utils, dict_typeFs, utils } from "../imports.js";
    * @param {string} audioObjName Name of the AudioObj
    * @param {number} timestamp Timestamp of the note (in seconds)
    * @param {note} note Note's text
+   * @param {Boolean} save Whether to save into local storage
    * 
    * @throws Error if the specified timestamp isn't a valid number (in seconds)
    * @throws Error if the specified timestamp already exists
@@ -75,7 +76,7 @@ import { folder_utils, dict_typeFs, utils } from "../imports.js";
    * @usage
    * Ex. add_note("Bob's Project", "10/11 Practice", "G Major Scales", 3600, "Not enough feelings")
    */
-  export function add_note(typeFName, typeAName, audioObjName, timestamp, note) {
+  export function add_note(typeFName, typeAName, audioObjName, timestamp, note, save = true) {
     // check for existing note
     utils._log("Inside add_note in notes.js");
     if (dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName).does_note_exist(timestamp))
@@ -85,7 +86,8 @@ import { folder_utils, dict_typeFs, utils } from "../imports.js";
       .get_typeA(typeAName)
       .get_audio(audioObjName)
       .add_note(timestamp, note);
-    folder_utils.set_typeF_in_local_storage(typeFName);
+    if (save)
+      folder_utils.set_typeF_in_local_storage(typeFName);
   }
   
   /**
