@@ -53,8 +53,6 @@ export class AudioObject {
   get_path() {
     if (fs.existsSync(path.resolve(__dirname, this.path)))
       return this.path;
-    
-    throw new Error("Audio file path no longer exists");
   }
 
   /** 
@@ -67,9 +65,6 @@ export class AudioObject {
   */
   add_note(timestamp, note) {
     timestamp = parseInt(timestamp);
-
-    if (Number.isNaN(timestamp))
-      throw new Error(`Timestamp must be a valid number (in seconds)`);
 
     if (this.notes[timestamp])
       throw new Error(`Note already exists at timestamp ${timestamp}`);
@@ -98,10 +93,7 @@ export class AudioObject {
   * @return True if a note exits at the timestamp, False otherwise
   */
   does_note_exist(timestamp) {
-    if (this.notes[timestamp])
-      return true;
-    else
-      return false;
+    return this.notes[timestamp] || false;
   }
 
   /**
@@ -124,9 +116,6 @@ export class AudioObject {
    */
   update_timestamp(timestamp, newTimestamp) {
     newTimestamp = parseInt(newTimestamp);
-
-    if (Number.isNaN(newTimestamp))
-      throw new Error(`Timestamp must be a valid number (in seconds)`);
 
     if (!this.notes[timestamp])
       throw new Error(`Note doesn't exist at timestamp ${timestamp}`);

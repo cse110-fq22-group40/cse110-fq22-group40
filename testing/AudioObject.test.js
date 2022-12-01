@@ -5,7 +5,7 @@ const {resolve} = require('path');
  * This file is used to test the AudioObject Class
  * defined in AudioObj.js
  * 
- * Kat
+ * Kat and Billy
  */
 
 // Constants
@@ -209,4 +209,41 @@ test("Testing clear notes: correct clear", () => {
   }
   newAudio.clear_notes()
   expect(newAudio).toEqual({"path": TESTFILE, "notes": { } } );
+});
+
+/**
+ * get_path()
+ */
+ test("Testing get path: no path - INVALID ", () => {
+  function getter(){
+    const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
+    expect(newAudio.get_path()).toThrow("Audio file path no longer exists");
+  }
+});
+
+/**
+ * add_note(timestamp, note)
+ */
+ test("Testing add note: not a number - INVALID TIME", () => {
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    expect(newAudio.add_note("not a number", "test_note")).toThrow(`Timestamp must be a valid number (in seconds)`);
+  }
+});
+
+/**
+ * does_note_exist(timestamp)
+ */
+test("Testing does note exists: false - INVALID NOTE", () => {
+    const newAudio = new functions.AudioObject(TESTFILE);
+    expect(newAudio.does_note_exist(10)).toBe(false);
+});
+
+/**
+ * does_note_exist(timestamp)
+ */
+ test("Testing does note exists: true", () => {
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.add_note(10, "test_note");
+    expect(newAudio.does_note_exist(10)).toBeTruthy;
 });
