@@ -41,6 +41,7 @@ const audioPlayer = document.getElementById("audio-player");
 const noteDisplay = document.getElementById("note-display");
 const noteTemplate = document.getElementById("note-template");
 const submitButton = document.getElementById("submit");
+const timeStamp = document.getElementsByClassName("timestamp")[0];
 const updateForm = document.getElementById("update-note");
 const updateFormYes = document.getElementsByClassName("update-yes")[0];
 const updateFormNo = document.getElementsByClassName("update-no")[0];
@@ -217,6 +218,20 @@ function initAudioVisualizer() {
     requestAnimationFrame(animateAudioVisualizer);
   }
 }
+
+/**
+ * Prompts the update-screen to appear so that user can input new timestmap
+ * 
+ * @Usage
+ * Ex: submitUpdate()
+ */
+
+function promptUpdateTimestamp() {
+  const updateTimestampCreate = document.createElement("update-timestamp-screen");
+  document.body.appendChild(updateTimestampCreate);
+}
+
+timestamp.addEventListener("contextmenu", promptUpdateTimestamp());
 
 /**
  * Submits a note to be displayed onto the screen and stores into the backend

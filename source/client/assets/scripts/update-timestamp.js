@@ -28,7 +28,7 @@
  
      /**
       * When the update button is clicked, create a new eventlistener that can
-      * keeps track of the name of the TypeFCard
+      * keeps track of the new timestamp
       *
       * @type {HTMLElement} - the target of the event
       * @listens document#click - when the AudioCard component is clicked
@@ -41,6 +41,7 @@
        }
        else 
        {
+
          const submitEvent = new CustomEvent("timestampUpdated", {
            detail: 
            {

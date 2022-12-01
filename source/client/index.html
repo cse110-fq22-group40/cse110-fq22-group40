@@ -10,6 +10,7 @@
   <script src="assets/scripts/index/type-f-card.js" type="module"></script>
   <script src="assets/scripts/index/type-f-create-screen.js" type="module"></script>
   <script src="assets/scripts/file-success-screen.js" type="module"></script>
+  <script src="assets/scripts/update-timestamp.js" type="module"></script>
   <!-- Importing the styling -->
   <link rel="stylesheet" href="assets/styles/main.css">
   <link rel="stylesheet" href="assets/styles/background-colors.css">
@@ -49,9 +50,20 @@
     </div>
   </template>
 
+  <template id="update-timestamp-template">
+    <link rel="stylesheet" href="assets/styles/create-screen.css">
+    <div class="container">
+      <button class="exit"></button>
+      <h2 class="title">Enter new timestamp in seconds.</h2>
+      <form>
+        <input type="text" class="name"> 
+        <input type="submit" class="update">
+      </form>
+    </div>
+  </template>
+
   <template id="success-screen-template">
     <link rel="stylesheet" href="assets/styles/success-screen.css">
-
     <div class="container">
       <div class="title">
         <h2>Success!</h2>
