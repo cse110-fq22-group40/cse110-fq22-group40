@@ -47,29 +47,38 @@ export function update_name(newName, typeFName, typeAName, audioObjName) {
   const dict_typeF = dict_typeFs[typeFName];
 
   folder_utils.remove_typeF_from_local_storage(typeFName);
-
   if (typeAName) {
-    const dict_typeA = dict_typeF.get_typeA(typeAName);
-
-    if (audioObjName) {
-      // User wants to rename AudioObj
-      dict_typeA.update_audio_name(audioObjName, newName);
-    } else {
-      // User wants to rename TypeA folder
-      dict_typeF.update_typeA_name(typeAName, newName);
+    try{
+      const dict_typeA = dict_typeF.get_typeA(typeAName);
+      if (audioObjName) {
+        // User wants to rename AudioObj
+        dict_typeA.update_audio_name(audioObjName, newName);
+      } else {
+        // User wants to rename TypeA folder
+        dict_typeF.update_typeA_name(typeAName, newName);
+      }
+      folder_utils.set_typeF_in_local_storage(typeFName);
+    } catch (err) {
+      folder_utils.set_typeF_in_local_storage(typeFName);
+      throw err;
     }
-
-    folder_utils.set_typeF_in_local_storage(typeFName);
-  } else {
-    if (typeFName === "")
+  } 
+  else { 
+    try{
+      if (typeFName === "")
       throw new Error("TypeF folder name cannot be empty");
+  
+      // User wants to rename TypeF folder
+      if (!dict_typeFs[typeFName])
+        throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
+  
+      if (dict_typeFs[newName])
+        throw new Error(`TypeF folder with name "${newName}" already exists`);
 
-    // User wants to rename TypeF folder
-    if (!dict_typeFs[typeFName])
-      throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
-
-    if (dict_typeFs[newName])
-      throw new Error(`TypeF folder with name "${newName}" already exists`);
+    } catch (err) {
+      folder_utils.set_typeF_in_local_storage(typeFName);
+      throw err;
+    }
 
     dict_typeFs[newName] = dict_typeFs[typeFName];
     delete dict_typeFs[typeFName];
