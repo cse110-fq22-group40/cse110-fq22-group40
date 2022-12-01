@@ -1,4 +1,4 @@
-import { dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG } from "../imports.js";
+import { dict_typeFs, folder_utils, audio_utils, notes_utils, DEBUG_FLAG, utils } from "../imports.js";
 
 // CONSTANST FOR APPLICATION HERE
 const os = require("os");
@@ -150,6 +150,7 @@ export function update_timestamp(typeFName, typeAName, audioObjName, timestamp, 
  */
 export function load_data() {
   // Load TypeF folders
+  _log("inside load_data");
   Object.keys(localStorage).forEach(typeFName => {
     folder_utils.add_typeF(typeFName, false);
     const typeF = JSON.parse(
