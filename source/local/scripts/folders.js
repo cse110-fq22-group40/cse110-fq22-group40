@@ -138,5 +138,5 @@ export function set_typeF_in_local_storage(typeFName) {
   utils._log("inside set_typeF");
   localStorage.setItem(typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[typeFName])));
-  utils._log(JSON.stringify(localStorage));
+  utils._log(JSON.stringify(lz_string.decompressFromUTF16(localStorage.getItem(typeFName))));
 }
