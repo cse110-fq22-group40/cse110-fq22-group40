@@ -5,6 +5,7 @@
  */
 
 import { utils, folder_utils } from "../../../../local/imports.js";
+import { _log } from "../../../../local/scripts/utils.js";
 
 // Obtains all the HTML elements that need to be targeted
 const addButton = document.querySelector(".add-button");
@@ -49,6 +50,7 @@ addButton.addEventListener("click", () => {
   // When the user submits a new audio file
   typeACreate.addEventListener("fileSubmitted", evt => {
     try {
+      utils._log("in fileSubmitted event listener");
       // Create a new audio card
       folder_utils.add_typeA(evt.detail.parent,evt.detail.name);
       createFolderA(evt.detail.name);
