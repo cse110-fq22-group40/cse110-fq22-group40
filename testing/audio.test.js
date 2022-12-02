@@ -5,17 +5,15 @@
  */
   
 // importing file to test
-const aud_fun = require('../source/local/classes/audio-object.js');
-const f_fun = require('../source/local/classes/type-f.js');
-const a_fun = require('../source/local/classes/type-a.js');
-const aud = require('../source/local/scripts/audio.js');
-const {resolve} = require('path');
-const { hasUncaughtExceptionCaptureCallback } = require('process');
-
-
+const aud_fun = require("../source/local/classes/audio-object.js");
+const f_fun = require("../source/local/classes/type-f.js");
+const a_fun = require("../source/local/classes/type-a.js");
+const aud = require("../source/local/scripts/audio.js");
+const {resolve} = require("path");
+const { hasUncaughtExceptionCaptureCallback } = require("process");
 
 // Constants
-const TESTING_ABS_PATH = resolve(__dirname, 'testFiles');
+const TESTING_ABS_PATH = resolve(__dirname, "testFiles");
 const TESTING_REL_PATH = "../../../testing/testFiles";
 
 const MP3 = "/moonlight-sonata.mp3";
