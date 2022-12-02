@@ -110,7 +110,7 @@ test("Test update_audio_name: empty oldName relative path - EMPTY STRING", () =>
     newTypeA.add_audio("test", TESTFILE_REL);
     newTypeA.update_audio_name("", "test");
   }
-  expect(getter).toThrow("Audio file with name \"\" doesn"t exist");
+  expect(getter).toThrow("Audio file with name \"\" doesn't exist");
 });
 
 test("Test update_audio_name: empty oldName absolute path - EMPTY STRING", () => {
@@ -119,7 +119,7 @@ test("Test update_audio_name: empty oldName absolute path - EMPTY STRING", () =>
     newTypeA.add_audio("test", TESTFILE_ABS);
     newTypeA.update_audio_name("", "test");
   }
-  expect(getter).toThrow("Audio file with name \"\" doesn"t exist");
+  expect(getter).toThrow("Audio file with name \"\" doesn't exist");
 });
 
 test("Test update_audio_name: invalid name - DOES NOT EXIST", () => {
@@ -128,7 +128,7 @@ test("Test update_audio_name: invalid name - DOES NOT EXIST", () => {
     const newTypeA = new functions.TypeA("test_typeA"); 
     newTypeA.update_audio_name(name);
   }
-  expect(getter).toThrow(`Audio file with name "${name}" doesn"t exist`);
+  expect(getter).toThrow(`Audio file with name "${name}" doesn't exist`);
 });
 
 test("Test update_audio_name: Audio same name relative path - REPEATED NAME FILE", () => {
@@ -188,7 +188,7 @@ test("Test delete_audio: invalid name relative path - DOES NOT EXIST", () => {
     newTypeA.add_audio(name2, TESTFILE_REL);
     newTypeA.delete_audio(name3);
   }
-  expect(getter).toThrow(`Audio file with name "${name3}" doesn"t exist`);
+  expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
 
 test("Test delete_audio: invalid name absolute path- DOES NOT EXIST", () => {
@@ -201,7 +201,7 @@ test("Test delete_audio: invalid name absolute path- DOES NOT EXIST", () => {
     newTypeA.add_audio(name2, TESTFILE_ABS);
     newTypeA.delete_audio(name3);
   }
-    expect(getter).toThrow(`Audio file with name "${name3}" doesn"t exist`);
+    expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
 
 //Test clear_folder()

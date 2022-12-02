@@ -53,13 +53,13 @@ test("Test update name: empty name - EMPTY STRING", () => {
   expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 
-test("Test update name: typeA doesn"t exist - NONEXISTANT FILE", () => {
+test("Test update name: typeA doesn't exist - NONEXISTANT FILE", () => {
   let name = "test";
   function getter(){
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.update_typeA_name(name);
   }
-  expect(getter).toThrow(`TypeA folder with name "${name}" doesn"t exist`);
+  expect(getter).toThrow(`TypeA folder with name "${name}" doesn't exist`);
 });
 
 test("Test update name: typeA same name - REPEATED NAME FILE", () => {
