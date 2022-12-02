@@ -35,7 +35,7 @@ const NOTE_EX2 = "More crescendo!";
  */
 test("Test constructor: invalid file path - EMPTY STRING", () => {
   function getter() {
-    const newAudio = new functions.AudioObject("");
+    const newAudio = new functions.AudioObject(""); 
     newAudio.get_path();
   }
 

@@ -28,7 +28,7 @@ test("Test constructor typeF:", () => {
  * Output: We checking for a error because we should not be able to add a 
  * no named type A folder into the type F folder
  */
-test("Test adder typeF: invalid name - EMPTY STRING", () => {
+test("Test adder typeA: invalid name - EMPTY STRING", () => {
   function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.add_typeA("");
@@ -56,6 +56,7 @@ test("Test adder typeF: invalid name - REPEAT STRING", () => {
 
   expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
+
 test("Test add new typeF: invalid name - EMPTY STRING", () => {
   const name = "";
 
@@ -93,7 +94,6 @@ test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
   newTypeF.add_typeA(name1);
   newTypeF.add_typeA(name2);
   newTypeF.delete_typeA(name1);
-  console.log(newTypeF);
 
   expect(newTypeF).toEqual({ "dict_typeA": { "test2": {"dict_audio": {} } } });
 });
@@ -173,4 +173,96 @@ test("Testing clear typeF:", () => {
 
   newTypeF.clear_folder();
   expect(newTypeF).toEqual({"dict_typeA": {}});
+});
+
+/**
+ * Test Case: Testing to get contents of Type A folder
+ * 
+ * Input: Name of type A folder inside of type F folder
+ * Output: We checking for an empty type A folder since we don't
+ * add audio inside the typeA folder.
+ */
+// get_typeA(typeAName)
+test("Test get_typeA: correct get", () => {
+  const name = "test_typeA";
+  const newTypeF = new functions.TypeF("test_typeF");
+  newTypeF.add_typeA(name);
+  expect(newTypeF.get_typeA(name)).toEqual({"dict_audio": {}});
+});
+
+/**
+ * Test Case: Testing to get all contents of Type F folder
+ * 
+ * Input: None
+ * Output: We checking for the names of the type A folders we added
+ */
+// get_all_typeA_names()
+test("Test get_all_typeA_names: correct get", () => {
+  const name1 = "test_typeA1";
+  const name2 = "test_typeA2";
+  const newTypeF = new functions.TypeF("test_typeF");
+  newTypeF.add_typeA(name1);
+  newTypeF.add_typeA(name2);
+  expect(newTypeF.get_all_typeA_names()).toEqual(["test_typeA1", "test_typeA2"]);
+});
+
+/**
+ * Test Case: Testing to update contents of Type F folder
+ * 
+ * Input: name of current folder that exists, name of new folder
+ * Output: We checking for the names of the type A folders we modified
+ */
+test("Test update_typeA_name: correct update", () => {
+  const name1 = "test_typeA1";
+  const name2 = "test_typeA2";
+  const newTypeF = new functions.TypeF("test_typeF");
+  newTypeF.add_typeA(name1);
+  newTypeF.update_typeA_name(name1, name2);
+  expect(newTypeF.get_all_typeA_names()).toEqual(["test_typeA2"]);
+});
+
+/**
+ * Test Case: Testing to get all contents of Type F folder
+ * 
+ * Input: None
+ * Output: We checking for the names of the type A folders we added
+ */
+test("Testing delete_typeA: incorrect deletion - NONEXISTANT TYPEA", () => {
+  const name1 = "test_typeA1";
+  function getter(){
+    const newTypeF = new functions.TypeF("test_typeF");
+    newTypeF.delete_typeA(name1);
+  }
+  expect(getter).toThrow(`TypeA folder with name "${name1} doesn't exist`);
+});
+
+/**
+ * Test Case: Testing to add a type F folder with no name
+ * 
+ * Input: empty string as type F folder name
+ * Output: We checking for a error because we should not be able to add a 
+ * no named type F folder
+ */
+ test("Test adder typeF: invalid name - EMPTY STRING", () => {
+  function getter() {
+    functions.add_typeF("");
+  }
+  expect(getter).toThrow("TypeF folder name cannot be empty");
+});
+
+/**
+ * Test Case: Testing to add a type F folder to type F with repeat name
+ * 
+ * Input: type F folder name that already exist
+ * Output: We checking for a error because we should not be able to add a 
+ * repeat of existing type F folder that already exists
+ */
+test("Test adder typeF: invalid name - REPEAT STRING", () => {
+  let name = "test";
+  function getter() { 
+    for(let i = 0; i < 20; i++){
+      functions.add_typeF(name);
+    }
+  }
+  expect(getter).toThrow(`TypeF folder with name "${name}" already exists`);
 });
