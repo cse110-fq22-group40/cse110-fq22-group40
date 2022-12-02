@@ -123,8 +123,8 @@ export class AudioObject {
   update_timestamp(timestamp, newTimestamp) {
     newTimestamp = parseInt(newTimestamp);
 
-    // if (this.notes[newTimestamp])
-    //   throw new Error(`Note already exists at timestamp ${newTimestamp}`);
+    if (this.notes[newTimestamp])
+      throw new Error(`Note already exists at timestamp ${newTimestamp}`);
     
     this.notes[newTimestamp] = this.notes[timestamp];
     delete this.notes[timestamp];

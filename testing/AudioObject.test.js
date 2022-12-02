@@ -124,6 +124,19 @@ test('Test get_note: Valid Timestamp, note exists', () => {
   expect(call_to_func).toBe(NOTE_EX1);
 });
 
+/**
+ * update_timestamp(timestamp, newTimestamp)
+ */
+ test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
+  let timestamp = 10;
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.add_note(timestamp, "test_note");
+    newAudio.update_timestamp(timestamp, timestamp);
+  }
+  expect(getter).toThrow(`Note already exists at timestamp ${timestamp}`);
+});
+
 /**test('Test get_note: Valid Timestamp, note nonexistent', () => {
   function getter() {
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
@@ -164,38 +177,58 @@ test('Test get_notes: No Notes', () => {
  * update_note(num_timestamp, str_newNote)
  */
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
+  let timestamp = 0;
     function getter(){
       const newAudio = new functions.AudioObject(TESTFILE);
-      expect(newAudio.update_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
-      expect(newAudio.update_note("37")).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+      newAudio.update_note(timestamp);
     }
+    expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`)
+});
+
+test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
+  let timestamp = "37";
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    expect(newAudio.update_note(timestamp));
+  }
+  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`)
+});
+
+test("Testing update note: no timestamp - INVALID TIMESTAMP", () => {
+  let timestamp = "37"
+  function getter(){
+    const newAudio = new functions.AudioObject(TESTFILE);
+    newAudio.update_note(timestamp);
+  }
+  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
 
 test("Testing update note: correct update", () => {
-  function getter(){
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "this is a test");
     expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
     newAudio.update_note(10, "this is the new test")
     expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is the new test"} } );
-  }
 });
 
 /**
  * delete_note(num_timestamp)
  */
 test("Testing delete note: bad timestamp - INVALID TIMESTAMP", () => {
+  let timestamp = 0;
   function getter(){
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "this is a test");
-    expect(newAudio.delete_note(0)).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
+    newAudio.delete_note(timestamp);
   }
+  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
 
 test("Testing delete note: correct delete", () => {
   const newAudio = new functions.AudioObject(TESTFILE);
   newAudio.add_note(10, "this is a test");
-  expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
+  newAudio.delete_note(10);
+  expect(newAudio).toEqual({"path": TESTFILE, "notes": {} } );
 });
 
 /**
@@ -246,15 +279,4 @@ test("Testing does note exists: false - INVALID NOTE", () => {
     expect(newAudio.does_note_exist(10)).toBeTruthy;
 });
 
-/**
- * update_timestamp(timestamp, newTimestamp)
- */
- test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
-  let timestamp = 10;
-  function getter(){
-  const newAudio = new functions.AudioObject(TESTFILE);
-  newAudio.add_note(timestamp, "test_note");
-  expect(newAudio.update_timestamp(timestamp, timestamp)).toThrow(`Note already exists at timestamp ${timestamp}`)
-  }
-  
-});
+
