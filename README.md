@@ -66,9 +66,4 @@ Link to youtube [video](https://www.youtube.com/watch?v=dMgJ_TWeIxc&feature=yout
 
 ## Future Plans
 ### Near Future
-- Create more features for better usability
-  - User search bar and filtering system
-  - User profile with customization
 ### Far Future
-- Integrate features which increase user options
-  - Ability to annotate music sheets and videos
