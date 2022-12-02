@@ -204,7 +204,7 @@ test("Test delete_audio: invalid name absolute path- DOES NOT EXIST", () => {
     expect(getter).toThrow(`Audio file with name "${name3}" doesn't exist`);
 });
 
-//Test clear_folder()
+// Test clear_folder()
 test("Testing clear_folder: relative path", () => {
   const newTypeA = new functions.TypeA("test_typeA"); 
   let name = "test";
