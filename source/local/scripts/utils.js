@@ -246,7 +246,7 @@ export function get_profile_picture() {
         pictures = pictures
           .map((pic) => {
             return [
-              parseInt(pic.match(/Image\d*/)[0].substring(5)) || 0,
+              parseInt(pic.match(/Image\d*/)[0].substring(5), 10) || 0,
               pic
             ];
           })
