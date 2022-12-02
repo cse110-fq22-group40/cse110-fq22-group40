@@ -6,6 +6,7 @@ const lz_string = require("lz-string");
  * Add a new TypeA folder with the given name
  * @param {string} typeFName Name of the TypeF folder
  * @param {string} typeAName Name of the TypeA folder
+ * @param {boolean} save Whether or not to save the changes to LocalStorage
  * 
  * @throws Error if the TypeA folder name is empty
  * @throws Error if the TypeA folder name already exists
@@ -65,6 +66,7 @@ export function clear_typeA(typeFName, typeAName) {
 /**
  * Add a new TypeF folder with the given name
  * @param {string} typeFName Name of the typeF folder
+ * @param {boolean} save Whether or not to save the changes to LocalStorage
  * 
  * @throws Error if the TypeF folder name is empty
  * @throws Error if the TypeF folder name already exists
