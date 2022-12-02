@@ -1,6 +1,5 @@
 const functions = require("../source/local/classes/audio-object.js");
 const { resolve } = require("path");
-const { time } = require("console");
 
 /**
  * This file is used to test the AudioObject Class
@@ -25,10 +24,8 @@ const TEST_ABS_PATH_EX2 = TESTING_ABS_PATH + NON_EXISTENT_MP3;
 const TIMESTAMP_EX1 = 1;
 const TIMESTAMP_EX2 = 5;
 
-
 const NOTE_EX1 = "This needs more dynamics!";
 const NOTE_EX2 = "More crescendo!";
-
 
 /**
  * Basic Tests: constructor + update_path() + get_path()
@@ -223,9 +220,9 @@ test("Testing update note: no timestamp - INVALID TIMESTAMP", () => {
 test("Testing update note: correct update", () => {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "this is a test");
-    expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is a test"} } );
+    expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is a test"} });
     newAudio.update_note(10, "this is the new test")
-    expect(newAudio).toEqual({"path": TESTFILE, "notes": {"10": "this is the new test"} } );
+    expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is the new test"} });
 });
 
 /**
@@ -246,7 +243,7 @@ test("Testing delete note: correct delete", () => {
   const newAudio = new functions.AudioObject(TESTFILE);
   newAudio.add_note(10, "this is a test");
   newAudio.delete_note(10);
-  expect(newAudio).toEqual({"path": TESTFILE, "notes": {} } );
+  expect(newAudio).toEqual({ "path": TESTFILE, "notes": {} });
 });
 
 /**
@@ -262,7 +259,7 @@ test("Testing clear notes: correct clear", () => {
   }
 
   newAudio.clear_notes()
-  expect(newAudio).toEqual({"path": TESTFILE, "notes": { } } );
+  expect(newAudio).toEqual({ "path": TESTFILE, "notes": {} });
 });
 
 /**

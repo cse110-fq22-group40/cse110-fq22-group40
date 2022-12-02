@@ -10,7 +10,6 @@ const f_fun = require("../source/local/classes/type-f.js");
 const a_fun = require("../source/local/classes/type-a.js");
 const aud = require("../source/local/scripts/audio.js");
 const { resolve } = require("path");
-const { hasUncaughtExceptionCaptureCallback } = require("process");
 
 // Constants
 const TESTING_ABS_PATH = resolve(__dirname, "testFiles");

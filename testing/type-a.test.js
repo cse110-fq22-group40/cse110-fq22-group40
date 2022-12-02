@@ -182,7 +182,7 @@ test("Test delete_audio: correct delete relative path - CORRECT STORAGE", () => 
   newTypeA.add_audio(name2, TESTFILE_REL);
   newTypeA.delete_audio(name1, TESTFILE_REL);
 
-  expect(newTypeA).toEqual({ "dict_audio": { "test2": { "path": TESTFILE_REL, "notes": {} } } } );
+  expect(newTypeA).toEqual({ "dict_audio": { "test2": { "path": TESTFILE_REL, "notes": {} } } });
 });
 
 // TODO: Figure out why the abolsute path is being formatted oddly
@@ -194,7 +194,7 @@ test("Test delete_audio: correct delete relative path - CORRECT STORAGE", () => 
 //     newTypeA.add_audio(name2, TESTFILE_ABS);
 //     newTypeA.delete_audio(name1, TESTFILE_ABS);
 //     console.log(newTypeA);
-//     expect(newTypeA).toEqual({"dict_audio": { "test2": {"path": TESTFILE_REL, "notes": {} } } } );
+//     expect(newTypeA).toEqual({"dict_audio": { "test2": {"path": TESTFILE_REL, "notes": {} } } });
 // });
 
 test("Test delete_audio: invalid name relative path - DOES NOT EXIST", () => {
