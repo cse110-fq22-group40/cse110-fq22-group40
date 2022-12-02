@@ -4,7 +4,7 @@
  * Billy
  */
 
-// importing file to test
+// Importing file to test
 const functions = require("../source/local/classes/type-f.js");
 
 // Basic Tests: constructor, adders, delete
@@ -43,7 +43,7 @@ test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
   expect(newTypeF).toEqual({"dict_typeA": { "test2": {"dict_audio": {} } } } );
 });
 
-//testing updating name of files.
+// Testing updating name of files.
 test("Test update name: empty name - EMPTY STRING", () => {
   function getter(){
     const newTypeF = new functions.TypeF("test_typeF"); 
@@ -72,7 +72,7 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
   expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 
-//testing clear
+// Testing clear
 test("Testing clear typeF:", () => {
   const newTypeF = new functions.TypeF("test_typeF"); 
   let name = "test";
