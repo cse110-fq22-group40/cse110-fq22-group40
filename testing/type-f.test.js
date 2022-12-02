@@ -110,6 +110,7 @@ test("Testing clear typeF:", () => {
   let name = "test";
 
   for (let i = 0; i < 100; i++) {
+    newTypeF.add_typeA(name);
     const addOne = i + 1;
     const mod = addOne.toString();
     name += mod;

@@ -267,9 +267,11 @@ test("Testing clear notes: correct clear", () => {
  */
 test("Testing get path: no path - INVALID ", () => {
   function getter() {
-    const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
-    expect(newAudio.get_path()).toThrow("Audio file path no longer exists");
+    const newAudio = new functions.AudioObject(TEST_REL_PATH_EX2);
+    newAudio.get_path();
   }
+
+  expect(getter).toThrow("Invalid audio file path");
 });
 
 /**
