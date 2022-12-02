@@ -85,7 +85,7 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
 // Testing clear
 test("Testing clear typeF:", () => {
   const newTypeF = new functions.TypeF("test_typeF"); 
-  const name = "test";
+  let name = "test";
 
   for (let i = 0; i < 100; i++) {
     const addOne = i + 1;
