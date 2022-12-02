@@ -113,7 +113,6 @@ test("Test add_note: Adding Duplicate Timestamp notes", () => {
 /**
  * get_note(num_timestamp)
  */
-
 test("Test get_note: Valid Timestamp, note exists", () => {
   function getter() {
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
@@ -127,7 +126,7 @@ test("Test get_note: Valid Timestamp, note exists", () => {
 /**
  * update_timestamp(timestamp, newTimestamp)
  */
- test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
+test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
   let timestamp = 10;
   function getter(){
     const newAudio = new functions.AudioObject(TESTFILE);
@@ -148,7 +147,6 @@ test("Test get_note: Valid Timestamp, note exists", () => {
 /**
  * get_notes()
  */
-
 test("Test get_notes: No Notes", () => {
   function getter() {
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
@@ -161,8 +159,7 @@ test("Test get_notes: No Notes", () => {
 /**
  * update_timestamp(num_timestamp, num_newTimestamp)
  */
-
- test("Test update_timestamp: Updates Timestamp Successfully", () => {
+test("Test update_timestamp: Updates Timestamp Successfully", () => {
   function getter() {
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
     newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
@@ -248,7 +245,7 @@ test("Testing clear notes: correct clear", () => {
 /**
  * get_path()
  */
- test("Testing get path: no path - INVALID ", () => {
+test("Testing get path: no path - INVALID ", () => {
   function getter(){
     const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
     expect(newAudio.get_path()).toThrow("Audio file path no longer exists");
@@ -258,7 +255,7 @@ test("Testing clear notes: correct clear", () => {
 /**
  * add_note(timestamp, note)
  */
- test("Testing add note: not a number - INVALID TIME", () => {
+test("Testing add note: not a number - INVALID TIME", () => {
   function getter(){
     const newAudio = new functions.AudioObject(TESTFILE);
     expect(newAudio.add_note("not a number", "test_note")).toThrow(`Timestamp must be a valid number (in seconds)`);
@@ -269,14 +266,14 @@ test("Testing clear notes: correct clear", () => {
  * does_note_exist(timestamp)
  */
 test("Testing does note exists: false - INVALID NOTE", () => {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    expect(newAudio.does_note_exist(10)).toBe(false);
+  const newAudio = new functions.AudioObject(TESTFILE);
+  expect(newAudio.does_note_exist(10)).toBe(false);
 });
 
- test("Testing does note exists: true", () => {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    newAudio.add_note(10, "test_note");
-    expect(newAudio.does_note_exist(10)).toBeTruthy;
+test("Testing does note exists: true", () => {
+  const newAudio = new functions.AudioObject(TESTFILE);
+  newAudio.add_note(10, "test_note");
+  expect(newAudio.does_note_exist(10)).toBeTruthy;
 });
 
 
