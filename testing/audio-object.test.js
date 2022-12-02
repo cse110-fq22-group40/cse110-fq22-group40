@@ -279,7 +279,7 @@ test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
     expect(newAudio.update_note(timestamp));
   }
 
-  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`)
+  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
 
 test("Testing update note: no timestamp - INVALID TIMESTAMP", () => {
@@ -319,6 +319,7 @@ test("Testing delete note: bad timestamp - INVALID TIMESTAMP", () => {
   }
   expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
+
 /**
  * Test Case: Test to make sure delete note performs if we have an valid 
  * timestamp 

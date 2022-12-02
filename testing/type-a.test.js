@@ -14,7 +14,7 @@ const TESTING_ABS_PATH = resolve(__dirname, "testFiles");
 const TESTING_REL_PATH = "../../../testing/testFiles";
 
 const MP3 = "/moonlight-sonata.mp3";
-const FAKE_MP3 = "/fake-mp3.mp3";
+// const FAKE_MP3 = "/fake-mp3.mp3";
 
 const TESTFILE_REL = TESTING_REL_PATH + MP3;
 const TESTFILE_ABS = TESTING_ABS_PATH + MP3;
