@@ -6,8 +6,8 @@
  * Description: This file is used to test the TypeF Class defined in type-f.js
  */
 
-// importing file to test
-const functions = require('../source/local/classes/type-f.js');
+// Importing file to test
+const functions = require("../source/local/classes/type-f.js");
 
 /**
  * Test Case: Testing constructor to create new type F folder
@@ -32,6 +32,7 @@ test("Test adder typeF: invalid name - EMPTY STRING", () => {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.add_typeA("");
   }
+
   expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 /**
@@ -42,13 +43,15 @@ test("Test adder typeF: invalid name - EMPTY STRING", () => {
  * repeat of existing type A folder that alredy a certain type F folder
  */
 test("Test adder typeF: invalid name - REPEAT STRING", () => {
-  let name = "test";
+  const name = "test";
+
   function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
-    for(let i = 0; i < 20; i++){
+    for (let i = 0; i < 20; i++) {
       newTypeF.add_typeA(name);
     }
   }
+
   expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 /**
@@ -58,15 +61,39 @@ test("Test adder typeF: invalid name - REPEAT STRING", () => {
  * Output: We checking for a pass because we should be able to delete a 
  * type A folder that exist within a type F folder
  */
+test("Test add new typeF: invalid name - EMPTY STRING", () => {
+  const name = "";
+
+  function getter() {
+    functions.add_typeF(name);
+  }
+
+  expect(getter).toThrow("TypeF folder name cannot be empty");
+});
+
+test("Test add new typeF: invalid name - REPEAT STRING", () => {
+  const name = "test";
+
+  function getter() {
+    for (let i = 0; i < 20; i++) {
+      functions.add_typeF(name);
+    }
+  }
+
+  expect(getter).toThrow(`TypeF folder with name "${name}" already exists`);
+});
+
 test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
-  let name1 = "test1";
-  let name2 = "test2";
+  const name1 = "test1";
+  const name2 = "test2";
+
   const newTypeF = new functions.TypeF("test_typeF"); 
   newTypeF.add_typeA(name1);
   newTypeF.add_typeA(name2);
   newTypeF.delete_typeA(name1);
   console.log(newTypeF);
-  expect(newTypeF).toEqual({"dict_typeA": { "test2": {"dict_audio": {} } } } );
+
+  expect(newTypeF).toEqual({ "dict_typeA": { "test2": {"dict_audio": {} } } });
 });
 /**
  * Test Case: Testing to update Type A folder with empty name
@@ -76,11 +103,12 @@ test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
  * type A folder to an empty name.
  */
 test("Test update name: empty name - EMPTY STRING", () => {
-  function getter(){
+  function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.add_typeA("test");
     newTypeF.update_typeA_name("test", "");
   }
+
   expect(getter).toThrow("TypeA folder name cannot be empty");
 });
 /**
@@ -91,11 +119,13 @@ test("Test update name: empty name - EMPTY STRING", () => {
  * a type A folder that does not even exist
  */
 test("Test update name: typeA doesn't exist - NONEXISTANT FILE", () => {
-  let name = "test";
-  function getter(){
+  const name = "test";
+
+  function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.update_typeA_name(name);
   }
+
   expect(getter).toThrow(`TypeA folder with name "${name}" doesn't exist`);
 });
 /**
@@ -106,12 +136,14 @@ test("Test update name: typeA doesn't exist - NONEXISTANT FILE", () => {
  * type A folder to a name that already exist
  */
 test("Test update name: typeA same name - REPEATED NAME FILE", () => {
-  let name = "test";
-  function getter(){
+  const name = "test";
+  
+  function getter() {
     const newTypeF = new functions.TypeF("test_typeF"); 
     newTypeF.add_typeA(name);
     newTypeF.update_typeA_name(name, name);
   }
+
   expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 /**
@@ -121,16 +153,17 @@ test("Test update name: typeA same name - REPEATED NAME FILE", () => {
  * Output: We checking for a pass because we should be able to clear out a 
  * entire type F folder of all its type A folders
  */
-//testing clear
-test('Testing clear typeF:', () => {
+// Testing clear
+test("Testing clear typeF:", () => {
   const newTypeF = new functions.TypeF("test_typeF"); 
   let name = "test";
-  for(let i = 0; i < 100; i++){
-    let addOne = i + 1;
-    let mod = addOne.toString();
+
+  for (let i = 0; i < 100; i++) {
+    const addOne = i + 1;
+    const mod = addOne.toString();
     name += mod;
   }
+
   newTypeF.clear_folder();
   expect(newTypeF).toEqual({"dict_typeA": {}});
 });
-
