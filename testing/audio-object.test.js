@@ -1,5 +1,5 @@
 const functions = require("../source/local/classes/audio-object.js");
-const {resolve} = require("path");
+const { resolve } = require("path");
 const { time } = require("console");
 
 /**
@@ -138,7 +138,8 @@ test("Test get_note: Valid Timestamp, note exists", () => {
  */
 test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
   const timestamp = 10;
-  function getter(){
+
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(timestamp, "test_note");
     newAudio.update_timestamp(timestamp, timestamp);
@@ -189,7 +190,7 @@ test("Test update_timestamp: Updates Timestamp Successfully", () => {
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
   const timestamp = 0;
 
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.update_note(timestamp);
   }
@@ -200,7 +201,7 @@ test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
   const timestamp = "37";
 
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     expect(newAudio.update_note(timestamp));
   }
@@ -211,7 +212,7 @@ test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
 test("Testing update note: no timestamp - INVALID TIMESTAMP", () => {
   const timestamp = "37"
 
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.update_note(timestamp);
   }
@@ -233,7 +234,7 @@ test("Testing update note: correct update", () => {
 test("Testing delete note: bad timestamp - INVALID TIMESTAMP", () => {
   const timestamp = 0;
 
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "this is a test");
     newAudio.delete_note(timestamp);
@@ -268,7 +269,7 @@ test("Testing clear notes: correct clear", () => {
  * get_path()
  */
 test("Testing get path: no path - INVALID ", () => {
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
     expect(newAudio.get_path()).toThrow("Audio file path no longer exists");
   }
@@ -278,7 +279,7 @@ test("Testing get path: no path - INVALID ", () => {
  * add_note(timestamp, note)
  */
 test("Testing add note: not a number - INVALID TIME", () => {
-  function getter(){
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     expect(newAudio.add_note("not a number", "test_note")).toThrow(`Timestamp must be a valid number (in seconds)`);
   }
@@ -297,5 +298,3 @@ test("Testing does note exists: true", () => {
   newAudio.add_note(10, "test_note");
   expect(newAudio.does_note_exist(10)).toBeTruthy;
 });
-
-
