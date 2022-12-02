@@ -1,3 +1,11 @@
+/**
+ * This file contains the helper functions available to front-end
+ * for manipulating audio objects, including creating, updating,
+ * and deleting audio objects from LocalStorage. It also contains
+ * helper functions for getting and changing the file path of the
+ * audio object.
+ */
+
 import { folder_utils, dict_typeFs } from "../imports.js";
 
 /**
