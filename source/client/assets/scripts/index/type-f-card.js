@@ -1,14 +1,16 @@
 /**
- * This file defines a class that determines how an TypeFCard is rendered 
+ * This file defines a class that determines how a TypeFCard is rendered 
  * for each F folder that is created by the user.
  */
+
 import { utils, folder_utils } from "../../../../local/imports.js";
 
 const template = document.getElementById("card-template");
 
 class TypeFCard extends HTMLElement {
   constructor() {
-    super();  
+    super();
+
     const shadow = this.attachShadow({ mode: "open" });
     shadow.appendChild(template.content.cloneNode("true"));
 
@@ -16,8 +18,8 @@ class TypeFCard extends HTMLElement {
      * When the TypeFCard object is clicked, set the path in sessionStorage
      * and go to the TypeF.html page
      *
-     * @type {shadowRoot} - the target of the event
-     * @listens shadowRoot#click - when the FolderF component is clicked
+     * @type {shadowRoot} The target of the event
+     * @listens shadowRoot#click When the FolderF component is clicked
      */
     shadow.addEventListener("click", () => {
       const card = shadow.querySelector(".card");
@@ -42,8 +44,8 @@ class TypeFCard extends HTMLElement {
      * When the rename icon is clicked, open the rename popup and allow the
      * user to change the name of the TypeF Folder
      *
-     * @type {HTMLElement} - the target of the event
-     * @listens document#click - when the rename icon is clicked
+     * @type {HTMLElement} The target of the event
+     * @listens document#click When the rename icon is clicked
      */
     renameButton.addEventListener("click", event => {
       // Removes the event listener of the whole card
@@ -56,8 +58,8 @@ class TypeFCard extends HTMLElement {
        * Stops the event listener for the whole card to propagate to the
        * outside area div
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the outside area of popup is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the outside area of popup is clicked
        */
       popup.querySelector("#outside-area").addEventListener("click", event => {
         event.stopPropagation();
@@ -67,8 +69,8 @@ class TypeFCard extends HTMLElement {
        * Stops the event listener for the whole card to propagate to the
        * rename popup menu
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the rename popup menu is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the rename popup menu is clicked
        */
       popup.querySelector(".rename-popup-screen").addEventListener("click", 
         event => {
@@ -78,8 +80,8 @@ class TypeFCard extends HTMLElement {
       /**
        * When the new name is submitted, it is sent to the backend to be stored
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the rename submit is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the rename submit is clicked
        */
       popup.querySelector(".rename-submit").addEventListener("click", event => {
         // Prevent default submit behavior
@@ -112,8 +114,8 @@ class TypeFCard extends HTMLElement {
       /**
        * If the user doesn't want to rename, close the popup
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the exit button is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the exit button is clicked
        */
       popup.querySelector(".exit").addEventListener("click", event => {
         event.stopPropagation();
@@ -128,8 +130,8 @@ class TypeFCard extends HTMLElement {
      * When the delete icon is clicked, open the delete popup and allow the
      * user to delete the folder
      *
-     * @type {HTMLElement} - the target of the event
-     * @listens document#click - when the delete icon is clicked
+     * @type {HTMLElement} The target of the event
+     * @listens document#click When the delete icon is clicked
      */
     deleteButton.addEventListener("click", event => {
       // Prevent propagation of original click event listener
@@ -142,8 +144,8 @@ class TypeFCard extends HTMLElement {
        * Stops the event listener for the whole card to propagate to the
        * outside area div
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the outside area of popup is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the outside area of popup is clicked
        */
       popup.querySelector("#outside-area").addEventListener("click", event => {
         event.stopPropagation();
@@ -153,8 +155,8 @@ class TypeFCard extends HTMLElement {
        * If the user wants to delete the folder, update in the backend and
        * remove popup from screen
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the yes button of popup is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the yes button of popup is clicked
        */
       popup.querySelector(".update-yes").addEventListener("click", event => {
         // Prevents propagation of original click event listener
@@ -177,13 +179,14 @@ class TypeFCard extends HTMLElement {
       /**
        * If the user doesn't to delete the folder, close the screen
        *
-       * @type {HTMLElement} - the target of the event
-       * @listens document#click - when the no button of popup is clicked
+       * @type {HTMLElement} The target of the event
+       * @listens document#click When the no button of popup is clicked
        */
       popup.querySelector(".update-no").addEventListener("click", event => {
         event.stopPropagation();
         shadow.querySelector("#outside-area").remove();
       });
+
       shadow.appendChild(popup);
     });
   }
@@ -199,6 +202,6 @@ class TypeFCard extends HTMLElement {
   }
 }
   
-// define a custom HTML element
+// Define a custom HTML element
 customElements.define("type-f-card", TypeFCard);
   
