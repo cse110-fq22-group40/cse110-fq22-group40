@@ -121,12 +121,36 @@ test("Test add_audio: invalid address - NO PATH", () => {
   expect(getter).toThrow("Invalid audio file path");
 });
 
-// //Test get_audio(audioObjName)
-// test("Test get_audio: correct return - CORRECT NAME", () => {
-//     const newTypeA = new functions.TypeA("test_typeA");
-//     newTypeA.add_audio("test", TESTFILE_REL);
+/**
+ * Test Case: Testing trying to get the audioObj with the correct name
+ * 
+ * Input: name of the audioObj
+ * Output: We are checking for a pass because we should have the correct 
+ * audioObj returned with the corresponding name of the audioObj
+ */ 
+test("Test get_audio: correct return - CORRECT NAME", () => {
+  const newTypeA = new functions.TypeA("test_typeA");
+  newTypeA.add_audio("test", TESTFILE_REL);
+  const testAudioObj = newTypeA.get_audio("test");
+  console.log(testAudioObj);
 
-// });
+  expect(testAudioObj).toEqual({ "path": TESTFILE_REL, "notes": {} });
+});
+
+/**
+ * Test Case: Testing trying to get the audioObj with a non-exisiting name
+ * 
+ * Input: a name that doesn't exist in 
+ * Output: We are checking for a pass because we should have the correct 
+ * audioObj returned with the corresponding name of the audioObj
+ */ 
+ test("Test get_audio: correct return - CORRECT NAME", () => {
+  const newTypeA = new functions.TypeA("test_typeA");
+  newTypeA.add_audio("test", TESTFILE_REL);
+  const testAudioObj = newTypeA.get_audio("test");
+  console.log(testAudioObj);
+  expect(testAudioObj).toEqual({ "path": TESTFILE_REL, "notes": {} });
+});
 
 // //Test get_all_audio_names()
 // test("Test get_all_audio: correct return - CORRECT USAGE", () => {
@@ -382,3 +406,19 @@ test("Testing clear_folder: absolute path", () => {
   newTypeA.clear_folder();
   expect(newTypeA).toEqual({ "dict_audio": {} });
 });
+
+/**
+ * Test Case: Testing adding audioObj with empty name input
+ * 
+ * Input: audioObj and an empty name 
+ * Output: We checking for an error because we shouldn't be able to add any  
+ * audioObj with no name inputted.
+ */
+
+/**
+ * Test Case: Testing adding audioObj with existed audioObj name
+ * 
+ * Input: none
+ * Output: We checking for a pass because we should be able to delete all the 
+ * audio files within a Type A folder
+ */
