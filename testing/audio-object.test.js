@@ -258,7 +258,7 @@ test("Testing clear notes: correct clear", () => {
     note += "-";
   }
 
-  newAudio.clear_notes()
+  newAudio.clear_notes();
   expect(newAudio).toEqual({ "path": TESTFILE, "notes": {} });
 });
 
