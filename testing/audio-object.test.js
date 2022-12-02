@@ -38,8 +38,10 @@ test("Test constructor: invalid file path - EMPTY STRING", () => {
     const newAudio = new functions.AudioObject(""); 
     newAudio.get_path();
   }
+
   expect(getter).toThrow("Invalid audio file path: File path cannot be empty");
 });
+
 /**
  * Test Case: Testing the case of invalid path with random string
  * 
@@ -51,8 +53,10 @@ test("Test constructor: invalid file path - RANDOM STRING", () => {
     const newAudio = new functions.AudioObject("filepath");
     newAudio.get_path();
   }
+
   expect(getter).toThrow("Invalid audio file path");
 });
+
 /**
  * Test Case: Testing the case of invalid path with non string type
  * 
@@ -61,12 +65,15 @@ test("Test constructor: invalid file path - RANDOM STRING", () => {
  */
 test("Test constructor: valid file path - NON-STRING TYPE", () => {
   const input = 123;
+
   function getter() {
     const newAudio = new functions.AudioObject(input);
     newAudio.get_path();
   }
+
   expect(getter).toThrow();
 });
+
 /**
  * Test Case: Testing the case of a valid path with a relative path
  * 
@@ -78,9 +85,11 @@ test("Test constructor: valid file path & audio file exists - RELATIVE PATH", ()
     const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
     return newAudio.get_path();
   }
+
   const call_to_func = getter();
   expect(call_to_func).toBe(TEST_REL_PATH_EX1);
 });
+
 /**
  * Test Case: Testing the case of a valid path with a absolute path
  * 
@@ -92,9 +101,11 @@ test("Test constructor: valid file path & audio file exists - ABSOLUTE PATH", ()
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
     return newAudio.get_path();
   }
+
   const call_to_func = getter();
   expect(call_to_func).toBe(TEST_REL_PATH_EX1);
 });
+
 /**
  * Test Case: Testing the case of a invalid path with a improper relative path
  * 
@@ -106,8 +117,10 @@ test("Test constructor: valid file path & audio file does not exist - RELATIVE P
     const newAudio = new functions.AudioObject(TEST_REL_PATH_EX2);
     return newAudio.get_path();
   }
+
   expect(getter).toThrow("Invalid audio file path");
 });
+
 /**
  * Test Case: Testing the case of a invalid path with a improper absolute path
  * 
@@ -119,6 +132,7 @@ test("Test constructor: valid file path & audio file does not exist - ABSOLUTE P
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX2);
     return newAudio.get_path();
   }
+
   expect(getter).toThrow("Invalid audio file path");
 });
 
@@ -134,6 +148,7 @@ test("Test add_note: Adding 1 note at timestamp 1 sec", () => {
   newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
   expect(newAudio).toEqual({ "path": TEST_REL_PATH_EX1, "notes": { 1: NOTE_EX1 } });
 });
+
 /**
  * Test Case: Adding a note to at a certain timestamp twice
  * 
@@ -147,8 +162,10 @@ test("Test add_note: Adding Duplicate Timestamp notes", () => {
     newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
     newAudio.add_note(TIMESTAMP_EX1, NOTE_EX2);
   }
+
   expect(getter).toThrow(`Note already exists at timestamp ${TIMESTAMP_EX1}`);
 });
+
 /**
  * Test Case: Test to get a note with valid time stamp
  * 
@@ -162,6 +179,7 @@ test("Test get_note: Valid Timestamp, note exists", () => {
     newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
     return newAudio.get_note(TIMESTAMP_EX1);
   }
+
   const call_to_func = getter();
   expect(call_to_func).toBe(NOTE_EX1);
 });
@@ -171,11 +189,13 @@ test("Test get_note: Valid Timestamp, note exists", () => {
  */
 test("Testing update timestamp: timestamp exists - REPEAT TIME", () => {
   const timestamp = 10;
+
   function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(timestamp, "test_note");
     newAudio.update_timestamp(timestamp, timestamp);
   }
+
   expect(getter).toThrow(`Note already exists at timestamp ${timestamp}`);
 });
 
@@ -199,6 +219,7 @@ test("Test get_notes: No Notes", () => {
     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
     return newAudio.get_notes();
   }
+
   const call_to_func = getter();
   expect(call_to_func).toStrictEqual({});
 });
@@ -217,6 +238,7 @@ test("Test update_timestamp: Updates Timestamp Successfully", () => {
     newAudio.update_timestamp(TIMESTAMP_EX1, TIMESTAMP_EX2);
     return newAudio.get_note(TIMESTAMP_EX2);
   }
+
   const call_to_func = getter();
   expect(call_to_func).toBe(NOTE_EX1);
 });
@@ -231,12 +253,15 @@ test("Test update_timestamp: Updates Timestamp Successfully", () => {
  */
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
   const timestamp = 0;
+
   function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.update_note(timestamp);
   }
+  
   expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`)
 });
+
 /**
  * Test Case: Test to see if we can update the note correctly with valid 
  * timestamp
@@ -247,29 +272,33 @@ test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
  * content from the input
  */
 test("Testing update note: bad timestamp - INVALID TIMESTAMP", () => {
-  let timestamp = "37";
+  const timestamp = "37";
+
   function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     expect(newAudio.update_note(timestamp));
   }
-  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`)
+
+  expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
 
 test("Testing update note: no timestamp - INVALID TIMESTAMP", () => {
   const timestamp = "37"
+
   function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.update_note(timestamp);
   }
+
   expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
 
 test("Testing update note: correct update", () => {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    newAudio.add_note(10, "this is a test");
-    expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is a test"} });
-    newAudio.update_note(10, "this is the new test")
-    expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is the new test"} });
+  const newAudio = new functions.AudioObject(TESTFILE);
+  newAudio.add_note(10, "this is a test");
+  expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is a test"} });
+  newAudio.update_note(10, "this is the new test")
+  expect(newAudio).toEqual({ "path": TESTFILE, "notes": {"10": "this is the new test"} });
 });
 
 /**
@@ -282,13 +311,15 @@ test("Testing update note: correct update", () => {
  */
 test("Testing delete note: bad timestamp - INVALID TIMESTAMP", () => {
   const timestamp = 0;
-  function getter()  {
+
+  function getter() {
     const newAudio = new functions.AudioObject(TESTFILE);
     newAudio.add_note(10, "this is a test");
     newAudio.delete_note(timestamp);
   }
   expect(getter).toThrow(`Note doesn't exist at timestamp ${timestamp}`);
 });
+
 /**
  * Test Case: Test to make sure delete note performs if we have an valid 
  * timestamp 
@@ -314,10 +345,12 @@ test("Testing delete note: correct delete", () => {
 test("Testing clear notes: correct clear", () => {
   const newAudio = new functions.AudioObject(TESTFILE);
   let note = "";
+
   for (let i = 0; i < 100; i++) {
     newAudio.add_note(i, note);
     note += "-";
   }
+
   newAudio.clear_notes();
   expect(newAudio).toEqual({ "path": TESTFILE, "notes": {} });
 });
@@ -327,9 +360,11 @@ test("Testing clear notes: correct clear", () => {
  */
 test("Testing get path: no path - INVALID ", () => {
   function getter() {
-    const newAudio = new functions.AudioObject(TEST_REL_PATH_EX1);
-    expect(newAudio.get_path()).toThrow("Audio file path no longer exists");
+    const newAudio = new functions.AudioObject(TEST_REL_PATH_EX2);
+    newAudio.get_path();
   }
+
+  expect(getter).toThrow("Invalid audio file path");
 });
 
 /**
