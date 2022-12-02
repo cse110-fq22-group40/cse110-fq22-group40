@@ -35,6 +35,28 @@ test("Test adder typeF: invalid name - REPEAT STRING", () => {
   expect(getter).toThrow(`TypeA folder with name "${name}" already exists`);
 });
 
+test("Test add new typeF: invalid name - EMPTY STRING", () => {
+  const name = "";
+
+  function getter() {
+    functions.add_typeF(name);
+  }
+
+  expect(getter).toThrow("TypeF folder name cannot be empty");
+});
+
+test("Test add new typeF: invalid name - REPEAT STRING", () => {
+  const name = "test";
+
+  function getter() {
+    for (let i = 0; i < 20; i++) {
+      functions.add_typeF(name);
+    }
+  }
+
+  expect(getter).toThrow(`TypeF folder with name "${name}" already exists`);
+});
+
 test("Test delete typeF: correct delete - CORRECT STORAGE", () => {
   const name1 = "test1";
   const name2 = "test2";
