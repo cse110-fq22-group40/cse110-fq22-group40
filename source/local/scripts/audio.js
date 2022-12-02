@@ -2,8 +2,8 @@ import { folder_utils, dict_typeFs } from "../imports.js";
 
 /**
  * Gets an array of the names of every AudioObj inside of a TypeA folder
- * @param {string} typeFName name of the TypeF folder
- * @param {string} typeAName name of the TypeA folder
+ * @param {string} typeFName Name of the TypeF folder
+ * @param {string} typeAName Name of the TypeA folder
  * 
  * @usage
  * Ex: get_all_audio_names("Bob's Project", "10/11 Practice")
@@ -18,6 +18,7 @@ export function get_all_audio_names(typeFName, typeAName) {
  * @param {typeAName} typeAName Name of the TypeA folder
  * @param {audioObjName} audioObjName Name of the AudioObj
  * @param {audioPath} audioPath Path of the audio file
+ * @param {boolean} save Whether or not to save the changes to LocalStorage
  * 
  * @throws Error if the AudioObj name is empty
  * @throws Error if the AudioObj name already exists
@@ -95,8 +96,8 @@ export function update_audio_path(typeFName, typeAName, audioObjName, newPath) {
   if (!dict_typeFs[typeFName].get_typeA(typeAName).get_audio(audioObjName))
     throw new Error(`AudioObj with name "${audioObjName}" does not exist`);
 
-// if (!fs.existsSync(newPath))
-// throw new Error(`AudioObj with path "${newPath}" does not exist`);
+  // if (!fs.existsSync(newPath))
+  //   throw new Error(`AudioObj with path "${newPath}" does not exist`);
 
   dict_typeFs[typeFName]
     .get_typeA(typeAName)
