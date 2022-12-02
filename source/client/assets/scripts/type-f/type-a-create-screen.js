@@ -23,6 +23,9 @@ class TypeACreateScreen extends HTMLElement {
      */
     fileexit.addEventListener("click", () => {
       const popup = this.shadowRoot.querySelector(".container");
+      const outsideArea = this.shadowRoot.getElementById("outside-area");
+
+      outsideArea.remove();
       popup.remove();
     });
 
@@ -53,6 +56,10 @@ class TypeACreateScreen extends HTMLElement {
         this.dispatchEvent(submitEvent);
       }
     });
+  }
+
+  focus() {
+    this.shadowRoot.querySelector(".name").focus();
   }
 }
 
