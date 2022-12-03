@@ -1,6 +1,4 @@
 /*
-const utils = require("../source/local/utils");
-
 beforeAll(() => {
   utils.add_typeF("testProject_Obj");
   utils.add_typeA("testProject_Obj", "testAudio_Obj");
@@ -41,7 +39,40 @@ test('Delete audio object named testObject', () => {
 });
 */
 
-// Template test
-test("template test", () => {
+const utils = require("../source/local/scripts/utils");
 
+/**
+ * Test Case: Testing correctness of log function
+ * 
+ * Input: Inputting a message to log
+ * Output: Expect the message to console log
+ */
+test("Log message: correct implementation", () => {
+  console.log = jest.fn();
+  utils._log("error message");
+  expect(console.log).toHaveBeenCalledWith("error message");
+});
+
+/**
+ * Test Case: Testing correctness of time formatting function
+ * 
+ * Input: Inputting a time to format in seconds
+ * Output: Expect a time in hours:minutes:seconds
+ */
+ test("Format time: correct implementation - less than an hour", () => {
+   const timeInSeconds = 300;
+   const timeFormatted = utils.format_time(timeInSeconds);
+   expect(timeFormatted).toEqual("5:00");
+});
+
+/**
+ * Test Case: Testing correctness of time formatting function
+ * 
+ * Input: Inputting a time to format in seconds
+ * Output: Expect a time in hours:minutes:seconds
+ */
+ test("Format time: correct implementation - more than an hour", () => {
+  const timeInSeconds = 4200;
+  const timeFormatted = utils.format_time(timeInSeconds);
+  expect(timeFormatted).toEqual("1:10:00");
 });
