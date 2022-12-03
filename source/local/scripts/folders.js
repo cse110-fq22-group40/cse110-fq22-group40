@@ -32,7 +32,10 @@ export function add_typeA(typeFName, typeAName, save = true) {
  * Ex: get_all_typeA_names("Bob's Project")
  */
 export function get_all_typeA_names(typeFName) {
-  return dict_typeFs[typeFName].get_all_typeA_names();
+  if(dict_typeFs[typeFName])
+    return dict_typeFs[typeFName].get_all_typeA_names();
+
+  throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
 }
 
 /**
@@ -44,8 +47,12 @@ export function get_all_typeA_names(typeFName) {
  * Ex: delete_typeA("Bob's Project", "10/11 Practice")
  */
 export function delete_typeA(typeFName, typeAName) {
-  dict_typeFs[typeFName].delete_typeA(typeAName);
-  set_typeF_in_local_storage(typeFName);
+  if(dict_typeFs[typeFName]) {
+    dict_typeFs[typeFName].delete_typeA(typeAName);
+    set_typeF_in_local_storage(typeFName);
+  } else {
+    throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
+  }
 }
 
 /**
@@ -57,8 +64,12 @@ export function delete_typeA(typeFName, typeAName) {
  * Ex: clear_typeA("Bob's Project", "10/11 Practice")
  */
 export function clear_typeA(typeFName, typeAName) {
-  dict_typeFs[typeFName].get_typeA(typeAName).clear_folder();
-  set_typeF_in_local_storage(typeFName);
+  if(dict_typeFs[typeFName]) {
+    dict_typeFs[typeFName].get_typeA(typeAName).clear_folder();
+    set_typeF_in_local_storage(typeFName);
+  } else {
+    throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
+  }
 }
 // TYPE F FILE HANDLING
 
@@ -100,8 +111,12 @@ export function get_all_typeF_names() {
  * Ex: delete_typeF("Bob's Project")
  */
 export function delete_typeF(typeFName) {
-  delete dict_typeFs[typeFName];
-  remove_typeF_from_local_storage(typeFName);
+  if(dict_typeFs[typeFName]) {
+    delete dict_typeFs[typeFName];
+    remove_typeF_from_local_storage(typeFName);
+  } else {
+    throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
+  }
 }
 
 /**
@@ -112,8 +127,12 @@ export function delete_typeF(typeFName) {
  * Ex: clear_typeF("Bob's Project")
  */
 export function clear_typeF(typeFName) {
-  dict_typeFs[typeFName].clear_folder();
-  set_typeF_in_local_storage(typeFName);
+  if(dict_typeFs[typeFName]) {
+    dict_typeFs[typeFName].clear_folder();
+    set_typeF_in_local_storage(typeFName);
+  } else {
+    throw new Error(`TypeF folder with name "${typeFName}" doesn't exist`);
+  }
 }
 
 /**
