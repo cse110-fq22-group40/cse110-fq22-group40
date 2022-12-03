@@ -1,8 +1,13 @@
-# ADR - Style Guide
+---
+  status: {Accepted}
+  date: {2022-11-27}
+  last update: {2022-11-27}
+  deciders: {Ben Snowbarger, Billy Sudirdja, Kat Wong, Emmanuel Serrano, Bennett Zhang}
+  consulted: {Allison Turner}
+  informed: {Rest of Team}
+---
 
-Created By: Ben Snowbarger
-Participants: Katherine Wong, Sailor Eichhorn, Bennett Zhang
-Type: ADR
+# ADR - Style Guide
 
 ## Context and Problem Statement:
 
@@ -12,7 +17,6 @@ Style guidelines for our code include method, class, and file headers, as well a
 
 ## Considered Options:
 
-- Add a list of considerations here
 - Allow different approaches for logic comparisons and declaring strings
 - Standardize those practices
 - Have headers be done completely in plain text
