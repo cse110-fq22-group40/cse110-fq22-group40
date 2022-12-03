@@ -1,11 +1,11 @@
-    ---
+---
     status: {Accepted}
     date: {2022-10-26}
     last update: {2022-11-22}
     deciders: {Sailor Eichhorn, Emmanuel Serrano}
     consulted: {Allison Turner}
     informed: {Rest of Team}
-    ---
+---
 
 # Using M/W/F Zoom Meetings to do Weekly Stand-Ups
 

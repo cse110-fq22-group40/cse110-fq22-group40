@@ -1,4 +1,4 @@
-import { TypeF, dict_typeFs } from "../imports.js";
+import { TypeF, dict_typeFs, utils } from "../imports.js";
 const lz_string = require("lz-string");
 // TYPE A FILE HANDLING
 
@@ -6,6 +6,7 @@ const lz_string = require("lz-string");
  * Add a new TypeA folder with the given name
  * @param {string} typeFName Name of the TypeF folder
  * @param {string} typeAName Name of the TypeA folder
+ * @param {boolean} save Whether or not to save the changes to LocalStorage
  * 
  * @throws Error if the TypeA folder name is empty
  * @throws Error if the TypeA folder name already exists
@@ -14,6 +15,7 @@ const lz_string = require("lz-string");
  * Ex: add_typeA("Bob's Project", "10/11 Practice")
  */
 export function add_typeA(typeFName, typeAName, save = true) {
+  utils._log("inside add_typeA");
   if (typeAName === "")
     throw new Error("TypeA folder name cannot be empty");
   if (dict_typeFs[typeFName].get_typeA(typeAName))
@@ -64,6 +66,7 @@ export function clear_typeA(typeFName, typeAName) {
 /**
  * Add a new TypeF folder with the given name
  * @param {string} typeFName Name of the typeF folder
+ * @param {boolean} save Whether or not to save the changes to LocalStorage
  * 
  * @throws Error if the TypeF folder name is empty
  * @throws Error if the TypeF folder name already exists
@@ -134,6 +137,8 @@ export function remove_typeF_from_local_storage(typeFName) {
  * Ex. set_typeF_in_local_storage("nameOfThisFolder");
  */
 export function set_typeF_in_local_storage(typeFName) {
+  utils._log("inside set_typeF");
   localStorage.setItem(typeFName, lz_string.compressToUTF16(
     JSON.stringify(dict_typeFs[typeFName])));
+  utils._log(lz_string.decompressFromUTF16(localStorage.getItem(typeFName)));
 }
