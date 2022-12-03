@@ -68,7 +68,7 @@ import { folder_utils, dict_typeFs, utils } from "../imports.js";
    * @param {string} audioObjName Name of the AudioObj
    * @param {number} timestamp Timestamp of the note (in seconds)
    * @param {note} note Note's text
-   * @param {Boolean} save Whether to save into local storage
+   * @param {boolean} save Whether or not to save the changes to LocalStorage
    * 
    * @throws Error if the specified timestamp isn't a valid number (in seconds)
    * @throws Error if the specified timestamp already exists
