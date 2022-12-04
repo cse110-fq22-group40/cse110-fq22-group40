@@ -26,6 +26,7 @@ class TypeACard extends HTMLElement {
     this.shadowRoot.addEventListener("click", () => {
       const card = this.shadowRoot.querySelector(".card");
       card.classList.add("full-screen");
+      document.body.style.overflow = "hidden";
 
       setTimeout(() => {
         const typeAName = this.shadowRoot.querySelector("h2");

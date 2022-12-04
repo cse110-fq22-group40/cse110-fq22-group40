@@ -30,7 +30,7 @@
 }
 
 #audio-player {
-  margin-top: 40px;
+  margin-top: 85px;
   width: 100%;
   animation: expandWidth 0.75s;
   filter: invert(100%);
