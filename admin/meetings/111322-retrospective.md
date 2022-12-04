@@ -7,6 +7,8 @@ Type: Design and Planning
 
 Sprint Retrospective Video Available in Notion
 
+[Video Link to Notion](https://www.notion.so/Sprint-Retrospective-11-13-2eb85d4fc8824b5684525976525fc131)
+
 # PROs:
 
 - Looking at the skills and contributions of others furthered personal skills for other team members (X2)

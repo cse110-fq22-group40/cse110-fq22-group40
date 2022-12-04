@@ -8,6 +8,8 @@ Type: Retrospective Meeting <br>
 
 Retrospective Video Available in Notion
 
+[Video Link To Notion](https://www.notion.so/Sprint-2-Retrospective-11-27-bfd633bdad684690a9b88d2440ef42a7)
+
 ## Video
 
 ## Part 1:

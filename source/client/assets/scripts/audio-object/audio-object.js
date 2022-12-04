@@ -59,7 +59,9 @@ const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 const path = document.getElementById("path");
 
 const Size = Quill.import("attributors/style/size");
-const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+const fontSizeArr = [
+  "8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"
+];
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
@@ -110,6 +112,11 @@ window.addEventListener("load", () => {
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow",
   });
+
+  quill.focus();
+
+  // Only format blots that aren't inside of a note
+  quill.getModule("blotFormatter").specs[1].selector = "iframe.ql-video:not(.note *)";
 });
 
 /**
@@ -139,7 +146,7 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  //initAudioVisualizer();
+  // initAudioVisualizer();
 }
 
 /**
@@ -233,17 +240,21 @@ function submitNote() {
     // Store notes in backend
     try {
       notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, contents);
+
+      // Hide image/video resizer
+      quill.getModule("blotFormatter").hide();
+
       displayNote(timestamp, contents);
 
       // Clear text editor
       quill.setContents();
     } catch(err) {
-      // If a note already exists at the timestamp ask the user if they want to update it
       updateForm.style.display = "flex";
-      
+
+      // If a note already exists at the timestamp ask the user if they want to update it
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
+        notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);
                 
         // Clear text editor
         quill.setContents();
@@ -291,10 +302,12 @@ function displayNote(timestamp, text) {
   const noteQuill = new Quill(note.querySelector(".note-text"), {
     modules: {
       toolbar: false,
-      syntax: true
+      syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });
+  
   noteQuill.setContents(JSON.parse(text));
   noteQuill.disable();
 
