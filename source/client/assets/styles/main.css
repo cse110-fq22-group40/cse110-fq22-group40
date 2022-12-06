@@ -5,6 +5,10 @@
   font-family: "Nunito", "Trebuchet MS", sans-serif;
 }
 
+html {
+  margin-left: calc(100vw - 100%);
+}
+
 body {
   background-attachment: fixed;
   margin: 35px 40px;
@@ -12,7 +16,10 @@ body {
 
 /* Navbar style */
 nav {
-  position: relative;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: calc(100% - 70px);
   height: 50px;
   display: flex;
   align-items: center;
@@ -28,10 +35,6 @@ nav {
   user-select: none;
 }
 
-.spacer {
-  flex-grow: 1;
-}
-
 /* @keyframes slideInLeft {
   from {
     transform: translate(100%, 0);
@@ -44,6 +47,7 @@ nav {
 
 /* Path display style */
 #path {
+  margin-left: auto;
   font-size: 35px;
   font-weight: bolder;
 }

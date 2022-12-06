@@ -24,6 +24,7 @@ class TypeFCard extends HTMLElement {
     shadow.addEventListener("click", () => {
       const card = shadow.querySelector(".card");
       card.classList.add("full-screen");
+      document.body.style.overflow = "hidden";
 
       setTimeout(() => {
         const typeFName = shadow.querySelector("h2");
