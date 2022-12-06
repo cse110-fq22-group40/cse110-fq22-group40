@@ -22,6 +22,7 @@ class AudioObjectCard extends HTMLElement {
     this.shadowRoot.addEventListener("click", () => {
       const card = this.shadowRoot.querySelector(".card");
       card.classList.add("full-screen");
+      document.body.style.overflow = "hidden";
 
       setTimeout(() => {
         const audObjectName = this.shadowRoot.querySelector("h2").textContent;
