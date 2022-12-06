@@ -43,10 +43,16 @@ export class TypeA {
    * Getter for an audio object in dict_audio
    * @param {string} audioObjName Name of the audio file
    * 
+   * @throws Error if the AudioObj name doesn't exist
+   * 
    * @return Audio Object
    */
   get_audio(audioObjName) {
-    return this.dict_audio[audioObjName];
+    if(this.dict_audio[audioObjName]) {
+      return this.dict_audio[audioObjName];
+    }
+
+    throw new Error(`Audio file with name "${audioObjName}" doesn't exist`);
   }
 
   /**
