@@ -266,3 +266,44 @@ test("Test adder typeF: invalid name - REPEAT STRING", () => {
   }
   expect(getter).toThrow(`TypeF folder with name "${name}" already exists`);
 });
+
+/**
+ * Test Case: Testing correctness of getting all TypeF names
+ * 
+ * Input: Inputting a list of TypeF folders to create
+ * Output: Expect a list of all the TypeF folders
+ */
+ test("Test getting all typeF names: correct implementation", () => {
+    for(let i = 0; i < 5; i++){
+      functions.add_typeF(i.toString());
+    }
+    expect(functions.get_all_typeF_names()).toEqual(['0','1','2','3','4',
+      'test']);
+});
+
+/**
+ * Test Case: Testing correctness of deleting a TypeF folders
+ * 
+ * Input: Inputting a TypeF folders
+ * Output: Expect the TypeF folder to not exist because its deleted
+ */
+ test("Test deleting all typeF names: correct implementation", () => {
+   functions.add_typeF("test_typeF");
+   functions.delete_typeF("test_typeF");
+   expect(typeof functions.dict_typeFs["test_typeF"]).toEqual("undefined");
+});
+
+
+/**
+ * Test Case: Testing correctness of clearing the TypeF folder content
+ * 
+ * Input: Inputting a TypeF folder and TypeA folder
+ * Output: Expect a the TypeA folder to not exist
+ */
+ test("Test clearing a typeF folder: correct implementation", () => {
+  functions.add_typeF("test_typeF");
+  const newTypeF = functions.dict_typeFs["test_typeF"];
+  newTypeF.add_typeA("test_typeA");
+  functions.clear_typeF("test_typeF");
+  expect(typeof newTypeF.dict_typeA["test_typeA"]).toEqual("undefined");
+});
