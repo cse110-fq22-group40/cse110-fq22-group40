@@ -8,6 +8,8 @@ Type: Sprint Review Meeting <br>
 
 Sprint Review Video Available in Notion
 
+[Video Link To Notion](https://www.notion.so/Sprint-2-Review-11-27-edacb555c1f14117be27da8148bca3b2)
+
 ## Video
 
 ## Back End
