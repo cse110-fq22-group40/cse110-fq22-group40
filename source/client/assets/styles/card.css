@@ -5,12 +5,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-width: 150px;
-  min-height: 200px;
   border: none;
   border-radius: 20px;
   box-shadow: 4px 4px 8px rgb(0, 0, 0, 20%);
-  margin: 35px 20px 20px 20px;
+  padding: 25px;
+  min-width: 125px;
+  min-height: 200px;
   max-width: 150px;
   max-height: 300px;
   word-wrap: break-word;
@@ -51,7 +51,6 @@
 .icon {
   width: 50px;
   height: 50px;
-  margin-top: 20px;
   transition: opacity 0.8s;
 }
 
@@ -62,9 +61,16 @@
 .button-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  margin-top: auto;
+  width: 100%;
 }
 
 #rename-button, #delete-button {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   opacity: 0.5;

@@ -7,6 +7,8 @@ Type: Design and Planning
 
 Sprint Review Video Available in Notion
 
+[Video Link to Notion](https://www.notion.so/Sprint-Review-11-13-9e4790cd775b4f308318b01e7f032232)
+
 ## Front End
 
 - Great amount of work was done for this sprint

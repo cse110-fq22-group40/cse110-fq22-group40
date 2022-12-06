@@ -57,6 +57,10 @@ class TypeACreateScreen extends HTMLElement {
       }
     });
   }
+
+  focus() {
+    this.shadowRoot.querySelector(".name").focus();
+  }
 }
 
 customElements.define("type-a-create-screen", TypeACreateScreen);

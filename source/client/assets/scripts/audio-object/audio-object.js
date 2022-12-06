@@ -117,6 +117,11 @@ window.addEventListener("load", () => {
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow",
   });
+
+  quill.focus();
+
+  // Only format blots that aren't inside of a note
+  quill.getModule("blotFormatter").specs[1].selector = "iframe.ql-video:not(.note *)";
 });
 
 /**
@@ -241,6 +246,10 @@ function submitNote() {
     // Store notes in backend
     try {
       notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, contents);
+
+      // Hide image/video resizer
+      quill.getModule("blotFormatter").hide();
+
       displayNote(timestamp, contents);
 
       // Clear text editor
@@ -304,6 +313,7 @@ function displayNote(timestamp, text) {
     },
     theme: "snow"
   });
+  
   noteQuill.setContents(JSON.parse(text));
   noteQuill.disable();
 
