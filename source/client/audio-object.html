@@ -17,18 +17,21 @@
   <link rel="stylesheet" href="../../node_modules/quill-emoji/dist/quill-emoji.css">
 </head>
 <body class="audio-object-background">
+  <!-- Navbar located at top of page -->
   <nav>
     <img src="./assets/images/logo.png" alt="logo" id="home" draggable="false">
     <img src="./assets/images/back.png" alt="back navigation arrow" id="back" draggable="false">
     <div class="spacer"></div>
     <div id="path"></div>
   </nav>
+  <!-- Editor for typing notes -->
   <div id="editor">
     <!-- <canvas id="audio-visualizer" width="696" height="40"></canvas> -->
     <audio id="audio-player" controls></audio>
     <div id="text-editor"></div>
     <button id="submit" type="submit">Submit</button>
   </div>
+  <!-- Note display at bottom of screen -->
   <div id="note-display">
     <template id="note-template">
       <div class="note">
@@ -37,6 +40,7 @@
       </div>
     </template>
   </div>
+  <!-- Popup for updating a note -->
   <div id="update-note">
     <h2 class="update-title">A note at this timestamp already exists. Update it?</h2>
     <div class="yes-no-container">

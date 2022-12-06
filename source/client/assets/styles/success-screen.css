@@ -1,3 +1,4 @@
+/* Animation for success screen popup */
 @keyframes zoom {
   from {
     transform: scale(0, 0);
@@ -8,6 +9,7 @@
   }
 }
 
+/* Success screen popup style */
 .container {
   position: absolute;
   display: flex;
