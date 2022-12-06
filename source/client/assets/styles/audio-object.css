@@ -30,7 +30,7 @@
 }
 
 #audio-player {
-  margin-top: 40px;
+  margin-top: 85px;
   width: 100%;
   animation: expandWidth 0.75s;
   filter: invert(100%);
@@ -290,6 +290,7 @@ code {
   padding: 40px;
   user-select: none;
   animation: zoom 0.5s;
+  z-index: 20;
 }
 
 .yes-no-container {

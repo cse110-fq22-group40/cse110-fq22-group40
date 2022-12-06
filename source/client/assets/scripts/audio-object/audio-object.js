@@ -11,9 +11,7 @@ import { utils, audio_utils, notes_utils } from "../../../../local/imports.js";
 // Syntax highlighting for code-blocks
 window.hljs = require("highlight.js");
 
-// LaTeX support for inserting math equations
-window.katex = require("katex");
-
+// Configure the Quill container
 const Quill = require("quill");
 
 // Automatically convert markdown into rich-text!
@@ -59,7 +57,9 @@ const notes = notes_utils.get_all_notes(typeFName, typeAName, audioObjectName);
 const path = document.getElementById("path");
 
 const Size = Quill.import("attributors/style/size");
-const fontSizeArr = ["8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
+const fontSizeArr = [
+  "8px", "9px", "10px", "12px", false, "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"
+];
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
@@ -75,6 +75,13 @@ Quill.register("modules/imageCompress", imageCompressor);
 
 let quill;
 
+/**
+ * When an audio-card object is opened, load Quill text editor for user input.
+ * 
+ * 
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
+ */
 window.addEventListener("load", () => {
   document.title += ` ❖ ${audioObjectName}`;
   path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObjectName}`;
@@ -110,27 +117,32 @@ window.addEventListener("load", () => {
     placeholder: "Take notes at your desired timestamp…",
     theme: "snow",
   });
+
+  quill.focus();
+
+  // Only format blots that aren't inside of a note
+  quill.getModule("blotFormatter").specs[1].selector = "iframe.ql-video:not(.note *)";
 });
 
 /**
  * When the page loads, call loadAudio
  *
- * @type {window} - the target of the event
- * @listens window#load - when the window loads
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
  */
 window.addEventListener("load", loadAudio(audio));
 
 /**
  * When the page loads, call loadNotes
  *
- * @type {window} - the target of the event
- * @listens window#load - when the window loads
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
  */
 window.addEventListener("load", loadNotes(notes));
 
 /**
- * Loads the audio into the player when the audio object page loads
- * @param {string} src - path of the mp3 file
+ * Loads the audio into the player when opening the audio object page
+ * @param {string} src - Path of the mp3 file
  * 
  * @Usage
  * Ex: loadAudio("path/of/music.mp3")
@@ -139,11 +151,12 @@ function loadAudio(src) {
   utils._log(src);
   audioPlayer.src = src;
   editor.style.display = "block";
-  //initAudioVisualizer();
+  // initAudioVisualizer();
 }
 
 /**
- * Loads the notes into the container the audio object page loads
+ * Display the notes in the container
+ * 
  * @param {Object} notes - Key is the timestamp and value is the note
  * 
  * @Usage
@@ -219,7 +232,7 @@ function initAudioVisualizer() {
 }
 
 /**
- * Submits a note to be displayed onto the screen and stores into the backend
+ * Submits a note, displays it onto the screen, and stores into the backend
  * 
  * @Usage
  * Ex: submitNote()
@@ -233,17 +246,21 @@ function submitNote() {
     // Store notes in backend
     try {
       notes_utils.add_note(typeFName, typeAName, audioObjectName, timestamp, contents);
+
+      // Hide image/video resizer
+      quill.getModule("blotFormatter").hide();
+
       displayNote(timestamp, contents);
 
       // Clear text editor
       quill.setContents();
     } catch(err) {
-      // If a note already exists at the timestamp ask the user if they want to update it
       updateForm.style.display = "flex";
-      
+
+      // If a note already exists at the timestamp ask the user if they want to update it
       updateFormYes.addEventListener("click", () => {
         updateForm.style.display = "none";
-        notes_utils.update_note(typeFName,typeAName,audioObjectName,timestamp, contents);
+        notes_utils.update_note(typeFName, typeAName, audioObjectName, timestamp, contents);
                 
         // Clear text editor
         quill.setContents();
@@ -263,11 +280,11 @@ function submitNote() {
 submitButton.addEventListener("click", submitNote);
 
 /**
- * Called when a note is submitted, performs the operation to display the note
+ * When a note is submitted, display the note
  * onto the screen
  * 
- * @param {string} timeStamp - current timestamp of the where the note exists
- * @param {string} text - the note the user types
+ * @param {string} timeStamp - Current timestamp of the note
+ * @param {string} text - user input
  * 
  * @Usage 
  * Ex: displayNote("1", "perfect technique")
@@ -291,10 +308,12 @@ function displayNote(timestamp, text) {
   const noteQuill = new Quill(note.querySelector(".note-text"), {
     modules: {
       toolbar: false,
-      syntax: true
+      syntax: true,
+      blotFormatter: false
     },
     theme: "snow"
   });
+  
   noteQuill.setContents(JSON.parse(text));
   noteQuill.disable();
 
@@ -320,8 +339,8 @@ homeButton.addEventListener("click", () => {
 /**
  * When the back button is clicked on the page go back to the previous page
  *
- * @type {HTMLElement} - the target of the event
- * @listens document#click - when the AudioCard component is clicked
+ * @type {HTMLElement} - The target of the event
+ * @listens document#click - When the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
   window.location = "type-a.html";
