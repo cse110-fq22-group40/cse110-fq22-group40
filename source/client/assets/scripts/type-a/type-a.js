@@ -87,6 +87,12 @@ function createAudioCard(name) {
   audioCard.name = name;
 }
 
+/**
+ * When the home button is clicked, redirect to the main page
+ * 
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
 homeButton.addEventListener("click", () => {
   window.location = "index.html";
 });
