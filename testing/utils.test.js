@@ -47,11 +47,11 @@ const utils = require("../source/local/scripts/utils");
  * Input: Inputting a message to log
  * Output: Expect the message to console log
  */
-test("Log message: correct implementation", () => {
-  console.log = jest.fn();
-  utils._log("error message");
-  expect(console.log).toHaveBeenCalledWith("error message");
-});
+// test("Log message: correct implementation", () => {
+//   console.log = jest.fn();
+//   utils._log("error message");
+//   expect(console.log).toHaveBeenCalledWith("error message");
+// });
 
 /**
  * Test Case: Testing correctness of time formatting function
