@@ -371,10 +371,9 @@ test("Testing get path: no path - INVALID ", () => {
  * add_note(timestamp, note)
  */
 test("Testing add note: not a number - INVALID TIME", () => {
-  function getter() {
-    const newAudio = new functions.AudioObject(TESTFILE);
-    expect(newAudio.add_note("not a number", "test_note")).toThrow(`Timestamp must be a valid number (in seconds)`);
-  }
+  const newAudio = new functions.AudioObject(TESTFILE);
+  const res = newAudio.add_note("not a number", "test_note");
+  expect(res).toBe(undefined);
 });
 
 /**
