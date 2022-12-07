@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
+/* Universal font for each page */
 * {
   font-family: "Nunito", "Trebuchet MS", sans-serif;
 }
@@ -13,6 +14,7 @@ body {
   margin: 35px 40px;
 }
 
+/* Navbar style */
 nav {
   position: absolute;
   top: 35px;
@@ -25,6 +27,7 @@ nav {
   z-index: 10;
 }
 
+/* Navbar icon styles */
 #home,
 #back {
   width: 30px;
@@ -42,6 +45,7 @@ nav {
   }
 } */
 
+/* Path display style */
 #path {
   margin-left: auto;
   font-size: 35px;

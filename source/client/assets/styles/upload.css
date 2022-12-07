@@ -1,3 +1,4 @@
+/* Animation for upload screen */
 @keyframes zoom {
   from {
     transform: scale(0, 0);
@@ -8,6 +9,7 @@
   }
 }
 
+/* Upload screen style */
 .button-container {
   display: flex;
   justify-content: center;
