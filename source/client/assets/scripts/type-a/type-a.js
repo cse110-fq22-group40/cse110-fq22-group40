@@ -45,18 +45,19 @@ window.addEventListener("load", () => {
  */
 addButton.addEventListener("click", () => {
   // Create a prompt to allow the user to upload an audio file
-  const createAudObject = document.createElement("audio-object-create-screen");
-  document.body.appendChild(createAudObject);
+  const audioObjectCreateScreen = document.createElement("audio-object-create-screen");
+  document.body.appendChild(audioObjectCreateScreen);
+  audioObjectCreateScreen.focus();
 
   // When the user submits a new audio file
-  createAudObject.addEventListener("fileSubmitted", evt => {
+  audioObjectCreateScreen.addEventListener("fileSubmitted", evt => {
     try {
       // Create a new audio card
       audio_utils.add_audio(typeFName, typeAName, evt.detail.name, evt.detail.path);
       createAudioCard(evt.detail.name);
 
       // Remove the input prompt
-      document.body.removeChild(createAudObject);
+      document.body.removeChild(audioObjectCreateScreen);
 
       // Show success screen
       const successScreen = document.createElement("success-screen");
@@ -87,6 +88,12 @@ function createAudioCard(name) {
   audioCard.name = name;
 }
 
+/**
+ * When the home button is clicked, redirect to the main page
+ * 
+ * @type {HTMLElement} - the target of the event
+ * @listens document#click - when the AudioCard component is clicked
+ */
 homeButton.addEventListener("click", () => {
   window.location = "index.html";
 });

@@ -16,14 +16,17 @@
   <link rel="stylesheet" href="assets/styles/upload.css">
 </head>
 <body class="index-background">
+  <!-- Navbar located at top of page -->
   <nav>
     <img src="./assets/images/logo.png" alt="logo" id="home" draggable="false">
   </nav>
 
+  <!-- Button to create new folder -->
   <div class="button-container">
     <button class="add-button type-f-background">+ Create a New Project</button>
   </div>
 
+  <!-- Folder card -->
   <div class="card-container">
     <template id="card-template">
       <link rel="stylesheet" href="assets/styles/card.css">
@@ -32,23 +35,66 @@
       <div class="card type-f-background">
         <img src="assets/images/folder.png" class="icon" alt="folder icon" draggable="false">
         <h2></h2>
+        <div class="button-container">
+          <button id="rename-button">
+            <img src="./assets/images/pencil.png" alt="pencil" id="rename-icon">
+          </button>
+          <button id="delete-button">
+            <img src="./assets/images/trash.png" alt="trash" id="delete-icon">
+          </button>
+        </div>
       </div>
     </template>
   </div>
 
-  <template id="create-screen-template">
-    <link rel="stylesheet" href="assets/styles/create-screen.css">
+  <!-- Popup menu to rename-->
+  <template id="rename-popup">
+    <link rel="stylesheet" href="assets/styles/popup.css">
 
-    <div class="container">
-      <button class="exit"></button>
-      <h2 class="title">Name and create your folder!</h2>
-      <form>
-        <input type="text" class="name">
-        <input type="submit" class="create">
-      </form>
+    <div id="outside-area">
+      <div class="rename-popup-screen">
+        <button class="exit"></button>
+        <h2 class="title">Rename your folder!</h2>
+        <form>
+          <input type="text" class="new-name">
+          <input type="submit" class="rename-submit">
+        </form>
+      </div>
     </div>
   </template>
 
+  <!-- Popup menu to delete-->
+  <template id="delete-popup">
+    <link rel=stylesheet href="assets/styles/popup.css">
+
+    <div id="outside-area">
+      <div id="delete-popup-screen">
+        <h2 class="popup-title">Are you sure you want to delete?</h2>
+        <div class="yes-no-container">
+          <button class="update-yes" type="submit">Yes</button>
+          <button class="update-no" type="submit">No</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Popup menu to create new folder-->
+  <template id="create-screen-template">
+    <link rel="stylesheet" href="assets/styles/create-screen.css">
+
+    <div id="outside-area">
+      <div class="container">
+        <button class="exit"></button>
+        <h2 class="title">Name and create your folder!</h2>
+        <form>
+          <input type="text" class="name">
+          <input type="submit" class="create">
+        </form>
+      </div>
+    </div>
+  </template>
+
+  <!-- Popup menu for success-->
   <template id="success-screen-template">
     <link rel="stylesheet" href="assets/styles/success-screen.css">
 

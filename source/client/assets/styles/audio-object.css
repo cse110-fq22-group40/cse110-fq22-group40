@@ -1,7 +1,9 @@
+/* Background color to use */
 :root {
   --secondary-color: #f4d0af;
 }
 
+/* Animation when opening page */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -11,6 +13,7 @@
   }
 }
 
+/* Text editing box style */
 #editor {
   display: none;
   animation: fadeIn 0.75s;
@@ -23,19 +26,22 @@
   animation: expand 0.75s;
 } */
 
+/* Animation to make audio player bigger */
 @keyframes expandWidth {
   from {
     width: 0;
   }
 }
 
+/* Audio player style */
 #audio-player {
-  margin-top: 40px;
+  margin-top: 85px;
   width: 100%;
   animation: expandWidth 0.75s;
   filter: invert(100%);
 }
 
+/* Quill text editor style */
 .ql-toolbar {
   margin-top: 10px;
   border: none !important;
@@ -210,6 +216,7 @@ code {
   font-family: monospace;
 }
 
+/* Submit note button style */
 #submit {
   border: none;
   border-radius: 8px;
@@ -228,6 +235,7 @@ code {
   filter: brightness(90%);
 }
 
+/* Container for all notes displayed */
 #note-display {
   display: flex;
   flex-direction: column;
@@ -239,6 +247,7 @@ code {
   transition: margin-top 0.75s;
 }
 
+/* Individual note style */
 .note {
   margin-bottom: 10px;
   border: none;
@@ -248,6 +257,7 @@ code {
   animation: fadeIn 0.75s;
 }
 
+/* Timestamp style */
 .timestamp {
   color: dodgerblue;
   cursor: pointer;
@@ -272,6 +282,7 @@ code {
   }
 }
 
+/* Update note popup screen style */
 #update-note {
   position: absolute;
   display: none;
@@ -290,8 +301,10 @@ code {
   padding: 40px;
   user-select: none;
   animation: zoom 0.5s;
+  z-index: 20;
 }
 
+/* Update note button styles */
 .yes-no-container {
   display: flex;
   flex-direction: row;
