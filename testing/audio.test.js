@@ -142,7 +142,7 @@ test("Test add_audio: correct usage", () => {
  * Test Case: Getting a path to an audio object that doesnt exist
  * 
  * Input: The audio object we want to add
- * Output: The name of the audio object
+ * Output: Checking for error that object doenst exist
  */
 //TODO: "Cannot read properties of undefined (reading 'get_typeA')"
  test("Test get_audio_path: invalid object - NO AUDIO OBJECT", () => {
@@ -158,4 +158,22 @@ test("Test add_audio: correct usage", () => {
   
 
   expect(getter).toThrow(`AudioObj with name "test_aud" does not exist`);
+});
+
+/**
+ * Test Case: Getting a path to an audio object
+ * 
+ * Input: The audio object we want to add
+ * Output: The audio object's path
+ */
+//TODO: "Cannot read properties of undefined (reading 'get_typeA')"
+test("Test get_audio_path: correct usage", () => {
+  const newTypeF = new f_fun.TypeF("test_typeF"); 
+  const newTypeA = new a_fun.TypeA("test_typeA");
+  f_fun.dict_typeFs["test_typeF"] = newTypeF;
+  newTypeF.add_typeA("test_typeA");
+  aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
+  const filename = "test_aud";
+  const name = aud.get_audio_path("test_typeF", "test_typeA", filename);
+  expect(name).toEqual(TESTFILE);
 });
