@@ -11,9 +11,7 @@ import { utils, audio_utils, notes_utils } from "../../../../local/imports.js";
 // Syntax highlighting for code-blocks
 window.hljs = require("highlight.js");
 
-// LaTeX support for inserting math equations
-window.katex = require("katex");
-
+// Configure the Quill container
 const Quill = require("quill");
 
 // Automatically convert markdown into rich-text!
@@ -77,6 +75,13 @@ Quill.register("modules/imageCompress", imageCompressor);
 
 let quill;
 
+/**
+ * When an audio-card object is opened, load Quill text editor for user input.
+ * 
+ * 
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
+ */
 window.addEventListener("load", () => {
   document.title += ` ❖ ${audioObjectName}`;
   path.innerHTML = `/\u2009${typeFName}\u2009/\u2009${typeAName}\u2009/\u2009${audioObjectName}`;
@@ -122,22 +127,22 @@ window.addEventListener("load", () => {
 /**
  * When the page loads, call loadAudio
  *
- * @type {window} - the target of the event
- * @listens window#load - when the window loads
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
  */
 window.addEventListener("load", loadAudio(audio));
 
 /**
  * When the page loads, call loadNotes
  *
- * @type {window} - the target of the event
- * @listens window#load - when the window loads
+ * @type {window} - The target of the event
+ * @listens window#load - When the window loads
  */
 window.addEventListener("load", loadNotes(notes));
 
 /**
- * Loads the audio into the player when the audio object page loads
- * @param {string} src - path of the mp3 file
+ * Loads the audio into the player when opening the audio object page
+ * @param {string} src - Path of the mp3 file
  * 
  * @Usage
  * Ex: loadAudio("path/of/music.mp3")
@@ -150,7 +155,8 @@ function loadAudio(src) {
 }
 
 /**
- * Loads the notes into the container the audio object page loads
+ * Display the notes in the container
+ * 
  * @param {Object} notes - Key is the timestamp and value is the note
  * 
  * @Usage
@@ -226,7 +232,7 @@ function initAudioVisualizer() {
 }
 
 /**
- * Submits a note to be displayed onto the screen and stores into the backend
+ * Submits a note, displays it onto the screen, and stores into the backend
  * 
  * @Usage
  * Ex: submitNote()
@@ -274,11 +280,11 @@ function submitNote() {
 submitButton.addEventListener("click", submitNote);
 
 /**
- * Called when a note is submitted, performs the operation to display the note
+ * When a note is submitted, display the note
  * onto the screen
  * 
- * @param {string} timeStamp - current timestamp of the where the note exists
- * @param {string} text - the note the user types
+ * @param {string} timeStamp - Current timestamp of the note
+ * @param {string} text - user input
  * 
  * @Usage 
  * Ex: displayNote("1", "perfect technique")
@@ -333,8 +339,8 @@ homeButton.addEventListener("click", () => {
 /**
  * When the back button is clicked on the page go back to the previous page
  *
- * @type {HTMLElement} - the target of the event
- * @listens document#click - when the AudioCard component is clicked
+ * @type {HTMLElement} - The target of the event
+ * @listens document#click - When the AudioCard component is clicked
  */
 backButton.addEventListener("click", () => {
   window.location = "type-a.html";

@@ -1,4 +1,4 @@
-/* Rename popup */
+/* Rename popup animation */
 @keyframes zoom {
   from {
     transform: scale(0, 0);
@@ -9,6 +9,7 @@
   }
 }
 
+/* Rename popup style */
 .rename-popup-screen {
   position: absolute;
   display: flex;
@@ -98,7 +99,7 @@
   filter: brightness(90%);
 }
 
-/* Delete popup */
+/* Outside area of popup screen style */
 #outside-area {
   position: fixed;
   top: 0;
@@ -108,6 +109,7 @@
   z-index: 20;
 }
 
+/* Delete popup style */
 #delete-popup-screen {
   position: fixed;
   display: flex;
