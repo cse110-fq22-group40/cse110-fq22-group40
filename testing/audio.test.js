@@ -1,7 +1,10 @@
 /**
- * audio method Testing
+ * Testing the file: audio.js
  * 
- * Billy
+ * File: audio.test.js
+ * 
+ * Description: This file is used to test the notes related functions defined
+ * in the file audio.js
  */
   
 // Importing file to test
@@ -10,6 +13,9 @@ const f_fun = require("../source/local/classes/type-f.js");
 const a_fun = require("../source/local/classes/type-a.js");
 const aud = require("../source/local/scripts/audio.js");
 const { resolve } = require("path");
+
+const functions = require("../source/local/scripts/audio.js");
+const { folder_utils, audio_utils, notes_utils} = require("../source/local/imports.js");
 
 // Constants
 const TESTING_ABS_PATH = resolve(__dirname, "testFiles");
@@ -29,6 +35,32 @@ const TIMESTAMP_EX2 = 5;
 
 const NOTE_EX1 = "This needs more dynamics!";
 const NOTE_EX2 = "More crescendo!";
+
+/**
+ * Test Case: Gets all the audio
+ * 
+ * Input: The audio objects we want to add
+ * Output: The added audio objects
+ */
+//TODO: why doesnt this work?
+test("Test get_all_audio: correct usage TESTING", () => {
+  folder_utils.add_typeF("testTypeF");
+  folder_utils.add_typeA("testTypeF", "testTypeA");
+  for(let i = 0; i < 20; i++){
+    audio_utils.add_audio("testTypeF", "testTypeA", `test ${i}`, TESTFILE);
+  }
+  console.log(functions.get_all_audio_names("testTypeF", "testTypeA"));
+  const names = functions.get_all_audio_names("testTypeF", "testTypeA")
+  expect(names).toEqual([                                                                                                                                                                                                                                                                                                                       
+    'test 0',  'test 1',  'test 2',
+    'test 3',  'test 4',  'test 5',
+    'test 6',  'test 7',  'test 8',
+    'test 9',  'test 10', 'test 11',
+    'test 12', 'test 13', 'test 14',
+    'test 15', 'test 16', 'test 17',
+    'test 18', 'test 19'
+  ])
+});
 
 /**
  * Test Case: Gets all the audio
