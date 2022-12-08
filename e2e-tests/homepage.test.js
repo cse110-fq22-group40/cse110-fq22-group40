@@ -5,6 +5,7 @@ const path = require("path");
 
 let window;
 let electronApp;
+const filePath = "../e2e-tests/moonlight-sonata.mp3"
 
 test.beforeAll(async () => {
   electronApp = await electron.launch({ args: ["source/local/app.js"] })
@@ -78,14 +79,11 @@ test("Create Audio", async () => {
   await message.type("Sonata");
 
   await window.locator("input.upload").click();
-  await window.setInputFiles('input[type="file"]',"/moonlight-sonata.mp3");
+  
+  await window.setInputFiles('input[name="file"]', filePath);
 
   await window.locator("input.create").click();
 
-
-  // getting the text of the new project
-  const text = await window.locator("h2.card-title").textContent();
-  await expect(text).toBe("Sonata");
 });
 
 test("Rename Audio", async () => {
