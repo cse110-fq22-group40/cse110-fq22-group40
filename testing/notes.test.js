@@ -9,9 +9,9 @@
 
 // Constants
 const functions = require("../source/local/scripts/notes.js");
-const { folder_utils, audio_utils, notes_utils} = require("../source/local/imports.js");
-const { add_audio } = require("../source/local/scripts/audio.js");
-const { add_note } = require("../source/local/scripts/notes.js");
+const { folder_utils, audio_utils, notes_utils} = require(
+  "../source/local/imports.js"
+);
 
 const TESTING_REL_PATH = "../../../testing/testFiles";
 
@@ -190,6 +190,6 @@ test("Test delete_note: CORRECT USAGE",() => {
     "testNewNotes"
     )
   }
+
   expect(getter).toThrow(`Note with timestamp "4" does not exist`);
-  
 });
