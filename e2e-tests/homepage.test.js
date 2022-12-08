@@ -5,7 +5,7 @@ const path = require("path");
 
 let window;
 let electronApp;
-const filePath = "../e2e-tests/moonlight-sonata.mp3"
+//const filePath = "e2e-tests/moonlight-sonata.mp3"
 
 test.beforeAll(async () => {
   electronApp = await electron.launch({ args: ["source/local/app.js"] })
@@ -70,7 +70,11 @@ test("Rename Type A", async () => {
   await expect(text).toBe("Practice 2");
 });
 
-
+// Playwright currently has an issue with uploading files in electron where
+// the path of the file is not being saved due to electron methods for 
+// playwright still being "experimental". 
+//(See here: https://github.com/microsoft/playwright/issues/10527)
+/*
 test("Create Audio", async () => {
   // click on "Create a New Project" button
   await window.locator("div.card.type-a-background").click();
@@ -78,13 +82,11 @@ test("Create Audio", async () => {
   const message = window.locator("input.name");
   await message.type("Sonata");
 
-  await window.locator("input.upload").click();
-  
-  await window.setInputFiles('input[name="file"]', filePath);
+  await window.setInputFiles('input[type="file"]', filePath);
 
   await window.locator("input.create").click();
-
 });
+
 
 test("Rename Audio", async () => {
   await window.locator("button#rename-button").click();
@@ -107,10 +109,12 @@ test("Delete Audio", async () => {
   count = await window.locator("h2.card-title").count();
   expect(count).toBe(0);
 });
+*/
 
 test("Delete Type A", async () => {
   // checking the count of children
   let count = await window.locator("h2.card-title").count();
+  await window.screenshot({ path: "e2e-tests/deleteA.png" });
   expect(count).toBe(1);
   // getting rid of the new project for new tests
   await window.locator("button#delete-button").click();
@@ -122,6 +126,8 @@ test("Delete Type A", async () => {
 
 test("Delete Type F", async () => {
   // checking the count of children
+  await window.locator("id=back").click();
+  await window.screenshot({ path: "e2e-tests/deleteF.png" });
   let count = await window.locator("h2.card-title").count();
   expect(count).toBe(1);
   // getting rid of the new project for new tests
@@ -131,8 +137,6 @@ test("Delete Type F", async () => {
   count = await window.locator("h2.card-title").count();
   expect(count).toBe(0);
 });
-
-
 
 
 test.afterAll(async () => {
