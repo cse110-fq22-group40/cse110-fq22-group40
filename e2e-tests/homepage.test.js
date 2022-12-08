@@ -1,5 +1,7 @@
 const { _electron: electron } = require("playwright")
 const { test, expect } = require("@playwright/test")
+const path = require("path");
+
 
 let window;
 let electronApp;
@@ -7,6 +9,9 @@ let electronApp;
 test.beforeAll(async () => {
   electronApp = await electron.launch({ args: ["source/local/app.js"] })
   window = await electronApp.firstWindow();
+  const localStorage = await window.evaluate(() => {
+    return localStorage.clear();// return Object.keys(localStorage).map(name => ({ name, value: localStorage.getItem(name) }));
+  });
 });
 
 test("Homepage has Team LitHub in the title", async () => {
@@ -15,7 +20,7 @@ test("Homepage has Team LitHub in the title", async () => {
   expect(title).toBe("LitHub Front Page");
 });
 
-test("Create a new project button and deleting a project", async () => {
+test("Create Type F", async () => {
   // click on "Create a New Project" button
   await window.locator(".add-button").click();
   // take screenshot
@@ -30,6 +35,94 @@ test("Create a new project button and deleting a project", async () => {
   // getting the text of the new project
   const text = await window.locator("h2.card-title").textContent();
   await expect(text).toBe("Classical");
+});
+
+test("Rename Type F", async () => {
+  await window.locator("button#rename-button").click();
+  const message = window.locator("input.new-name");
+  await message.type("Pop");
+  await window.locator("input.rename-submit").click();
+  // getting the text of the new project
+  const text = await window.locator("h2.card-title").textContent();
+  await expect(text).toBe("Pop");
+});
+
+test("Create Type A", async () => {
+  // click on "Create a New Project" button
+  await window.locator("div.card.type-f-background").click();
+  await window.locator("button.add-button.type-a-background").click();
+  const message = window.locator("input.name");
+  await message.type("Practice 1");
+  await window.locator("input.create").click();
+  // getting the text of the new project
+  const text = await window.locator("h2.card-title").textContent();
+  await expect(text).toBe("Practice 1");
+});
+
+test("Rename Type A", async () => {
+  await window.locator("button#rename-button").click();
+  const message = window.locator("input.new-name");
+  await message.type("Practice 2");
+  await window.locator("input.rename-submit").click();
+  // getting the text of the new project
+  const text = await window.locator("h2.card-title").textContent();
+  await expect(text).toBe("Practice 2");
+});
+
+
+test("Create Audio", async () => {
+  // click on "Create a New Project" button
+  await window.locator("div.card.type-a-background").click();
+  await window.locator("button.add-button.audio-object-background").click();
+  const message = window.locator("input.name");
+  await message.type("Sonata");
+
+  await window.locator("input.upload").click();
+  await window.setInputFiles('input[type="file"]',"/moonlight-sonata.mp3");
+
+  await window.locator("input.create").click();
+
+
+  // getting the text of the new project
+  const text = await window.locator("h2.card-title").textContent();
+  await expect(text).toBe("Sonata");
+});
+
+test("Rename Audio", async () => {
+  await window.locator("button#rename-button").click();
+  const message = window.locator("input.new-name");
+  await message.type("Practice 2");
+  await window.locator("input.rename-submit").click();
+  // getting the text of the new project
+  const text = await window.locator("h2.card-title").textContent();
+  await expect(text).toBe("Practice 2");
+});
+
+test("Delete Audio", async () => {
+  // checking the count of children
+  let count = await window.locator("h2.card-title").count();
+  expect(count).toBe(1);
+  // getting rid of the new project for new tests
+  await window.locator("button#delete-button").click();
+  await window.locator("button.update-yes").click();
+  // checking the count of updated children
+  count = await window.locator("h2.card-title").count();
+  expect(count).toBe(0);
+});
+
+test("Delete Type A", async () => {
+  // checking the count of children
+  let count = await window.locator("h2.card-title").count();
+  expect(count).toBe(1);
+  // getting rid of the new project for new tests
+  await window.locator("button#delete-button").click();
+  await window.locator("button.update-yes").click();
+  // checking the count of updated children
+  count = await window.locator("h2.card-title").count();
+  expect(count).toBe(0);
+});
+
+test("Delete Type F", async () => {
   // checking the count of children
   let count = await window.locator("h2.card-title").count();
   expect(count).toBe(1);
@@ -42,15 +135,7 @@ test("Create a new project button and deleting a project", async () => {
 });
 
 
-// test("testing adding type A in type F folder", async () => {
-//   //electronApp = await electron.launch({ args: ["source/local/app.js"] })
-//   //window = await electronApp.firstWindow();
-//   await window.locator(".add-button").click();
-//   await window.screenshot({ path: "e2e-tests/add.png" });
-//   const message = window.locator("input.name");
-//   console.log(await message.inputValue());
-//   await message.type("Classical");
-// });
+
 
 test.afterAll(async () => {
   await electronApp.close();
