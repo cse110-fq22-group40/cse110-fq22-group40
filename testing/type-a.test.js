@@ -132,7 +132,6 @@ test("Test get_audio: correct return - CORRECT NAME", () => {
   const newTypeA = new functions.TypeA("test_typeA");
   newTypeA.add_audio("test", TESTFILE_REL);
   const testAudioObj = newTypeA.get_audio("test");
-  console.log(testAudioObj);
 
   expect(testAudioObj).toEqual({ "path": TESTFILE_REL, "notes": {} });
 });
