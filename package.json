@@ -44,6 +44,8 @@
   "jest": {
     "verbose": true,
     "resetMocks": false,
-    "setupFiles": ["jest-localstorage-mock"]
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   }
 }
