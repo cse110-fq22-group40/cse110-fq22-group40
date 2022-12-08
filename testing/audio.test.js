@@ -8,14 +8,14 @@
  */
   
 // Importing file to test
-const aud_fun = require("../source/local/classes/audio-object.js");
-const f_fun = require("../source/local/classes/type-f.js");
-const a_fun = require("../source/local/classes/type-a.js");
-const aud = require("../source/local/scripts/audio.js");
-const { resolve } = require("path");
+// const aud_fun = require("../source/local/classes/audio-object.js");
+// const f_fun = require("../source/local/classes/type-f.js");
+// const a_fun = require("../source/local/classes/type-a.js");
+// const aud = require("../source/local/scripts/audio.js");
 
 const functions = require("../source/local/scripts/audio.js");
 const { folder_utils, audio_utils, notes_utils} = require("../source/local/imports.js");
+const { resolve } = require("path");
 
 // Constants
 const TESTING_ABS_PATH = resolve(__dirname, "testFiles");
@@ -42,15 +42,14 @@ const NOTE_EX2 = "More crescendo!";
  * Input: The audio objects we want to add
  * Output: The added audio objects
  */
-//TODO: why doesnt this work?
 test("Test get_all_audio: correct usage TESTING", () => {
   folder_utils.add_typeF("testTypeF");
   folder_utils.add_typeA("testTypeF", "testTypeA");
   for(let i = 0; i < 20; i++){
     audio_utils.add_audio("testTypeF", "testTypeA", `test ${i}`, TESTFILE);
   }
-  console.log(functions.get_all_audio_names("testTypeF", "testTypeA"));
-  const names = functions.get_all_audio_names("testTypeF", "testTypeA")
+  //console.log(functions.get_all_audio_names("testTypeF", "testTypeA"));
+  const names = functions.get_all_audio_names("testTypeF", "testTypeA");
   expect(names).toEqual([                                                                                                                                                                                                                                                                                                                       
     'test 0',  'test 1',  'test 2',
     'test 3',  'test 4',  'test 5',
@@ -59,38 +58,10 @@ test("Test get_all_audio: correct usage TESTING", () => {
     'test 12', 'test 13', 'test 14',
     'test 15', 'test 16', 'test 17',
     'test 18', 'test 19'
-  ])
-});
-
-/**
- * Test Case: Gets all the audio
- * 
- * Input: The audio objects we want to add
- * Output: The added audio objects
- */
-//TODO: why doesnt this work?
-test("Test get_all_audio: correct usage", () => {
-  const newTypeF = new f_fun.TypeF("test_typeF"); 
-  const newTypeA = new a_fun.TypeA("test_typeA");
-  f_fun.dict_typeFs["test_typeF"] = newTypeF;
-  newTypeF.add_typeA("test_typeA");
-  for(let i = 0; i < 20; i++){
-    newTypeA.add_audio(`test ${i}`, TESTFILE);
-    aud.add_audio("test_typeF", "test_typeA", `test ${i}`, TESTFILE);
-  }
-
-  const audioNames = aud.get_all_audio_names("test_typeF", "test_typeA");
-
-  expect(names).toEqual([
-    'test 0',  'test 1',  'test 2',
-    'test 3',  'test 4',  'test 5',
-    'test 6',  'test 7',  'test 8',
-    'test 9',  'test 10', 'test 11',
-    'test 12', 'test 13', 'test 14',
-    'test 15', 'test 16', 'test 17',
-    'test 18', 'test 19'
   ]);
-})
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
+});
 
 /**
  * Test Case: Adding an audio object without giving a name
@@ -100,15 +71,14 @@ test("Test get_all_audio: correct usage", () => {
  */
 test("Test add_audio: invalid name - EMPTY STRING", () => {
   function getter() {
-    const newTypeF = new f_fun.TypeF("test_typeF"); 
-    const newTypeA = new a_fun.TypeA("test_typeA");
-    f_fun.dict_typeFs["test_typeF"] = newTypeF;
-    newTypeF.add_typeA("test_typeA");
-    newTypeA.add_audio("test_aud", TESTFILE);
-    aud.add_audio("test_typeF", "test_typeA", "", TESTFILE);
+    folder_utils.add_typeF("testTypeF");
+    folder_utils.add_typeA("testTypeF", "testTypeA");
+    functions.add_audio("testTypeF", "testTypeA", "", TESTFILE);
   }
-
+  
   expect(getter).toThrow("AudioObj name cannot be empty");
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
 
 /**
@@ -117,18 +87,18 @@ test("Test add_audio: invalid name - EMPTY STRING", () => {
  * Input: The audio object we want to add
  * Output: Checking for an error because the name is invalid
  */
-//TODO: why doesnt it work?
 test("Test add_audio: invalid name - ALREADY EXISTS", () => {
+  const audName = "test_Aud";
   function getter() {
-    const newTypeF = new f_fun.TypeF("test_typeF"); 
-    const newTypeA = new a_fun.TypeA("test_typeA");
-    f_fun.dict_typeFs["test_typeF"] = newTypeF;
-    newTypeF.add_typeA("test_typeA");
-    newTypeA.add_audio("test_aud", TESTFILE);
-    aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
+    folder_utils.add_typeF("testTypeF");
+    folder_utils.add_typeA("testTypeF", "testTypeA");
+    functions.add_audio("testTypeF", "testTypeA", audName, TESTFILE);
+    functions.add_audio("testTypeF", "testTypeA", audName, TESTFILE);
   }
 
-  expect(getter).toThrow('AudioObj with name "test_aud" already exists');
+  expect(getter).toThrow(`AudioObj with name "${audName}" already exists`);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
 
 /**
@@ -139,15 +109,14 @@ test("Test add_audio: invalid name - ALREADY EXISTS", () => {
  */
 test("Test add_audio: invalid name - PATH INCORRECT", () => {
   function getter() {
-    const newTypeF = new f_fun.TypeF("test_typeF"); 
-    const newTypeA = new a_fun.TypeA("test_typeA");
-    f_fun.dict_typeFs["test_typeF"] = newTypeF;
-    newTypeF.add_typeA("test_typeA");
-    newTypeA.add_audio("test_aud", TEST_REL_PATH_FAKE);
-    aud.add_audio("test_typeF", "test_typeA", "", TEST_REL_PATH_FAKE);
+    folder_utils.add_typeF("testTypeF");
+    folder_utils.add_typeA("testTypeF", "testTypeA");
+    functions.add_audio("testTypeF", "testTypeA", "test_Aud", TEST_REL_PATH_FAKE);
   }
 
   expect(getter).toThrow("Invalid audio file path");
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
 
 /**
@@ -156,18 +125,15 @@ test("Test add_audio: invalid name - PATH INCORRECT", () => {
  * Input: The audio object we want to add
  * Output: The name of the audio object
  */
-//TODO: why doesnt this work?
 test("Test add_audio: correct usage", () => {
-  const newTypeF = new f_fun.TypeF("test_typeF"); 
-  const newTypeA = new a_fun.TypeA("test_typeA");
-  f_fun.dict_typeFs["test_typeF"] = newTypeF;
-  newTypeF.add_typeA("test_typeA");
-  newTypeA.add_audio("test_aud", TESTFILE);
-  aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
-
-  const name = aud.get_audio_path("test_typeF", "test_typeA", "test_aud");
-
-  expect(name).toEqual(TESTFILE);
+  folder_utils.add_typeF("testTypeF");
+  folder_utils.add_typeA("testTypeF", "testTypeA");
+  audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+  //console.log(functions.get_all_audio_names("testTypeF", "testTypeA"));
+  const names = functions.get_all_audio_names("testTypeF", "testTypeA");
+  expect(names).toEqual(["testAud"]);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
 
 /**
@@ -176,20 +142,17 @@ test("Test add_audio: correct usage", () => {
  * Input: The audio object we want to add
  * Output: Checking for error that object doenst exist
  */
-//TODO: "Cannot read properties of undefined (reading 'get_typeA')"
  test("Test get_audio_path: invalid object - NO AUDIO OBJECT", () => {
+  const fakeFile = "fakeFile";
   function getter() {
-    const newTypeF = new f_fun.TypeF("test_typeF"); 
-    const newTypeA = new a_fun.TypeA("test_typeA");
-    f_fun.dict_typeFs["test_typeF"] = newTypeF;
-    newTypeF.add_typeA("test_typeA");
-
-    const filename = "test_aud";
-    aud.get_audio_path("test_typeF", "test_typeA", "test_aud");
+    folder_utils.add_typeF("testTypeF");
+    folder_utils.add_typeA("testTypeF", "testTypeA");
+    audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+    functions.get_audio_path("testTypeF", "testTypeA", fakeFile)
   }
-  
-
-  expect(getter).toThrow(`AudioObj with name "test_aud" does not exist`);
+  expect(getter).toThrow(`AudioObj with name "${fakeFile}" does not exist`);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
 
 /**
@@ -198,14 +161,47 @@ test("Test add_audio: correct usage", () => {
  * Input: The audio object we want to add
  * Output: The audio object's path
  */
-//TODO: "Cannot read properties of undefined (reading 'get_typeA')"
 test("Test get_audio_path: correct usage", () => {
-  const newTypeF = new f_fun.TypeF("test_typeF"); 
-  const newTypeA = new a_fun.TypeA("test_typeA");
-  f_fun.dict_typeFs["test_typeF"] = newTypeF;
-  newTypeF.add_typeA("test_typeA");
-  aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
-  const filename = "test_aud";
-  const name = aud.get_audio_path("test_typeF", "test_typeA", filename);
-  expect(name).toEqual(TESTFILE);
+  folder_utils.add_typeF("testTypeF");
+  folder_utils.add_typeA("testTypeF", "testTypeA");
+  audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+  const names = functions.get_audio_path("testTypeF", "testTypeA", "testAud");
+  expect(names).toEqual(TESTFILE);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
+});
+
+/**
+ * Test Case: Delete and audio object
+ * 
+ * Input: The audio object we want to add
+ * Output: The object is deleted
+ */
+ test("Test delete_audio: correct usage", () => {
+  folder_utils.add_typeF("testTypeF");
+  folder_utils.add_typeA("testTypeF", "testTypeA");
+  audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+  audio_utils.delete_audio("testTypeF", "testTypeA", "testAud")
+  const names = functions.get_all_audio_names("testTypeF", "testTypeA");
+  expect(names).toEqual([]);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
+});
+
+/**
+ * Test Case: Updating an audio object that does not exist
+ * 
+ * Input: The audio object we want to add
+ * Output: Checking for error that path doenst exist
+ */
+ test("Test update_audio_path: invalid object - NO AUDIO OBJECT", () => {
+  const fakeFile = "fakeFile";
+  function getter() {
+    folder_utils.add_typeF("testTypeF");
+    folder_utils.add_typeA("testTypeF", "testTypeA");
+    functions.update_audio_path("testTypeF", "testTypeA", fakeFile, TESTFILE);
+  }
+  expect(getter).toThrow(`AudioObj with name "${fakeFile}" does not exist`);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
 });
