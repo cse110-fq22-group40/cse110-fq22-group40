@@ -36,21 +36,28 @@ const NOTE_EX2 = "More crescendo!";
  * Input: The audio objects we want to add
  * Output: The added audio objects
  */
-test("Test get_all_audio: CORRECT USEAGE", () => {
+//TODO: why doesnt this work?
+test("Test get_all_audio: correct usage", () => {
   const newTypeF = new f_fun.TypeF("test_typeF"); 
   const newTypeA = new a_fun.TypeA("test_typeA");
   f_fun.dict_typeFs["test_typeF"] = newTypeF;
   newTypeF.add_typeA("test_typeA");
-  newTypeA.add_audio("test_aud1", TESTFILE);
-  newTypeA.add_audio("test_aud2", TESTFILE);
-  newTypeA.add_audio("test_aud3", TESTFILE);
+  for(let i = 0; i < 20; i++){
+    newTypeA.add_audio(`test ${i}`, TESTFILE);
+    aud.add_audio("test_typeF", "test_typeA", `test ${i}`, TESTFILE);
+  }
 
   const audioNames = aud.get_all_audio_names("test_typeF", "test_typeA");
 
-  expect(audioNames).toBeInstanceOf(Array);
-  expect(audioNames.length).toBe(3);
-  expect(audioNames).toContain("test_aud1");
-  expect(audioNames).toContain("test_aud2");
+  expect(names).toEqual([
+    'test 0',  'test 1',  'test 2',
+    'test 3',  'test 4',  'test 5',
+    'test 6',  'test 7',  'test 8',
+    'test 9',  'test 10', 'test 11',
+    'test 12', 'test 13', 'test 14',
+    'test 15', 'test 16', 'test 17',
+    'test 18', 'test 19'
+  ]);
 })
 
 /**
@@ -79,21 +86,21 @@ test("Test add_audio: invalid name - EMPTY STRING", () => {
  * Output: Checking for an error because the name is invalid
  */
 //TODO: why doesnt it work?
-// test("Test add_audio: invalid name - ALREADY EXISTS", () => {
-//   function getter() {
-//     const newTypeF = new f_fun.TypeF("test_typeF"); 
-//     const newTypeA = new a_fun.TypeA("test_typeA");
-//     f_fun.dict_typeFs["test_typeF"] = newTypeF;
-//     newTypeF.add_typeA("test_typeA");
-//     newTypeA.add_audio("test_aud", TESTFILE);
-//     aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
-//   }
+test("Test add_audio: invalid name - ALREADY EXISTS", () => {
+  function getter() {
+    const newTypeF = new f_fun.TypeF("test_typeF"); 
+    const newTypeA = new a_fun.TypeA("test_typeA");
+    f_fun.dict_typeFs["test_typeF"] = newTypeF;
+    newTypeF.add_typeA("test_typeA");
+    newTypeA.add_audio("test_aud", TESTFILE);
+    aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
+  }
 
-//   expect(getter).toThrow('AudioObj with name "test_aud" already exists');
-// });
+  expect(getter).toThrow('AudioObj with name "test_aud" already exists');
+});
 
 /**
- * Test Case: Adding an audio object withan incorrect path
+ * Test Case: Adding an audio object with an incorrect path
  * 
  * Input: The audio object we want to add
  * Output: Checking for an error because the name is invalid
@@ -111,3 +118,44 @@ test("Test add_audio: invalid name - PATH INCORRECT", () => {
   expect(getter).toThrow("Invalid audio file path");
 });
 
+/**
+ * Test Case: Adding an audio object
+ * 
+ * Input: The audio object we want to add
+ * Output: The name of the audio object
+ */
+//TODO: why doesnt this work?
+test("Test add_audio: correct usage", () => {
+  const newTypeF = new f_fun.TypeF("test_typeF"); 
+  const newTypeA = new a_fun.TypeA("test_typeA");
+  f_fun.dict_typeFs["test_typeF"] = newTypeF;
+  newTypeF.add_typeA("test_typeA");
+  newTypeA.add_audio("test_aud", TESTFILE);
+  aud.add_audio("test_typeF", "test_typeA", "test_aud", TESTFILE);
+
+  const name = aud.get_audio_path("test_typeF", "test_typeA", "test_aud");
+
+  expect(name).toEqual(TESTFILE);
+});
+
+/**
+ * Test Case: Getting a path to an audio object that doesnt exist
+ * 
+ * Input: The audio object we want to add
+ * Output: The name of the audio object
+ */
+//TODO: "Cannot read properties of undefined (reading 'get_typeA')"
+ test("Test get_audio_path: invalid object - NO AUDIO OBJECT", () => {
+  function getter() {
+    const newTypeF = new f_fun.TypeF("test_typeF"); 
+    const newTypeA = new a_fun.TypeA("test_typeA");
+    f_fun.dict_typeFs["test_typeF"] = newTypeF;
+    newTypeF.add_typeA("test_typeA");
+
+    const filename = "test_aud";
+    aud.get_audio_path("test_typeF", "test_typeA", "test_aud");
+  }
+  
+
+  expect(getter).toThrow(`AudioObj with name "test_aud" does not exist`);
+});
