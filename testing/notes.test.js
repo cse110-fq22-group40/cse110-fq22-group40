@@ -92,7 +92,7 @@ test("Test delete_note: CORRECT USAGE",() => {
  * Output: We check for a pass since we should be able to correctly add notes
  * to an audioObj and be able to retrieve it. 
  */
-test("Test add_note: 20 notes - CORRECT USAGE",() => {
+ test("Test add_note: 20 notes - CORRECT USAGE",() => {
   folder_utils.delete_typeF("testTypeF");
 
   folder_utils.add_typeF("testTypeF");
@@ -126,7 +126,7 @@ test("Test add_note: 20 notes - CORRECT USAGE",() => {
  * Output: We check for an error since we should not be able to add any notes
  * to an audioObject if a timestamp already exists at that location
  */
-test("Test add_note: 20 notes - REPEATED TIMESTAMPS",() => {
+ test("Test add_note: 20 notes - REPEATED TIMESTAMPS",() => {
   function getter(){
       notes_utils.add_note("testTypeF", "testTypeA","testAudio", 15);
   }
@@ -143,7 +143,7 @@ test("Test add_note: 20 notes - REPEATED TIMESTAMPS",() => {
  * Output: We check for an pass since we should be able to update any notes
  * to an audioObject if a note timestamp already exists at that location
  */
-test("Test update_note: a note - CORRECT USAGE",() => {
+ test("Test update_note: a note - CORRECT USAGE",() => {
   for(let index = 0; index < 20; index++) {
     functions.update_note(
       "testTypeF",
@@ -172,7 +172,7 @@ test("Test update_note: a note - CORRECT USAGE",() => {
  * Output: We check for an pass since we should be able to update any notes
  * to an audioObject if a note timestamp already exists at that location
  */
-test("Test update_note: a note - NONEXISITING TIMESTAMP",() => {
+ test("Test update_note: a note - NONEXISITING TIMESTAMP",() => {
   for(let index = 0; index < 20; index++) {
     functions.delete_note(
       "testTypeF",
