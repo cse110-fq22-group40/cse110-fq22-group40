@@ -8,11 +8,6 @@
  */
   
 // Importing file to test
-// const aud_fun = require("../source/local/classes/audio-object.js");
-// const f_fun = require("../source/local/classes/type-f.js");
-// const a_fun = require("../source/local/classes/type-a.js");
-// const aud = require("../source/local/scripts/audio.js");
-
 const functions = require("../source/local/scripts/audio.js");
 const { folder_utils, audio_utils, notes_utils} = require("../source/local/imports.js");
 const { resolve } = require("path");
