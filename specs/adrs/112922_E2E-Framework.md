@@ -1,12 +1,13 @@
 ---
     status: {Accepted}
-    date: {2022-11-29}
-    last update: {2022-10-3}
-    deciders: {Sailor Eichhorn, Katherine Wopng, Billy Sudirdja, Ben Snowbarger}
+    date: {2022-11-26}
+    update: {2022-12-7}
+    last update: {2022-12-01}
+    deciders: {Sailor Eichhorn, Katherine Wong, Billy Sudirdja, Ben Snowbarger}
     consulted: {Allison Turner, Malcolm McSwain}
     informed: {Rest of Team}
 ---
-# ADR - E2E Framework
+# E2E Framework
 
 ## Context and Problem Statement:
 
@@ -26,6 +27,6 @@ After working on Unit Testing, we moved to E2E testing, and we were initially ru
 
 Scrap the puppeteer work and instead choose Selenium because of its native support for Electron, because of its larger amount of Electron focused documentation
 
-Update 12/8:
+Update 12/7:
 
-We decided to use Playwright instead. This is because it allows us to test our app through Electron. Initially we tried Selenium with WebDriverIO but it became difficult to open our app because we didn't have our app downloaded as a binary executable. Right now we have E2E tests written for creating, updating, deleting Type F and Type A folders, and we decided not to test the Audio File creation because Playwright doesn't have a non-faulty way of uploading a file through automated testing. That is something that our team will look to in the future. 
+We decided on using Microsoft Playwright instead. We had issues with opening the Electron app using WebDriverIO since we needed to package our Electron app into an executable and provide a path to the binary. So, we looked into Playwright instead and got it setup and working much faster. We were also able to write substantial tests and had much more documentation and allowed us to understand it easily. 
