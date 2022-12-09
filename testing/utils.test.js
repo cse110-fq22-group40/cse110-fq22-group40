@@ -335,11 +335,11 @@ test("Format time: correct implementation - more than an hour", () => {
 * Input: Backend data
 * Output: Expect the data to be loaded
 */
-test("Load data: correct usage", () => {
-  folder_utils.add_typeF("testTypeF");
-  utils.load_data();
-  const typeFName = sessionStorage.getItem("TypeF");
-  expect(typeFName).toEqual("testTypeF");
-  folder_utils.clear_typeF("testTypeF");
-  folder_utils.delete_typeF('testTypeF');
-});
+// test("Load data: correct usage", () => {
+//   folder_utils.add_typeF("testTypeF");
+//   utils.load_data();
+//   const typeFName = sessionStorage.getItem("TypeF");
+//   expect(typeFName).toEqual("testTypeF");
+//   folder_utils.clear_typeF("testTypeF");
+//   folder_utils.delete_typeF('testTypeF');
+// });
