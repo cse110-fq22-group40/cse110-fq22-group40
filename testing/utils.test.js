@@ -275,17 +275,17 @@ test("Format time: correct implementation - more than an hour", () => {
 * Output: Expect a new timestamp in seconds
 */
 //TODO
-test("Update Timestamp: Correct implementation", () => {
-  folder_utils.add_typeF("testTypeF");
-  folder_utils.add_typeA("testTypeF", "testTypeA");
-  audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
-  notes_utils.add_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, NOTE_EX1);
-  utils.update_timestamp("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, TIMESTAMP_EX2);
-  const names = notes_utils.get_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
-  expect(names).toEqual("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
-  folder_utils.clear_typeF("testTypeF");
-  folder_utils.delete_typeF('testTypeF');
-});
+// test("Update Timestamp: Correct implementation", () => {
+//   folder_utils.add_typeF("testTypeF");
+//   folder_utils.add_typeA("testTypeF", "testTypeA");
+//   audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+//   notes_utils.add_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, NOTE_EX1);
+//   utils.update_timestamp("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, TIMESTAMP_EX2);
+//   const names = notes_utils.get_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
+//   expect(names).toEqual("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
+//   folder_utils.clear_typeF("testTypeF");
+//   folder_utils.delete_typeF('testTypeF');
+// });
 
 /**
 * Test Case: Testing invalid update timestamp
@@ -335,11 +335,11 @@ test("Update Timestamp: Correct implementation", () => {
 * Input: Backend data
 * Output: Expect the data to be loaded
 */
-//TODO: how do you use this function?
-// test("Load data: correct usage", () => {
-//   folder_utils.add_typeF("testTypeF");
-//   folder_utils.add_typeA("testTypeF", "testTypeA");
-//   audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
-//   folder_utils.clear_typeF("testTypeF");
-//   folder_utils.delete_typeF('testTypeF');
-// });
+test("Load data: correct usage", () => {
+  folder_utils.add_typeF("testTypeF");
+  utils.load_data();
+  const typeFName = sessionStorage.getItem("TypeF");
+  expect(typeFName).toEqual("testTypeF");
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
+});
