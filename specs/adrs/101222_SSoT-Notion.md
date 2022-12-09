@@ -51,6 +51,6 @@ Chosen Option: "Notion" because it allows us to have both a clean and easy syste
 
 Officially we will be using the Notion as our Single Source of Truth where everyone will have their own workspace to upload their own documents and work. We will be using the notion to make announcements, show meeting times, and make tasks list to go along with putting on work on the notion. Then after every sprint the notino will be backup making it so we can also put it into our github repository as a zip file.
 
-Update 12/1:
+# Update 12/1:
 
 Our Notion has exceeded the file size allowed by GitHub. Instead, links to the notion will be included in notable places including references and our README.md. Additionally we are moving a lot of our workflow into GitHub so that both sources can house information from the team.
