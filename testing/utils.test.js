@@ -240,8 +240,8 @@ test("Log message: correct implementation", () => {
     utils.update_name(Audioname, "testTypeF", "testTypeA", "testAud", TESTFILE);
   }
   expect(getter).toThrow(`Audio file with name "${Audioname}" already exists`);
-  // folder_utils.clear_typeF("testTypeF");
-  // folder_utils.delete_typeF("testTypeF");
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF("testTypeF");
 });
 
 /**
@@ -275,19 +275,17 @@ test("Format time: correct implementation - more than an hour", () => {
 * Output: Expect a new timestamp in seconds
 */
 //TODO
-// test("Update Timestamp: Correct implementation", () => {
-//   folder_utils.add_typeF("testTypeF");
-//   folder_utils.add_typeA("testTypeF", "testTypeA");
-//   audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
-//   notes_utils.add_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, NOTE_EX1);
-//   console.log(notes_utils.get_all_notes("testTypeF", "testTypeA", "testAud"));
-//   utils.update_timestamp("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, TIMESTAMP_EX2);
-//   const names = notes_utils.get_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
-//   console.log(names);
-//   expect(names).toEqual(["testAud2"]);
-//   // folder_utils.clear_typeF("testTypeF");
-//   // folder_utils.delete_typeF('testTypeF');
-// });
+test("Update Timestamp: Correct implementation", () => {
+  folder_utils.add_typeF("testTypeF");
+  folder_utils.add_typeA("testTypeF", "testTypeA");
+  audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
+  notes_utils.add_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, NOTE_EX1);
+  utils.update_timestamp("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX1, TIMESTAMP_EX2);
+  const names = notes_utils.get_note("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
+  expect(names).toEqual("testTypeF", "testTypeA", "testAud", TIMESTAMP_EX2);
+  folder_utils.clear_typeF("testTypeF");
+  folder_utils.delete_typeF('testTypeF');
+});
 
 /**
 * Test Case: Testing invalid update timestamp
