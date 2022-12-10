@@ -49,6 +49,9 @@
     "resetMocks": false,
     "setupFiles": [
       "jest-localstorage-mock"
+    ],
+    "testPathIgnorePatterns": [
+      "/e2e-tests"
     ]
   }
 }
