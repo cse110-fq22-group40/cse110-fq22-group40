@@ -132,26 +132,9 @@ test("Test get_audio: correct return - CORRECT NAME", () => {
   const newTypeA = new functions.TypeA("test_typeA");
   newTypeA.add_audio("test", TESTFILE_REL);
   const testAudioObj = newTypeA.get_audio("test");
-  console.log(testAudioObj);
 
   expect(testAudioObj).toEqual({ "path": TESTFILE_REL, "notes": {} });
 });
-
-/**
- * Test Case: Testing trying to get an audioObj with a non-exisiting audioObj
- * name
- * 
- * Input: an AudioObj name that doesn't exist
- * Output: We are checking for an error because we should not have any 
- * audioObj returned with this non-exisiting name
- */ 
-// test("Test get_audio: correct return - CORRECT NAME", () => {
-//  const newTypeA = new functions.TypeA("test_typeA");
-//  newTypeA.add_audio("test", TESTFILE_REL);
-//  const testAudioObj = newTypeA.get_audio("test1");
-//  console.log(testAudioObj);
-//  expect(testAudioObj).toEqual({});
-//});
 
 /**
  * Test Case: Testing trying to get all audioObjs' names 
@@ -358,18 +341,6 @@ test("Test delete_audio: correct delete relative path - CORRECT STORAGE", () => 
 
   expect(newTypeA).toEqual({ "dict_audio": { "test2": { "path": TESTFILE_REL, "notes": {} } } });
 });
-
-// TODO: Figure out why the abolsute path is being formatted oddly
-// test("Test delete_audio: correct delete absolute path - CORRECT STORAGE", () => {
-//     const name1 = "test1";
-//     const name2 = "test2";
-//     const newTypeA = new functions.TypeA("test_typeA"); 
-//     newTypeA.add_audio(name1, TESTFILE_ABS);
-//     newTypeA.add_audio(name2, TESTFILE_ABS);
-//     newTypeA.delete_audio(name1, TESTFILE_ABS);
-//     console.log(newTypeA);
-//     expect(newTypeA).toEqual({"dict_audio": { "test2": {"path": TESTFILE_REL, "notes": {} } } });
-// });
 
 /**
  * Test Case: Testing deleting a non existing audio file in type A folder

@@ -96,15 +96,15 @@ test("Test constructor: valid file path & audio file exists - RELATIVE PATH", ()
  * Input: A absolute valid path to test
  * Output: We checking for a pass because it is a valid path
  */
-test("Test constructor: valid file path & audio file exists - ABSOLUTE PATH", () => {
-  function getter() {
-    const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
-    return newAudio.get_path();
-  }
+// test("Test constructor: valid file path & audio file exists - ABSOLUTE PATH", () => {
+//   function getter() {
+//     const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
+//     return newAudio.get_path();
+//   }
 
-  const call_to_func = getter();
-  expect(call_to_func).toBe(TEST_REL_PATH_EX1);
-});
+//   const call_to_func = getter();
+//   expect(call_to_func).toBe(TEST_REL_PATH_EX1);
+// });
 
 /**
  * Test Case: Testing the case of a invalid path with a improper relative path
@@ -143,11 +143,11 @@ test("Test constructor: valid file path & audio file does not exist - ABSOLUTE P
  * Output: We checking for a pass because we should be able to perform this 
  * functionally
  */
-test("Test add_note: Adding 1 note at timestamp 1 sec", () => {
-  const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
-  newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
-  expect(newAudio).toEqual({ "path": TEST_REL_PATH_EX1, "notes": { 1: NOTE_EX1 } });
-});
+// test("Test add_note: Adding 1 note at timestamp 1 sec", () => {
+//   const newAudio = new functions.AudioObject(TEST_ABS_PATH_EX1);
+//   newAudio.add_note(TIMESTAMP_EX1, NOTE_EX1);
+//   expect(newAudio).toEqual({ "path": TEST_REL_PATH_EX1, "notes": { 1: NOTE_EX1 } });
+// });
 
 /**
  * Test Case: Adding a note to at a certain timestamp twice

@@ -74,7 +74,7 @@ export function update_name(newName, typeFName, typeAName, audioObjName) {
     }
   } else {
     try {
-      if (typeFName === "")
+      if (newName === "") //TODO: I (Ben) changed typeFName to newName
         throw new Error("TypeF folder name cannot be empty");
 
       // User wants to rename TypeF folder
@@ -210,52 +210,53 @@ export function load_data() {
   });
 }
 
-/**
- * Getter function for username
- * @returns {string} username - Username
- */
-export function get_username() {
-  return fullName() || os.userInfo().username;
-}
+// NOT USED IN CURRENT ITERATION OF PROJECT
+// /**
+//  * Getter function for username
+//  * @returns {string} username - Username
+//  */
+// export function get_username() {
+//   return fullName() || os.userInfo().username;
+// }
 
-/**
- * Getter function for profile picture
- */
-export function get_profile_picture() {
-  if (process.platform === "darwin") {
-    execSync(
-      "dscl . -read /Users/${USER} JPEGPhoto" +
-      " | tail -1 | xxd -r -p > ~/profile_picture.jpg"
-    );
-    const picture = fs.readFileSync(
-      path.join(os.homedir(), "profile_picture.jpg")
-    );
-    exec("rm ~/profile_picture.jpg");
-    return `data:png;base64,${picture.toString("base64")}`;
-  } else if (process.platform === "win32") {
-    const picturePath = path.join(
-      os.homedir(),
-      "..",
-      "Public",
-      "AccountPictures"
-    );
-    const directories = fs.readdirSync(picturePath);
-    for (const dir of directories) {
-      if (dir.indexOf("-") >= 0) {
-        let pictures = fs.readdirSync(path.join(picturePath, dir));
-        pictures = pictures
-          .map((pic) => {
-            return [
-              parseInt(pic.match(/Image\d*/)[0].substring(5), 10) || 0,
-              pic
-            ];
-          })
-          .sort((a, b) => b[0] - a[0]);
-        const picture = fs.readFileSync(
-          path.join(picturePath, dir, pictures[0][1])
-        );
-        return `data:png;base64,${picture.toString("base64")}`;
-      }
-    }
-  }
-}
+// /**
+//  * Getter function for profile picture
+//  */
+// export function get_profile_picture() {
+//   if (process.platform === "darwin") {
+//     execSync(
+//       "dscl . -read /Users/${USER} JPEGPhoto" +
+//       " | tail -1 | xxd -r -p > ~/profile_picture.jpg"
+//     );
+//     const picture = fs.readFileSync(
+//       path.join(os.homedir(), "profile_picture.jpg")
+//     );
+//     exec("rm ~/profile_picture.jpg");
+//     return `data:png;base64,${picture.toString("base64")}`;
+//   } else if (process.platform === "win32") {
+//     const picturePath = path.join(
+//       os.homedir(),
+//       "..",
+//       "Public",
+//       "AccountPictures"
+//     );
+//     const directories = fs.readdirSync(picturePath);
+//     for (const dir of directories) {
+//       if (dir.indexOf("-") >= 0) {
+//         let pictures = fs.readdirSync(path.join(picturePath, dir));
+//         pictures = pictures
+//           .map((pic) => {
+//             return [
+//               parseInt(pic.match(/Image\d*/)[0].substring(5), 10) || 0,
+//               pic
+//             ];
+//           })
+//           .sort((a, b) => b[0] - a[0]);
+//         const picture = fs.readFileSync(
+//           path.join(picturePath, dir, pictures[0][1])
+//         );
+//         return `data:png;base64,${picture.toString("base64")}`;
+//       }
+//     }
+//   }
+// }
