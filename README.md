@@ -42,7 +42,7 @@ Take a peek at our notes on **[Notion](https://www.notion.so/The-Lit-Hub-24ded02
 You should have NodeJS installed (If you get stuck check out this [page](https://nodejs.dev/en/learn/how-to-install-nodejs)).
 ### Installing our software
 1. Navigate to our main repository page and look for the green button above the files labeled **< >Code**.
-2. After clicking the button, copy the link to the repository pressing this button ![Copybutton](./readme-images/copy.png)
+2. After clicking the button, copy the link to the repository pressing this button ![Copybutton](./imgs/copy.png)
 3. Open your favorite code editor and in their terminal run the command ***git clone*** along with what you copied (You may need to specify where you want this on your file system).
 4. Once again in the terminal run the command ***npm install*** to get all dependancies 
     
@@ -51,20 +51,25 @@ You should have NodeJS installed (If you get stuck check out this [page](https:/
 1. Assuming all the tasks from the section above **Installing our software** was done correctly you may move on to the next step.
 2. In your terminal run the command ***npm run start*** to get started!
     
-## Running Our Tests
+<!-- ## Running Our Tests
 ### What is **Jest**?
 ### Creating your own tests
 
 ## Example Use case
 ### User personas
-### User stories
+### User stories -->
 
 ## Youtube Tutorial
 Link to youtube [video](https://www.youtube.com/watch?v=dMgJ_TWeIxc&feature=youtu.be)
+
 ## Documentation
 [Check out how to use our functions](https://cse110-fq22-group40.github.io/cse110-fq22-group40/index.html)
 
+## New to The Team?
+Checkout our **[onboarding document](onboard.md)** to get started!
+
 ## Future Plans
+
 ### Near Future
 - Create more features for better usability
   - User search bar and filtering system
@@ -72,3 +77,5 @@ Link to youtube [video](https://www.youtube.com/watch?v=dMgJ_TWeIxc&feature=yout
 ### Far Future
 - Integrate features which increase user options
   - Ability to annotate music sheets and videos
+  - Add API's to increase the number of instances we can store
+  - store video local to the app instead of by the path
