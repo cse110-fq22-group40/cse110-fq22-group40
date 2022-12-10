@@ -14,14 +14,10 @@ We are aiming to create an audio note taking app geared towards musicians, where
     - [Requirements](#requirements)
     - [Installing our software](#installing-our-software)
     - [Running our software](#running-our-software)
-  - [Running Our Tests](#running-our-tests)
-    - [What is **Jest**?](#what-is-jest)
-    - [Creating your own tests](#creating-your-own-tests)
-  - [Example Use case](#example-use-case)
-    - [User personas](#user-personas)
-    - [User stories](#user-stories)
+    - [Running our Unit and End-to-end Tests](#running-our-unit-and-end-to-end-tests)
   - [Youtube Tutorial](#youtube-tutorial)
   - [Documentation](#documentation)
+  - [New to The Team?](#new-to-the-team)
   - [Future Plans](#future-plans)
     - [Near Future](#near-future)
     - [Far Future](#far-future)
@@ -50,6 +46,11 @@ You should have NodeJS installed (If you get stuck check out this [page](https:/
 ### Running our software
 1. Assuming all the tasks from the section above **Installing our software** was done correctly you may move on to the next step.
 2. In your terminal run the command ***npm run start*** to get started!
+
+### Running our Unit and End-to-end Tests
+To run Jest: ***npm run test***
+To run Playwright: ***npx playwright test***
+
     
 <!-- ## Running Our Tests
 ### What is **Jest**?
