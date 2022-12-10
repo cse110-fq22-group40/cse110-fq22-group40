@@ -41,7 +41,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeF folder
  * Output: Expect the typeF folder to be renamed
  */
- test("Update name typeF: Correct implementation", () => {
+test("Update name typeF: Correct implementation", () => {
   folder_utils.add_typeF("testTypeF");
   utils.update_name("testTypeF2", "testTypeF");
   const names = folder_utils.get_all_typeF_names();
@@ -56,7 +56,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeA folder
  * Output: Expect the typeA folder to be renamed
  */
- test("Update name typeA: Correct implementation", () => {
+test("Update name typeA: Correct implementation", () => {
   folder_utils.add_typeF("testTypeF");
   folder_utils.add_typeA("testTypeF", "testTypeA");
   utils.update_name("testTypeA2", "testTypeF", "testTypeA");
@@ -72,7 +72,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting an AudioObject
  * Output: Expect the AudioObject to be renamed
  */
- test("Update name AudioObject: Correct implementation", () => {
+test("Update name AudioObject: Correct implementation", () => {
   folder_utils.add_typeF("testTypeF");
   folder_utils.add_typeA("testTypeF", "testTypeA");
   audio_utils.add_audio("testTypeF", "testTypeA", "testAud", TESTFILE);
@@ -90,7 +90,7 @@ test("Log message: correct implementation", () => {
  * Output: Expect the typeF folder to throw an error
  */
 // TODO:
- test("Update name typeF: EMPTY STRING", () => {
+test("Update name typeF: EMPTY STRING", () => {
   function getter() {
     folder_utils.add_typeF("testTypeF");
     utils.update_name("", "testTypeF");
@@ -106,7 +106,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeF folder
  * Output: Expect the typeF folder to throw an error
  */
- test("Update name typeF: OLD NAME DOESNT EXIST", () => {
+test("Update name typeF: OLD NAME DOESNT EXIST", () => {
   const fakeName = "fakeName";
   function getter() {
     folder_utils.add_typeF("testTypeF");
@@ -123,7 +123,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeF folder
  * Output: Expect the typeF folder to throw an error
  */
- test("Update name typeF: NAME ALREADY EXISTS", () => {
+test("Update name typeF: NAME ALREADY EXISTS", () => {
   const typeFname = "testTypeF";
   function getter() {
     folder_utils.add_typeF("testTypeF");
@@ -140,7 +140,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeA folder
  * Output: Expect the typeA folder to throw an error
  */
- test("Update name typeA: EMPTY STRING", () => {
+test("Update name typeA: EMPTY STRING", () => {
   function getter() {
     folder_utils.add_typeF("testTypeF");
     folder_utils.add_typeA("testTypeF", "testTypeA");
@@ -157,7 +157,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeA folder
  * Output: Expect the typeA folder to throw an error
  */
- test("Update name typeA: OLD NAME DOESNT EXIST", () => {
+test("Update name typeA: OLD NAME DOESNT EXIST", () => {
   const fakeName = "fakeName";
   function getter() {
     folder_utils.add_typeF("testTypeF");
@@ -175,7 +175,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting a typeA folder
  * Output: Expect the typeA folder to throw an error
  */
- test("Update name typeA: NAME ALREADY EXISTS", () => {
+test("Update name typeA: NAME ALREADY EXISTS", () => {
   const typeAname = "testTypeA";
   function getter() {
     folder_utils.add_typeF("testTypeF");
@@ -193,7 +193,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting an AudioObject folder
  * Output: Expect the AudioObject to throw an error
  */
- test("Update name AudioObject: EMPTY STRING", () => {
+test("Update name AudioObject: EMPTY STRING", () => {
   function getter() {
     folder_utils.add_typeF("testTypeF");
     folder_utils.add_typeA("testTypeF", "testTypeA");
@@ -211,7 +211,7 @@ test("Log message: correct implementation", () => {
  * Input: Inputting an AudioObject folder
  * Output: Expect the AudioObject to throw an error
  */
- test("Update name AudioObject: OLD NAME DOESNT EXIST", () => {
+test("Update name AudioObject: OLD NAME DOESNT EXIST", () => {
   const fakeName = "fakeName";
   function getter() {
     folder_utils.add_typeF("testTypeF");
